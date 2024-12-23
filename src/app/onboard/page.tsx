@@ -23,7 +23,7 @@ export default function OnboardingPage() {
   if (user?.clientMetadata?.onboarded) {
     return <></>;
   }
-
+  // should add all required fields for new users
   return (
     <>
       <input
@@ -40,6 +40,7 @@ export default function OnboardingPage() {
               address,
             },
           });
+          // todo: create new user in database
           router.push("/");
         }}
       >
