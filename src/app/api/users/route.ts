@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
+import { stackServerApp } from "@/stack";
+export const GET = async function () {
+  const user = await stackServerApp.getUser();
+  if (!user) {
+    return NextResponse.json({ error: "user not found" }, { status: 401 });
+  }
 
-export const GET = function (){
-    return NextResponse.json({users:5});
-}
+  return NextResponse.json({ userEmail: user.primaryEmail });
+};

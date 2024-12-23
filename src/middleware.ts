@@ -6,6 +6,10 @@ export async function middleware(request: NextRequest) {
   if (!user) {
     return NextResponse.redirect(new URL("/handler/sign-in", request.url));
   }
+  console.log("User", user);
+  if (!user?.clientMetadata?.onboarded) {
+    return NextResponse.redirect(new URL("/onboard", request.url));
+  }
   return NextResponse.next();
 }
 

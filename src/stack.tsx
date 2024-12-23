@@ -7,5 +7,6 @@ export const stackServerApp = new StackServerApp({
   urls: {
     // signIn: '/signin',
     afterSignIn: "/protected/user_profile",
+    afterSignUp: "/onboard",
   },
 });
