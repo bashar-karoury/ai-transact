@@ -1,5 +1,6 @@
 "use client";
 
+import { transcactize_audio } from "@/utils/voiceTranscript";
 import { useRef, useState } from "react";
 interface RecordTransactionButtonProps {
   onTransactionRecorded: (url: string) => void; // Prop type for the callback function
@@ -27,8 +28,9 @@ export default function RecordTransactionButton({
       audioChunks = [];
       const newAudioUrl = URL.createObjectURL(audioBlob);
       console.log(newAudioUrl);
+      transcactize_audio(audioBlob);
       // Call the parent-provided callback function
-      //
+      // transcribe audio and return back the transcation
       onTransactionRecorded(newAudioUrl);
       setAudioUrl(newAudioUrl);
     };

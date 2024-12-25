@@ -1,39 +1,21 @@
-export function voiceclickHandler() {
-  console.log("voice Button is clicked indeed");
-  // start recording from user
-
-  // call assemblyAi to transcribe recorded audio
-
-  // convert transcription to transaction
-}
-
-let mediaRecorder: MediaRecorder;
-let audioChunks: BlobPart[] = [];
-
-export async function startButtonHandler() {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-  mediaRecorder = new MediaRecorder(stream);
-
-  mediaRecorder.ondataavailable = (event) => {
-    audioChunks.push(event.data);
+import { AssemblyAI } from "assemblyai";
+export function transcactize_audio(audio: any): any {
+  const client = new AssemblyAI({
+    apiKey: "05b94775bd674db48dfed9002812903e",
+  });
+  const audioUrl = "https://assembly.ai/sports_injuries.mp3";
+  const run = async () => {
+    const transcript = await client.transcripts.transcribe({ audio: audioUrl });
+    console.log(transcript.text);
+    const prompt =
+      "Assuming this is a transaction text, extract transaction description, amount, date and category out of it";
+    const { response } = await client.lemur.task({
+      transcript_ids: [transcript.id],
+      prompt,
+      final_model: "anthropic/claude-3-5-sonnet",
+    });
+    console.log(response);
   };
 
-  mediaRecorder.onstop = () => {
-    const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
-    console.log(audioBlob);
-    audioChunks = [];
-    const audioUrl = URL.createObjectURL(audioBlob);
-    console.log(audioUrl);
-    // audioElement.src = audioUrl;
-  };
-
-  mediaRecorder.start();
-  // startButton.disabled = true;
-  // stopButton.disabled = false;
-}
-
-export async function stopButtonHandler() {
-  mediaRecorder.stop();
-  // startButton.disabled = false;
-  // stopButton.disabled = true;
+  run();
 }
