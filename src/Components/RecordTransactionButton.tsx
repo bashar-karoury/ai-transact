@@ -24,7 +24,7 @@ export default function RecordTransactionButton({
 
     mediaRecorderRef.current.onstop = async () => {
       const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
-      console.log(audioBlob);
+      // console.log(audioBlob);
       audioChunks = [];
       setAudioblob(audioBlob);
     };
@@ -42,7 +42,7 @@ export default function RecordTransactionButton({
     async function extractHandler() {
       if (audioblob) {
         const transaction = await transcactize_audio(audioblob);
-        console.log("transaction received", transaction);
+        // console.log("transaction received", transaction);
         onTransactionRecorded(transaction);
       }
     }
@@ -51,12 +51,8 @@ export default function RecordTransactionButton({
 
   return (
     <>
-      <button onClick={startButtonHandler} disabled={isRecording}>
-        startButton
-      </button>
-      ;
-      <button onClick={stopButtonHandler} disabled={!isRecording}>
-        stopButton
+      <button onMouseDown={startButtonHandler} onMouseUp={stopButtonHandler}>
+        {isRecording ? "Recording Now.." : "Record"}
       </button>
     </>
   );

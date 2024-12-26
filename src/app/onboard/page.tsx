@@ -1,6 +1,6 @@
 "use client";
 import { useUser } from "@stackframe/stack";
-import { useRouter, useServerInsertedHTML } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type CurrentUser = {
