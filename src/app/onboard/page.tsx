@@ -1,6 +1,6 @@
 "use client";
 import { useUser } from "@stackframe/stack";
-import { useRouter } from "next/navigation";
+import { useRouter, useServerInsertedHTML } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type CurrentUser = {
@@ -41,6 +41,13 @@ export default function OnboardingPage() {
             },
           });
           // todo: create new user in database
+          // const new_user ={
+          //   email:user.email,
+          //   id:user_id,
+          //   profile_pic,
+          //   currency
+          // }
+          // database.addUser(new_user);
           router.push("/");
         }}
       >
