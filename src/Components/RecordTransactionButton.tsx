@@ -13,6 +13,7 @@ export default function RecordTransactionButton({
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [audioblob, setAudioblob] = useState<Blob | null>(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   async function startButtonHandler() {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -41,9 +42,17 @@ export default function RecordTransactionButton({
   useEffect(() => {
     async function extractHandler() {
       if (audioblob) {
-        const transaction = await transcactize_audio(audioblob);
-        // console.log("transaction received", transaction);
-        onTransactionRecorded(transaction);
+        console.log(audioblob);
+        setIsProcessing(true);
+        try {
+          const transaction = await transcactize_audio(audioblob);
+          // console.log("transaction received", transaction);
+          onTransactionRecorded(transaction);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setIsProcessing(false);
+        }
       }
     }
     extractHandler();
@@ -54,6 +63,7 @@ export default function RecordTransactionButton({
       <button onMouseDown={startButtonHandler} onMouseUp={stopButtonHandler}>
         {isRecording ? "Recording Now.." : "Record"}
       </button>
+      {isProcessing ? "AI thinking.." : ""}
     </>
   );
 }
