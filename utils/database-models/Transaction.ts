@@ -2,6 +2,13 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // Interface for the Transaction model
+
+// export interface Iuser extends Document {
+//   _id: number;
+//   email: string;
+// }
+
+
 export interface ITransaction extends Document {
   email: string;
   profilePicture?: string;
@@ -11,7 +18,7 @@ export interface ITransaction extends Document {
   amount: number;
   description: string;
   date: Date;
-  report?: string; // Optional 
+  report?: string; // Optional
 }
 
 // Schema for the Transaction model
