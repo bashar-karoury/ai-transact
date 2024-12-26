@@ -1,3 +1,4 @@
+"use server";
 import { AssemblyAI, FileUploadParams } from "assemblyai";
 import {
   GoogleGenerativeAI,
@@ -53,7 +54,7 @@ export async function transcactize_audio(
   const client = new AssemblyAI({
     apiKey: assemblyApiKey,
   });
-
+  console.log("Processing");
   try {
     const transcript = await client.transcripts.transcribe({ audio: audio });
     if (transcript.text) {
