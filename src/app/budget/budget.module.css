@@ -1,0 +1,108 @@
+.budgetContainer {
+  padding: 20px;
+  background: white;
+  min-height: calc(100vh - 40px);
+}
+
+.title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.budgetFormCard {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.budgetForm {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.addButton {
+  padding: 8px 20px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-end;
+  font-size: 14px;
+  width: fit-content;
+}
+
+.addButton:hover {
+  background: #1976d2;
+}
+
+.budgetsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.budgetItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.budgetName {
+  color: #333;
+  font-size: 14px;
+}
+
+.expandButton {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.expandButton:hover {
+  color: #2196f3;
+}
+
+@media (max-width: 768px) {
+  .budgetContainer {
+    padding: 15px;
+  }
+
+  .budgetFormCard {
+    padding: 15px;
+  }
+
+  .input {
+    max-width: 100%;
+  }
+}

@@ -6,38 +6,30 @@ import {
   BellIcon, 
   WalletIcon,
   ChartPieIcon,
-  UserIcon
 } from '@heroicons/react/24/outline';
 import styles from './rootLayout.module.css';
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
+  
+  // Check if current path is login or signup related
   const isAuthPage = pathname === '/login' || pathname === '/signup' || pathname === '/';
 
   if (isAuthPage) {
-    return (
-      <html lang="en">
-        <body>{children}</body>
-      </html>
-    );
+    return <>{children}</>;
   }
 
   return (
     <html lang="en">
       <body>
-        <div className={styles.container}>
-          {/* Dashboard Sidebar */}
+        <div className={styles.layoutContainer}>
+          {/* Static Sidebar */}
           <aside className={styles.sidebar}>
-            <div className={styles.sidebarHeader}>
+            <div className={styles.logo}>
               <h1>Ai-Transact</h1>
-              <div className={styles.userInfo}>
-                <UserIcon className={styles.userIcon} />
-                <span>bashar@gmail.com</span>
-              </div>
             </div>
-
             <nav className={styles.nav}>
-              <a href="/home" className={pathname === '/home' ? styles.active : ''}>
+              <a href="/dashboard" className={pathname === '/dashboard' ? styles.active : ''}>
                 <HomeIcon className={styles.icon} />
                 <span>Home</span>
               </a>
@@ -58,10 +50,9 @@ export default function RootLayout({ children }) {
                 <span>Reports</span>
               </a>
             </nav>
-
             <div className={styles.balance}>
               <p>Balance:</p>
-              <h2>120,998 $</h2>
+              <h2>$120,498</h2>
             </div>
           </aside>
 

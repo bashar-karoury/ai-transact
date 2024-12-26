@@ -1,0 +1,112 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/budget/budget.module.css ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************/
+.budget_budgetContainer__uXiwu {
+  padding: 20px;
+  background: white;
+  min-height: calc(100vh - 40px);
+}
+
+.budget_title__m3wSw {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.budget_budgetFormCard__wjurh {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.budget_budgetForm__TSTi9 {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.budget_formGroup__2CIbX {
+  display: flex;
+  flex-direction: column;
+}
+
+.budget_input__hzsxg {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.budget_input__hzsxg:focus {
+  outline: none;
+  border-color: #2196f3;
+}
+
+.budget_addButton__bvFro {
+  padding: 8px 20px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  align-self: flex-end;
+  font-size: 14px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.budget_addButton__bvFro:hover {
+  background: #1976d2;
+}
+
+.budget_budgetsList__R6jua {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.budget_budgetItem__sZVJq {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.budget_budgetName__oSGFh {
+  color: #333;
+  font-size: 14px;
+}
+
+.budget_expandButton__dpXYi {
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+.budget_expandButton__dpXYi:hover {
+  color: #2196f3;
+}
+
+@media (max-width: 768px) {
+  .budget_budgetContainer__uXiwu {
+    padding: 15px;
+  }
+
+  .budget_budgetFormCard__wjurh {
+    padding: 15px;
+  }
+
+  .budget_input__hzsxg {
+    max-width: 100%;
+  }
+}

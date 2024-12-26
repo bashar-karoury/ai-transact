@@ -1,34 +1,48 @@
-.layoutContainer {
+.container {
   display: flex;
   min-height: 100vh;
-  background: #f5f5f5;
 }
 
 .sidebar {
   width: 250px;
   background: white;
+  border-right: 1px solid #eee;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  border-right: 1px solid #eee;
   position: fixed;
   height: 100vh;
-  overflow-y: auto;
+  left: 0;
+  top: 0;
 }
 
-.logo {
-  margin-bottom: 40px;
+.sidebarHeader {
+  margin-bottom: 30px;
 }
 
-.logo h1 {
-  color: #333;
+.sidebarHeader h1 {
   font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+.userIcon {
+  width: 20px;
+  height: 20px;
 }
 
 .nav {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .nav a {
@@ -42,7 +56,8 @@
   transition: all 0.3s;
 }
 
-.nav a:hover, .nav a.active {
+.nav a:hover, 
+.nav a.active {
   background: #f0f7ff;
   color: #2196f3;
 }
@@ -72,7 +87,8 @@
 .mainContent {
   flex: 1;
   margin-left: 250px;
-  padding: 30px;
+  padding: 20px;
+  background: #f5f5f5;
 }
 
 @media (max-width: 768px) {
@@ -80,13 +96,18 @@
     width: 100%;
     height: auto;
     position: relative;
+    padding: 15px;
+  }
+
+  .container {
+    flex-direction: column;
   }
 
   .mainContent {
     margin-left: 0;
   }
 
-  .layoutContainer {
-    flex-direction: column;
+  .nav {
+    margin-bottom: 20px;
   }
 }
