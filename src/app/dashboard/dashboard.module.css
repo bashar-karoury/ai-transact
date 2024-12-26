@@ -1,0 +1,186 @@
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background: #f5f5f5;
+}
+
+.sidebar {
+  width: 250px;
+  background: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #eee;
+}
+
+.logo {
+  margin-bottom: 40px;
+}
+
+.logo h1 {
+  color: #333;
+  font-size: 24px;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  color: #666;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.nav a:hover, .nav a.active {
+  background: #f0f7ff;
+  color: #2196f3;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.balance {
+  margin-top: auto;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.balance p {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.balance h2 {
+  color: #2196f3;
+  font-size: 24px;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 30px;
+}
+
+.transactionInput {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.inputGroup {
+  display: flex;
+  gap: 12px;
+}
+
+.inputGroup input,
+.inputGroup select {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.inputGroup input[type="text"] {
+  flex: 2;
+}
+
+.inputGroup input[type="number"] {
+  flex: 1;
+}
+
+.inputGroup select {
+  flex: 1;
+}
+
+.addButton {
+  padding: 10px 20px;
+  background: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.addButton:hover {
+  background: #1976d2;
+}
+
+.transactionList {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.transactionList h3 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.transactionInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.transactionType {
+  color: #333;
+  font-weight: 500;
+}
+
+.transactionDate {
+  color: #666;
+  font-size: 14px;
+}
+
+.transactionAmount {
+  font-weight: bold;
+}
+
+.income {
+  color: #4caf50;
+}
+
+.expense {
+  color: #f44336;
+}
+
+@media (max-width: 768px) {
+  .dashboardContainer {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 15px;
+  }
+
+  .inputGroup {
+    flex-direction: column;
+  }
+
+  .mainContent {
+    padding: 15px;
+  }
+}
