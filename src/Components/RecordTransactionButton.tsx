@@ -11,7 +11,6 @@ export default function RecordTransactionButton({
 }: RecordTransactionButtonProps) {
   let audioChunks: BlobPart[] = [];
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-  const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [audioblob, setAudioblob] = useState<Blob | null>(null);
   const [isRecording, setIsRecording] = useState(false);
 
@@ -27,9 +26,6 @@ export default function RecordTransactionButton({
       const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
       console.log(audioBlob);
       audioChunks = [];
-      const newAudioUrl = URL.createObjectURL(audioBlob);
-      console.log(newAudioUrl);
-      setAudioUrl(newAudioUrl);
       setAudioblob(audioBlob);
     };
 
@@ -62,8 +58,6 @@ export default function RecordTransactionButton({
       <button onClick={stopButtonHandler} disabled={!isRecording}>
         stopButton
       </button>
-      ;{audioUrl && <audio src={audioUrl} controls />}
-      <button onClick={extractHandler}>Extract transaction</button>
     </>
   );
 }
