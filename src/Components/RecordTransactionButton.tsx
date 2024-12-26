@@ -37,17 +37,17 @@ export default function RecordTransactionButton({
     mediaRecorderRef.current?.stop();
     setIsRecording(false);
   }
-  async function extractHandler() {
-    if (audioblob) {
-      const transaction = await transcactize_audio(audioblob);
-      console.log("transaction received", transaction);
-      onTransactionRecorded(transaction);
-    }
-  }
 
   useEffect(() => {
+    async function extractHandler() {
+      if (audioblob) {
+        const transaction = await transcactize_audio(audioblob);
+        console.log("transaction received", transaction);
+        onTransactionRecorded(transaction);
+      }
+    }
     extractHandler();
-  }, [audioblob]);
+  }, [audioblob, onTransactionRecorded]);
 
   return (
     <>
