@@ -86,6 +86,10 @@ export async function transcactize_audio(
   audio: FileUploadParams
 ): Promise<TransactionData> {
   const assemblyApiKey: string = process.env.NEXT_PUBLIC_ASSEMPLY_API_KEY || "";
+
+  if (!assemblyApiKey) {
+    throw new Error("No key found");
+  }
   const client = new AssemblyAI({
     apiKey: assemblyApiKey,
   });
