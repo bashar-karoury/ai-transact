@@ -1,24 +1,21 @@
 "use client";
+import DescriptionInput from "@/Components/DescriptionInput";
 import { useState } from "react";
-import deduceCategoryFromDescription from "@/utils/categorization";
-export default function Page() {
-  const [description, setDescription] = useState("");
 
-  async function CallCategorization() {
-    const result = await deduceCategoryFromDescription(description);
-    console.log(result);
+export default function Page() {
+  const [category, setCategory] = useState("");
+  function finishCategorization(output_category: string) {
+    console.log("Finished Categorizing");
+    setCategory(output_category);
   }
   return (
-    <>
+    <div>
+      <DescriptionInput onFinishCategorization={finishCategorization} />
       <input
         type="text"
-        value={description}
-        onChange={(e) => {
-          setDescription(e.target.value);
-          console.log(description);
-        }}
+        value={category}
+        onChange={() => console.log("second input value changed")}
       ></input>
-      <button onClick={CallCategorization}> categorize </button>
-    </>
+    </div>
   );
 }

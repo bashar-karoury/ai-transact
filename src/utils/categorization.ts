@@ -51,7 +51,11 @@ Here is the transaction description: ${text}`;
     const result: GenerateContentResult = await model.generateContent(prompt);
     let responseText = result.response?.text();
     responseText = responseText.trim();
-    return responseText;
+    if (categories.includes(responseText)) {
+      return responseText;
+    } else {
+      return null;
+    }
   } catch (error) {
     throw error; // re-throw the error
   }
