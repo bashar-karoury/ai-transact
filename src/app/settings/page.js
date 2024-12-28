@@ -31,6 +31,7 @@ export default function Settings() {
             value={settings.currency}
             onChange={handleChange}
             placeholder="Enter currency"
+            className={styles.input}
           />
         </div>
 
@@ -43,6 +44,7 @@ export default function Settings() {
             value={settings.theme}
             onChange={handleChange}
             placeholder="Enter theme"
+            className={styles.input}
           />
         </div>
 
@@ -55,6 +57,7 @@ export default function Settings() {
             value={settings.imageOpt}
             onChange={handleChange}
             placeholder="Enter image options"
+            className={styles.input}
           />
         </div>
       </div>

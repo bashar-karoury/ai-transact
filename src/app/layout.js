@@ -1,4 +1,5 @@
-'use client'
+// app/layout.js
+'use client';
 import { usePathname } from 'next/navigation';
 import { 
   HomeIcon, 
@@ -6,28 +7,36 @@ import {
   BellIcon, 
   WalletIcon,
   ChartPieIcon,
+  UserIcon
 } from '@heroicons/react/24/outline';
 import styles from './rootLayout.module.css';
 
 export default function RootLayout({ children }) {
   const pathname = usePathname();
-  
-  // Check if current path is login or signup related
   const isAuthPage = pathname === '/login' || pathname === '/signup' || pathname === '/';
 
   if (isAuthPage) {
-    return <>{children}</>;
+    return (
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    );
   }
 
   return (
     <html lang="en">
       <body>
-        <div className={styles.layoutContainer}>
-          {/* Static Sidebar */}
+        <div className={styles.container}>
+          {/* Dashboard Sidebar */}
           <aside className={styles.sidebar}>
-            <div className={styles.logo}>
+            <div className={styles.sidebarHeader}>
               <h1>Ai-Transact</h1>
+              <div className={styles.userInfo}>
+                <UserIcon className={styles.userIcon} />
+                <span>menatalla@gmail.com</span>
+              </div>
             </div>
+
             <nav className={styles.nav}>
               <a href="/dashboard" className={pathname === '/dashboard' ? styles.active : ''}>
                 <HomeIcon className={styles.icon} />
@@ -50,9 +59,10 @@ export default function RootLayout({ children }) {
                 <span>Reports</span>
               </a>
             </nav>
+
             <div className={styles.balance}>
               <p>Balance:</p>
-              <h2>$120,498</h2>
+              <h2>120,500 $</h2>
             </div>
           </aside>
 
@@ -64,4 +74,4 @@ export default function RootLayout({ children }) {
       </body>
     </html>
   );
-} 
+}

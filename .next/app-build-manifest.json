@@ -28,18 +28,6 @@
       "static/css/app/dashboard/page.css",
       "static/chunks/app/dashboard/page.js"
     ],
-    "/settings/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/settings/page.css",
-      "static/chunks/app/settings/page.js"
-    ],
-    "/notifications/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/notifications/page.css",
-      "static/chunks/app/notifications/page.js"
-    ],
     "/budget/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",

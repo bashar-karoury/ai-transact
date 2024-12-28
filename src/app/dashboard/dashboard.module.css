@@ -1,5 +1,5 @@
 .dashboardContainer {
-  display: flex;
+  display: inline-flex;
   min-height: 100vh;
   background: #f5f5f5;
 }
@@ -81,19 +81,21 @@
 
 .inputGroup {
   display: flex;
-  gap: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px ;
 }
 
 .inputGroup input,
 .inputGroup select {
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 10px 12px;
+  border: 1px solid #f7f4f4;
   border-radius: 6px;
   font-size: 14px;
 }
 
 .inputGroup input[type="text"] {
-  flex: 2;
+  flex: 1;
 }
 
 .inputGroup input[type="number"] {
@@ -115,7 +117,7 @@
 }
 
 .addButton:hover {
-  background: #1976d2;
+  background: #0e4780;
 }
 
 .transactionList {
@@ -134,7 +136,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  padding: 12px;
   border-bottom: 1px solid #eee;
 }
 
@@ -150,7 +152,7 @@
 }
 
 .transactionDate {
-  color: #666;
+  color: #2e2d29;
   font-size: 14px;
 }
 
@@ -166,21 +168,8 @@
   color: #f44336;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-width: 480px) {
   .dashboardContainer {
     flex-direction: column;
-  }
-
-  .sidebar {
-    width: 100%;
-    padding: 15px;
-  }
-
-  .inputGroup {
-    flex-direction: column;
-  }
-
-  .mainContent {
-    padding: 15px;
   }
 }

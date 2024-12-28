@@ -2,7 +2,7 @@
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[13].oneOf[5].use[3]!./src/app/dashboard/dashboard.module.css ***!
   \**********************************************************************************************************************************************************************************************************************************************************************************/
 .dashboard_dashboardContainer__RDA7j {
-  display: flex;
+  display: inline-flex;
   min-height: 100vh;
   background: #f5f5f5;
 }
@@ -84,19 +84,21 @@
 
 .dashboard_inputGroup__9i_dh {
   display: flex;
-  gap: 12px;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding: 10px ;
 }
 
 .dashboard_inputGroup__9i_dh input,
 .dashboard_inputGroup__9i_dh select {
-  padding: 10px;
-  border: 1px solid #ddd;
+  padding: 10px 12px;
+  border: 1px solid #f7f4f4;
   border-radius: 6px;
   font-size: 14px;
 }
 
 .dashboard_inputGroup__9i_dh input[type="text"] {
-  flex: 2 1;
+  flex: 1 1;
 }
 
 .dashboard_inputGroup__9i_dh input[type="number"] {
@@ -118,7 +120,7 @@
 }
 
 .dashboard_addButton__qj5pA:hover {
-  background: #1976d2;
+  background: #0e4780;
 }
 
 .dashboard_transactionList__off2H {
@@ -137,7 +139,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 0;
+  padding: 12px;
   border-bottom: 1px solid #eee;
 }
 
@@ -153,7 +155,7 @@
 }
 
 .dashboard_transactionDate__G8aZc {
-  color: #666;
+  color: #2e2d29;
   font-size: 14px;
 }
 
@@ -169,22 +171,9 @@
   color: #f44336;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) and (min-width: 480px) {
   .dashboard_dashboardContainer__RDA7j {
     flex-direction: column;
-  }
-
-  .dashboard_sidebar__5ka0E {
-    width: 100%;
-    padding: 15px;
-  }
-
-  .dashboard_inputGroup__9i_dh {
-    flex-direction: column;
-  }
-
-  .dashboard_mainContent__hxLoe {
-    padding: 15px;
   }
 }
 
