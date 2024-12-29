@@ -3,7 +3,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // transaction interface
 export interface ITransaction extends Document {
-//   _id: string;
+  // _id: string;
   type: 'income' | 'expense';
   amount: number;
   description: string;
@@ -12,7 +12,7 @@ export interface ITransaction extends Document {
 
 // budget interface
 export interface IBudget extends Document {
-//   _id: string;
+  // _id: string;
   category: string;
   startDate: Date;
   endDate: Date;
@@ -21,7 +21,7 @@ export interface IBudget extends Document {
 
 // user interface
 export interface IUser extends Document {
-//   _id: string;
+  // _id: string;
   email: string;
   profilePicture?: string;
   balance: number;
@@ -33,7 +33,7 @@ export interface IUser extends Document {
 
 // transaction schema
 const TransactionSchema: Schema<ITransaction> = new Schema({
-//   _id: { type: String, required: true },
+  // _id: { type: String, required: true },
   type: { type: String, enum: ['income', 'expense'], required: true },
   amount: { type: Number, required: true },
   description: { type: String, required: true },
@@ -42,7 +42,7 @@ const TransactionSchema: Schema<ITransaction> = new Schema({
 
 // budget schema
 const BudgetSchema: Schema<IBudget> = new Schema({
-//   _id: { type: String, required: true },
+  // _id: { type: String, required: true },
   category: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },
@@ -51,7 +51,7 @@ const BudgetSchema: Schema<IBudget> = new Schema({
 
 // user schema
 const UserSchema: Schema<IUser> = new Schema({
-//   _id: { type: String, required: true },
+  // _id: { type: String, required: true },
   email: { type: String, required: true },
   profilePicture: { type: String },
   balance: { type: Number, required: true },

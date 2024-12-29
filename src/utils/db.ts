@@ -2,10 +2,6 @@
 import mongoose from "mongoose";
 
 const dbConnect = async (): Promise<void> => {
-    // Check if there's an existing connection
-    if (mongoose.connection.readyState >= 1) {
-        return;
-    }
     try {
         // Connect to the MongoDB database
         await mongoose.connect(process.env.MONGO_URI as string, {
