@@ -1,6 +1,7 @@
 .notifications-container {
   padding: 24px;
   color: white;
+  border-radius: 15px;
 }
 
 .notifications-header {
@@ -8,6 +9,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 24px;
+  border-radius: 15px;
 }
 
 .notifications-header h1 {
@@ -58,6 +60,7 @@
   display: flex;
   gap: 16px;
   align-items: flex-start;
+  border-radius: 15px;
 }
 
 .notification-icon {

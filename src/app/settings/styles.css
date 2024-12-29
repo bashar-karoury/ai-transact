@@ -55,7 +55,7 @@
 }
 
 .form-group.checkbox {
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
 }
 

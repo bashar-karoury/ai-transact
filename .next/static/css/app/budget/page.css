@@ -5,6 +5,7 @@
   padding: 20px;
   background: white;
   min-height: calc(100vh - 40px);
+  border-radius: 15px;
 }
 
 .budget_title__m3wSw {
@@ -43,12 +44,12 @@
 
 .budget_input__hzsxg:focus {
   outline: none;
-  border-color: #2196f3;
+  border-color: #83A6CE;
 }
 
 .budget_addButton__bvFro {
   padding: 8px 20px;
-  background: #2196f3;
+  background: #26415E;
   color: white;
   border: none;
   border-radius: 6px;
@@ -60,7 +61,7 @@
 }
 
 .budget_addButton__bvFro:hover {
-  background: #1976d2;
+  background: #83A6CE
 }
 
 .budget_budgetsList__R6jua {
@@ -94,7 +95,7 @@
 }
 
 .budget_expandButton__dpXYi:hover {
-  color: #2196f3;
+  color: #83A6CE;
 }
 
 @media (max-width: 768px) {

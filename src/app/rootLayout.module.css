@@ -22,7 +22,7 @@
 
 .sidebarHeader h1 {
   font-size: 24px;
-  color: #333;
+  color: #26415E;
   margin-bottom: 10px;
    display: flex;
   align-items: center;
@@ -64,8 +64,8 @@
 
 .nav a:hover, 
 .nav a.active {
-  background: #f0f7ff;
-  color: #158cee;
+  background: #83A6CE;
+  color: #26415E;
 }
 
 .icon {
@@ -86,15 +86,16 @@
 }
 
 .balance h2 {
-  color: #2196f3;
+  color: #26415E;
   font-size: 24px;
 }
 
 .mainContent {
   flex: 1;
   margin-left: 250px;
-  padding: 20px;
-  background: #f5f5f5;
+  padding: 20px 20px 20px;
+  background: #b2cbff;
+  border-radius: 15px;
 }
 
 @media (max-width: 768px) {
@@ -102,15 +103,16 @@
     width: 70%;
     height: auto;
     position: relative;
-    padding: 10px;
+    padding: 10px
   }
 
   .container {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .mainContent {
     margin-left: 0;
+    border-radius: 15px;
   }
 
   .nav {

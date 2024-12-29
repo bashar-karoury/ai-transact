@@ -2,11 +2,12 @@
   padding: 30px;
   background: white;
   min-height: calc(100vh - 40px);
+  border-radius: 15px;
 }
 
 .title {
   font-size: 24px;
-  color: #333;
+  color: #26415E;
   margin-bottom: 30px;
 }
 
@@ -22,7 +23,7 @@
 
 .formGroup label {
   width: 120px;
-  color: #666;
+  color: #26415E;
   font-size: 16px;
 }
 
@@ -32,12 +33,12 @@
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 14px;
-  color: #333;
+  color: #26415E;
   background: white;
 }
 
 .input::placeholder {
-  color: #999;
+  color: #26415E;
 }
 
 .input:focus {

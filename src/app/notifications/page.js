@@ -6,17 +6,17 @@ export default function Notifications() {
   const [notifications] = useState([
     {
       id: 1,
-      message: 'Notification One: fastfastfastfastfast',
+      message: 'Notification One: You have a new transaction "Fast Food"',
       date: 'Date'
     },
     {
       id: 2,
-      message: 'Notification Two: fastfastfastfastfast',
+      message: 'Notification Two: You have a new transaction "Groceries"',
       date: 'Date'
     },
     {
       id: 3,
-      message: 'Notification Three: fastfastfastfastfast',
+      message: 'Notification Three: You have a new transaction "Gas"',
       date: 'Date'
     }
   ]);

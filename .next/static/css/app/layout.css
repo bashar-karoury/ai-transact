@@ -25,7 +25,7 @@
 
 .rootLayout_sidebarHeader__vgOiy h1 {
   font-size: 24px;
-  color: #333;
+  color: #26415E;
   margin-bottom: 10px;
    display: flex;
   align-items: center;
@@ -67,8 +67,8 @@
 
 .rootLayout_nav__tsQ3M a:hover, 
 .rootLayout_nav__tsQ3M a.rootLayout_active__tuQsn {
-  background: #f0f7ff;
-  color: #158cee;
+  background: #83A6CE;
+  color: #26415E;
 }
 
 .rootLayout_icon__jUXHy {
@@ -89,15 +89,16 @@
 }
 
 .rootLayout_balance__Gheti h2 {
-  color: #2196f3;
+  color: #26415E;
   font-size: 24px;
 }
 
 .rootLayout_mainContent__o_diJ {
   flex: 1 1;
   margin-left: 250px;
-  padding: 20px;
-  background: #f5f5f5;
+  padding: 20px 20px 20px;
+  background: #b2cbff;
+  border-radius: 15px;
 }
 
 @media (max-width: 768px) {
@@ -105,15 +106,16 @@
     width: 70%;
     height: auto;
     position: relative;
-    padding: 10px;
+    padding: 10px
   }
 
   .rootLayout_container__Gsrsi {
-    flex-direction: row;
+    flex-direction: column;
   }
 
   .rootLayout_mainContent__o_diJ {
     margin-left: 0;
+    border-radius: 15px;
   }
 
   .rootLayout_nav__tsQ3M {
