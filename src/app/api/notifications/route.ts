@@ -1,1 +1,2 @@
 // GET /notifications/
+export {};

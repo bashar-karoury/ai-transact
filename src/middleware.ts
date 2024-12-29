@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { stackServerApp } from "./stack";
 
 export async function middleware(request: NextRequest) {
-  // const user = await stackServerApp.getUser();
-  // if (!user) {
-  //   return NextResponse.redirect(new URL("/handler/sign-in", request.url));
-  // }
-  // if (!user?.clientMetadata?.onboarded) {
-  //   return NextResponse.redirect(new URL("/onboard", request.url));
-  // }
+  const user = await stackServerApp.getUser();
+  if (!user) {
+    return NextResponse.redirect(new URL("/handler/sign-in", request.url));
+  }
+  if (!user?.clientMetadata?.onboarded) {
+    return NextResponse.redirect(new URL("/onboard", request.url));
+  }
   return NextResponse.next();
 }
 

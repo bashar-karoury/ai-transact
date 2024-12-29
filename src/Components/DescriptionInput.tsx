@@ -23,7 +23,7 @@ export default function DescriptionInput({
     }
   }
 
-  async function checkEnter(event) {
+  async function checkEnter(event: { key: string }) {
     if (event.key === "Enter") {
       setShouldCategorize(true);
     }
