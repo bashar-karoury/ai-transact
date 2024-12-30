@@ -1,5 +1,3 @@
-// `GET /userSettings`
-
 // `PUT /userSettings`
 
 

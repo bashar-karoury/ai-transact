@@ -1,5 +1,5 @@
 // `GET /budgets/`
-
+export {};
 // `POST /budgets/`
 // import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';

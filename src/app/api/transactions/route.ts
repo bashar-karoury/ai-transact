@@ -23,3 +23,5 @@ export async function POST(req: NextRequest) {
     );
   }
 }
+
+// `GET /transactions?time=today|this_month|this_year`
