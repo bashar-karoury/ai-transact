@@ -1,4 +1,4 @@
-import User, { IUser, ITransaction, IBudget } from '../databaseModules/users';
+import {User, IUser, ITransaction, IBudget } from '../databaseModules/users';
 
 export const addUser = async (userData: IUser) => {
   try {
