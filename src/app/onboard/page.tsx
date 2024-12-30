@@ -41,6 +41,13 @@ export default function OnboardingPage() {
             },
           });
           // todo: create new user in database
+          // const new_user ={
+          //   email:user.email,
+          //   id:user_id,
+          //   profile_pic,
+          //   currency
+          // }
+          // database.addUser(new_user);
           router.push("/");
         }}
       >
