@@ -1,0 +1,186 @@
+.reports-container {
+  padding: 24px;
+  color: white;
+}
+
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.date-filter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #2d2d2d;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.calendar-icon {
+  width: 20px;
+  height: 20px;
+  color: #808080;
+}
+
+.date-filter select {
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.summary-card {
+  background: #2d2d2d;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.amount {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 8px 0;
+}
+
+.change {
+  font-size: 14px;
+  &.positive { color: #4caf50; }
+  &.negative { color: #f44336; }
+}
+
+.report-section {
+  background: #2d2d2d;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.section-icon {
+  width: 24px;
+  height: 24px;
+  color: #808080;
+}
+
+.categories-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.category-info {
+  width: 150px;
+}
+
+.category-info h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.category-info p {
+  margin: 4px 0 0;
+  color: #808080;
+}
+
+.category-bar {
+  flex: 1;
+  height: 8px;
+  background: #1a1a1a;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.category-progress {
+  height: 100%;
+  background: #4a90e2;
+}
+
+.category-percentage {
+  width: 50px;
+  text-align: right;
+  color: #808080;
+}
+
+.monthly-data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+
+.month-item {
+  text-align: center;
+}
+
+.month-bars {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 16px 0;
+  align-items: flex-end;
+}
+
+.bar-container {
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.bar {
+  width: 100%;
+  background: #4a90e2;
+  border-radius: 4px 4px 0 0;
+  transition: height 0.3s;
+
+  &.income { background: #4caf50; }
+  &.expenses { background: #f44336; }
+}
+
+.bar-label {
+  margin-top: 8px;
+  font-size: 12px;
+  color: #808080;
+}
+
+.month-details {
+  font-size: 14px;
+  color: #808080;
+}
+
+.month-details p {
+  margin: 4px 0;
+}
