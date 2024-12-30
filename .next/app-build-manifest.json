@@ -16,6 +16,12 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/page.css",
+      "static/chunks/app/page.js"
+    ],
     "/dashboard/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -28,17 +34,22 @@
       "static/css/app/settings/page.css",
       "static/chunks/app/settings/page.js"
     ],
+    "/notifications/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/notifications/page.css",
+      "static/chunks/app/notifications/page.js"
+    ],
     "/budget/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/budget/page.css",
       "static/chunks/app/budget/page.js"
     ],
-    "/notifications/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/notifications/page.css",
-      "static/chunks/app/notifications/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
