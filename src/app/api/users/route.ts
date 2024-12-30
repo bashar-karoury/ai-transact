@@ -1,9 +1,6 @@
-// `GET /budgets/`
-export {};
-// `POST /budgets/`
 // import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
-import { addBudget } from '../../../utils/handler/functions';
+import { addUser } from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
 
 
@@ -14,14 +11,14 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     console.log('Request Body:', body);
 
-    const budget = await addBudget(body._id, body);
-    console.log('transaction added:', budget);
+    const newUser = await addUser(body);
+    console.log('User Created:', newUser);
 
-    return NextResponse.json(budget, { status: 201 });
+    return NextResponse.json(newUser, { status: 201 });
   } catch (error: any) {
-    console.error('Error creating budget:', error);
+    console.error('Error creating user:', error);
     return NextResponse.json(
-      { error: 'Failed to add budget', details: error.message },
+      { error: 'Failed to add user', details: error.message },
       { status: 500 }
     );
   }
