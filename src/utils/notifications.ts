@@ -1,11 +1,13 @@
+// Extend the global namespace to include the type definition
 declare global {
   let activeUserClients: Map<string, ReadableStreamDefaultController<unknown>>;
 }
 
-// globalThis.activeUserClients = globalThis.activeUserClients || new Map<string, ReadableStreamDefaultController<unknown>>();
+// Initialize the global variable using `globalThis`
+globalThis.activeUserClients =
+  globalThis.activeUserClients ||
+  new Map<string, ReadableStreamDefaultController<unknown>>();
 
-// export const activeUserClients = globalThis.activeUserClients;
-activeUserClients = new Map();
 export function addClient(
   userEmail: string,
   controller: ReadableStreamDefaultController<unknown>
