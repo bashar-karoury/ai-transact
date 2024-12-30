@@ -1,5 +1,8 @@
+// function.ts is a file that contains all the functions that are used in the handlers.
+import { get } from 'http';
 import {User, IUser, ITransaction, IBudget } from '../databaseModules/users';
 
+// Add a new user to the database
 export const addUser = async (userData: IUser) => {
   try {
     const newUser = new User(userData);
@@ -11,6 +14,7 @@ export const addUser = async (userData: IUser) => {
   }
 };
 
+// addTransaction function is used to add a new transaction to the user's transactions array
 export const addTransaction = async (userId: string, transactionData: ITransaction) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(userId, {
@@ -23,6 +27,7 @@ export const addTransaction = async (userId: string, transactionData: ITransacti
   }
 };
 
+// deleteTransaction function is used to delete a transaction from the user's transactions array
 export const deleteTransaction = async (userId: string, transactionId: string) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(userId, {
@@ -35,6 +40,7 @@ export const deleteTransaction = async (userId: string, transactionId: string) =
   }
 };
 
+// updateTransaction function is used to update a transaction in the user's transactions array
 export const updateTransaction = async (
   userId: string,
   transactionId: string,
@@ -53,6 +59,7 @@ export const updateTransaction = async (
   }
 };
 
+// addBudget function is used to add a new budget to the user's budgets array
 export const addBudget = async (userId: string, budgetData: IBudget) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(userId, {
@@ -65,6 +72,7 @@ export const addBudget = async (userId: string, budgetData: IBudget) => {
   }
 };
 
+// updateBudget function is used to update a budget in the user's budgets array
 export const updateBudget = async (
   userId: string,
   budgetId: string,
@@ -83,6 +91,7 @@ export const updateBudget = async (
   }
 };
 
+// deleteBudget function is used to delete a budget from the user's budgets array
 export const deleteBudget = async (userId: string, budgetId: string) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(userId, {
@@ -95,6 +104,7 @@ export const deleteBudget = async (userId: string, budgetId: string) => {
   }
 };
 
+// updaateCurrency function is used to update the user's currency
 export const updateCurrency = async (userId: string, currency: string) => {
   try {
     return await User.findByIdAndUpdate(userId, { currency }, { new: true });
@@ -104,6 +114,7 @@ export const updateCurrency = async (userId: string, currency: string) => {
   }
 };
 
+// getBalance function is used to get the user's balance
 export const getBalance = async (userId: string) => {
   try {
     const user = await User.findById(userId);
@@ -114,6 +125,8 @@ export const getBalance = async (userId: string) => {
   }
 };
 
+
+// getAllExpenses function is used to get all the user's expenses
 export const getAllExpenses = async (userId: string) => {
   try {
     const user = await User.findById(userId);
@@ -124,6 +137,7 @@ export const getAllExpenses = async (userId: string) => {
   }
 };
 
+// getAllIncomes function is used to get all the user's incomes
 export const getAllIncomes = async (userId: string) => {
   try {
     const user = await User.findById(userId);

@@ -3,6 +3,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // transaction interface
 export interface ITransaction extends Document {
+  category: string;
   // _id: string;
   type: 'income' | 'expense';
   amount: number;
@@ -37,6 +38,7 @@ const TransactionSchema: Schema<ITransaction> = new Schema({
   type: { type: String, enum: ['income', 'expense'], required: true },
   amount: { type: Number, required: true },
   description: { type: String, required: true },
+  category: { type: String, required: true },
   date: { type: Date, default: Date.now },
 });
 
