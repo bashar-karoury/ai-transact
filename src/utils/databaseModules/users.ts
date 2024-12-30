@@ -3,11 +3,11 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // transaction interface
 export interface ITransaction extends Document {
-  category: string;
   // _id: string;
   type: 'income' | 'expense';
   amount: number;
   description: string;
+  category: string;
   date: Date;
 }
 
@@ -63,7 +63,7 @@ const UserSchema: Schema<IUser> = new Schema({
 });
 
 // user model
-export const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
 
 // export user model
-// export User;
+export default User;

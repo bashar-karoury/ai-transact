@@ -33,15 +33,18 @@ export async function GET(req: NextRequest) {
     // Fetch balance using '_id'
     const expenses = await getAllExpenses(_id);
     const incomes = await getAllIncomes(_id);
-    const amount  = 0;
+
+    // define the total income and total expense
     let total_income = 0;
     let total_expense = 0;
     const categorize_income: { [key: string]: number } = {};
     const categorize_expense: { [key: string]: number } = {};
 
+    // Calculate the total income and total expense
     total_income = incomes ? incomes.reduce((acc, income) => acc + income.amount, 0) : 0;
     total_expense = expenses ? expenses.reduce((acc, expense) => acc + expense.amount, 0) : 0;
 
+    // Categorize the expenses
     expenses?.forEach(expense => {
       if (categorize_expense[expense.category]) {
         categorize_expense[expense.category] += expense.amount;
@@ -50,6 +53,7 @@ export async function GET(req: NextRequest) {
       }
     });
 
+    // Categorize the incomes
     incomes?.forEach(income => {
       if (categorize_income[income.category]) {
         categorize_income[income.category] += income.amount;
@@ -58,6 +62,7 @@ export async function GET(req: NextRequest) {
       }
     });
 
+    // Log the expenses and incomes
     console.log('Expenses:', expenses);
     console.log('Incomes:', incomes);
 
@@ -65,6 +70,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ total_income, total_expense, categorize_income, categorize_expense }, { status: 200 });
 
   }
+  // Catch any errors and return the error response
   catch (error: any) {
     console.error('Error getting expenses and incomes:', error);
     return NextResponse.json(

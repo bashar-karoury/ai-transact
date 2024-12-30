@@ -1,6 +1,6 @@
 // function.ts is a file that contains all the functions that are used in the handlers.
 import { get } from 'http';
-import {User, IUser, ITransaction, IBudget } from '../databaseModules/users';
+import User, {IUser, ITransaction, IBudget } from '../databaseModules/users';
 
 // Add a new user to the database
 export const addUser = async (userData: IUser) => {
@@ -147,3 +147,18 @@ export const getAllIncomes = async (userId: string) => {
     throw new Error('Failed to get incomes');
   }
 };
+
+
+// getUserSettings function is used to get the user's settings
+export const getUserSettings = async (userId: string) => {
+  try {
+    const user = await User.findById(userId);
+    return {
+      currency: user?.currency,
+      profilePicture: user?.profilePicture,
+    };
+  } catch (error) {
+    console.error('Error getting user settings:', error);
+    throw new Error('Failed to get user settings');
+  }
+}
