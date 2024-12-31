@@ -3,7 +3,6 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // transaction interface
 export interface ITransaction extends Document {
-  // _id: string;
   type: 'income' | 'expense';
   amount: number;
   description: string;
@@ -13,7 +12,6 @@ export interface ITransaction extends Document {
 
 // budget interface
 export interface IBudget extends Document {
-  // _id: string;
   category: string;
   startDate: Date;
   endDate: Date;
@@ -22,7 +20,6 @@ export interface IBudget extends Document {
 
 // user interface
 export interface IUser extends Document {
-  // _id: string;
   email: string;
   profilePicture?: string;
   balance: number;
