@@ -59,6 +59,39 @@ export const updateTransaction = async (
   }
 };
 
+// getAllTransactionsBySpecificDate function is used to get all the user's transactions by a specific date
+export const getAllTransactionsBySpecificDate = async (
+  userId: string,
+  start_date: Date,
+  end_date: Date
+) => {
+  try {
+    const user = await User.findById(userId).select('transactions'); // Get only transactions field
+
+    // Filter transactions locally (alternative approach since MongoDB's `$elemMatch` can't project nested arrays)
+    const transactions = user?.transactions.filter(
+      (t) =>
+        t.date >= start_date &&
+        t.date <= end_date
+    );
+    return transactions || [];
+  } catch (error) {
+    console.error('Error getting transactions by specific date:', error);
+    throw new Error('Failed to get transactions by specific date');
+  }
+}
+
+// get all transactions of a user
+export const getAllTransactions = async (userId: string) => {
+  try {
+    const user = await User.findById(userId);
+    return user?.transactions;
+  } catch (error) {
+    console.error('Error getting transactions:', error);
+    throw new Error('Failed to get transactions');
+  }
+}
+
 // addBudget function is used to add a new budget to the user's budgets array
 export const addBudget = async (userId: string, budgetData: IBudget) => {
   try {
