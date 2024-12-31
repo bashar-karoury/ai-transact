@@ -1,6 +1,6 @@
 // import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
-import { getTransactionsForToday, getTransactionsForThisMonth, getTransactionsForThisYear, getAllTransactionsBySpecificDate, getAllTransactions,  addTransaction } from '../../../utils/handler/functions';
+import { updateTransaction, getTransactionsForToday, getTransactionsForThisMonth, getTransactionsForThisYear, getAllTransactionsBySpecificDate, getAllTransactions,  addTransaction } from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
 
 
@@ -69,4 +69,25 @@ export async function GET(req: NextRequest) {
       { status: 500 }
     );
   }
+}
+
+// put request to update a transaction
+export async function PUT(req: NextRequest) {
+  try {
+    await dbConnect();
+
+    const body = await req.json();
+    console.log('Request Body:', body);
+
+    const transaction = await updateTransaction(body._id, body);
+    console.log('Transaction updated:', transaction);
+
+    return NextResponse.json(transaction, {status: 200});
+  } catch (error: any) {
+    console.error('Error update transaction:', error);
+    return NextResponse.json(
+      { error: 'Failed to update transaction', details: error.message },
+      { status: 500 }
+    );
+    }
 }
