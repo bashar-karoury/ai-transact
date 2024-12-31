@@ -104,6 +104,17 @@ export const deleteBudget = async (userId: string, budgetId: string) => {
   }
 };
 
+// getBudgets function is used to get all the user's budgets
+export const getBudgets = async (userId: string) => {
+  try {
+    const user = await User.findById(userId);
+    return user?.budgets;
+  } catch (error) {
+    console.error('Error getting budgets:', error);
+    throw new Error('Failed to get budgets');
+  }
+}
+
 // updaateCurrency function is used to update the user's currency
 export const updateCurrency = async (userId: string, currency: string) => {
   try {
