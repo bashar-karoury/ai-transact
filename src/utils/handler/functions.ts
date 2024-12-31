@@ -148,6 +148,50 @@ export const getAllIncomes = async (userId: string) => {
   }
 };
 
+// getAllIncomesBySpecificDate function is used to get all the user's incomes by a specific date
+export const getAllIncomesBySpecificDate = async (
+  userId: string,
+  start_date: Date,
+  end_date: Date
+) => {
+  try {
+    const user = await User.findById(userId).select('transactions'); // Get only transactions field
+
+    // Filter transactions locally (alternative approach since MongoDB's `$elemMatch` can't project nested arrays)
+    const incomes = user?.transactions.filter(
+      (t) =>
+        t.type === 'income' &&
+        t.date >= start_date &&
+        t.date <= end_date
+    );
+    return incomes || [];
+  } catch (error) {
+    console.error('Error getting incomes by specific date:', error);
+    throw new Error('Failed to get incomes by specific date');
+  }
+};
+
+// getAllExpensesBySpecificDate function is used to get all the user's expenses by a specific date
+export const getAllExpensesBySpecificDate = async (
+  userId: string,
+  start_date: Date,
+  end_date: Date
+) => {
+  try {
+    const user = await User.findById(userId).select('transactions');
+
+    const expenses = user?.transactions.filter(
+      (t) =>
+        t.type === 'expense' &&
+        t.date >= start_date &&
+        t.date <= end_date
+    );
+    return expenses || [];
+  } catch (error) {
+    console.error('Error getting expenses by specific date:', error);
+    throw new Error('Failed to get expenses by specific date');
+  }
+};
 
 // getUserSettings function is used to get the user's settings
 export const getUserSettings = async (userId: string) => {
