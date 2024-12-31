@@ -33,8 +33,6 @@ export async function GET(req: NextRequest) {
     const expenses = await getAllExpensesBySpecificDate(_id, start_date as Date, end_date as Date);
     const incomes = await getAllIncomesBySpecificDate(_id, start_date as Date, end_date as Date);
 
-    // console.log('Expenses:', expenses);
-    // console.log('Incomes:', incomes);
     // define the total income and total expense
     let total_income = 0;
     let total_expense = 0;
