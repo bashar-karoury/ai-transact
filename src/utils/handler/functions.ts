@@ -43,12 +43,11 @@ export const deleteTransaction = async (userId: string, transactionId: string) =
 // updateTransaction function is used to update a transaction in the user's transactions array
 export const updateTransaction = async (
   userId: string,
-  transactionId: string,
   transactionData: Partial<ITransaction>
 ) => {
   try {
     const updatedUser = await User.findOneAndUpdate(
-      { _id: userId, 'transactions._id': transactionId },
+      { _id: userId},
       { $set: { 'transactions.$': transactionData } },
       { new: true }
     );
@@ -58,6 +57,69 @@ export const updateTransaction = async (
     throw new Error('Failed to update transaction');
   }
 };
+
+// getTransactions for today function is used to get all the user's transactions for today
+export const getTransactionsForToday = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select('transactions'); // Get only transactions field
+
+    // Filter transactions locally (alternative approach since MongoDB's `$elemMatch` can't project nested arrays)
+    const today = new Date();
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+    const transactions = user?.transactions.filter(
+      (t) =>
+        t.date >= startOfDay &&
+        t.date <= endOfDay
+    );
+    return transactions || [];
+  } catch (error) {
+    console.error('Error getting transactions for today:', error);
+    throw new Error('Failed to get transactions for today');
+  }
+}
+
+// getTransactionsForThisMonth function is used to get all the user's transactions for this month
+export const getTransactionsForThisMonth = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select('transactions'); // Get only transactions field
+
+    // Filter transactions locally (alternative approach since MongoDB's `$elemMatch` can't project nested arrays)
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59); // Ensure the end is inclusive
+    const transactions = user?.transactions.filter(
+      (t) =>
+        t.date >= startOfMonth &&
+        t.date <= endOfMonth
+    );
+    return transactions || [];
+  } catch (error) {
+    console.error('Error getting transactions for this month:', error);
+    throw new Error('Failed to get transactions for this month');
+  }
+}
+
+// getTransactionsForThisYear function is used to get all the user's transactions for this year
+export const getTransactionsForThisYear = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select('transactions'); // Get only transactions field
+
+    // Filter transactions locally (alternative approach since MongoDB's `$elemMatch` can't project nested arrays)
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 1);
+    const endOfYear = new Date(today.getFullYear(), 11, 31, 23, 59, 59); // Ensure the end is inclusive
+    const transactions = user?.transactions.filter(
+      (t) =>
+        t.date >= startOfYear &&
+        t.date <= endOfYear
+    );
+    return transactions || [];
+  } catch (error) {
+    console.error('Error getting transactions for this year:', error);
+    throw new Error('Failed to get transactions for this year');
+  }
+}
 
 // getAllTransactionsBySpecificDate function is used to get all the user's transactions by a specific date
 export const getAllTransactionsBySpecificDate = async (

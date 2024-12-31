@@ -1,6 +1,6 @@
 // import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllTransactionsBySpecificDate, getAllTransactions,  addTransaction } from '../../../utils/handler/functions';
+import { getTransactionsForToday, getTransactionsForThisMonth, getTransactionsForThisYear, getAllTransactionsBySpecificDate, getAllTransactions,  addTransaction } from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
 
 
@@ -29,13 +29,10 @@ export async function GET(req: NextRequest) {
   try {
     await dbConnect();
 
-    // use the query parameter to get the user's id
+    // use the query parameter to get the user's id, and the time parameter to get the time frame
     const { searchParams } = new URL(req.url);
     const _id = searchParams.get('_id');
-    const start_date_str = searchParams.get('start_date');
-    const end_date_str = searchParams.get('end_date');
-    const start_date = start_date_str ? new Date(start_date_str) : null;
-    const end_date = end_date_str ? new Date(end_date_str) : null;
+    const time = searchParams.get('time');
 
     if (!_id) {
       return NextResponse.json(
@@ -46,11 +43,26 @@ export async function GET(req: NextRequest) {
 
     console.log('Request ID:', _id);
 
-    const transactions = await getAllTransactionsBySpecificDate(_id, start_date as Date, end_date as Date);
+    let transactions;
+
+    switch (time) {
+      case 'today':
+        transactions = await getTransactionsForToday(_id);
+        break;
+      case 'this_month':
+        transactions = await getTransactionsForThisMonth(_id);
+        break;
+      case 'this_year':
+        transactions = await getTransactionsForThisYear(_id);
+        break;
+      default:
+        transactions = await getAllTransactions(_id);
+    }
+
     console.log('transactions:', transactions);
 
     return NextResponse.json(transactions, { status: 200 });
-} catch (error: any) {
+  } catch (error: any) {
     console.error('Error getting transactions:', error);
     return NextResponse.json(
       { error: 'Failed to get transactions', details: error.message },
