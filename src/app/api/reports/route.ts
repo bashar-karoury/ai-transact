@@ -1,35 +1,8 @@
-// ### Reports APIs
-export {};
-// `GET /reports?time=today|this_month|this_year`
-// return {total_income: 1234
-//         total_expense: 432
-//         categorize_income:{
-//             Salary:1000,
-//             Gift:200,
-//         }
-//         categorize_expense:{
-//             Utilities: 200,
-//             Transportation:50,
-//             Entertainment: 20
-//         }
-// }
-
-//GET /reports?time=today
-// return {total_income: 1234,
-//         total_expense: 432,
-//         categorize_income:{
-//             Salary:1000,
-//             Gift:200,
-//         },
-//         categorize_expense:{
-//             Utilities: 200,
-//             Transportation:50,
-//             Entertainment: 20
-//         }
-// }
+// Import the 'NextRequest' and 'NextResponse' types from 'next/server'
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllExpenses, getAllIncomes } from '../../../utils/handler/functions';
+import { getAllIncomesBySpecificDate, getAllExpensesBySpecificDate,  getAllExpenses, getAllIncomes } from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
+
 
 export async function GET(req: NextRequest) {
   try {
@@ -39,6 +12,11 @@ export async function GET(req: NextRequest) {
     // Get the '_id' parameter from the query string
     const { searchParams } = new URL(req.url);
     const _id = searchParams.get('_id');
+    // Get the 'time' parameter from the query string
+    const start_date_str = searchParams.get('start_date');
+    const end_date_str = searchParams.get('end_date');
+    const start_date = start_date_str ? new Date(start_date_str) : null;
+    const end_date = end_date_str ? new Date(end_date_str) : null;
 
     // Log the '_id'
     console.log('Request ID:', _id);
@@ -52,8 +30,8 @@ export async function GET(req: NextRequest) {
     }
 
     // Fetch balance using '_id'
-    const expenses = await getAllExpenses(_id);
-    const incomes = await getAllIncomes(_id);
+    const expenses = await getAllExpensesBySpecificDate(_id, start_date as Date, end_date as Date);
+    const incomes = await getAllIncomesBySpecificDate(_id, start_date as Date, end_date as Date);
 
     // define the total income and total expense
     let total_income = 0;
@@ -62,24 +40,27 @@ export async function GET(req: NextRequest) {
     const categorize_expense: { [key: string]: number } = {};
 
     // Calculate the total income and total expense
-    total_income = incomes ? incomes.reduce((acc, income) => acc + income.amount, 0) : 0;
-    total_expense = expenses ? expenses.reduce((acc, expense) => acc + expense.amount, 0) : 0;
+    total_income = incomes.reduce((acc, income) => acc + income.amount, 0);
+    total_expense = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+
 
     // Categorize the expenses
     expenses?.forEach(expense => {
-      if (categorize_expense[expense.category]) {
-        categorize_expense[expense.category] += expense.amount;
+      const expenseCategory = (expense as any).category;
+      if (categorize_expense[expenseCategory]) {
+        categorize_expense[expenseCategory] += (expense as any).amount;
       } else {
-        categorize_expense[expense.category] = expense.amount;
+        categorize_expense[expenseCategory] = (expense as any).amount;
       }
     });
 
     // Categorize the incomes
     incomes?.forEach(income => {
-      if (categorize_income[income.category]) {
-        categorize_income[income.category] += income.amount;
+      const incomeCategory = (income as any).category;
+      if (categorize_income[incomeCategory]) {
+        categorize_income[incomeCategory] += (income as any).amount;
       } else {
-        categorize_income[income.category] = income.amount;
+        categorize_income[incomeCategory] = (income as any).amount;
       }
     });
 

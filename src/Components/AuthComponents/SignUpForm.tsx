@@ -1,5 +1,5 @@
-import { SignUp } from "@stackframe/stack";
+// import { SignUp } from "@stackframe/stack";
 
-export default function SignUpForm() {
-  return <SignUp />;
-}
+// export default function SignUpForm() {
+//   return <SignUp />;
+// }
