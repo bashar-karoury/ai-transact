@@ -176,7 +176,7 @@ export const updateBudget = async (
 ) => {
   try {
     const updatedUser = await User.findOneAndUpdate(
-      { _id: userId, 'budgets._id': budgetId },
+      { _id: userId, 'budgets.budget_id': budgetId },
       { $set: { 'budgets.$': budgetData } },
       { new: true }
     );

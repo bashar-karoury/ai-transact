@@ -1,6 +1,6 @@
 // import type { NextRequest, NextResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
-import { getBudgets, addBudget } from '../../../utils/handler/functions';
+import { updateBudget, getBudgets, addBudget } from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
 
 
@@ -55,5 +55,26 @@ export async function GET(req: NextRequest) {
       { error: 'Failed to get budgets', details: error.message },
       { status: 500 }
     );
+  }
+}
+
+// function to handle PUT request to update a budget
+export async function PUT(req:NextRequest) {
+  try {
+    await dbConnect();
+
+    const body = await req.json();
+    console.log('Request Boody:', body);
+
+    const budget = await updateBudget(body._id, body.budget_id, body);
+    console.log('Budget updated:', budget);
+
+    return NextResponse.json(budget, { status: 200 });
+  } catch (error: any) {
+    console.log('Error updating Budget:', error);
+    return NextResponse.json(
+      { error: 'Failed to update budget', details: error.message},
+      { status: 500}
+    )
   }
 }
