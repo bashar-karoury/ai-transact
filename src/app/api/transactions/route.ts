@@ -79,7 +79,7 @@ export async function PUT(req: NextRequest) {
     const body = await req.json();
     console.log('Request Body:', body);
 
-    const transaction = await updateTransaction(body._id, body);
+    const transaction = await updateTransaction(body._id, body.transaction_id, body);
     console.log('Transaction updated:', transaction);
 
     return NextResponse.json(transaction, {status: 200});

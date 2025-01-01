@@ -3,6 +3,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 
 // transaction interface
 export interface ITransaction extends Document {
+  transaction_id: mongoose.Schema.Types.ObjectId;
   type: 'income' | 'expense';
   amount: number;
   description: string;
@@ -12,6 +13,7 @@ export interface ITransaction extends Document {
 
 // budget interface
 export interface IBudget extends Document {
+  budget_id: mongoose.Schema.Types.ObjectId;
   category: string;
   startDate: Date;
   endDate: Date;
@@ -31,6 +33,8 @@ export interface IUser extends Document {
 
 // transaction schema
 const TransactionSchema: Schema<ITransaction> = new Schema({
+  // transaction_id, will be used to update and delete transactions in the future
+  transaction_id: { type: mongoose.Schema.Types.ObjectId, auto: true },
   type: { type: String, enum: ['income', 'expense'], required: true },
   amount: { type: Number, required: true },
   description: { type: String, required: true },
@@ -40,6 +44,7 @@ const TransactionSchema: Schema<ITransaction> = new Schema({
 
 // budget schema
 const BudgetSchema: Schema<IBudget> = new Schema({
+  budget_id: { type: mongoose.Schema.Types.ObjectId, auto: true },
   category: { type: String, required: true },
   startDate: { type: Date, required: true },
   endDate: { type: Date, required: true },

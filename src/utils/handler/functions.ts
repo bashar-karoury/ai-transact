@@ -43,11 +43,12 @@ export const deleteTransaction = async (userId: string, transactionId: string) =
 // updateTransaction function is used to update a transaction in the user's transactions array
 export const updateTransaction = async (
   userId: string,
+  transactionId: string,
   transactionData: Partial<ITransaction>
 ) => {
   try {
     const updatedUser = await User.findOneAndUpdate(
-      { _id: userId},
+      { _id: userId, 'transactions.transaction_id': transactionId },
       { $set: { 'transactions.$': transactionData } },
       { new: true }
     );
