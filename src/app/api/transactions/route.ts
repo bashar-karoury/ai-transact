@@ -46,15 +46,19 @@ export async function GET(req: NextRequest) {
     let transactions;
 
     switch (time) {
+      // get transactions for today
       case 'today':
         transactions = await getTransactionsForToday(_id);
         break;
+      // get transactions for this month
       case 'this_month':
         transactions = await getTransactionsForThisMonth(_id);
         break;
+      // get transactions for this year
       case 'this_year':
         transactions = await getTransactionsForThisYear(_id);
         break;
+      // get all transactions
       default:
         transactions = await getAllTransactions(_id);
     }
