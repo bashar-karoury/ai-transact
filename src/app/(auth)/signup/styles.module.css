@@ -3,13 +3,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #8b5cf6, #3b82f6);
+  background: linear-gradient(45deg, #26415E, #83A6CE, #26415E);
 }
 
 .signupCard {
   background: white;
   padding: 40px;
-  border-radius: 16px;
+  border-radius: 20px;
   width: 100%;
   max-width: 400px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -18,21 +18,21 @@
 .title {
   text-align: center;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   color: #333;
-  margin-bottom: 30px;
-  letter-spacing: 0.5px;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 
 .nameFields {
   display: flex;
-  gap: 15px;
+  gap: 20px;
 }
 
 .inputGroup {
@@ -41,37 +41,39 @@
 
 .inputGroup input {
   width: 100%;
-  padding: 10px 0;
+  padding: 8px 0;
   border: none;
   border-bottom: 1px solid #ddd;
   font-size: 16px;
   outline: none;
   background: transparent;
-  transition: border-color 0.3s;
+  color: #333;
 }
 
 .inputGroup input::placeholder {
-  color: #999;
+  color: #666;
+  font-size: 14px;
 }
 
 .inputGroup input:focus {
-  border-bottom-color: #8b5cf6;
+  border-bottom-color: #9333EA;
 }
 
 .signupButton {
-  background: linear-gradient(to right, #8b5cf6, #3b82f6);
+  background: linear-gradient(to right, #26415E, #83A6CE);
   color: white;
-  padding: 14px;
+  padding: 15px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  margin-top: 10px;
-  transition: opacity 0.3s;
+  margin-top: 20px;
+  text-transform: uppercase;
   letter-spacing: 1px;
+  transition: opacity 0.3s;
 }
 
 .signupButton:hover {
   opacity: 0.9;
-}
+} 
