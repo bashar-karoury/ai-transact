@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { MicrophoneIcon } from '@heroicons/react/24/outline';
+import { MicrophoneIcon, CalendarIcon, TagIcon } from '@heroicons/react/24/outline';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import styles from './dashboard.module.css';
 
@@ -31,6 +31,24 @@ export default function Dashboard() {
     }
   ]);
 
+  const [newTransaction, setNewTransaction] = useState({
+    description: '',
+    date: '',
+    amount: '',
+    type: 'Income',
+    category: ''
+  });
+
+  const categories = [
+    'Salary',
+    'Food',
+    'Transport',
+    'Shopping',
+    'Entertainment',
+    'Bills',
+    'Others'
+  ];
+
   const startRecording = async () => {
     try {
       setIsRecording(true);
@@ -60,6 +78,15 @@ export default function Dashboard() {
     }
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setNewTransaction({ ...newTransaction, [name]: value });
+  };
+
+  const handleAddTransaction = () => {
+    // Implement transaction addition logic here
+  };
+
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.transactionList}>
@@ -86,46 +113,78 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <div className={styles.inputContainer}>
-        <div className={styles.plusIconWrapper}>
-          <PlusIcon className={styles.plusIcon} />
-        </div>
-        <input
-          type="text"
-          placeholder="Transaction Description"
-          className={styles.descriptionInput}
-          value={transaction.description}
-          onChange={(e) => setTransaction({...transaction, description: e.target.value})}
-        />
-        <input
-          type="date"
-          className={styles.dateInput}
-          value={transaction.date}
-          onChange={(e) => setTransaction({...transaction, date: e.target.value})}
-        />
-        <input
-          type="number"
-          placeholder="Amount"
-          className={styles.amountInput}
-          value={transaction.amount}
-          onChange={(e) => setTransaction({...transaction, amount: e.target.value})}
-        />
-        <select
-          className={styles.categorySelect}
-          value={transaction.category}
-          onChange={(e) => setTransaction({...transaction, category: e.target.value})}
-        >
-          <option value="Income">Income</option>
-          <option value="Expense">Expense</option>
-        </select>
-        <button 
-          className={styles.micButton}
-          onClick={startRecording}
-          disabled={isRecording}
-        >
-          <MicrophoneIcon className={`${styles.micIcon} ${isRecording ? styles.recording : ''}`} />
-        </button>
-        <button className={styles.addButton}>Add</button>
+      <div className={styles.inputSection}>
+        <form onSubmit={handleAddTransaction} className={styles.transactionForm}>
+          <div className={styles.inputGroup}>
+            <input
+              type="text"
+              name="description"
+              placeholder="Transaction Description"
+              value={newTransaction.description}
+              onChange={handleInputChange}
+              className={styles.descriptionInput}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input
+              type="date"
+              name="date"
+              value={newTransaction.date}
+              onChange={handleInputChange}
+              className={styles.dateInput}
+            />
+            <CalendarIcon className={styles.calendarIcon} />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input
+              type="number"
+              name="amount"
+              placeholder="Amount"
+              value={newTransaction.amount}
+              onChange={handleInputChange}
+              className={styles.amountInput}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <select
+              name="type"
+              value={newTransaction.type}
+              onChange={handleInputChange}
+              className={styles.typeSelect}
+            >
+              <option value="Income">Income</option>
+              <option value="Expense">Expense</option>
+            </select>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <select
+              name="category"
+              value={newTransaction.category}
+              onChange={handleInputChange}
+              className={styles.categorySelect}
+            >
+              <option value="">Select Category</option>
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <TagIcon className={styles.categoryIcon} />
+          </div>
+
+          <button type="button" className={styles.micButton}>
+            <MicrophoneIcon className={styles.micIcon} />
+          </button>
+
+          <button type="submit" className={styles.addButton}>
+            Add
+          </button>
+        </form>
       </div>
     </div>
   );

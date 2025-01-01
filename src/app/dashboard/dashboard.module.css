@@ -59,12 +59,27 @@
 }
 
 .categorySelect {
-  width: 120px;
+  width: 100%;
   padding: 8px 12px;
+  padding-right: 32px;
   border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 14px;
-  
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  appearance: none;
+  background: white;
+  cursor: pointer;
+}
+
+.categoryIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #666;
+  pointer-events: none;
 }
 
 .micButton {
@@ -215,6 +230,24 @@
 @media (max-width: 768px) {
   .inputContainer {
     left: 0;
+  }
+
+  .transactionForm {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .inputGroup {
+    min-width: calc(50% - 4px);
+  }
+
+  .descriptionInput {
+    min-width: 100%;
+  }
+
+  .categorySelect,
+  .typeSelect {
+    min-width: calc(50% - 4px);
   }
 }
 .recent-transactions {
