@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { MicrophoneIcon, CalendarIcon, TagIcon } from '@heroicons/react/24/outline';
-import { PlusIcon } from '@heroicons/react/24/outline';
+import { MicrophoneIcon, CalendarIcon, TagIcon, PlusIcon } from '@heroicons/react/24/outline';
 import styles from './dashboard.module.css';
 
 export default function Dashboard() {
@@ -115,7 +114,11 @@ export default function Dashboard() {
 
       <div className={styles.inputSection}>
         <form onSubmit={handleAddTransaction} className={styles.transactionForm}>
-          <div className={styles.inputGroup}>
+          <div className={styles.formWrapper}>
+            <button type="button" className={styles.plusButton}>
+              <PlusIcon className={styles.plusIcon} />
+            </button>
+
             <input
               type="text"
               name="description"
@@ -124,9 +127,7 @@ export default function Dashboard() {
               onChange={handleInputChange}
               className={styles.descriptionInput}
             />
-          </div>
 
-          <div className={styles.inputGroup}>
             <input
               type="date"
               name="date"
@@ -134,10 +135,7 @@ export default function Dashboard() {
               onChange={handleInputChange}
               className={styles.dateInput}
             />
-            <CalendarIcon className={styles.calendarIcon} />
-          </div>
 
-          <div className={styles.inputGroup}>
             <input
               type="number"
               name="amount"
@@ -146,44 +144,29 @@ export default function Dashboard() {
               onChange={handleInputChange}
               className={styles.amountInput}
             />
-          </div>
 
-          <div className={styles.inputGroup}>
-            <select
-              name="type"
-              value={newTransaction.type}
-              onChange={handleInputChange}
-              className={styles.typeSelect}
-            >
-              <option value="Income">Income</option>
-              <option value="Expense">Expense</option>
-            </select>
-          </div>
-
-          <div className={styles.inputGroup}>
             <select
               name="category"
               value={newTransaction.category}
               onChange={handleInputChange}
               className={styles.categorySelect}
             >
-              <option value="">Select Category</option>
+              <option value="">Category</option>
               {categories.map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
               ))}
             </select>
-            <TagIcon className={styles.categoryIcon} />
+
+            <button type="button" className={styles.micButton}>
+              <MicrophoneIcon className={styles.micIcon} />
+            </button>
+
+            <button type="submit" className={styles.addButton}>
+              Add
+            </button>
           </div>
-
-          <button type="button" className={styles.micButton}>
-            <MicrophoneIcon className={styles.micIcon} />
-          </button>
-
-          <button type="submit" className={styles.addButton}>
-            Add
-          </button>
         </form>
       </div>
     </div>
