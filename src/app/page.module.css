@@ -1,163 +1,124 @@
-.page {
+.container {
+  min-height: 200vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  background: linear-gradient(45deg, #26415E, #83A6CE, #26415E);
+  background-size: 200% 200%;
+  padding: 100px;
+}
+
+.loginCard {
+  background: white;
   padding: 40px;
-  min-height: 100vh;
-  background: #ffffff;
-  color: #333;
-  direction: rtl;
-}
-
-.title {
-  margin-bottom: 32px;
-  color: var(--primary-color);
-  font-size: 2rem;
-  text-align: right;
-}
-
-.authContainer {
-  display: flex;
-  flex-direction: row-reverse;
-  gap: 40px;
-  align-items: flex-start;
+  border-radius: 20px;
   width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-.divider {
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  /* background: #dc1a5c; */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 0;
+  color: white;
+  font-size: 24px;
 }
 
-.dividerText {
-  background: #ffffff;
-  padding: 10px;
-  color: #666;
-  font-weight: bold;
-  position: relative;
-  z-index: 1;
-}
-
-.divider::before {
-  content: '';
-  position: absolute;
-  right: 50%;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: #ddd;
-  transform: translateX(50%);
-}
-
-.authForm {
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  width: 100%;
-  max-width: 400px;
-  color: #333;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  text-align: right;
-}
-
-.formTitle {
-  margin-bottom: 24px;
-  text-align: right;
-  color: #333;
-  font-size: 1.5rem;
-}
-
-.formGroup {
-  margin-bottom: 16px;
-}
-
-.label {
-  display: block;
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 600;
   margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
   color: #666;
-  font-size: 14px;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  position: relative;
 }
 
 .input {
   width: 100%;
-  padding: 10px;
-  background: #ffffff;
+  padding: 12px;
   border: 1px solid #ddd;
-  border-radius: 6px;
-  color: #333;
-  font-size: 14px;
-  text-align: left;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
 }
 
 .input:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color:#26415E;
+  background: #26415e;
 }
 
-.button {
-  width: 100%;
-  padding: 10px;
-  background: var(--primary-color);
-  border: none;
-  border-radius: 6px;
+.loginButton {
+  background: linear-gradient(to right, #26415E, #83A6CE);
   color: white;
-  font-size: 14px;
-  font-weight: bold;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-.button:hover {
-  background: #357abd;
+.loginButton:hover {
+  background: #83A6CE;
 }
 
-.signOutButton {
-  padding: 10px 20px;
-  background: #12456e;
-  border: none;
-  border-radius: 6px;
-  color: white;
-  font-size: 14px;
-  font-weight: bold;
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: #f5f5f5;
+  color: #333;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
   cursor: pointer;
   transition: background 0.3s;
 }
 
-.signOutButton:hover {
-  background: #12456eb0;
+.googleButton:hover {
+  background: #eee;
 }
 
-.spacer {
-  height: 24px;
+.signupText {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
 }
 
-@media (max-width: 900px) {
-  .authContainer {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .divider {
-    width: 100%;
-    padding: 10px 0;
-  }
-
-  .divider::before {
-    width: 100%;
-    height: 1px;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .authForm {
-    max-width: 100%;
-  }
+.signupText a {
+  color: #26415e;
+  text-decoration: none;
+  font-weight: 500;
 }
 
+.signupText a:hover {
+  text-decoration: underline;
+}
