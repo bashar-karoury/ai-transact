@@ -30,15 +30,17 @@ export const addTransaction = async (userId: string, transactionData: ITransacti
 // deleteTransaction function is used to delete a transaction from the user's transactions array
 export const deleteTransaction = async (userId: string, transactionId: string) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(userId, {
-      $pull: { transactions: { _id: transactionId } },
-    }, { new: true });
-    return updatedUser?.transactions;
+    // delete the transaction from the user's transactions array
+    const updated = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { transactions: { transaction_id: transactionId } } }, { new: true }
+    );
+    return updated?.transactions;
   } catch (error) {
     console.error('Error deleting transaction:', error);
     throw new Error('Failed to delete transaction');
   }
-};
+}
 
 // updateTransaction function is used to update a transaction in the user's transactions array
 export const updateTransaction = async (

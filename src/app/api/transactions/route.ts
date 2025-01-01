@@ -1,6 +1,6 @@
 // import type { NextApiRequest, NextApiResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
-import { updateTransaction, getTransactionsForToday, getTransactionsForThisMonth, getTransactionsForThisYear, getAllTransactionsBySpecificDate, getAllTransactions,  addTransaction } from '../../../utils/handler/functions';
+import { deleteTransaction, updateTransaction, getTransactionsForToday, getTransactionsForThisMonth, getTransactionsForThisYear, getAllTransactionsBySpecificDate, getAllTransactions,  addTransaction } from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
 
 
@@ -94,4 +94,25 @@ export async function PUT(req: NextRequest) {
       { status: 500 }
     );
     }
+}
+
+// delete request to delete a transaction
+export async function DELETE(req: NextRequest) {
+  try {
+    await dbConnect();
+
+    const body = await req.json();
+    console.log('Request Body:', body);
+
+    const transaction = await deleteTransaction(body._id, body.transaction_id);
+    console.log('Transaction deleted:', transaction);
+
+    return NextResponse.json(transaction, {status: 200});
+  } catch (error: any) {
+    console.error('Error delete transaction:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete transaction', details: error.message},
+      { status: 500}
+    );
+  }
 }
