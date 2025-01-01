@@ -192,15 +192,17 @@ export const updateBudget = async (
 // deleteBudget function is used to delete a budget from the user's budgets array
 export const deleteBudget = async (userId: string, budgetId: string) => {
   try {
-    const updatedUser = await User.findByIdAndUpdate(userId, {
-      $pull: { budgets: { _id: budgetId } },
-    }, { new: true });
-    return updatedUser?.budgets;
+    // delete the budget from the user's budgets array
+    const updated = await User.findByIdAndUpdate(
+      userId,
+      { $pull: { budgets: { budget_id: budgetId } } }, { new: true }
+    );
+    return updated?.budgets;
   } catch (error) {
     console.error('Error deleting budget:', error);
     throw new Error('Failed to delete budget');
   }
-};
+}
 
 // getBudgets function is used to get all the user's budgets
 export const getBudgets = async (userId: string) => {

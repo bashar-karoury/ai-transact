@@ -1,6 +1,6 @@
 // import type { NextRequest, NextResponse } from 'next';
 import { NextRequest, NextResponse } from 'next/server';
-import { updateBudget, getBudgets, addBudget } from '../../../utils/handler/functions';
+import { deleteBudget, updateBudget, getBudgets, addBudget } from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
 
 
@@ -76,5 +76,26 @@ export async function PUT(req:NextRequest) {
       { error: 'Failed to update budget', details: error.message},
       { status: 500}
     )
+  }
+}
+
+// function to handle DELETE request to delete a budget
+export async function DELETE(req: NextRequest) {
+  try {
+    await dbConnect();
+
+    const body = await req.json();
+    console.log('Request Body:', body);
+
+    const budget = await deleteBudget(body._id, body.budget_id);
+    console.log('Budget deleted:', budget);
+
+    return NextResponse.json(budget, { status: 200 });
+} catch(error: any) {
+    console.error('Error deleting budget:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete budget', details: error.message },
+      { status: 500 }
+    );
   }
 }
