@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react';
-import { MicrophoneIcon, CalendarIcon, TagIcon, PlusIcon } from '@heroicons/react/24/outline';
+import { MicrophoneIcon, CalendarIcon, TagIcon, PlusIcon, EllipsisVerticalIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import styles from './dashboard.module.css';
 
 export default function Dashboard() {
@@ -48,6 +48,23 @@ export default function Dashboard() {
     'Others'
   ];
 
+  const [activeTransaction, setActiveTransaction] = useState(null);
+  const [showPopover, setShowPopover] = useState(false);
+  const [popoverPosition, setPopoverPosition] = useState({ x: 0, y: 0 });
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingTransaction, setEditingTransaction] = useState(null);
+  const [editPopoverPosition, setEditPopoverPosition] = useState({ x: 0, y: 0 });
+
+  const handleOptionsClick = (transaction, e) => {
+    e.stopPropagation();
+    setActiveTransaction(transaction);
+    setShowPopover(true);
+    setPopoverPosition({
+      x: e.clientX,
+      y: e.clientY
+    });
+  };
+
   const startRecording = async () => {
     try {
       setIsRecording(true);
@@ -86,6 +103,16 @@ export default function Dashboard() {
     // Implement transaction addition logic here
   };
 
+  const handleEditClick = (transaction) => {
+    setEditingTransaction(transaction);
+  };
+
+  const handleEditSubmit = (e) => {
+    e.preventDefault();
+    // Add your update logic here
+    setEditingTransaction(null);
+  };
+
   return (
     <div className={styles.dashboardContainer}>
       <div className={styles.transactionList}>
@@ -103,14 +130,56 @@ export default function Dashboard() {
               <span className={styles.transactionType}>{transaction.type}</span>
               <span className={styles.transactionDate}>{transaction.date}</span>
             </div>
-            <span className={`${styles.transactionAmount} ${
-              transaction.amount > 0 ? styles.income : styles.expense
-            }`}>
-              ${Math.abs(transaction.amount).toLocaleString()}
-            </span>
+            <div className={styles.transactionActions}>
+              <span className={`${styles.transactionAmount} ${
+                transaction.amount > 0 ? styles.income : styles.expense
+              }`}>
+                ${Math.abs(transaction.amount).toLocaleString()}
+              </span>
+              <button 
+                className={styles.optionsButton}
+                onClick={(e) => handleOptionsClick(transaction, e)}
+              >
+                <EllipsisVerticalIcon className={styles.optionsIcon} />
+              </button>
+            </div>
           </div>
         ))}
       </div>
+
+      {showPopover && activeTransaction && (
+        <div 
+          className={styles.popover}
+          style={{
+            top: popoverPosition.y,
+            left: popoverPosition.x
+          }}
+        >
+          <div className={styles.popoverHeader}>
+            <h3>Edit Transaction</h3>
+            <button 
+              className={styles.closeButton}
+              onClick={() => setShowPopover(false)}
+            >
+              ×
+            </button>
+          </div>
+          <div className={styles.popoverContent}>
+            <button className={styles.popoverButton} onClick={() => {
+              // Add edit logic here
+              setShowPopover(false);
+            }}>
+              Edit
+            </button>
+            <button className={styles.popoverButton} onClick={() => {
+              // Add delete logic here
+              setShowPopover(false);
+            }}>
+              Delete
+            </button>
+          </div>
+        </div>
+      )}
 
       <div className={styles.inputSection}>
         <form onSubmit={handleAddTransaction} className={styles.transactionForm}>
@@ -169,6 +238,93 @@ export default function Dashboard() {
           </div>
         </form>
       </div>
+
+      {/* Edit Transaction Popover */}
+      {editingTransaction && (
+        <div className={styles.editPopoverOverlay}>
+          <div className={styles.editPopover}>
+            <h2 className={styles.editTitle}>Edit Transaction:</h2>
+            
+            <form onSubmit={handleEditSubmit} className={styles.editForm}>
+              <div className={styles.formField}>
+                <label>Description:</label>
+                <input
+                  type="text"
+                  value={editingTransaction.description}
+                  onChange={(e) => setEditingTransaction({
+                    ...editingTransaction,
+                    description: e.target.value
+                  })}
+                />
+              </div>
+
+              <div className={styles.formField}>
+                <label>Amount:</label>
+                <input
+                  type="number"
+                  value={Math.abs(editingTransaction.amount)}
+                  onChange={(e) => setEditingTransaction({
+                    ...editingTransaction,
+                    amount: e.target.value
+                  })}
+                />
+              </div>
+
+              <div className={styles.formField}>
+                <label>Date:</label>
+                <input
+                  type="date"
+                  value={editingTransaction.date}
+                  onChange={(e) => setEditingTransaction({
+                    ...editingTransaction,
+                    date: e.target.value
+                  })}
+                />
+              </div>
+
+              <div className={styles.formField}>
+                <label>Category:</label>
+                <input
+                  type="text"
+                  value={editingTransaction.category || ''}
+                  onChange={(e) => setEditingTransaction({
+                    ...editingTransaction,
+                    category: e.target.value
+                  })}
+                />
+              </div>
+
+              <div className={styles.formField}>
+                <label>Note:</label>
+                <textarea
+                  value={editingTransaction.note || ''}
+                  onChange={(e) => setEditingTransaction({
+                    ...editingTransaction,
+                    note: e.target.value
+                  })}
+                  rows={4}
+                />
+              </div>
+
+              <div className={styles.formActions}>
+                <button 
+                  type="button" 
+                  onClick={() => setEditingTransaction(null)}
+                  className={styles.cancelButton}
+                >
+                  Cancel
+                </button>
+                <button 
+                  type="submit" 
+                  className={styles.saveButton}
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
