@@ -1,4 +1,4 @@
-'use client'
+/*'use client'
 import { useState } from 'react';
 
 export default function SignInForm({ styles }) {
@@ -40,4 +40,5 @@ export default function SignInForm({ styles }) {
       <button type="submit" className={styles.button}>Sign In</button>
     </form>
   );
-} 
+}
+  */

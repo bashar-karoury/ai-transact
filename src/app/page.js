@@ -1,27 +1,70 @@
 'use client'
-import styles from "./page.module.css";
-import SignInForm from "@/Components/AuthComponents/SignInForm";
-import SignUpForm from "@/Components/AuthComponents/SignUpForm";
-import SignOutButton from "@/Components/AuthComponents/SignOutButton";
-import { UserButton } from "@/components/ui/user-button";
+import { useState } from 'react';
+import styles from './page.module.css';
+import Image from 'next/image';
+import Link from 'next/link';
 
-export default function Home() {
+export default function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your login logic here
+  };
+
   return (
-    <div className={styles.page}>
-      <h1 className={styles.title}>Welcome to AI-Transact</h1>
-      <UserButton />
-      <div className={styles.spacer} />
-      
-      <div className={styles.authContainer}>
-        <SignUpForm styles={styles} />
-        <div className={styles.divider}>
-          <span className={styles.dividerText}>OR</span>
+    <div className={styles.container}>
+      <div className={styles.loginCard}>
+        {/* Logo */}
+        <div className={styles.logoContainer}>
+          <div className={styles.logo}>
+            <Image src="/favicon.ico" alt="Logo" width={100} height={100} />
+          </div>
         </div>
-        <SignInForm styles={styles} />
+
+        {/* Welcome Text */}
+        <h1 className={styles.title}>Ai-Transact</h1>
+        <p className={styles.subtitle}>Welcome back 👋</p>
+
+        {/* Login Form */}
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={(e) => setFormData({...formData, email: e.target.value})}
+              className={styles.input}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input
+              type="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={(e) => setFormData({...formData, password: e.target.value})}
+              className={styles.input}
+            />
+          </div>
+
+          <button type="submit" className={styles.loginButton}>
+            Login
+          </button>
+
+          <button type="button" className={styles.googleButton}>
+            <Image src="/google-icon.png" alt="Google" width={20} height={20} />
+            Log in with Google
+          </button>
+        </form>
+
+        <p className={styles.signupText}>
+          Don't have an account? <Link href="/signup">Sign Up</Link>
+        </p>
       </div>
-      
-      <div className={styles.spacer} />
-      <SignOutButton styles={styles} />
     </div>
   );
 }

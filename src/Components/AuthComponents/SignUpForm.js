@@ -1,55 +1,78 @@
 'use client'
 import { useState } from 'react';
+import styles from './signup.module.css';
+import Link from 'next/link';
 
-export default function SignUpForm({ styles }) {
+export default function SignUp() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Sign up:', formData);
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.authForm}>
-      <h2 className={styles.formTitle}>Sign Up</h2>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>Full Name</label>
-        <input
-          type="text"
-          className={styles.input}
-          placeholder="Enter your full name"
-          value={formData.name}
-          onChange={(e) => setFormData({...formData, name: e.target.value})}
-          required
-        />
+    <div className={styles.container}>
+      <div className={styles.signupCard}>
+        <h1 className={styles.title}>CREATE ACCOUNT</h1>
+
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.nameFields}>
+            <div className={styles.inputGroup}>
+              <input
+                type="text"
+                placeholder="First name"
+                value={formData.firstName}
+                onChange={(e) => setFormData({...formData, firstName: e.target.value})}
+              />
+            </div>
+            <div className={styles.inputGroup}>
+              <input
+                type="text"
+                placeholder="Last name"
+                value={formData.lastName}
+                onChange={(e) => setFormData({...formData, lastName: e.target.value})}
+              />
+            </div>
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={(e) => setFormData({...formData, email: e.target.value})}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input
+              type="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={(e) => setFormData({...formData, password: e.target.value})}
+            />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input
+              type="password"
+              placeholder="Re-type password"
+              value={formData.confirmPassword}
+              onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
+            />
+          </div>
+
+          <button type="submit" className={styles.signupButton}>
+            SIGN UP
+          </button>
+        </form>
       </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>Email</label>
-        <input
-          type="email"
-          className={styles.input}
-          placeholder="Enter your email"
-          value={formData.email}
-          onChange={(e) => setFormData({...formData, email: e.target.value})}
-          required
-        />
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label}>Password</label>
-        <input
-          type="password"
-          className={styles.input}
-          placeholder="Create a password"
-          value={formData.password}
-          onChange={(e) => setFormData({...formData, password: e.target.value})}
-          required
-        />
-      </div>
-      <button type="submit" className={styles.button}>Sign Up</button>
-    </form>
+    </div>
   );
-} 
+}
