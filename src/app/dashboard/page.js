@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { MicrophoneIcon, CalendarIcon, TagIcon, PlusIcon, EllipsisVerticalIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import styles from './dashboard.module.css';
 import TransactionsListComponent from './TransactionsListComponent';
+import TranasactionOptionsPopOver from './TransactionOptionsPopOver'
 export default function Dashboard() {
   const [isRecording, setIsRecording] = useState(false);
   const [transaction, setTransaction] = useState({
@@ -118,37 +119,7 @@ export default function Dashboard() {
       <TransactionsListComponent transactions={transactions} handleOptionsClick={handleOptionsClick} />
 
       {showPopover && activeTransaction && (
-        <div
-          className={styles.popover}
-          style={{
-            top: popoverPosition.y,
-            left: popoverPosition.x
-          }}
-        >
-          <div className={styles.popoverHeader}>
-            <h3>Edit Transaction</h3>
-            <button
-              className={styles.closeButton}
-              onClick={() => setShowPopover(false)}
-            >
-              ×
-            </button>
-          </div>
-          <div className={styles.popoverContent}>
-            <button className={styles.popoverButton} onClick={() => {
-              // Add edit logic here
-              setShowPopover(false);
-            }}>
-              Edit
-            </button>
-            <button className={styles.popoverButton} onClick={() => {
-              // Add delete logic here
-              setShowPopover(false);
-            }}>
-              Delete
-            </button>
-          </div>
-        </div>
+        <TranasactionOptionsPopOver transactions={transactions} popoverPosition={popoverPosition} showPopover={showPopover} setShowPopover={setShowPopover} />
       )}
 
       <div className={styles.inputSection}>
