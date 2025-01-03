@@ -5,6 +5,8 @@ import {
   GenerateContentResult,
 } from "@google/generative-ai";
 
+import categories from "@/utils/categories";
+
 interface TransactionData {
   type: string | null;
   description: string | null;
@@ -12,34 +14,7 @@ interface TransactionData {
   date: string | null;
   category: string | null;
 }
-const categories = [
-  "Housing",
-  "Utilities",
-  "Groceries",
-  "Dining",
-  "Transportation",
-  "Healthcare",
-  "Entertainment",
-  "Shopping",
-  "Debt",
-  "Education",
-  "Travel",
-  "Insurance",
-  "Childcare",
-  "Savings",
-  "Investments",
-  "Gifts",
-  "Donations",
-  "Pets",
-  "Salary",
-  "Business Income",
-  "Investments",
-  "Rental Income",
-  "Government Benefits",
-  "Freelancing",
-  "Pension",
-  "Grants",
-];
+
 async function extractTransactionGemini(text: string) {
   const apiKey: string = process.env.NEXT_PUBLIC_GEMINI_API_KEY || "";
 

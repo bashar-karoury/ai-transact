@@ -8,33 +8,7 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import styles from "./dashboard.module.css";
-const categories = [
-  "Housing",
-  "Utilities",
-  "Groceries",
-  "Dining",
-  "Transportation",
-  "Healthcare",
-  "Entertainment",
-  "Shopping",
-  "Debt",
-  "Education",
-  "Travel",
-  "Insurance",
-  "Childcare",
-  "Savings",
-  "Investments",
-  "Gifts",
-  "Donations",
-  "Pets",
-  "Salary",
-  "Business Income",
-  "Rental Income",
-  "Government Benefits",
-  "Freelancing",
-  "Pension",
-  "Grants",
-];
+import categories from "@/utils/categories";
 export default function AddTransactionInput() {
   const [newTransaction, setNewTransaction] = useState({
     description: "",

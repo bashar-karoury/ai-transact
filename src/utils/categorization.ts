@@ -3,6 +3,7 @@ import {
   GoogleGenerativeAI,
   GenerateContentResult,
 } from "@google/generative-ai";
+import categories from "@/utils/categories";
 export default async function deduceCategoryFromDescription(text: string) {
   const apiKey: string = process.env.NEXT_PUBLIC_GEMINI_API_KEY || "";
 
@@ -12,34 +13,6 @@ export default async function deduceCategoryFromDescription(text: string) {
 
   const genAI = new GoogleGenerativeAI(apiKey);
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-  const categories = [
-    "Housing",
-    "Utilities",
-    "Groceries",
-    "Dining",
-    "Transportation",
-    "Healthcare",
-    "Entertainment",
-    "Shopping",
-    "Debt",
-    "Education",
-    "Travel",
-    "Insurance",
-    "Childcare",
-    "Savings",
-    "Investments",
-    "Gifts",
-    "Donations",
-    "Pets",
-    "Salary",
-    "Business Income",
-    "Investments",
-    "Rental Income",
-    "Government Benefits",
-    "Freelancing",
-    "Pension",
-    "Grants",
-  ];
   console.log(categories.join(", "));
   const prompt = `Deduce the most relative category for a transaction description from the categories list is [${categories.join(
     ", "
