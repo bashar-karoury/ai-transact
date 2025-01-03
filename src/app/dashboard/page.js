@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { MicrophoneIcon, CalendarIcon, TagIcon, PlusIcon, EllipsisVerticalIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import styles from './dashboard.module.css';
-
+import TransactionsListComponent from './TransactionsListComponent';
 export default function Dashboard() {
   const [isRecording, setIsRecording] = useState(false);
   const [transaction, setTransaction] = useState({
@@ -13,17 +13,17 @@ export default function Dashboard() {
   });
 
   const [transactions] = useState([
-    { 
+    {
       type: 'Salary',
       amount: 5000,
       date: '2024-03-01'
     },
-    { 
+    {
       type: 'Rent',
       amount: -2000,
       date: '2024-03-05'
     },
-    { 
+    {
       type: 'Groceries',
       amount: -300,
       date: '2024-03-06'
@@ -115,40 +115,10 @@ export default function Dashboard() {
 
   return (
     <div className={styles.dashboardContainer}>
-      <div className={styles.transactionList}>
-        <div className={styles.transactionHeader}>
-          <h3>Recent Transactions</h3>
-          <div className={styles.timeFilter}>
-            <button className={styles.filterButton}>Today</button>
-            <button className={styles.filterButton}>This Week</button>
-            <button className={styles.filterButton}>This Month</button>
-          </div>
-        </div>
-        {transactions.map((transaction, index) => (
-          <div key={index} className={styles.transaction}>
-            <div className={styles.transactionInfo}>
-              <span className={styles.transactionType}>{transaction.type}</span>
-              <span className={styles.transactionDate}>{transaction.date}</span>
-            </div>
-            <div className={styles.transactionActions}>
-              <span className={`${styles.transactionAmount} ${
-                transaction.amount > 0 ? styles.income : styles.expense
-              }`}>
-                ${Math.abs(transaction.amount).toLocaleString()}
-              </span>
-              <button 
-                className={styles.optionsButton}
-                onClick={(e) => handleOptionsClick(transaction, e)}
-              >
-                <EllipsisVerticalIcon className={styles.optionsIcon} />
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+      <TransactionsListComponent transactions={transactions} handleOptionsClick={handleOptionsClick} />
 
       {showPopover && activeTransaction && (
-        <div 
+        <div
           className={styles.popover}
           style={{
             top: popoverPosition.y,
@@ -157,7 +127,7 @@ export default function Dashboard() {
         >
           <div className={styles.popoverHeader}>
             <h3>Edit Transaction</h3>
-            <button 
+            <button
               className={styles.closeButton}
               onClick={() => setShowPopover(false)}
             >
@@ -244,7 +214,7 @@ export default function Dashboard() {
         <div className={styles.editPopoverOverlay}>
           <div className={styles.editPopover}>
             <h2 className={styles.editTitle}>Edit Transaction:</h2>
-            
+
             <form onSubmit={handleEditSubmit} className={styles.editForm}>
               <div className={styles.formField}>
                 <label>Description:</label>
@@ -307,15 +277,15 @@ export default function Dashboard() {
               </div>
 
               <div className={styles.formActions}>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => setEditingTransaction(null)}
                   className={styles.cancelButton}
                 >
                   Cancel
                 </button>
-                <button 
-                  type="submit" 
+                <button
+                  type="submit"
                   className={styles.saveButton}
                 >
                   Save
