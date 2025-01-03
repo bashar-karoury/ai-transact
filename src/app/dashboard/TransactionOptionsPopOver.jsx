@@ -13,6 +13,7 @@ export default function TranasactionOptionsPopOver({
   popoverPosition,
   showPopover,
   setShowPopover,
+  setEditingTransaction,
 }) {
   return (
     <>
@@ -29,7 +30,6 @@ export default function TranasactionOptionsPopOver({
             <button
               className={styles.closeButton}
               onClick={() => {
-                // showPopover = false;
                 setShowPopover(false);
               }}
             >
@@ -41,7 +41,7 @@ export default function TranasactionOptionsPopOver({
               className={styles.popoverButton}
               onClick={() => {
                 // Add edit logic here
-                //showPopover = false;
+                setEditingTransaction(true);
                 setShowPopover(false);
               }}
             >
@@ -51,7 +51,7 @@ export default function TranasactionOptionsPopOver({
               className={styles.popoverButton}
               onClick={() => {
                 // Add delete logic here
-                showPopover = false;
+                // delete transaction from transactions
                 setShowPopover(false);
               }}
             >

@@ -3,7 +3,9 @@ import { useState } from 'react';
 import { MicrophoneIcon, CalendarIcon, TagIcon, PlusIcon, EllipsisVerticalIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import styles from './dashboard.module.css';
 import TransactionsListComponent from './TransactionsListComponent';
-import TranasactionOptionsPopOver from './TransactionOptionsPopOver'
+import TranasactionOptionsPopOver from './TransactionOptionsPopOver';
+import EditTransactionPopOver from './EditTransactionPopOver';
+import AddTransactionInput from './AddTransactionInput';
 export default function Dashboard() {
   const [isRecording, setIsRecording] = useState(false);
   const [transaction, setTransaction] = useState({
@@ -66,206 +68,28 @@ export default function Dashboard() {
     });
   };
 
-  const startRecording = async () => {
-    try {
-      setIsRecording(true);
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const mediaRecorder = new MediaRecorder(stream);
-      mediaRecorder.start();
-
-      const recordingDiv = document.createElement('div');
-      recordingDiv.className = styles.recordingMessage;
-      recordingDiv.textContent = 'Recording...';
-      document.body.appendChild(recordingDiv);
-
-      mediaRecorder.onstart = () => {
-        console.log('Recording started');
-      };
-
-      mediaRecorder.onstop = () => {
-        stream.getTracks().forEach(track => track.stop());
-        setIsRecording(false);
-        document.body.removeChild(recordingDiv);
-      };
-
-      setTimeout(() => mediaRecorder.stop(), 5000);
-    } catch (err) {
-      console.error('Error accessing microphone:', err);
-      setIsRecording(false);
-    }
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewTransaction({ ...newTransaction, [name]: value });
-  };
-
-  const handleAddTransaction = () => {
-    // Implement transaction addition logic here
-  };
-
   const handleEditClick = (transaction) => {
     setEditingTransaction(transaction);
   };
 
-  const handleEditSubmit = (e) => {
-    e.preventDefault();
-    // Add your update logic here
-    setEditingTransaction(null);
-  };
-
   return (
     <div className={styles.dashboardContainer}>
+      <div className={styles.transactionHeader}>
+        <h3>Recent Transactions</h3>
+        <div className={styles.timeFilter}>
+          <button className={styles.filterButton}>Today</button>
+          <button className={styles.filterButton}>This Week</button>
+          <button className={styles.filterButton}>This Month</button>
+        </div>
+      </div>
       <TransactionsListComponent transactions={transactions} handleOptionsClick={handleOptionsClick} />
 
-      {showPopover && activeTransaction && (
-        <TranasactionOptionsPopOver transactions={transactions} popoverPosition={popoverPosition} showPopover={showPopover} setShowPopover={setShowPopover} />
-      )}
 
-      <div className={styles.inputSection}>
-        <form onSubmit={handleAddTransaction} className={styles.transactionForm}>
-          <div className={styles.formWrapper}>
-            <button type="button" className={styles.plusButton}>
-              <PlusIcon className={styles.plusIcon} />
-            </button>
+      <TranasactionOptionsPopOver transactions={transactions} popoverPosition={popoverPosition} showPopover={showPopover} setShowPopover={setShowPopover} setEditingTransaction={setEditingTransaction} />
 
-            <input
-              type="text"
-              name="description"
-              placeholder="Transaction Description"
-              value={newTransaction.description}
-              onChange={handleInputChange}
-              className={styles.descriptionInput}
-            />
+      <AddTransactionInput />
 
-            <input
-              type="date"
-              name="date"
-              value={newTransaction.date}
-              onChange={handleInputChange}
-              className={styles.dateInput}
-            />
-
-            <input
-              type="number"
-              name="amount"
-              placeholder="Amount"
-              value={newTransaction.amount}
-              onChange={handleInputChange}
-              className={styles.amountInput}
-            />
-
-            <select
-              name="category"
-              value={newTransaction.category}
-              onChange={handleInputChange}
-              className={styles.categorySelect}
-            >
-              <option value="">Category</option>
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-
-            <button type="button" className={styles.micButton}>
-              <MicrophoneIcon className={styles.micIcon} />
-            </button>
-
-            <button type="submit" className={styles.addButton}>
-              Add
-            </button>
-          </div>
-        </form>
-      </div>
-
-      {/* Edit Transaction Popover */}
-      {editingTransaction && (
-        <div className={styles.editPopoverOverlay}>
-          <div className={styles.editPopover}>
-            <h2 className={styles.editTitle}>Edit Transaction:</h2>
-
-            <form onSubmit={handleEditSubmit} className={styles.editForm}>
-              <div className={styles.formField}>
-                <label>Description:</label>
-                <input
-                  type="text"
-                  value={editingTransaction.description}
-                  onChange={(e) => setEditingTransaction({
-                    ...editingTransaction,
-                    description: e.target.value
-                  })}
-                />
-              </div>
-
-              <div className={styles.formField}>
-                <label>Amount:</label>
-                <input
-                  type="number"
-                  value={Math.abs(editingTransaction.amount)}
-                  onChange={(e) => setEditingTransaction({
-                    ...editingTransaction,
-                    amount: e.target.value
-                  })}
-                />
-              </div>
-
-              <div className={styles.formField}>
-                <label>Date:</label>
-                <input
-                  type="date"
-                  value={editingTransaction.date}
-                  onChange={(e) => setEditingTransaction({
-                    ...editingTransaction,
-                    date: e.target.value
-                  })}
-                />
-              </div>
-
-              <div className={styles.formField}>
-                <label>Category:</label>
-                <input
-                  type="text"
-                  value={editingTransaction.category || ''}
-                  onChange={(e) => setEditingTransaction({
-                    ...editingTransaction,
-                    category: e.target.value
-                  })}
-                />
-              </div>
-
-              <div className={styles.formField}>
-                <label>Note:</label>
-                <textarea
-                  value={editingTransaction.note || ''}
-                  onChange={(e) => setEditingTransaction({
-                    ...editingTransaction,
-                    note: e.target.value
-                  })}
-                  rows={4}
-                />
-              </div>
-
-              <div className={styles.formActions}>
-                <button
-                  type="button"
-                  onClick={() => setEditingTransaction(null)}
-                  className={styles.cancelButton}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className={styles.saveButton}
-                >
-                  Save
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+      <EditTransactionPopOver transactions={transactions} editingTransaction={editingTransaction} setEditingTransaction={setEditingTransaction} />
     </div>
   );
 }
