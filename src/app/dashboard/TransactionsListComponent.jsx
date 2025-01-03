@@ -17,7 +17,12 @@ export default function TransactionsListComponent({
       {transactions.map((transaction, index) => (
         <div key={index} className={styles.transaction}>
           <div className={styles.transactionInfo}>
-            <span className={styles.transactionType}>{transaction.type}</span>
+            <span className={styles.transactionType}>
+              {transaction.description}
+            </span>
+            <span className={styles.transactionType}>
+              {transaction.category}
+            </span>
             <span className={styles.transactionDate}>{transaction.date}</span>
           </div>
           <div className={styles.transactionActions}>

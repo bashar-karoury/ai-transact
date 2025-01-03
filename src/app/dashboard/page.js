@@ -1,25 +1,31 @@
 'use client'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './dashboard.module.css';
 import TransactionsListComponent from './TransactionsListComponent';
 import TranasactionOptionsPopOver from './TransactionOptionsPopOver';
-import EditTransactionPopOver from './EditTransactionPopOver';
 import AddTransactionInput from './AddTransactionInput';
+import TransactionHeader from './TransactionHeader'
 export default function Dashboard() {
   const [transactions] = useState([
     {
-      type: 'Salary',
+      description: 'Receieved 5000 salary',
+      category: 'salary',
+      type: 'income',
       amount: 5000,
       date: '2024-03-01'
     },
     {
-      type: 'Rent',
-      amount: -2000,
+      description: 'Home rent',
+      category: 'rent',
+      type: 'expense',
+      amount: 2000,
       date: '2024-03-05'
     },
     {
-      type: 'Groceries',
-      amount: -300,
+      description: 'Apples and Oranges',
+      category: 'groceries',
+      type: 'expense',
+      amount: 300,
       date: '2024-03-06'
     }
   ]);
@@ -27,9 +33,7 @@ export default function Dashboard() {
   const [activeTransaction, setActiveTransaction] = useState(null);
   const [showPopover, setShowPopover] = useState(false);
   const [popoverPosition, setPopoverPosition] = useState({ x: 0, y: 0 });
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [editingTransaction, setEditingTransaction] = useState(null);
-  const [editPopoverPosition, setEditPopoverPosition] = useState({ x: 0, y: 0 });
+  const [time, setTime] = useState("today");
 
   const handleOptionsClick = (transaction, e) => {
     e.stopPropagation();
@@ -41,27 +45,18 @@ export default function Dashboard() {
     });
   };
 
-  const handleEditClick = (transaction) => {
-    setEditingTransaction(transaction);
-  };
-
+  useEffect(() => {
+    // fetch time depending on received time from TransactionHeader
+    console.log(time);
+  }, [time]);
   return (
     <div className={styles.dashboardContainer}>
-      <div className={styles.transactionHeader}>
-        <h3>Recent Transactions</h3>
-        <div className={styles.timeFilter}>
-          <button className={styles.filterButton}>Today</button>
-          <button className={styles.filterButton}>This Week</button>
-          <button className={styles.filterButton}>This Month</button>
-        </div>
-      </div>
+      <TransactionHeader setTime={setTime} />
       <TransactionsListComponent transactions={transactions} handleOptionsClick={handleOptionsClick} />
 
-      <TranasactionOptionsPopOver transactions={transactions} popoverPosition={popoverPosition} showPopover={showPopover} setShowPopover={setShowPopover} editingTransaction={editingTransaction} setEditingTransaction={setEditingTransaction} />
+      <TranasactionOptionsPopOver activeTransaction={activeTransaction} transactions={transactions} popoverPosition={popoverPosition} showPopover={showPopover} setShowPopover={setShowPopover} />
 
       <AddTransactionInput />
-
-      {/* <EditTransactionPopOver transactions={transactions} editingTransaction={editingTransaction} setEditingTransaction={setEditingTransaction} /> */}
     </div>
   );
 }

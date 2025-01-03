@@ -1,23 +1,14 @@
 import styles from "./dashboard.module.css";
 import EditTransactionPopOver from "./EditTransactionPopOver";
-import {
-  MicrophoneIcon,
-  CalendarIcon,
-  TagIcon,
-  PlusIcon,
-  EllipsisVerticalIcon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
 import { useState } from "react";
 export default function TranasactionOptionsPopOver({
+  activeTransaction,
   transactions,
   popoverPosition,
   showPopover,
   setShowPopover,
-  editingTransaction,
-  setEditingTransaction,
 }) {
-  //   const [editingTransaction, setEditingTransaction] = useState(null);
+  const [editingTransaction, setEditingTransaction] = useState(null);
   return (
     <>
       {showPopover && (
@@ -44,7 +35,7 @@ export default function TranasactionOptionsPopOver({
               className={styles.popoverButton}
               onClick={() => {
                 // Add edit logic here
-                setEditingTransaction(true);
+                setEditingTransaction(activeTransaction);
                 setShowPopover(false);
               }}
             >
