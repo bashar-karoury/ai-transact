@@ -3,11 +3,40 @@ export default function EditTransactionPopOver({
   transactions,
   editingTransaction,
   setEditingTransaction,
+  tofetch,
+  setFetch,
 }) {
-  const handleEditSubmit = (e) => {
+  const handleEditSubmit = async (e) => {
     e.preventDefault();
+    // Add delete logic here
+    console.log(editingTransaction);
+    try {
+      const response = await fetch("/api/transactions", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          editingTransaction,
+        }),
+      });
+      const data = await response.json();
+      console.log("Success:", data);
+      // delete transaction from transactions
+      const index = transactions.indexOf(editingTransaction);
+      if (index !== -1) {
+        console.log("Edited Transaction available");
+        transactions[index].description = "la bla bla bla";
+      }
+      // setActiveTransaction(null);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    // setShowPopover(false);
+
     // Add your update logic here
     setEditingTransaction(null);
+    setFetch(!tofetch);
   };
   return (
     <>

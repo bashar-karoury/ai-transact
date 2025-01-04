@@ -48,7 +48,7 @@ export default function OnboardingPage() {
           //   currency
           // }
           // database.addUser(new_user);
-          router.push("/");
+          router.push("/dashboard");
         }}
       >
         Submit
