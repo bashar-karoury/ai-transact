@@ -14,6 +14,16 @@ export const addUser = async (userData: IUser) => {
   }
 };
 
+// getUser function is used to get a user by id
+export const getUser = async (userId: string) => {
+  try {
+    return await User.findById(userId);
+  } catch (error) {
+    console.error('Error getting user:', error);
+    throw new Error('Failed to get user');
+  }
+};
+
 // addTransaction function is used to add a new transaction to the user's transactions array
 export const addTransaction = async (userId: string, transactionData: ITransaction) => {
   try {
