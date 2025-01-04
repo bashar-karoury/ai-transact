@@ -317,3 +317,29 @@ export const getUserSettings = async (userId: string) => {
     throw new Error('Failed to get user settings');
   }
 }
+
+// updateUserSettings function is used to update the user's settings
+export const updateUserSettings = async (
+  userId: string,
+  settings: { currency?: string; profilePicture?: string}
+) => {
+  try {
+    return await User.findByIdAndUpdate(userId, settings, { new: true });
+  } catch (error) {
+    console.error('Error updating user settings:', error);
+    throw new Error('Failed to update user settings');
+  }
+};
+
+// getUserIdByEmail function is used to get the user's id by email
+export const getUserIdByEmail = async (email: string): Promise<string> =>  {
+  try {
+    const user = await User
+      .findOne({ email })
+      .select('_id');
+    return user?._id as string;
+  } catch (error) {
+    console.error('Error getting user id by email:', error);
+    throw new Error('Failed to get user id by email');
+  }
+}
