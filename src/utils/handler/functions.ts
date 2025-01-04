@@ -342,4 +342,4 @@ export const getUserIdByEmail = async (email: string): Promise<string> =>  {
     console.error('Error getting user id by email:', error);
     throw new Error('Failed to get user id by email');
   }
-}
+};
