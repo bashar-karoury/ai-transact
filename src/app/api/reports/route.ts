@@ -1,7 +1,8 @@
 // Import the 'NextRequest' and 'NextResponse' types from 'next/server'
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllIncomesBySpecificDate, getAllExpensesBySpecificDate,  getAllExpenses, getAllIncomes } from '../../../utils/handler/functions';
+import { getUserIdByEmail, getAllIncomesBySpecificDate, getAllExpensesBySpecificDate,  getAllExpenses, getAllIncomes } from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
+import { stackServerApp } from '@/stack';
 
 
 export async function GET(req: NextRequest) {
@@ -9,14 +10,27 @@ export async function GET(req: NextRequest) {
     // Connect to the database
     await dbConnect();
 
-    // Get the '_id' parameter from the query string
-    const { searchParams } = new URL(req.url);
-    const _id = searchParams.get('_id');
-    // Get the 'time' parameter from the query string
-    const start_date_str = searchParams.get('start_date');
-    const end_date_str = searchParams.get('end_date');
-    const start_date = start_date_str ? new Date(start_date_str) : null;
-    const end_date = end_date_str ? new Date(end_date_str) : null;
+    const user = await stackServerApp.getUser();
+       
+    if (!user) {
+      return new NextResponse("Not authorized", { status: 401 });
+    }
+    const user_email = user.primaryEmail;
+    console.log('User email:', user_email);
+    if (!user_email) {
+      return new NextResponse("User email not found", { status: 400 });
+    }
+    const _id: string = await getUserIdByEmail(user_email);
+
+
+    // Get the 'time' parameter from the body
+    const body = await req.json();
+    const start_date = body.start_date ? new Date(body.start_date) : null;
+    const end_date = body.end_date ? new Date(body.end_date) : null;
+    // const start_date_str = searchParams.get('start_date');
+    // const end_date_str = searchParams.get('end_date');
+    // const start_date = start_date_str ? new Date(start_date_str) : null;
+    // const end_date = end_date_str ? new Date(end_date_str) : null;
 
     // Log the '_id'
     console.log('Request ID:', _id);
