@@ -9,15 +9,12 @@ export async function GET(req: NextRequest) {
     
     // Connect to the database
     await dbConnect();
-
     // Get the user from the request
     const stackServerApp = new StackServerApp({
-
-    tokenStore: "nextjs-cookie",
-
-
+      tokenStore: "nextjs-cookie",
     });
     const user = await stackServerApp.getUser();
+
     if (!user) {
         return new NextResponse("Not authorized", { status: 401 });
       }
