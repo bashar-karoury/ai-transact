@@ -38,7 +38,6 @@ export default function TransactionsListComponent({
               className={styles.optionsButton}
               onClick={(e) => handleOptionsClick(transaction, e)}
             >
-            
               <EllipsisVerticalIcon className={styles.optionsIcon} />
             </button>
           </div>
@@ -48,3 +47,4 @@ export default function TransactionsListComponent({
     </div>
   );
 }
+

@@ -3,13 +3,15 @@ import {
   MicrophoneIcon,
   CalendarIcon,
   TagIcon,
-  // CancelIcon,
+
+  PlusIcon,
   EllipsisVerticalIcon,
   XMarkIcon,
-  PlusIcon,
 } from "@heroicons/react/24/outline";
 import styles from "./dashboard.module.css";
 import categories from "@/utils/categories";
+import DescriptionInput from "@/Components/DescriptionInput";
+import RecordTransactionButton from "@/Components/RecordTransactionButton";
 export default function AddTransactionInput() {
   const [newTransaction, setNewTransaction] = useState({
     description: "",
@@ -23,7 +25,9 @@ export default function AddTransactionInput() {
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 
+
   const handleAddTransaction = () => {
+    event.preventDefault();
     // Implement transaction addition logic here
     console.log(newTransaction);  
     setNewTransaction({
@@ -38,6 +42,24 @@ export default function AddTransactionInput() {
 
   };
 
+
+
+  function finishCategorization(output_category) {
+    console.log("Finished Categorizing");
+    console.log(output_category);
+    setNewTransaction({ ...newTransaction, category: output_category });
+  }
+
+  const handleTransactionRecorded = (newVoiceTransaction) => {
+    console.log("Transaction recorded:", newTransaction);
+    const cleanedTransaction = Object.fromEntries(
+      Object.entries(newVoiceTransaction).filter(([_, v]) => v != null)
+    );
+    setNewTransaction({ ...newTransaction, ...cleanedTransaction });
+    // fill new transaction fields with the new transaction
+    // to do ...
+  };
+
   return (
     <div className={styles.inputSection}>
       <form onSubmit={handleAddTransaction} className={styles.transactionForm}>
@@ -46,21 +68,22 @@ export default function AddTransactionInput() {
             <PlusIcon className={styles.plusIcon} />
           </button>
 
-          <input
-            type="text"
-            name="description"
-            placeholder="Transaction Description"
-            className={styles.input}
-            onChange={handleInputChange}
+
+          <DescriptionInput
+            onFinishCategorization={finishCategorization}
             value={newTransaction.description}
+            onChangeParent={handleInputChange}
           />
+
+
 
           <input
             type="date"
             name="date"
-            className={styles.input}
-            onChange={handleInputChange}
             value={newTransaction.date}
+            onChange={handleInputChange}
+            className={styles.dateInput}
+
           />
 
           <input
@@ -96,6 +119,13 @@ export default function AddTransactionInput() {
             ))}
           </select>
 
+
+          {/* <button type="button" className={styles.micButton}>
+            <MicrophoneIcon className={styles.micIcon} />
+          </button> */}
+          <RecordTransactionButton
+            onTransactionRecorded={handleTransactionRecorded}
+          />
           <button type="submit" className={styles.addButton}>
             Add
           </button>

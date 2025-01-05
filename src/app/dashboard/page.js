@@ -5,35 +5,16 @@ import TransactionsListComponent from './TransactionsListComponent';
 import TranasactionOptionsPopOver from './TransactionOptionsPopOver';
 import AddTransactionInput from './AddTransactionInput';
 import TransactionHeader from './TransactionHeader'
-export default function Dashboard() {
-  const [transactions] = useState([
-    {
-      description: 'Receieved 5000 salary',
-      category: 'salary',
-      type: 'income',
-      amount: 5000,
-      date: '2024-03-01'
-    },
-    {
-      description: 'Home rent',
-      category: 'rent',
-      type: 'expense',
-      amount: 2000,
-      date: '2024-03-05'
-    },
-    {
-      description: 'Apples and Oranges',
-      category: 'groceries',
-      type: 'expense',
-      amount: 300,
-      date: '2024-03-06'
-    }
-  ]);
 
+import { flightRouterStateSchema } from 'next/dist/server/app-render/types';
+export default function Dashboard() {
+  const [transactions, setTransactions] = useState([]);
   const [activeTransaction, setActiveTransaction] = useState(null);
   const [showPopover, setShowPopover] = useState(false);
   const [popoverPosition, setPopoverPosition] = useState({ x: 0, y: 0 });
   const [time, setTime] = useState("today");
+
+  const [tofetch, setFetch] = useState(flightRouterStateSchema);
 
   const handleOptionsClick = (transaction, e) => {
     e.stopPropagation();
@@ -48,13 +29,34 @@ export default function Dashboard() {
   useEffect(() => {
     // fetch time depending on received time from TransactionHeader
     console.log(time);
-  }, [time]);
+    console.log('RE--RENDERING');
+    const fetchTransactions = async function (time) {
+      try {
+        const result = await fetch(`/api/transactions?${time}`);
+        const data = await result.json();
+        console.log('result', data);
+        setTransactions(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchTransactions(time);
+  }, [time, tofetch]);
+
   return (
     <div className={styles.dashboardContainer}>
       <TransactionHeader setTime={setTime} />
       <TransactionsListComponent transactions={transactions} handleOptionsClick={handleOptionsClick} />
 
-      <TranasactionOptionsPopOver activeTransaction={activeTransaction} transactions={transactions} popoverPosition={popoverPosition} showPopover={showPopover} setShowPopover={setShowPopover} />
+      <TranasactionOptionsPopOver activeTransaction={activeTransaction}
+        setActiveTransaction={setActiveTransaction}
+        transactions={transactions}
+        popoverPosition={popoverPosition}
+        showPopover={showPopover}
+        setShowPopover={setShowPopover}
+        tofetch={tofetch}
+        setFetch={setFetch}
+      />
 
       <AddTransactionInput />
     </div>

@@ -1,13 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
 import deduceCategoryFromDescription from "@/utils/categorization";
+import styles from "@/app/dashboard/dashboard.module.css";
 interface DoneAutoCategorizationProps {
   onFinishCategorization: (calculatedCategory: string) => void; // Prop type for the callback function
 }
 
 export default function DescriptionInput({
   onFinishCategorization,
-}: DoneAutoCategorizationProps) {
+  value,
+  onChangeParent,
+}) {
   const [description, setDescription] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [shouldCategorize, setShouldCategorize] = useState(false);
@@ -36,7 +39,7 @@ export default function DescriptionInput({
         if (result) {
           onFinishCategorization(result);
         }
-        console.log(result);
+        // console.log(result);
       } catch (error) {
         console.log(error);
       }
@@ -51,9 +54,13 @@ export default function DescriptionInput({
     <>
       <input
         type="text"
-        value={description}
+        name="description"
+        placeholder="Transaction Description"
+        className={styles.descriptionInput}
+        value={value}
         onChange={(e) => {
           setDescription(e.target.value);
+          onChangeParent(e);
         }}
         onFocus={focusHanlder}
         onBlur={blurHnalder}

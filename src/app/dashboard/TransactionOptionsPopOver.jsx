@@ -3,10 +3,13 @@ import EditTransactionPopOver from "./EditTransactionPopOver";
 import { useState } from "react";
 export default function TranasactionOptionsPopOver({
   activeTransaction,
+  setActiveTransaction,
   transactions,
   popoverPosition,
   showPopover,
   setShowPopover,
+  tofetch,
+  setFetch,
 }) {
   const [editingTransaction, setEditingTransaction] = useState(null);
   return (
@@ -43,16 +46,32 @@ export default function TranasactionOptionsPopOver({
             </button>
             <button
               className={styles.popoverButton}
-              onClick={() => {
+              onClick={async () => {
                 // Add delete logic here
-                // delete transaction from transactions
-                transactions.splice(
-                  transactions.findIndex(
-                    (transaction) => transaction.id === activeTransaction.id
-                  ),
-                  1
-                );
-              
+                console.log(activeTransaction);
+                try {
+                  const response = await fetch("/api/transactions", {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      transaction_id: activeTransaction.id,
+                    }),
+                  });
+                  const data = await response.json();
+                  console.log("Success:", data);
+                  // delete transaction from transactions
+                  // const index = transactions.indexOf(activeTransaction);
+                  // if (index !== -1) {
+                  //   transactions.splice(index, 1);
+                  // }
+                  setActiveTransaction(null);
+                  // we are fetching transactions after successful deleting
+                  setFetch(!tofetch);
+                } catch (error) {
+                  console.error("Error:", error);
+                }
                 setShowPopover(false);
               }}
             >
@@ -65,6 +84,8 @@ export default function TranasactionOptionsPopOver({
         transactions={transactions}
         editingTransaction={editingTransaction}
         setEditingTransaction={setEditingTransaction}
+        tofetch={tofetch}
+        setFetch={setFetch}
       />
     </>
   );

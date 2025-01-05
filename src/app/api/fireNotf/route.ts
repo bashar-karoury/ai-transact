@@ -1,5 +1,5 @@
 import { stackServerApp } from "@/stack";
-import { sendNotification } from "@/utils/notifications";
+import { sendNotification } from "@/utils/NotificationManager";
 import { NextResponse } from "next/server";
 export async function GET() {
   const user = await stackServerApp.getUser();
@@ -9,7 +9,8 @@ export async function GET() {
     });
   }
   const { primaryEmail } = user;
-  sendNotification(primaryEmail, primaryEmail);
+  sendNotification(primaryEmail, "You have a new notification");
+  // sendNotification(primaryEmail, "2");
   return new NextResponse("Jelly Good", {
     status: 200,
   });

@@ -11,6 +11,8 @@ import {
 } from "@heroicons/react/24/outline";
 import styles from "./rootLayout.module.css";
 
+import NewNotificationsNumberComponent from "@/Components/NNNComponent";
+
 export default function SideBar({ children }) {
   const pathname = usePathname();
   const isAuthPage =
@@ -53,6 +55,8 @@ export default function SideBar({ children }) {
           >
             <BellIcon className={styles.icon} />
             <span>Notifications</span>
+
+            <NewNotificationsNumberComponent />
           </a>
           <a
             href="/budget"
