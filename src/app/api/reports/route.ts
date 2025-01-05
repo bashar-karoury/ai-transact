@@ -1,7 +1,18 @@
 // Import the 'NextRequest' and 'NextResponse' types from 'next/server'
 import { NextRequest, NextResponse } from 'next/server';
-import { getAllIncomesBySpecificDate, getAllExpensesBySpecificDate,  getAllExpenses, getAllIncomes } from '../../../utils/handler/functions';
+import {
+getUserIdByEmail,
+getAllExpensesForToday,
+getAllExpensesForThisMonth,
+getAllExpensesForThisYear,
+getAllIncomesForToday,
+getAllIncomesForThisMonth,
+getAllIncomesForThisYear,
+getAllExpenses,
+getAllIncomes, 
+} from '../../../utils/handler/functions';
 import dbConnect from '../../../utils/db';
+import { stackServerApp } from '@/stack';
 
 
 export async function GET(req: NextRequest) {
@@ -9,14 +20,23 @@ export async function GET(req: NextRequest) {
     // Connect to the database
     await dbConnect();
 
-    // Get the '_id' parameter from the query string
-    const { searchParams } = new URL(req.url);
-    const _id = searchParams.get('_id');
-    // Get the 'time' parameter from the query string
-    const start_date_str = searchParams.get('start_date');
-    const end_date_str = searchParams.get('end_date');
-    const start_date = start_date_str ? new Date(start_date_str) : null;
-    const end_date = end_date_str ? new Date(end_date_str) : null;
+    const user = await stackServerApp.getUser();
+       
+    if (!user) {
+      return new NextResponse("Not authorized", { status: 401 });
+    }
+    const user_email = user.primaryEmail;
+    console.log('User email:', user_email);
+    if (!user_email) {
+      return new NextResponse("User email not found", { status: 400 });
+    }
+    const _id: string = await getUserIdByEmail(user_email);
+
+
+    // Get the 'time' parameter from the body
+    const body = await req.json();
+    const time = body.time;
+    console.log('Request Body:', body);
 
     // Log the '_id'
     console.log('Request ID:', _id);
@@ -29,9 +49,28 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    // Fetch balance using '_id'
-    const expenses = await getAllExpensesBySpecificDate(_id, start_date as Date, end_date as Date);
-    const incomes = await getAllIncomesBySpecificDate(_id, start_date as Date, end_date as Date);
+    // Fetch the expenses and incomes
+    let expenses;
+    let incomes;
+
+    // Get the transactions based on the time frame
+    switch (time) {
+      case 'today':
+        expenses = await getAllExpensesForToday(_id);
+        incomes = await getAllIncomesForToday(_id);
+        break;
+      case 'this_month':
+        expenses = await getAllExpensesForThisMonth(_id);
+        incomes = await getAllIncomesForThisMonth(_id);
+        break;
+      case 'this_year':
+        expenses = await getAllExpensesForThisYear(_id);
+        incomes = await getAllIncomesForThisYear(_id);
+        break;
+      default:
+        expenses = await getAllExpenses(_id);
+        incomes = await getAllIncomes(_id);
+    }
 
     // define the total income and total expense
     let total_income = 0;
@@ -40,8 +79,8 @@ export async function GET(req: NextRequest) {
     const categorize_expense: { [key: string]: number } = {};
 
     // Calculate the total income and total expense
-    total_income = incomes.reduce((acc, income) => acc + income.amount, 0);
-    total_expense = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+    total_income = (incomes ?? []).reduce((acc, income) => acc + income.amount, 0);
+    total_expense = (expenses ?? []).reduce((acc, expense) => acc + expense.amount, 0);
 
 
     // Categorize the expenses
