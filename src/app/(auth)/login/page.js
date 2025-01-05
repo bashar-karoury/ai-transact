@@ -1,6 +1,7 @@
 'use client'
 import { useState } from 'react';
 import styles from './page.module.css';
+
 import Link from 'next/link';
 import { useStackApp } from "@stackframe/stack";
 import { useUser } from "@stackframe/stack"
@@ -14,6 +15,7 @@ export default function Login() {
     email: '',
     password: ''
   });
+
   const [error, setError] = useState('');
   const app = useStackApp();
 
@@ -31,21 +33,25 @@ export default function Login() {
     if (result.status === 'error') {
       setError(result.error.message);
     }
+
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.loginCard}>
         {/* Logo */}
+
         {/* <div className={styles.logoContainer}>
           <div className={styles.logo}>
             <Image src="/favicon.ico" alt="Logo" width={100} height={100} />
           </div>
         </div> */}
 
+
         {/* Welcome Text */}
         <h1 className={styles.title}>Ai-Transact</h1>
         <p className={styles.subtitle}>Welcome back 👋</p>
+
         {error}
         {/* Login Form */}
         <form onSubmit={handleSubmit} className={styles.form}>

@@ -3,6 +3,7 @@ import {
   MicrophoneIcon,
   CalendarIcon,
   TagIcon,
+
   PlusIcon,
   EllipsisVerticalIcon,
   XMarkIcon,
@@ -24,11 +25,24 @@ export default function AddTransactionInput() {
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 
-  const handleAddTransaction = (event) => {
+
+  const handleAddTransaction = () => {
     event.preventDefault();
-    // Handle the form data here
-    console.log("hahahah stopped you");
+    // Implement transaction addition logic here
+    console.log(newTransaction);  
+    setNewTransaction({
+      description: "",
+      date: "",
+      amount: "",
+      type: "Income",
+      category: "",
+    });
+    setIsOpen(false);
+    setIsOpen(true);
+
   };
+
+
 
   function finishCategorization(output_category) {
     console.log("Finished Categorizing");
@@ -45,6 +59,7 @@ export default function AddTransactionInput() {
     // fill new transaction fields with the new transaction
     // to do ...
   };
+
   return (
     <div className={styles.inputSection}>
       <form onSubmit={handleAddTransaction} className={styles.transactionForm}>
@@ -53,19 +68,14 @@ export default function AddTransactionInput() {
             <PlusIcon className={styles.plusIcon} />
           </button>
 
+
           <DescriptionInput
             onFinishCategorization={finishCategorization}
             value={newTransaction.description}
             onChangeParent={handleInputChange}
           />
-          {/* <input
-            type="text"
-            name="description"
-            placeholder="Transaction Description"
-            value={newTransaction.description}
-            onChange={handleInputChange}
-            className={styles.descriptionInput}
-          /> */}
+
+
 
           <input
             type="date"
@@ -73,22 +83,33 @@ export default function AddTransactionInput() {
             value={newTransaction.date}
             onChange={handleInputChange}
             className={styles.dateInput}
+
           />
 
           <input
             type="number"
             name="amount"
             placeholder="Amount"
-            value={newTransaction.amount}
+            className={styles.input}
             onChange={handleInputChange}
-            className={styles.amountInput}
+            value={newTransaction.amount}
           />
+
+          <select 
+            name="type" 
+            className={styles.typeSelect}
+            onChange={handleInputChange}
+            value={newTransaction.type}
+          >
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+          </select>
 
           <select
             name="category"
-            value={newTransaction.category}
+            className={styles.input}
             onChange={handleInputChange}
-            className={styles.categorySelect}
+            value={newTransaction.category}
           >
             <option value="">Category</option>
             {categories.map((category) => (
@@ -97,6 +118,7 @@ export default function AddTransactionInput() {
               </option>
             ))}
           </select>
+
 
           {/* <button type="button" className={styles.micButton}>
             <MicrophoneIcon className={styles.micIcon} />

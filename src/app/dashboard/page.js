@@ -5,14 +5,15 @@ import TransactionsListComponent from './TransactionsListComponent';
 import TranasactionOptionsPopOver from './TransactionOptionsPopOver';
 import AddTransactionInput from './AddTransactionInput';
 import TransactionHeader from './TransactionHeader'
+
 import { flightRouterStateSchema } from 'next/dist/server/app-render/types';
 export default function Dashboard() {
   const [transactions, setTransactions] = useState([]);
-
   const [activeTransaction, setActiveTransaction] = useState(null);
   const [showPopover, setShowPopover] = useState(false);
   const [popoverPosition, setPopoverPosition] = useState({ x: 0, y: 0 });
   const [time, setTime] = useState("today");
+
   const [tofetch, setFetch] = useState(flightRouterStateSchema);
 
   const handleOptionsClick = (transaction, e) => {
@@ -41,6 +42,7 @@ export default function Dashboard() {
     }
     fetchTransactions(time);
   }, [time, tofetch]);
+
   return (
     <div className={styles.dashboardContainer}>
       <TransactionHeader setTime={setTime} />

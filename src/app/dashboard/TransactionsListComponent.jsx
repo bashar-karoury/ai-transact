@@ -14,6 +14,7 @@ export default function TransactionsListComponent({
 }) {
   return (
     <div className={styles.transactionList}>
+      <div className={styles.buttonContainer}>
       {transactions.map((transaction, index) => (
         <div key={index} className={styles.transaction}>
           <div className={styles.transactionInfo}>
@@ -43,5 +44,7 @@ export default function TransactionsListComponent({
         </div>
       ))}
     </div>
+    </div>
   );
 }
+
