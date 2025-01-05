@@ -2,13 +2,12 @@
 
 import { transcactize_audio } from "@/utils/voiceTranscript";
 import { useEffect, useRef, useState } from "react";
-interface RecordTransactionButtonProps {
-  onTransactionRecorded: (newTransaction: object) => void; // Prop type for the callback function
-}
-
-export default function RecordTransactionButton({
-  onTransactionRecorded,
-}: RecordTransactionButtonProps) {
+import styles from "@/app/dashboard/dashboard.module.css";
+// interface RecordTransactionButtonProps {
+//   onTransactionRecorded: (newTransaction: object) => void; // Prop type for the callback function
+// }
+import { MicrophoneIcon } from "@heroicons/react/24/outline";
+export default function RecordTransactionButton({ onTransactionRecorded }) {
   let audioChunks: BlobPart[] = [];
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const [audioblob, setAudioblob] = useState<Blob | null>(null);
@@ -49,7 +48,8 @@ export default function RecordTransactionButton({
           // console.log("transaction received", transaction);
           onTransactionRecorded(transaction);
         } catch (error) {
-          console.log(error);
+          console.log("Catch you");
+          // console.log(error);
         } finally {
           setIsProcessing(false);
         }
@@ -60,7 +60,12 @@ export default function RecordTransactionButton({
 
   return (
     <>
-      <button onMouseDown={startButtonHandler} onMouseUp={stopButtonHandler}>
+      <button
+        className={styles.micButton}
+        onMouseDown={startButtonHandler}
+        onMouseUp={stopButtonHandler}
+      >
+        <MicrophoneIcon className={styles.micIcon} />
         {isRecording ? "Recording Now.." : "Record"}
       </button>
       {isProcessing ? "AI thinking.." : ""}

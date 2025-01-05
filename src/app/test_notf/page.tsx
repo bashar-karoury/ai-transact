@@ -1,9 +1,9 @@
-import NoNotificationsComponent from "@/Components/NoNotification";
+import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 
 export default function Page() {
   return (
     <>
-      <NoNotificationsComponent />
+      <NewNotificationsNumberComponent />
     </>
   );
 }

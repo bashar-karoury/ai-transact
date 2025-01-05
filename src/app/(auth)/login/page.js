@@ -1,34 +1,52 @@
 'use client'
 import { useState } from 'react';
 import styles from './page.module.css';
-import Image from 'next/image';
 import Link from 'next/link';
-
+import { useStackApp } from "@stackframe/stack";
+import { useUser } from "@stackframe/stack"
 export default function Login() {
+
+  const user = useUser();
+  if (user) {
+    window.location.href = '/dashboard';
+  }
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+  const [error, setError] = useState('');
+  const app = useStackApp();
 
-  const handleSubmit = (e) => {
+  // if already logged in redirect to dashboard
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here
+    const { email, password } = formData;
+    if (!password) {
+      setError('Please enter your password');
+      return;
+    }
+    // this will redirect to app.urls.afterSignIn if successful, you can customize it in the StackServerApp constructor
+    const result = await app.signInWithCredential({ email, password });
+    // It is better to handle each error code separately, but we will just show the error code directly for simplicity here
+    if (result.status === 'error') {
+      setError(result.error.message);
+    }
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.loginCard}>
         {/* Logo */}
-        <div className={styles.logoContainer}>
+        {/* <div className={styles.logoContainer}>
           <div className={styles.logo}>
             <Image src="/favicon.ico" alt="Logo" width={100} height={100} />
           </div>
-        </div>
+        </div> */}
 
         {/* Welcome Text */}
         <h1 className={styles.title}>Ai-Transact</h1>
         <p className={styles.subtitle}>Welcome back 👋</p>
-
+        {error}
         {/* Login Form */}
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
@@ -53,11 +71,6 @@ export default function Login() {
 
           <button type="submit" className={styles.loginButton}>
             Login
-          </button>
-
-          <button type="button" className={styles.googleButton}>
-            <Image src="/google-icon.png" alt="Google" width={20} height={20} />
-            Log in with Google
           </button>
         </form>
 

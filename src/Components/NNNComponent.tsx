@@ -1,15 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export default function NoNotificationsComponent() {
-  const [data, setData] = useState([]);
+export default function NewNotificationsNumberComponent() {
+  const [data, setData] = useState("");
 
   useEffect(() => {
-    const eventSource = new EventSource("/api/events");
+    const eventSource = new EventSource("/api/nnn-events");
 
     eventSource.onmessage = (event) => {
+      console.log("nnn receieved", event);
       setData(JSON.parse(event.data));
-      console.log(data);
+      console.log("receieved data", data);
     };
 
     eventSource.onerror = () => {
@@ -21,5 +22,5 @@ export default function NoNotificationsComponent() {
       eventSource.close();
     };
   }, []);
-  return <div>{JSON.stringify(data)}</div>;
+  return <div>{data}</div>;
 }

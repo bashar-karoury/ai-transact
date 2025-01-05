@@ -77,7 +77,7 @@ export async function transcactize_audio(
       );
       return transact;
     } else {
-      throw new Error("Transcript text is null or undefined");
+      // throw new Error("Transcript text is null or undefined");
     }
   } catch (error) {
     throw error;
