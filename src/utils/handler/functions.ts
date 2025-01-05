@@ -292,6 +292,136 @@ export const getAllIncomesBySpecificDate = async (
   }
 };
 
+// getAllexpnsesForToday function is used to get all the user's expenses for today
+export const getAllExpensesForToday = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select('transactions');
+
+    const today = new Date();
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+    const expenses = user?.transactions.filter(
+      (t) =>
+        t.type === 'expense' &&
+        t.date >= startOfDay &&
+        t.date <= endOfDay
+    );
+    return expenses || [];
+  } catch (error) {
+    console.error('Error getting expenses for today:', error);
+    throw new Error('Failed to get expenses for today');
+  }
+}
+
+// getAllExpensesForThisMonth function is used to get all the user's expenses for this month
+export const getAllExpensesForThisMonth = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select('transactions');
+
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59); // Ensure the end is inclusive
+    const expenses = user?.transactions.filter(
+      (t) =>
+        t.type === 'expense' &&
+        t.date >= startOfMonth &&
+        t.date <= endOfMonth
+    );
+    return expenses || [];
+  } catch (error) {
+    console.error('Error getting expenses for this month:', error);
+    throw new Error('Failed to get expenses for this month');
+  }
+}
+
+// getAllExpensesForThisYear function is used to get all the user's expenses for this year
+export const getAllExpensesForThisYear = async (userId: string) => {
+  try {
+    const
+    user =
+    await User.findById(userId).select('transactions');
+    
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 1);
+    const endOfYear = new Date(today.getFullYear(), 11, 31, 23, 59, 59); // Ensure the end is inclusive
+    const expenses = user?.transactions.filter(
+      (t) =>
+        t.type === 'expense' &&
+        t.date >= startOfYear &&
+        t.date <= endOfYear
+    );
+    return expenses || [];
+  } catch (error) {
+    console.error('Error getting expenses for this year:', error);
+    throw new Error('Failed to get expenses for this year');
+  }
+}
+
+// getAllIncomesForToday function is used to get all the user's incomes for today
+export const getAllIncomesForToday = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select('transactions');
+
+    const today = new Date();
+    const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+    const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+    const incomes = user?.transactions.filter(
+      (t) =>
+        t.type === 'income' &&
+        t.date >= startOfDay &&
+        t.date <= endOfDay
+    );
+    return incomes || [];
+  } catch (error) {
+    console.error('Error getting incomes for today:', error);
+    throw new Error('Failed to get incomes for today');
+  }
+}
+
+// getAllIncomesForThisMonth function is used to get all the user's incomes for this month
+export const getAllIncomesForThisMonth = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select('transactions');
+
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59); // Ensure the end is inclusive
+    const incomes = user?.transactions.filter(
+      (t) =>
+        t.type === 'income' &&
+        t.date >= startOfMonth &&
+        t.date <= endOfMonth
+    );
+    return incomes || [];
+  } catch (error) {
+    console.error('Error getting incomes for this month:', error);
+    throw new Error('Failed to get incomes for this month');
+  }
+}
+
+// getAllIncomesForThisYear function is used to get all the user's incomes for this year
+export const getAllIncomesForThisYear = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select('transactions');
+    
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 1);
+    const endOfYear = new Date(today.getFullYear(), 11, 31, 23, 59, 59); // Ensure the end is inclusive
+    const incomes = user?.transactions.filter(
+      (t) =>
+        t.type === 'income' &&
+        t.date >= startOfYear &&
+        t.date <= endOfYear
+    );
+    return incomes || [];
+  } catch (error) {
+    console.error('Error getting incomes for this year:', error);
+    throw new Error('Failed to get incomes for this year');
+  }
+}
+
+
+
 // getAllExpensesBySpecificDate function is used to get all the user's expenses by a specific date
 export const getAllExpensesBySpecificDate = async (
   userId: string,
