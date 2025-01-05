@@ -5,6 +5,7 @@
 }
 
 .inputSection {
+  display: flex;
   position: fixed;
   bottom: 14px;
   right: 10px;
