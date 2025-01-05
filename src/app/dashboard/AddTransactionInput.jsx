@@ -82,6 +82,10 @@ export default function AddTransactionInput() {
             Add
           </button>
         </div>
+        <div className="{style.buttonContainer}">
+          <button type="button" className={styles.incomeButton}>Income</button>
+          <button type="button" className={styles.expenseButton}>Expense</button>
+        </div>
       </form>
     </div>
   );

@@ -14,6 +14,7 @@ export default function TransactionsListComponent({
 }) {
   return (
     <div className={styles.transactionList}>
+      <div className={styles.buttonContainer}>
       {transactions.map((transaction, index) => (
         <div key={index} className={styles.transaction}>
           <div className={styles.transactionInfo}>
@@ -37,11 +38,13 @@ export default function TransactionsListComponent({
               className={styles.optionsButton}
               onClick={(e) => handleOptionsClick(transaction, e)}
             >
+            
               <EllipsisVerticalIcon className={styles.optionsIcon} />
             </button>
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 }

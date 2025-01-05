@@ -46,6 +46,13 @@ export default function TranasactionOptionsPopOver({
               onClick={() => {
                 // Add delete logic here
                 // delete transaction from transactions
+                transactions.splice(
+                  transactions.findIndex(
+                    (transaction) => transaction.id === activeTransaction.id
+                  ),
+                  1
+                );
+              
                 setShowPopover(false);
               }}
             >

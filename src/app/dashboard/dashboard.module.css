@@ -1,7 +1,13 @@
 .dashboardContainer {
   padding: 20px;
   padding-bottom: 80px;
-  
+  display: flex;
+  justify-content: normal;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px; /* Adjust the value to control the width of the dashboard */
+  margin: 0 auto;
+  gap: 20px;
 }
 
 .inputSection {
@@ -190,6 +196,29 @@
   font-size: 16px;
   font-weight: 500;
 }
+.buttonsContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.incomeButton,
+.expensesButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.incomeButton {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+
+.expensesButton {
+  background-color: #f44336; /* Red */
+  color: white;
+} 
 
 .income {
   color: #4CAF50;
