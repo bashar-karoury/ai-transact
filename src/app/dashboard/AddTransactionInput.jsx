@@ -3,9 +3,10 @@ import {
   MicrophoneIcon,
   CalendarIcon,
   TagIcon,
-  PlusIcon,
+  // CancelIcon,
   EllipsisVerticalIcon,
   XMarkIcon,
+  PlusIcon,
 } from "@heroicons/react/24/outline";
 import styles from "./dashboard.module.css";
 import categories from "@/utils/categories";
@@ -24,6 +25,17 @@ export default function AddTransactionInput() {
 
   const handleAddTransaction = () => {
     // Implement transaction addition logic here
+    console.log(newTransaction);  
+    setNewTransaction({
+      description: "",
+      date: "",
+      amount: "",
+      type: "Income",
+      category: "",
+    });
+    setIsOpen(false);
+    setIsOpen(true);
+
   };
 
   return (
@@ -38,33 +50,43 @@ export default function AddTransactionInput() {
             type="text"
             name="description"
             placeholder="Transaction Description"
-            value={newTransaction.description}
+            className={styles.input}
             onChange={handleInputChange}
-            className={styles.descriptionInput}
+            value={newTransaction.description}
           />
 
           <input
             type="date"
             name="date"
-            value={newTransaction.date}
+            className={styles.input}
             onChange={handleInputChange}
-            className={styles.dateInput}
+            value={newTransaction.date}
           />
 
           <input
             type="number"
             name="amount"
             placeholder="Amount"
-            value={newTransaction.amount}
+            className={styles.input}
             onChange={handleInputChange}
-            className={styles.amountInput}
+            value={newTransaction.amount}
           />
+
+          <select 
+            name="type" 
+            className={styles.typeSelect}
+            onChange={handleInputChange}
+            value={newTransaction.type}
+          >
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+          </select>
 
           <select
             name="category"
-            value={newTransaction.category}
+            className={styles.input}
             onChange={handleInputChange}
-            className={styles.categorySelect}
+            value={newTransaction.category}
           >
             <option value="">Category</option>
             {categories.map((category) => (
@@ -74,17 +96,9 @@ export default function AddTransactionInput() {
             ))}
           </select>
 
-          <button type="button" className={styles.micButton}>
-            <MicrophoneIcon className={styles.micIcon} />
-          </button>
-
           <button type="submit" className={styles.addButton}>
             Add
           </button>
-        </div>
-        <div className="{style.buttonContainer}">
-          <button type="button" className={styles.incomeButton}>Income</button>
-          <button type="button" className={styles.expenseButton}>Expense</button>
         </div>
       </form>
     </div>

@@ -1,13 +1,7 @@
 .dashboardContainer {
   padding: 20px;
   padding-bottom: 80px;
-  display: flex;
-  justify-content: normal;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1200px; /* Adjust the value to control the width of the dashboard */
-  margin: 0 auto;
-  gap: 20px;
+  
 }
 
 .inputSection {
@@ -103,7 +97,15 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px; 
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
 
 .addButton:hover {
   background: #83A6CE;
@@ -117,12 +119,14 @@
 
   .descriptionInput {
     min-width: 100%;
+    padding: 10px;
   }
 
   .dateInput,
   .amountInput,
   .categorySelect {
     min-width: calc(33.33% - 8px);
+    padding: 10px;
   }
 }
 
@@ -180,11 +184,13 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  padding: 10px;
 }
 
 .transactionType {
   font-size: 16px;
   color: #333;
+  padding: 10px;
 }
 
 .transactionDate {
@@ -195,30 +201,8 @@
 .transactionAmount {
   font-size: 16px;
   font-weight: 500;
+  padding: 10px;
 }
-.buttonsContainer {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
-
-.incomeButton,
-.expensesButton {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.incomeButton {
-  background-color: #4caf50; /* Green */
-  color: white;
-}
-
-.expensesButton {
-  background-color: #f44336; /* Red */
-  color: white;
-} 
 
 .income {
   color: #4CAF50;
@@ -230,12 +214,14 @@
 
 .transactionHeader {
   margin-bottom: 20px;
+  padding: 10px;
 }
 
 .timeFilter {
   display: flex;
   gap: 10px;
   margin-top: 15px;
+  padding: 10px;
 }
 
 .filterButton {
@@ -273,27 +259,33 @@
 
   .inputGroup {
     min-width: calc(50% - 4px);
+    padding: 10px;
   }
 
   .descriptionInput {
     min-width: 100%;
+    padding: 10px;
   }
 
   .categorySelect,
   .typeSelect {
     min-width: calc(50% - 4px);
+    padding: 10px;
   }
 }
 .recent-transactions {
   border-radius: 15px; /* Adjust the value to control the roundness of the corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow if desired */
   padding: 20px; /* Improves internal spacing */
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .transactionActions {
   display: flex;
   align-items: center;
   gap: 8px;
+  padding: 10px;
 }
 
 .optionsButton {
@@ -331,7 +323,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-bottom: 1px solid #e5e7eb;
 }
 
@@ -350,13 +342,13 @@
 }
 
 .popoverContent {
-  padding: 8px;
+  padding: 10px;
 }
 
 .popoverButton {
   width: 100%;
   text-align: left;
-  padding: 8px 16px;
+  padding: 10px 16px;
   background: none;
   border: none;
   cursor: pointer;
@@ -372,10 +364,6 @@
 /* Add these styles for the edit modal */
 .modalOverlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
@@ -386,12 +374,16 @@
 .editModal {
   background: white;
   border-radius: 12px;
-  padding: 24px;
-  width: 90%;
-  max-width: 500px;
-  max-height: 90vh;
+  padding: 20px;
+  width: 100%;
   overflow-y: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
+
+
 
 .modalHeader {
   display: flex;
@@ -432,7 +424,7 @@
 
 .formGroup input,
 .formGroup textarea {
-  padding: 8px 12px;
+  padding: 10px;
   border: 1px solid #e5e7eb;
   border-radius: 6px;
   font-size: 14px;
@@ -452,7 +444,7 @@
 
 .cancelButton,
 .saveButton {
-  padding: 8px 16px;
+  padding: 10px 16px;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
@@ -484,8 +476,8 @@
   position: fixed;
   background: white;
   border-radius: 12px;
-  padding: 16px;
-  width: 320px;
+  padding: 20px;
+  width: 300px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   z-index: 1000;
 }
@@ -530,7 +522,7 @@
 
 .formGroup input,
 .formGroup textarea {
-  padding: 6px 8px;
+  padding: 20px;
   border: 1px solid #e5e7eb;
   border-radius: 4px;
   font-size: 13px;
@@ -550,7 +542,7 @@
 
 .cancelButton,
 .saveButton {
-  padding: 6px 12px;
+  padding: 10px 12px;
   border-radius: 4px;
   font-size: 13px;
   font-weight: 500;
