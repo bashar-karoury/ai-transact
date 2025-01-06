@@ -1,4 +1,5 @@
 import { stackServerApp } from "@/stack";
+import { getNNN } from "@/utils/handler/functions";
 import { addClient, removeClient } from "@/utils/newNumberOfNotifications";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -12,10 +13,11 @@ export async function GET(req: NextRequest) {
   const { primaryEmail } = user;
   // console.log("email = ", primaryEmail);
   const stream = new ReadableStream({
-    start(controller) {
+    async start(controller) {
       addClient(primaryEmail, controller);
       // send initial nnn
-      controller.enqueue(`data: ${JSON.stringify("7")}\n\n`);
+      const nnn = await getNNN(primaryEmail);
+      controller.enqueue(`data: ${JSON.stringify(nnn)}\n\n`);
       console.log("/api/nnn-events connection is established");
 
       // Clean up when the connection is closed
