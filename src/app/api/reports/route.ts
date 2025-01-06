@@ -34,9 +34,12 @@ export async function GET(req: NextRequest) {
 
 
     // Get the 'time' parameter from the body
-    const body = await req.json();
-    const time = body.time;
-    console.log('Request Body:', body);
+    // const body = await req.json();
+    // const time = body.time;
+    // console.log('Request Body:', body);
+
+    const { searchParams } = new URL(req.url);
+    const time = searchParams.get("time");
 
     // Log the '_id'
     console.log('Request ID:', _id);

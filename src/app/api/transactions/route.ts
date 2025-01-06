@@ -79,21 +79,21 @@ export async function GET(req: NextRequest) {
     const _id: string = await getUserIdByEmail(user_email);
 
     // Get the 'time' parameter from the body
-    const body = await req.json();
-    const time = body.time;
-    console.log('Request Body:', body);
+    // const body = await req.json();
+    // const time = body.time;
+    // console.log('Request Body:', body);
 
     // use the query parameter to get the user's id, and the time parameter to get the time frame
-    // const { searchParams } = new URL(req.url);
+    const { searchParams } = new URL(req.url);
     // const _id = searchParams.get('_id');
-    // const time = searchParams.get('time');
+    const time = searchParams.get('time');
 
     if (!_id) {
       // Return an error if the user id is not provided
       return NextResponse.json(
-        { error: '_id parameter is required' },
-        { status: 400 }
-      );
+      { error: '_id parameter is required' },
+      { status: 400 }
+     );
     }
 
     console.log('Request ID:', _id);
