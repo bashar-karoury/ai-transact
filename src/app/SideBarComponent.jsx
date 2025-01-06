@@ -1,6 +1,7 @@
 // app/layout.js
 "use client";
 import { usePathname } from "next/navigation";
+import { useUser } from "@stackframe/stack";
 import {
   HomeIcon,
   CogIcon,
@@ -12,27 +13,31 @@ import {
 import styles from "./rootLayout.module.css";
 
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
+import React from 'react';
+import styles from './styles.css';
+
+function SignOutButton() {
+  const user = useUser();
+  return user ? <button onClick={() => user.signOut()}>Sign Out</button> : "Not signed in";
+}
 
 export default function SideBar({ children }) {
   const pathname = usePathname();
   const isAuthPage =
-    pathname === "/login" || pathname === "/signup" || pathname === "/";
+    pathname === "/login" || pathname === "/signup" || pathname === "/"; // this must change
 
   if (isAuthPage) {
-    return <>{children}</>;
-  }
+      return <>{children}</>;
+    }
 
   return (
     <div className={styles.container}>
-      {/* Dashboard Sidebar */}
+      /* Dashboard Sidebar */
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <h1>Ai-Transact</h1>
           <div className={styles.userInfo}>
-            <UserIcon className={styles.userIcon} />
-            <span>menatalla@gmail.com</span>
-          </div>
-        </div>
+<SignOutButton />
 
         <nav className={styles.nav}>
           <a
@@ -57,6 +62,7 @@ export default function SideBar({ children }) {
             <span>Notifications</span>
 
             <NewNotificationsNumberComponent />
+
           </a>
           <a
             href="/budget"
@@ -78,9 +84,23 @@ export default function SideBar({ children }) {
           <p>Balance:</p>
           <h2>120,500 $</h2>
         </div>
+      </div> 
       </aside>
+      <main className={styles.mainContent}>{children}</main>
+    </div>
+  );
+}
 
-      {/* Main Content */}
+export default function SideBarComponent({ children }) {
+  return (
+    <div className={styles.container}>
+      <aside className={styles.sidebar}>
+        <div className={styles.sidebarContent}>
+          <div className={styles.sidebarHeader}>
+            <h2>120,500 $</h2>
+          </div>
+        </div>
+      </aside>
       <main className={styles.mainContent}>{children}</main>
     </div>
   );

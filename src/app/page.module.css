@@ -1,8 +1,15 @@
 .container {
-  min-height: 1200vh;
-  display: flex;
+  width: '100vw', // render the container to the full width of the screen
+  height: '100vh', // render the container to the full height of the screen
+  margin: 0,
+  padding: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  /* min-height: 200vh; */
+  /* display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
   background: linear-gradient(45deg, #26415E, #83A6CE, #26415E);
   background-size: 200% 200%;
   padding: 100px;
