@@ -1,4 +1,3 @@
-// app/layout.js
 import SideBar from './SideBarComponent'
 import { StackProvider } from "@stackframe/stack";
 import { stackServerApp } from "../stack";

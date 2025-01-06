@@ -1,6 +1,6 @@
-// app/layout.js
 "use client";
 import { usePathname } from "next/navigation";
+import { useUser } from "@stackframe/stack";
 import {
   HomeIcon,
   CogIcon,
@@ -9,78 +9,75 @@ import {
   ChartPieIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import styles from "./rootLayout.module.css";
-
+import React from 'react';
+import Link from 'next/link';
+import styles from './styles.css';
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 
-export default function SideBar({ children }) {
-  const pathname = usePathname();
-  const isAuthPage =
-    pathname === "/login" || pathname === "/signup" || pathname === "/";
+function SignOutButton() {
+  const user = useUser();
+  return user ? <button onClick={() => user.signOut()}>Sign Out</button> : "Not signed in";
+}
 
-  if (isAuthPage) {
-    return <>{children}</>;
-  }
-
+export default function SideBarComponent({ children }) {
   return (
     <div className={styles.container}>
-      {/* Dashboard Sidebar */}
       <aside className={styles.sidebar}>
-        <div className={styles.sidebarHeader}>
-          <h1>Ai-Transact</h1>
-          <div className={styles.userInfo}>
-            <UserIcon className={styles.userIcon} />
+        <div className={styles.sidebarContent}>
+          {/* Logo and title */}
+          <div className={styles.logoSection}>
+            <h1>Ai-Transact</h1>
+          </div>
+
+          {/* User email */}
+          <div className={styles.userEmail}>
             <span>menatalla@gmail.com</span>
           </div>
-        </div>
 
-        <nav className={styles.nav}>
-          <a
-            href="/dashboard"
-            className={pathname === "/dashboard" ? styles.active : ""}
-          >
-            <HomeIcon className={styles.icon} />
-            <span>Home</span>
-          </a>
-          <a
-            href="/settings"
-            className={pathname === "/settings" ? styles.active : ""}
-          >
-            <CogIcon className={styles.icon} />
-            <span>Settings</span>
-          </a>
-          <a
-            href="/notifications"
-            className={pathname === "/notifications" ? styles.active : ""}
-          >
-            <BellIcon className={styles.icon} />
-            <span>Notifications</span>
+          {/* Navigation links */}
+          <nav className={styles.navigation}>
+            <ul>
+              <li>
+                <Link href="/dashboard">
+                  <HomeIcon className={styles.icon} />
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/settings">
+                  <CogIcon className={styles.icon} />
+                  Settings
+                </Link>
+              </li>
+              <li>
+                <Link href="/notifications">
+                  <BellIcon className={styles.icon} />
+                  Notifications
+                </Link>
+                <NewNotificationsNumberComponent />
+              </li>
+              <li>
+                <Link href="/budget">
+                  <WalletIcon className={styles.icon} />
+                  Budget
+                </Link>
+              </li>
+              <li>
+                <Link href="/reports">
+                  <ChartPieIcon className={styles.icon} />
+                  Reports
+                </Link>
+              </li>
+            </ul>
+          </nav>
 
-            <NewNotificationsNumberComponent />
-          </a>
-          <a
-            href="/budget"
-            className={pathname === "/budget" ? styles.active : ""}
-          >
-            <WalletIcon className={styles.icon} />
-            <span>Budget</span>
-          </a>
-          <a
-            href="/reports"
-            className={pathname === "/reports" ? styles.active : ""}
-          >
-            <ChartPieIcon className={styles.icon} />
-            <span>Reports</span>
-          </a>
-        </nav>
-
-        <div className={styles.balance}>
-          <p>Balance:</p>
-          <h2>120,500 $</h2>
+          {/* Balance section */}
+          <div className={styles.balanceSection}>
+            <p>Balance:</p>
+            <h2>120,500 $</h2>
+          </div>
         </div>
       </aside>
-
-      {/* Main Content */}
       <main className={styles.mainContent}>{children}</main>
     </div>
   );
