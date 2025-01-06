@@ -1,4 +1,3 @@
-// app/layout.js
 "use client";
 import { usePathname } from "next/navigation";
 import { useUser } from "@stackframe/stack";
@@ -14,8 +13,8 @@ import styles from "./rootLayout.module.css";
 
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 import React from 'react';
-import styles from './sidebar.module.css';
 import Link from 'next/link';
+import styles from './sidebar.module.css';
 
 function SignOutButton() {
   const user = useUser();
