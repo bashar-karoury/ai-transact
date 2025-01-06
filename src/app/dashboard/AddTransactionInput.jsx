@@ -3,7 +3,6 @@ import {
   MicrophoneIcon,
   CalendarIcon,
   TagIcon,
-
   PlusIcon,
   EllipsisVerticalIcon,
   XMarkIcon,
@@ -25,11 +24,24 @@ export default function AddTransactionInput() {
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 
-
-  const handleAddTransaction = () => {
+  const handleAddTransaction = async (event) => {
     event.preventDefault();
     // Implement transaction addition logic here
-    console.log(newTransaction);  
+    // POST request to /api/transactions
+    try {
+      const response = await fetch("/api/transactions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTransaction),
+      });
+      const data = await response.json();
+      console.log("Success:", data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+    console.log(newTransaction);
     setNewTransaction({
       description: "",
       date: "",
@@ -37,12 +49,9 @@ export default function AddTransactionInput() {
       type: "Income",
       category: "",
     });
-    setIsOpen(false);
-    setIsOpen(true);
-
+    // setIsOpen(false);
+    // setIsOpen(true);
   };
-
-
 
   function finishCategorization(output_category) {
     console.log("Finished Categorizing");
@@ -68,14 +77,11 @@ export default function AddTransactionInput() {
             <PlusIcon className={styles.plusIcon} />
           </button>
 
-
           <DescriptionInput
             onFinishCategorization={finishCategorization}
             value={newTransaction.description}
             onChangeParent={handleInputChange}
           />
-
-
 
           <input
             type="date"
@@ -83,7 +89,6 @@ export default function AddTransactionInput() {
             value={newTransaction.date}
             onChange={handleInputChange}
             className={styles.dateInput}
-
           />
 
           <input
@@ -95,8 +100,8 @@ export default function AddTransactionInput() {
             value={newTransaction.amount}
           />
 
-          <select 
-            name="type" 
+          <select
+            name="type"
             className={styles.typeSelect}
             onChange={handleInputChange}
             value={newTransaction.type}
@@ -119,7 +124,6 @@ export default function AddTransactionInput() {
             ))}
           </select>
 
-
           {/* <button type="button" className={styles.micButton}>
             <MicrophoneIcon className={styles.micIcon} />
           </button> */}
@@ -134,6 +138,3 @@ export default function AddTransactionInput() {
     </div>
   );
 }
-
-
-

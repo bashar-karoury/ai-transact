@@ -1,10 +1,10 @@
-'use client';
-import React, { useState, useEffect } from 'react';
-import styles from './Reports.module.css';
-import PieChart from './PieChart';
+"use client";
+import React, { useState, useEffect } from "react";
+import styles from "./Reports.module.css";
+import PieChart from "./PieChart";
 
 const ReportsPage = () => {
-  const [timePeriod, setTimePeriod] = useState('this_month');
+  const [timePeriod, setTimePeriod] = useState("this_month");
   const [expenseData, setExpenseData] = useState([]);
   const [incomeData, setIncomeData] = useState([]);
   const [totalExpenses, setTotalExpenses] = useState(0);
@@ -14,27 +14,23 @@ const ReportsPage = () => {
     // Fetch the data from the API when the timePeriod changes
     const fetchData = async () => {
       try {
-        const response = await fetch('/api/expenses-incomes', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ time: timePeriod }), // Send the selected time period
-        });
-
+        const response = await fetch(`/api/reports?${timePeriod}`);
         const data = await response.json();
+        console.log(response);
+        console.log(data);
 
         if (response.ok) {
           // Set the fetched data
+
           setExpenseData(Object.values(data.categorize_expense));
           setIncomeData(Object.values(data.categorize_income));
           setTotalExpenses(data.total_expense);
           setTotalIncomes(data.total_income);
         } else {
-          console.error('Error fetching data:', data.error);
+          console.error("Error fetching data:", data.error);
         }
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
     };
 
@@ -46,9 +42,9 @@ const ReportsPage = () => {
       <div className={styles.main}>
         <h1>Reports</h1>
         <div className={styles.filters}>
-          <button onClick={() => setTimePeriod('today')}>Today</button>
-          <button onClick={() => setTimePeriod('this_month')}>Month</button>
-          <button onClick={() => setTimePeriod('this_year')}>Year</button>
+          <button onClick={() => setTimePeriod("today")}>Today</button>
+          <button onClick={() => setTimePeriod("this_month")}>Month</button>
+          <button onClick={() => setTimePeriod("this_year")}>Year</button>
         </div>
 
         <div className={styles.reportSection}>

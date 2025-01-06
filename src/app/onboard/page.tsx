@@ -24,6 +24,29 @@ export default function OnboardingPage() {
     return <></>;
   }
   // should add all required fields for new users
+  const clickHandler = async () => {
+    try {
+      await user?.update({
+        clientMetadata: {
+          onboarded: true,
+          address,
+        },
+      });
+      const email = user?.primaryEmail;
+      const result = await fetch("/api/users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, balance: 0 }),
+      });
+      console.log("result of adding user =", result);
+    } catch (error) {
+      console.error(`Failed to add user to database ${error}`);
+    }
+    router.push("/dashboard");
+  };
+
   return (
     <>
       <input
@@ -32,27 +55,7 @@ export default function OnboardingPage() {
         onChange={(e) => setAddress(e.target.value)}
       />
 
-      <button
-        onClick={async () => {
-          await user?.update({
-            clientMetadata: {
-              onboarded: true,
-              address,
-            },
-          });
-          // todo: create new user in database
-          // const new_user ={
-          //   email:user.email,
-          //   id:user_id,
-          //   profile_pic,
-          //   currency
-          // }
-          // database.addUser(new_user);
-          router.push("/dashboard");
-        }}
-      >
-        Submit
-      </button>
+      <button onClick={clickHandler}>Submit</button>
     </>
   );
 }

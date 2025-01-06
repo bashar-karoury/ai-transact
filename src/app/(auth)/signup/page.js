@@ -35,6 +35,21 @@ export default function SignUp() {
     if (result.status === 'error') {
       setError(result.error.message);
     }
+
+    // for testing user is added to database here but it should happen in onboarding page
+
+    try {
+      const result = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      console.log('result of adding user =', result);
+    } catch (error) {
+      setError(`Failed to add user to database ${error}`);
+    }
   };
 
   return (
