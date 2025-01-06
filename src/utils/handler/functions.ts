@@ -1,6 +1,8 @@
 // function.ts is a file that contains all the functions that are used in the handlers.
 import { get } from 'http';
 import User, {IUser, ITransaction, IBudget } from '../databaseModules/users';
+import { sendNotification } from '../newNotifications';
+
 
 // Add a new user to the database
 export const addUser = async (userData: IUser) => {
@@ -529,5 +531,28 @@ export const clearNotifications = async (userId: string) => {
 
 // notifyOnOverBudget function is used to notify the user when they are over budget
 export const notifyOnOverBudget = async (userId: string, budgetId: string) => {
-  "to be disccused"
-} // to be disccused
+  try {
+    const user = await User.findById(userId);
+    const budget = user?.budgets.find(b => b.budget_id.toString() === budgetId);
+    if (!budget) {
+      throw new Error('Budget not found');
+    }
+    const category = budget.category;
+    const current: number = (user?.transactions || [])
+      .filter(t => t.category === category)
+      .reduce((acc, t) => acc + t.amount, 0);
+    if (current >= budget.amount) {
+      const message = `Overbudget on category ${category} by amount of ${current - budget.amount}`;
+      if (user) {
+        sendNotification(user.email, message);
+      } else {
+        throw new Error('User not found');
+      }
+      return message;
+    }
+    return 'Not over budget';
+  } catch (error) {
+    console.error('Error notifying on over budget:', error);
+    throw new Error('Failed to notify on over budget');
+  }
+}
