@@ -1,5 +1,5 @@
 .container {
-  min-height: 200vh;
+  min-height: 1200vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,7 +60,7 @@
 
 .input {
   width: 100%;
-  padding: 12px;
+  padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   font-size: 16px;
@@ -86,25 +86,6 @@
 
 .loginButton:hover {
   background: #83A6CE;
-}
-
-.googleButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  background: #f5f5f5;
-  color: #333;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.googleButton:hover {
-  background: #eee;
 }
 
 .signupText {
