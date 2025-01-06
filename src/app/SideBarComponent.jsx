@@ -14,7 +14,7 @@ import styles from "./rootLayout.module.css";
 
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 import React from 'react';
-import styles from './styles.css';
+import styles from './sidebar.module.css';
 import Link from 'next/link';
 
 function SignOutButton() {
