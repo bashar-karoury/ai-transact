@@ -1,5 +1,6 @@
 // User model and schema.
 import mongoose, { Schema, Document, Model } from 'mongoose';
+import { experimental_useEffectEvent } from 'react';
 
 // transaction interface
 export interface ITransaction extends Document {
@@ -28,7 +29,7 @@ export interface IUser extends Document {
   currency: string;
   transactions: ITransaction[];
   budgets: IBudget[];
-//   notifucations: INotification[];
+  notifications: any[];
 }
 
 // transaction schema
@@ -59,6 +60,7 @@ const UserSchema: Schema<IUser> = new Schema({
   currency: { type: String, default: 'USD' },
   transactions: [TransactionSchema],
   budgets: [BudgetSchema],
+  notifications: { type: mongoose.Schema.Types.Mixed, default: [] }
 });
 
 // user model
