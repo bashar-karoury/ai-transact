@@ -496,23 +496,13 @@ export const getNNN = async (user_id: string) => {
 }
 
 // updateNotifications function is used to update the user's notifications
-export const updateNotifications = async (userId: string, notifications: any[]) => {
+export const updateNotifications = async (userId: string, notification: any[]) => {
   try {
-    return await User.findByIdAndUpdate(userId, { notifications }, { new: true });
-  } catch (error) {
-    console.error('Error updating notifications:', error);
-    throw new Error('Failed to update notifications');
-  }
-}
-
-// addNotification function is used to add a new notification to the user's notifications array
-export const addNotification = async (userId: string, notification: any) => {
-  try {
-    const updatedUser = await User.findByIdAndUpdate(userId, { $push: { notifications: notification } }, { new: true });
+    const updatedUser =  await User.findByIdAndUpdate(userId, { $push: { notifications: notification } }, { new: true });
     return updatedUser?.notifications;
   } catch (error) {
-    console.error('Error adding notification:', error);
-    throw new Error('Failed to add notification');
+    console.error(`Error updating notifications for user ${userId} with data ${JSON.stringify(notification)}:`, error);
+    throw new Error('Failed to update notifications');
   }
 }
 
