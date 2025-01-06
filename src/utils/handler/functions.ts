@@ -32,6 +32,7 @@ export const addTransaction = async (userId: string, transactionData: ITransacti
     const updatedUser = await User.findByIdAndUpdate(userId, {
       $push: { transactions: transactionData },
     }, { new: true });
+    notifyOnOverBudget(updatedUser, transactionData.category)
     return updatedUser?.transactions;
   } catch (error) {
     console.error('Error adding transaction:', error);
@@ -530,29 +531,57 @@ export const clearNotifications = async (userId: string) => {
 }
 
 // notifyOnOverBudget function is used to notify the user when they are over budget
-export const notifyOnOverBudget = async (userId: string, budgetId: string) => {
+// export const notifyOnOverBudget = async (userId: string, budgetId: string) => {
+//   try {
+//     const user = await User.findById(userId);
+//     const budget = user?.budgets.find(b => b.budget_id.toString() === budgetId);
+//     if (!budget) {
+//       throw new Error('Budget not found');
+//     }
+//     const category = budget.category;
+//     const current: number = (user?.transactions || [])
+//       .filter(t => t.category === category)
+//       .reduce((acc, t) => acc + t.amount, 0);
+//     if (current >= budget.amount) {
+//       const message = `Overbudget on category ${category} by amount of ${current - budget.amount}`;
+//       if (user) {
+//         sendNotification(user.email, message);
+//       } else {
+//         throw new Error('User not found');
+//       }
+//       return message;
+//     }
+//     return 'Not over budget';
+//   } catch (error) {
+//     console.error('Error notifying on over budget:', error);
+//     throw new Error('Failed to notify on over budget');
+//   }
+// }
+
+// notifyOnOverBudget function is used to notify the user when they are over budget
+export const notifyOnOverBudget = async (user: IUser, category: string) => {
   try {
-    const user = await User.findById(userId);
-    const budget = user?.budgets.find(b => b.budget_id.toString() === budgetId);
+    const budget = user?.budgets.find(b => b.category === category);
     if (!budget) {
-      throw new Error('Budget not found');
+      return;
     }
-    const category = budget.category;
-    const current: number = (user?.transactions || [])
-      .filter(t => t.category === category)
+    const today = new Date();
+    const startOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0, 23, 59, 59); // Ensure the end is inclusive
+  
+    const current: number = (user?.transactions.filter(
+      (t) =>
+        t.category === category &&
+        t.date >= startOfMonth &&
+        t.date <= endOfMonth
+    ))
       .reduce((acc, t) => acc + t.amount, 0);
     if (current >= budget.amount) {
       const message = `Overbudget on category ${category} by amount of ${current - budget.amount}`;
-      if (user) {
-        sendNotification(user.email, message);
-      } else {
-        throw new Error('User not found');
-      }
-      return message;
+      sendNotification(user.email, message);
     }
-    return 'Not over budget';
   } catch (error) {
     console.error('Error notifying on over budget:', error);
     throw new Error('Failed to notify on over budget');
   }
-}
+};
