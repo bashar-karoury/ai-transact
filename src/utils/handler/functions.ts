@@ -483,3 +483,60 @@ export const getUserIdByEmail = async (email: string): Promise<string> =>  {
     throw new Error('Failed to get user id by email');
   }
 };
+
+// getNotificationsNumber function is used to get the number of notifications
+export const getNNN = async (user_id: string) => {
+  try {
+    const user = await User.findById(user_id);
+    return user?.notifications.length;
+  } catch (error) {
+    console.error('Error getting notifications number:', error);
+    throw new Error('Failed to get notifications number');
+  }
+}
+
+// updateNotifications function is used to update the user's notifications
+export const updateNotifications = async (userId: string, notifications: any[]) => {
+  try {
+    return await User.findByIdAndUpdate(userId, { notifications }, { new: true });
+  } catch (error) {
+    console.error('Error updating notifications:', error);
+    throw new Error('Failed to update notifications');
+  }
+}
+
+// addNotification function is used to add a new notification to the user's notifications array
+export const addNotification = async (userId: string, notification: any) => {
+  try {
+    const updatedUser = await User.findByIdAndUpdate(userId, { $push: { notifications: notification } }, { new: true });
+    return updatedUser?.notifications;
+  } catch (error) {
+    console.error('Error adding notification:', error);
+    throw new Error('Failed to add notification');
+  }
+}
+
+// getNotifications function is used to get all the user's notifications
+export const getNotifications = async (userId: string) => {
+  try {
+    const user = await User.findById(userId);
+    return user?.notifications;
+  } catch (error) {
+    console.error('Error getting notifications:', error);
+    throw new Error('Failed to get notifications');
+  }
+}
+
+// clearNotifications function is used to clear all the user's notifications
+export const clearNotifications = async (userId: string) => {
+  try {
+    return await User.findByIdAndUpdate(userId, { notifications: "" }, { new: true });
+  } catch (error) {
+    console.error('Error clearing notifications:', error);
+    throw new Error('Failed to clear notifications');
+  }
+}
+
+// notifyOnOverBudget function is used to notify the user when they are over budget
+export const notifyOnOverBudget = async (userId: string, budgetId: string) => {
+} // to be disccused
