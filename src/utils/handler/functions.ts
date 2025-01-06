@@ -530,7 +530,7 @@ export const getNotifications = async (userId: string) => {
 // clearNotifications function is used to clear all the user's notifications
 export const clearNotifications = async (userId: string) => {
   try {
-    return await User.findByIdAndUpdate(userId, { notifications: "" }, { new: true });
+    return await User.findByIdAndUpdate(userId, { notifications: "" /*[] I don't know what to return 'to be disccused'*/ }, { new: true });
   } catch (error) {
     console.error('Error clearing notifications:', error);
     throw new Error('Failed to clear notifications');
