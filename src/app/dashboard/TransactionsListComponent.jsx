@@ -29,13 +29,14 @@ export default function TransactionsListComponent({
               </span>
             </div>
             <div className={styles.transactionActions}>
-              <span
-                className={`${styles.transactionAmount} ${
-                  transaction.amount > 0 ? styles.income : styles.expense
-                }`}
-              >
-                ${Math.abs(transaction.amount).toLocaleString()}
-              </span>
+           <span 
+            className={`${styles.transactionAmount} ${
+            transaction.type === 'income' ? styles.income : styles.expense
+          }`}
+          >
+
+              ${Math.abs(transaction.amount).toLocaleString()}
+            </span>
               <button
                 className={styles.optionsButton}
                 onClick={(e) => handleOptionsClick(transaction, e)}
