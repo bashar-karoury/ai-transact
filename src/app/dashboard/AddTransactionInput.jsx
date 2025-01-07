@@ -55,7 +55,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       description: "",
       date: "",
       amount: "",
-      type: "Expense",
+      type: "expense",
       category: "",
     });
     setFetch(!tofetch);
@@ -116,8 +116,8 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             onChange={handleInputChange}
             value={newTransaction.type}
           >
-            <option value="Income">Income</option>
-            <option value="Expense">Expense</option>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
           </select>
 
           <select
