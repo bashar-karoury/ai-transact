@@ -1,5 +1,6 @@
 "use client";
 import { usePathname } from "next/navigation";
+import { UserButton } from "@stackframe/stack";
 import { useUser } from "@stackframe/stack";
 import {
   HomeIcon,
@@ -9,10 +10,10 @@ import {
   ChartPieIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
 // import styles from './styles.css';
-import styles from './rootLayout.module.css'
+import styles from "./rootLayout.module.css";
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 
 function SignOutButton() {
@@ -41,13 +42,13 @@ export default function SideBarComponent({ children }) {
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const res = await fetch('/api/balance'); // Call the API endpoint
-        if (!res.ok) throw new Error('Failed to fetch balance');
+        const res = await fetch("/api/balance"); // Call the API endpoint
+        if (!res.ok) throw new Error("Failed to fetch balance");
 
         const data = await res.json();
         setBalance(data); // Set balance
       } catch (err) {
-        console.error('Error fetching balance:', err);
+        console.error("Error fetching balance:", err);
         setError(true);
       } finally {
         setLoading(false);
@@ -55,7 +56,6 @@ export default function SideBarComponent({ children }) {
     };
     fetchBalance();
   }, []);
-
 
   if (isAuthPage) {
     return <>{children}</>;
@@ -73,6 +73,7 @@ export default function SideBarComponent({ children }) {
           {/* User email */}
           <div className={styles.userEmail}>
             <span>menatalla@gmail.com</span>
+            {/* <SignOutButton /> */}
           </div>
 
           {/* Navigation links */}

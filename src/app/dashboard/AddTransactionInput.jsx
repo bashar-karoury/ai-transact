@@ -12,15 +12,17 @@ import categories from "@/utils/categories";
 import DescriptionInput from "@/Components/DescriptionInput";
 import RecordTransactionButton from "@/Components/RecordTransactionButton";
 export default function AddTransactionInput({ tofetch, setFetch }) {
+  const today = new Date().toISOString().split("T")[0];
   const [newTransaction, setNewTransaction] = useState({
     description: "",
-    date: "",
+    date: today,
     amount: "",
     type: "Income",
     category: "",
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    // console.log(`name=${name} value=${value}`);
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 

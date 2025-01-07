@@ -38,7 +38,14 @@ export default function TranasactionOptionsPopOver({
               className={styles.popoverButton}
               onClick={() => {
                 // Add edit logic here
-                setEditingTransaction(activeTransaction);
+                // console.log("Active Transaction=", activeTransaction);
+                const editDate = activeTransaction.date.split("T")[0];
+                const updatedTransaction = {
+                  ...activeTransaction,
+                  date: editDate,
+                };
+                // console.log("Updated Transaction", updatedTransaction);
+                setEditingTransaction(updatedTransaction);
                 setShowPopover(false);
               }}
             >
