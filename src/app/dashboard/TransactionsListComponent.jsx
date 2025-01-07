@@ -15,8 +15,8 @@ export default function TransactionsListComponent({
   return (
     <div className={styles.transactionList}>
       <div className={styles.buttonContainer}>
-      {transactions.map((transaction, index) => (
-        <div key={index} className={styles.transaction}>
+      {transactions.map((transaction) => (
+        <div key={transaction.id} className={styles.transaction}>
           <div className={styles.transactionInfo}>
             <span className={styles.transactionType}>
               {transaction.description}
