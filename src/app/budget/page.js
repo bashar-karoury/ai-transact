@@ -5,7 +5,7 @@ import styles from './budget.module.css';
 export default function Budget() {
   const [budgetForm, setBudgetForm] = useState({
     category: '',
-    limitAmount: '',
+    amount: "",
   });
 
   const [budgets] = useState([
@@ -34,6 +34,8 @@ export default function Budget() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log('name', name)
+    console.log('value', value)
     setBudgetForm(prev => ({
       ...prev,
       [name]: value
@@ -60,8 +62,8 @@ export default function Budget() {
           <div className={styles.formGroup}>
             <input
               type="number"
-              name="limitAmount"
-              value={budgetForm.limitAmount}
+              name="amount"
+              value={budgetForm.amount}
               onChange={handleChange}
               placeholder="Limit Amount"
               className={styles.input}

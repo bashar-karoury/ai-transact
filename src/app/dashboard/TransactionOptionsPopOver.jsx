@@ -48,7 +48,7 @@ export default function TranasactionOptionsPopOver({
               className={styles.popoverButton}
               onClick={async () => {
                 // Add delete logic here
-                console.log(activeTransaction);
+                console.log("active transaction", activeTransaction);
                 try {
                   const response = await fetch("/api/transactions", {
                     method: "DELETE",
@@ -56,7 +56,7 @@ export default function TranasactionOptionsPopOver({
                       "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                      transaction_id: activeTransaction.id,
+                      transaction_id: activeTransaction.transaction_id,
                     }),
                   });
                   const data = await response.json();

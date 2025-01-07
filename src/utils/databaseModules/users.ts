@@ -1,11 +1,11 @@
 // User model and schema.
-import mongoose, { Schema, Document, Model } from 'mongoose';
-import { experimental_useEffectEvent } from 'react';
+import mongoose, { Schema, Document, Model } from "mongoose";
+import { experimental_useEffectEvent } from "react";
 
 // transaction interface
 export interface ITransaction extends Document {
   transaction_id: mongoose.Schema.Types.ObjectId;
-  type: 'income' | 'expense';
+  type: "income" | "expense";
   amount: number;
   description: string;
   category: string;
@@ -36,7 +36,7 @@ export interface IUser extends Document {
 const TransactionSchema: Schema<ITransaction> = new Schema({
   // transaction_id, will be used to update and delete transactions in the future
   transaction_id: { type: mongoose.Schema.Types.ObjectId, auto: true },
-  type: { type: String, enum: ['income', 'expense'], required: true },
+  type: { type: String, enum: ["income", "expense"], required: true },
   amount: { type: Number, required: true },
   description: { type: String, required: true },
   category: { type: String, required: true },
@@ -47,8 +47,6 @@ const TransactionSchema: Schema<ITransaction> = new Schema({
 const BudgetSchema: Schema<IBudget> = new Schema({
   budget_id: { type: mongoose.Schema.Types.ObjectId, auto: true },
   category: { type: String, required: true },
-  startDate: { type: Date, required: true },
-  endDate: { type: Date, required: true },
   amount: { type: Number, required: true },
 });
 
@@ -57,14 +55,15 @@ const UserSchema: Schema<IUser> = new Schema({
   email: { type: String, required: true },
   profilePicture: { type: String },
   balance: { type: Number, required: true },
-  currency: { type: String, default: 'USD' },
+  currency: { type: String, default: "USD" },
   transactions: [TransactionSchema],
   budgets: [BudgetSchema],
-  notifications: { type: mongoose.Schema.Types.Mixed, default: [] }
+  notifications: { type: mongoose.Schema.Types.Mixed, default: [] },
 });
 
 // user model
-const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+const User: Model<IUser> =
+  mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
 
 // export user model
 export default User;

@@ -116,8 +116,8 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             onChange={handleInputChange}
             value={newTransaction.type}
           >
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
+            <option value="expense">expense</option>
+            <option value="income">income</option>
           </select>
 
           <select
