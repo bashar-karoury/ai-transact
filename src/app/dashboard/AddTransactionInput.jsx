@@ -11,16 +11,18 @@ import styles from "./dashboard.module.css";
 import categories from "@/utils/categories";
 import DescriptionInput from "@/Components/DescriptionInput";
 import RecordTransactionButton from "@/Components/RecordTransactionButton";
-export default function AddTransactionInput() {
+export default function AddTransactionInput({ tofetch, setFetch }) {
+  const today = new Date().toISOString().split("T")[0];
   const [newTransaction, setNewTransaction] = useState({
     description: "",
-    date: "",
+    date: today,
     amount: "",
     type: "Income",
     category: "",
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    // console.log(`name=${name} value=${value}`);
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 
@@ -28,6 +30,22 @@ export default function AddTransactionInput() {
     event.preventDefault();
     // Implement transaction addition logic here
     // POST request to /api/transactions
+    const isTransactionValid = Object.values(newTransaction).every(
+      (value) => value !== ""
+    );
+
+    if (!isTransactionValid) {
+      console.error("All fields must be filled out");
+      setNewTransaction({
+        description: "----",
+        date: "-----",
+        amount: "---",
+        type: "------",
+        category: "---",
+      });
+      return;
+    }
+
     try {
       const response = await fetch("/api/transactions", {
         method: "POST",
@@ -46,9 +64,10 @@ export default function AddTransactionInput() {
       description: "",
       date: "",
       amount: "",
-      type: "Income",
+      type: "expense",
       category: "",
     });
+    // setFetch(!tofetch);
     // setIsOpen(false);
     // setIsOpen(true);
   };
@@ -71,7 +90,7 @@ export default function AddTransactionInput() {
 
   return (
     <div className={styles.inputSection}>
-      <form onSubmit={handleAddTransaction} className={styles.transactionForm}>
+      <form className={styles.transactionForm}>
         <div className={styles.formWrapper}>
           <button type="button" className={styles.plusButton}>
             <PlusIcon className={styles.plusIcon} />
@@ -106,8 +125,8 @@ export default function AddTransactionInput() {
             onChange={handleInputChange}
             value={newTransaction.type}
           >
-            <option value="Income">Income</option>
-            <option value="Expense">Expense</option>
+            <option value="expense">expense</option>
+            <option value="income">income</option>
           </select>
 
           <select
@@ -124,13 +143,14 @@ export default function AddTransactionInput() {
             ))}
           </select>
 
-          {/* <button type="button" className={styles.micButton}>
-            <MicrophoneIcon className={styles.micIcon} />
-          </button> */}
           <RecordTransactionButton
             onTransactionRecorded={handleTransactionRecorded}
           />
-          <button type="submit" className={styles.addButton}>
+          <button
+            type="button"
+            onClick={handleAddTransaction}
+            className={styles.addButton}
+          >
             Add
           </button>
         </div>

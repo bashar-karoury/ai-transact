@@ -5,8 +5,7 @@ import styles from './budget.module.css';
 export default function Budget() {
   const [budgetForm, setBudgetForm] = useState({
     category: '',
-    limitAmount: '',
-    startDate: ''
+    amount: "",
   });
 
   const [budgets] = useState([
@@ -15,13 +14,28 @@ export default function Budget() {
     { id: 3, name: 'Budget 3' }
   ]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('New budget:', budgetForm);
+    try {
+      const Budget = budgetForm;
+      const result = await fetch("/api/budgets", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(Budget),
+      });
+      console.log("result of adding budget =", result);
+    } catch (error) {
+      console.error(`Failed to add budget to database ${error}`);
+    }
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log('name', name)
+    console.log('value', value)
     setBudgetForm(prev => ({
       ...prev,
       [name]: value
@@ -48,20 +62,10 @@ export default function Budget() {
           <div className={styles.formGroup}>
             <input
               type="number"
-              name="limitAmount"
-              value={budgetForm.limitAmount}
+              name="amount"
+              value={budgetForm.amount}
               onChange={handleChange}
               placeholder="Limit Amount"
-              className={styles.input}
-            />
-          </div>
-          <div className={styles.formGroup}>
-            <input
-              type="text"
-              name="startDate"
-              value={budgetForm.startDate}
-              onChange={handleChange}
-              placeholder="Start date"
               className={styles.input}
             />
           </div>

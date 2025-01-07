@@ -14,7 +14,14 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
   const [isRecording, setIsRecording] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
 
-  async function startButtonHandler() {
+  async function startButtonHandler(event) {
+    event.preventDefault();
+    // setTimeout(() => {
+    //   if (isRecording) {
+    //     mediaRecorderRef.current?.stop();
+    //     setIsRecording(false);
+    //   }
+    // }, 20000);
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorderRef.current = new MediaRecorder(stream);
 
@@ -24,7 +31,7 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
 
     mediaRecorderRef.current.onstop = async () => {
       const audioBlob = new Blob(audioChunks, { type: "audio/webm" });
-      // console.log(audioBlob);
+      console.log(audioBlob);
       audioChunks = [];
       setAudioblob(audioBlob);
     };
@@ -33,7 +40,8 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
     setIsRecording(true);
   }
 
-  async function stopButtonHandler() {
+  async function stopButtonHandler(event) {
+    event.preventDefault();
     mediaRecorderRef.current?.stop();
     setIsRecording(false);
   }

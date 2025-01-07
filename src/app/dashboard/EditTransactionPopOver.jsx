@@ -16,9 +16,7 @@ export default function EditTransactionPopOver({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          editingTransaction,
-        }),
+        body: JSON.stringify(editingTransaction),
       });
       const data = await response.json();
       console.log("Success:", data);

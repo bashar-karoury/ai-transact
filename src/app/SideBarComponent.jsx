@@ -1,6 +1,7 @@
 // app/layout.js
 "use client";
 import { usePathname } from "next/navigation";
+import { UserButton } from "@stackframe/stack";
 import { useUser } from "@stackframe/stack";
 import {
   HomeIcon,
@@ -10,20 +11,55 @@ import {
   ChartPieIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import React from 'react';
-import Link from 'next/link';
-import NewNotificationsNumberComponent from "@/Components/NNNComponent";
+
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+// import styles from './styles.css';
 import styles from "./rootLayout.module.css";
+import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 
 export function SignOutButton() {
   const user = useUser();
-  return user ? <button onClick={() => user.signOut()}>Sign Out</button> : "Not signed in";
+  return user ? (
+    <button onClick={() => user.signOut()}>Sign Out</button>
+  ) : (
+    "Not signed in"
+  );
 }
 
-export default function SideBar({ children }) {
+
+export default function SideBarComponent({ children }) {
   const pathname = usePathname();
   const isAuthPage =
-    pathname === "/login" || pathname === "/signup" || pathname === "/onboard";
+    pathname === "/" ||
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/onboard";
+
+  // State to store the balance
+  const [balance, setBalance] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  // Fetch balance from API
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const res = await fetch("/api/balance"); // Call the API endpoint
+        if (!res.ok) throw new Error("Failed to fetch balance");
+
+        const data = await res.json();
+        setBalance(data); // Set balance
+      } catch (err) {
+        console.error("Error fetching balance:", err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBalance();
+  }, []);
+
 
   if (isAuthPage) {
     return <>{children}</>;
@@ -38,10 +74,12 @@ export default function SideBar({ children }) {
           <div className={styles.userInfo}>
             <UserIcon className={styles.userIcon} />
             <span>menatalla@gmail.com</span>
+            {/* <SignOutButton /> */}
           </div>
         </div>
 
         <SignOutButton />
+
 
         <nav className={styles.nav}>
           <a
@@ -82,9 +120,18 @@ export default function SideBar({ children }) {
           </a>
         </nav>
 
+          {/* Balance section */}
         <div className={styles.balance}>
           <p>Balance:</p>
-          <h2>120,500 $</h2>
+            {loading ? (
+              <h2>Loading...</h2>
+            ) : error ? (
+              <h2>Error</h2>
+            ) : (
+              <h2>{balance} $</h2>
+            )}
+          </div>
+
         </div>
       </aside>
 

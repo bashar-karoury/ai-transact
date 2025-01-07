@@ -27,7 +27,7 @@ export function removeClient(userEmail: string) {
   activeUserClientsNNN.delete(userEmail);
 }
 
-export function sendNotification(userEmail: string, data: string) {
+export function sendNotification(userEmail: string, data: number) {
   // console.log(activeUserClients);
   const clientController: ReadableStreamDefaultController<unknown> =
     activeUserClientsNNN.get(userEmail);

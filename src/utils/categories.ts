@@ -24,5 +24,6 @@ const categories = [
   "Freelancing",
   "Pension",
   "Grants",
+  "Others",
 ];
 export default categories;

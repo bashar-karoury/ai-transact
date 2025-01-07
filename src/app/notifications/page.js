@@ -14,7 +14,8 @@ export default function Notifications() {
       console.log('parsedreceieved:', JSON.parse(event.data));
       const notfs = JSON.parse(event.data);
       console.log(typeof notfs);
-      setNotifications((prevNotifications) => [...prevNotifications, ...JSON.parse(event.data)]);
+      const newNotifications = JSON.parse(event.data);
+      setNotifications([...notifications, ...newNotifications]);
       console.log('notifications', notifications);
     };
 
@@ -36,8 +37,7 @@ export default function Notifications() {
         {notifications.map((notification, index) => (
           <div key={index} className={styles.notificationCard}>
             <div className={styles.notificationContent}>
-              <p className={styles.message}>{notification.message}</p>
-              <span className={styles.date}>{notification.date}</span>
+              <p className={styles.message}>{notification}</p>
             </div>
           </div>
         ))}

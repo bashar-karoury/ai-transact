@@ -1,19 +1,18 @@
 // Import the 'NextRequest' and 'NextResponse' types from 'next/server'
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 import {
-getUserIdByEmail,
-getAllExpensesForToday,
-getAllExpensesForThisMonth,
-getAllExpensesForThisYear,
-getAllIncomesForToday,
-getAllIncomesForThisMonth,
-getAllIncomesForThisYear,
-getAllExpenses,
-getAllIncomes, 
-} from '../../../utils/handler/functions';
-import dbConnect from '../../../utils/db';
-import { stackServerApp } from '@/stack';
-
+  getUserIdByEmail,
+  getAllExpensesForToday,
+  getAllExpensesForThisMonth,
+  getAllExpensesForThisYear,
+  getAllIncomesForToday,
+  getAllIncomesForThisMonth,
+  getAllIncomesForThisYear,
+  getAllExpenses,
+  getAllIncomes,
+} from "../../../utils/handler/functions";
+import dbConnect from "../../../utils/db";
+import { stackServerApp } from "@/stack";
 
 export async function GET(req: NextRequest) {
   try {
@@ -21,17 +20,17 @@ export async function GET(req: NextRequest) {
     await dbConnect();
 
     const user = await stackServerApp.getUser();
-       
+
     if (!user) {
       return new NextResponse("Not authorized", { status: 401 });
     }
     const user_email = user.primaryEmail;
-    console.log('User email:', user_email);
+    // console.log('User email:', user_email);
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }
     const _id: string = await getUserIdByEmail(user_email);
-
+    // console.log('id is: ', _id);
 
     // Get the 'time' parameter from the body
     // const body = await req.json();
@@ -42,12 +41,12 @@ export async function GET(req: NextRequest) {
     const time = searchParams.get("time");
 
     // Log the '_id'
-    console.log('Request ID:', _id);
+    // console.log('Request ID:', _id);
 
     // Validate if '_id' exists
     if (!_id) {
       return NextResponse.json(
-        { error: '_id parameter is required' },
+        { error: "_id parameter is required" },
         { status: 400 }
       );
     }
@@ -58,15 +57,15 @@ export async function GET(req: NextRequest) {
 
     // Get the transactions based on the time frame
     switch (time) {
-      case 'today':
+      case "today":
         expenses = await getAllExpensesForToday(_id);
         incomes = await getAllIncomesForToday(_id);
         break;
-      case 'this_month':
+      case "this_month":
         expenses = await getAllExpensesForThisMonth(_id);
         incomes = await getAllIncomesForThisMonth(_id);
         break;
-      case 'this_year':
+      case "this_year":
         expenses = await getAllExpensesForThisYear(_id);
         incomes = await getAllIncomesForThisYear(_id);
         break;
@@ -82,12 +81,17 @@ export async function GET(req: NextRequest) {
     const categorize_expense: { [key: string]: number } = {};
 
     // Calculate the total income and total expense
-    total_income = (incomes ?? []).reduce((acc, income) => acc + income.amount, 0);
-    total_expense = (expenses ?? []).reduce((acc, expense) => acc + expense.amount, 0);
-
+    total_income = (incomes ?? []).reduce(
+      (acc, income) => acc + income.amount,
+      0
+    );
+    total_expense = (expenses ?? []).reduce(
+      (acc, expense) => acc + expense.amount,
+      0
+    );
 
     // Categorize the expenses
-    expenses?.forEach(expense => {
+    expenses?.forEach((expense) => {
       const expenseCategory = (expense as any).category;
       if (categorize_expense[expenseCategory]) {
         categorize_expense[expenseCategory] += (expense as any).amount;
@@ -97,7 +101,7 @@ export async function GET(req: NextRequest) {
     });
 
     // Categorize the incomes
-    incomes?.forEach(income => {
+    incomes?.forEach((income) => {
       const incomeCategory = (income as any).category;
       if (categorize_income[incomeCategory]) {
         categorize_income[incomeCategory] += (income as any).amount;
@@ -107,18 +111,19 @@ export async function GET(req: NextRequest) {
     });
 
     // Log the expenses and incomes
-    console.log('Expenses:', expenses);
-    console.log('Incomes:', incomes);
+    console.log("Expenses:", expenses);
+    console.log("Incomes:", incomes);
 
     // Return the expenses and incomes
-    return NextResponse.json({ total_income, total_expense, categorize_income, categorize_expense }, { status: 200 });
-
-  }
-  // Catch any errors and return the error response
-  catch (error: any) {
-    console.error('Error getting expenses and incomes:', error);
     return NextResponse.json(
-      { error: 'Failed to get incomes and expenses', details: error.message },
+      { total_income, total_expense, categorize_income, categorize_expense },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    // Catch any errors and return the error response
+    console.error("Error getting expenses and incomes:", error);
+    return NextResponse.json(
+      { error: "Failed to get incomes and expenses", details: error.message },
       { status: 500 }
     );
   }
