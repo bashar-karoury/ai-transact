@@ -1,7 +1,7 @@
-
 // app/layout.js
 "use client";
 import { usePathname } from "next/navigation";
+import { useUser } from "@stackframe/stack";
 import {
   HomeIcon,
   CogIcon,
@@ -10,12 +10,20 @@ import {
   ChartPieIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
+import React from 'react';
+import Link from 'next/link';
+import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 import styles from "./rootLayout.module.css";
+
+export function SignOutButton() {
+  const user = useUser();
+  return user ? <button onClick={() => user.signOut()}>Sign Out</button> : "Not signed in";
+}
 
 export default function SideBar({ children }) {
   const pathname = usePathname();
   const isAuthPage =
-    pathname === "/login" || pathname === "/signup" || pathname === "/";
+    pathname === "/login" || pathname === "/signup" || pathname === "/onboard";
 
   if (isAuthPage) {
     return <>{children}</>;
@@ -32,6 +40,8 @@ export default function SideBar({ children }) {
             <span>menatalla@gmail.com</span>
           </div>
         </div>
+
+        <SignOutButton />
 
         <nav className={styles.nav}>
           <a
@@ -54,6 +64,7 @@ export default function SideBar({ children }) {
           >
             <BellIcon className={styles.icon} />
             <span>Notifications</span>
+            <NewNotificationsNumberComponent />
           </a>
           <a
             href="/budget"
