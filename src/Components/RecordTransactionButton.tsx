@@ -15,6 +15,12 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
   const [isProcessing, setIsProcessing] = useState(false);
 
   async function startButtonHandler() {
+    setTimeout(() => {
+      if (isRecording) {
+        mediaRecorderRef.current?.stop();
+        setIsRecording(false);
+      }
+    }, 20000);
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorderRef.current = new MediaRecorder(stream);
 

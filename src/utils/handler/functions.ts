@@ -77,6 +77,7 @@ export const updateTransaction = async (
       { $set: { "transactions.$": transactionData } },
       { new: true }
     );
+    console.log("db: updated user", updatedUser);
     return updatedUser?.transactions;
   } catch (error) {
     console.error("Error updating transaction:", error);
@@ -532,19 +533,22 @@ export const getNNN = async (user_email: string) => {
 
 // updateNotifications function is used to update the user's notifications
 export const updateNotifications = async (
-  userId: string,
+  user_email: string,
   notification: any[]
 ) => {
   try {
+    const _id: string = await getUserIdByEmail(user_email);
+    console.log("type of received notification", typeof notification);
+    console.log("notification", notification);
     const updatedUser = await User.findByIdAndUpdate(
-      userId,
-      { $push: { notifications: notification } },
+      _id,
+      { $push: { notifications: [notification] } },
       { new: true }
     );
     return updatedUser?.notifications;
   } catch (error) {
     console.error(
-      `Error updating notifications for user ${userId} with data ${JSON.stringify(
+      `Error updating notifications for user ${user_email} with data ${JSON.stringify(
         notification
       )}:`,
       error
@@ -614,6 +618,10 @@ export const notifyOnOverBudget = async (user: IUser, category: string) => {
       }`;
       sendNotification(user.email, message);
     }
+    console.log(
+      "try send false notification to test integration with front end"
+    );
+    await sendNotification(user.email, "test notificatin mechanism");
   } catch (error) {
     console.error("Error notifying on over budget:", error);
     throw new Error("Failed to notify on over budget");

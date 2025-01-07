@@ -17,16 +17,20 @@ import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 
 function SignOutButton() {
   const user = useUser();
-  return user ? <button onClick={() => user.signOut()}>Sign Out</button> : "Not signed in";
+  return user ? (
+    <button onClick={() => user.signOut()}>Sign Out</button>
+  ) : (
+    "Not signed in"
+  );
 }
 
 export default function SideBarComponent({ children }) {
   const pathname = usePathname();
-  const isAuthPage = 
-  pathname === "" ||
-  pathname === "/login" ||
-  pathname === "/signup" ||
-  pathname === "onboard";
+  const isAuthPage =
+    pathname === "/" ||
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/onboard";
 
   // State to store the balance
   const [balance, setBalance] = useState(null);
@@ -51,6 +55,7 @@ export default function SideBarComponent({ children }) {
     };
     fetchBalance();
   }, []);
+
 
   if (isAuthPage) {
     return <>{children}</>;
