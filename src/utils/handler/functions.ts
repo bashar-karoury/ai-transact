@@ -129,6 +129,25 @@ export const getTransactionsForThisMonth = async (userId: string) => {
   }
 };
 
+// getTransactionForThisWeak function is used to get all the user's transactions for this week
+export const getTransactionsForThisWeek = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select("transactions"); // Get only transactions field
+
+    // Filter transactions locally (alternative approach since MongoDB's `$elemMatch` can't project nested arrays)
+    const today = new Date();
+    const startOfWeek = new Date(today.setDate(today.getDate() - today.getDay()));
+    const endOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 6));
+    const transactions = user?.transactions.filter(
+      (t) => t.date >= startOfWeek && t.date <= endOfWeek
+    );
+    return transactions || [];
+} catch (error) {
+    console.error("Error getting transactions for this week:", error);
+    throw new Error("Failed to get transactions for this week");
+  }
+}
+
 // getTransactionsForThisYear function is used to get all the user's transactions for this year
 export const getTransactionsForThisYear = async (userId: string) => {
   try {
@@ -256,6 +275,18 @@ export const updateCurrency = async (userId: string, currency: string) => {
 export const getBalance = async (userId: string) => {
   try {
     const user = await User.findById(userId);
+    const balance = user?.transactions.reduce((acc, t) => {
+            if (t.type === "income") {
+              return acc + (typeof t.amount === 'number' ? t.amount : 0);
+            } else if (t.type === "expense") {
+              return acc - (typeof t.amount === 'number' ? t.amount : 0);
+            }
+            return acc;
+          }, 0);
+    if (user && typeof balance === 'number') {
+      user.balance = balance;
+      user.save();
+    }
     return user?.balance;
   } catch (error) {
     console.error("Error getting balance:", error);

@@ -16,8 +16,8 @@ const ReportsPage = () => {
       try {
         const response = await fetch(`/api/reports?${timePeriod}`);
         const data = await response.json();
-        console.log(response);
-        console.log(data);
+        console.log('this is the response', response);
+        console.log('this is the data', data);
 
         if (response.ok) {
           // Set the fetched data
@@ -49,13 +49,13 @@ const ReportsPage = () => {
 
         <div className={styles.reportSection}>
           <h2>Expenses:</h2>
-          <PieChart data={expenseData} labels={Object.keys(expenseData)} />
+          <PieChart data={expenseData} labels={expenseData} />
           <div className={styles.total}>Total: ${totalExpenses}</div>
         </div>
 
         <div className={styles.reportSection}>
           <h2>Incomes:</h2>
-          <PieChart data={incomeData} labels={Object.keys(incomeData)} />
+          <PieChart data={incomeData} labels={incomeData} />
           <div className={styles.total}>Total: ${totalIncomes}</div>
         </div>
       </div>

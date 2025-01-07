@@ -9,9 +9,10 @@ import {
   ChartPieIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import styles from './styles.css';
+// import styles from './styles.css';
+import styles from './rootLayout.module.css'
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 
 function SignOutButton() {
@@ -20,6 +21,41 @@ function SignOutButton() {
 }
 
 export default function SideBarComponent({ children }) {
+  const pathname = usePathname();
+  const isAuthPage = 
+  pathname === "" ||
+  pathname === "/login" ||
+  pathname === "/signup" ||
+  pathname === "onboard";
+
+  // State to store the balance
+  const [balance, setBalance] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  // Fetch balance from API
+  useEffect(() => {
+    const fetchBalance = async () => {
+      try {
+        const res = await fetch('/api/balance'); // Call the API endpoint
+        if (!res.ok) throw new Error('Failed to fetch balance');
+
+        const data = await res.json();
+        setBalance(data); // Set balance
+      } catch (err) {
+        console.error('Error fetching balance:', err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchBalance();
+  }, []);
+
+  if (isAuthPage) {
+    return <>{children}</>;
+  }
+
   return (
     <div className={styles.container}>
       <aside className={styles.sidebar}>
@@ -74,7 +110,13 @@ export default function SideBarComponent({ children }) {
           {/* Balance section */}
           <div className={styles.balanceSection}>
             <p>Balance:</p>
-            <h2>120,500 $</h2>
+            {loading ? (
+              <h2>Loading...</h2>
+            ) : error ? (
+              <h2>Error</h2>
+            ) : (
+              <h2>{balance} $</h2>
+            )}
           </div>
         </div>
       </aside>

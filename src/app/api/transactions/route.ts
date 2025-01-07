@@ -6,7 +6,7 @@ import {
   updateTransaction,
   getTransactionsForToday,
   getTransactionsForThisMonth,
-  getTransactionsForThisYear,
+  getTransactionsForThisWeek,
   getAllTransactions,
   addTransaction
 } from '../../../utils/handler/functions';
@@ -110,8 +110,8 @@ export async function GET(req: NextRequest) {
         transactions = await getTransactionsForThisMonth(_id);
         break;
       // get transactions for this year
-      case 'this_year':
-        transactions = await getTransactionsForThisYear(_id);
+      case 'this_weak':
+        transactions = await getTransactionsForThisWeek(_id);
         break;
       // get all transactions
       default:

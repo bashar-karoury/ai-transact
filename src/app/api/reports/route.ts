@@ -31,6 +31,7 @@ export async function GET(req: NextRequest) {
       return new NextResponse("User email not found", { status: 400 });
     }
     const _id: string = await getUserIdByEmail(user_email);
+    console.log('id is: ', _id);
 
 
     // Get the 'time' parameter from the body
