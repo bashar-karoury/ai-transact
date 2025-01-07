@@ -15,20 +15,9 @@ const ReportsPage = () => {
     // Fetch the data from the API when the timePeriod changes
     const fetchData = async () => {
       try {
-        const response = await fetch(`/api/reports?${timePeriod}`);
+        const response = await fetch(`/api/reports?time=${timePeriod}`);
         const data = await response.json();
-        setData({
-          total_income: 2000,
-          total_expense: 1500,
-          categorize_income: {
-            "salary": 1500,
-            "gifts": 500
-          },
-          categorize_expense: {
-            "entertaiment": 1000,
-            "home": 500
-          }
-        });
+        setData(data);
         console.log('this is the response', response);
         console.log('this is the data', data);
 
@@ -62,13 +51,13 @@ const ReportsPage = () => {
 
         <div className={styles.reportSection}>
           <h2>Expenses:</h2>
-          <PieChart data={expenseData} labels={data?.categorize_expense} />
+          <PieChart data={expenseData} labels={Object.keys(data?.categorize_expense || {})} />
           <div className={styles.total}>Total: ${totalExpenses}</div>
         </div>
 
         <div className={styles.reportSection}>
           <h2>Incomes:</h2>
-          <PieChart data={incomeData} labels={data?.categorize_income} />
+          <PieChart data={incomeData} labels={Object.keys(data?.categorize_income || {})} />
           <div className={styles.total}>Total: ${totalIncomes}</div>
         </div>
       </div>
