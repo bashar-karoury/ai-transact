@@ -36,7 +36,7 @@ export default function Dashboard() {
         console.log('result', result);
         if (result.ok) {
           const data = await result.json();
-          console.log('result', data);
+          // console.log('result', data);
           setTransactions(data);
         }
       } catch (error) {

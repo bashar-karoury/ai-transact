@@ -19,9 +19,7 @@ export async function GET(req: NextRequest) {
       try {
         const nnn = await getNNN(primaryEmail);
         console.log("nnn to be sent", Number(nnn));
-        if (Number(nnn)) {
-          controller.enqueue(`data: ${JSON.stringify(nnn)}\n\n`);
-        }
+        controller.enqueue(`data: ${JSON.stringify(nnn)}\n\n`);
       } catch (error) {
         console.log(error);
       }

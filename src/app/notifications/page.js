@@ -14,7 +14,8 @@ export default function Notifications() {
       console.log('parsedreceieved:', JSON.parse(event.data));
       const notfs = JSON.parse(event.data);
       console.log(typeof notfs);
-      setNotifications((prevNotifications) => [...prevNotifications, ...JSON.parse(event.data)]);
+      const newNotifications = JSON.parse(event.data);
+      setNotifications([...notifications, ...newNotifications]);
       console.log('notifications', notifications);
     };
 

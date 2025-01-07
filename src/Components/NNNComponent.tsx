@@ -9,16 +9,19 @@ export default function NewNotificationsNumberComponent() {
 
     eventSource.onmessage = (event) => {
       console.log("nnn receieved", event);
-      setData(JSON.parse(event.data));
-      console.log("receieved data", data);
+      const received = event.data;
+      console.log("receieved", received);
+      if (received === "0") {
+        console.log("is zero");
+        setData("");
+      } else {
+        setData(JSON.parse(event.data));
+      }
+      console.log(`receieved data[${data}]`);
     };
 
     eventSource.onerror = (event) => {
       console.error("SSE error occurred:", event);
-      // Optionally inspect specific properties of the event object
-      if (event?.target?.readyState === EventSource.CLOSED) {
-        console.error("The connection was closed.");
-      }
       // Close the connection to avoid further errors
       eventSource.close();
     };
