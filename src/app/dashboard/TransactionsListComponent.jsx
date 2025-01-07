@@ -27,11 +27,12 @@ export default function TransactionsListComponent({
             <span className={styles.transactionDate}>{transaction.date}</span>
           </div>
           <div className={styles.transactionActions}>
-            <span
-              className={`${styles.transactionAmount} ${
-                transaction.amount > 0 ? styles.income : styles.expense
-              }`}
-            >
+          <span 
+            className={`${styles.transactionAmount} ${
+            transaction.type === 'income' ? styles.income : styles.expense
+          }`}
+          >
+
               ${Math.abs(transaction.amount).toLocaleString()}
             </span>
             <button
