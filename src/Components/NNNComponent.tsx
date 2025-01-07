@@ -13,8 +13,13 @@ export default function NewNotificationsNumberComponent() {
       console.log("receieved data", data);
     };
 
-    eventSource.onerror = () => {
-      console.error("SSE error");
+    eventSource.onerror = (event) => {
+      console.error("SSE error occurred:", event);
+      // Optionally inspect specific properties of the event object
+      if (event?.target?.readyState === EventSource.CLOSED) {
+        console.error("The connection was closed.");
+      }
+      // Close the connection to avoid further errors
       eventSource.close();
     };
 

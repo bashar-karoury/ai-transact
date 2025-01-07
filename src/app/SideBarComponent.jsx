@@ -9,17 +9,32 @@ import {
   ChartPieIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import React from 'react';
-import Link from 'next/link';
-import styles from './styles.css';
+import React from "react";
+import Link from "next/link";
+import styles from "./rootLayout.module.css";
+// import styles from "./styles.css";
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 
 function SignOutButton() {
   const user = useUser();
-  return user ? <button onClick={() => user.signOut()}>Sign Out</button> : "Not signed in";
+  return user ? (
+    <button onClick={() => user.signOut()}>Sign Out</button>
+  ) : (
+    "Not signed in"
+  );
 }
 
 export default function SideBarComponent({ children }) {
+  const pathname = usePathname();
+  const isAuthPage =
+    pathname === "/" ||
+    pathname === "/login" ||
+    pathname === "/signup" ||
+    pathname === "/onboard";
+
+  if (isAuthPage) {
+    return <>{children}</>;
+  }
   return (
     <div className={styles.container}>
       <aside className={styles.sidebar}>

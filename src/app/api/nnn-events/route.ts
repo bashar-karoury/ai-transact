@@ -16,8 +16,15 @@ export async function GET(req: NextRequest) {
     async start(controller) {
       addClient(primaryEmail, controller);
       // send initial nnn
-      const nnn = await getNNN(primaryEmail);
-      controller.enqueue(`data: ${JSON.stringify(nnn)}\n\n`);
+      try {
+        const nnn = await getNNN(primaryEmail);
+        console.log("nnn to be sent", Number(nnn));
+        if (Number(nnn)) {
+          controller.enqueue(`data: ${JSON.stringify(nnn)}\n\n`);
+        }
+      } catch (error) {
+        console.log(error);
+      }
       console.log("/api/nnn-events connection is established");
 
       // Clean up when the connection is closed

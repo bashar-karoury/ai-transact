@@ -77,6 +77,7 @@ export const updateTransaction = async (
       { $set: { "transactions.$": transactionData } },
       { new: true }
     );
+    console.log("db: updated user", updatedUser);
     return updatedUser?.transactions;
   } catch (error) {
     console.error("Error updating transaction:", error);

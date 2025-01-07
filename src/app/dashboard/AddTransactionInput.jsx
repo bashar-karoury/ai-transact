@@ -11,7 +11,7 @@ import styles from "./dashboard.module.css";
 import categories from "@/utils/categories";
 import DescriptionInput from "@/Components/DescriptionInput";
 import RecordTransactionButton from "@/Components/RecordTransactionButton";
-export default function AddTransactionInput() {
+export default function AddTransactionInput({ tofetch, setFetch }) {
   const [newTransaction, setNewTransaction] = useState({
     description: "",
     date: "",
@@ -28,6 +28,15 @@ export default function AddTransactionInput() {
     event.preventDefault();
     // Implement transaction addition logic here
     // POST request to /api/transactions
+    const isTransactionValid = Object.values(newTransaction).every(
+      (value) => value !== ""
+    );
+
+    if (!isTransactionValid) {
+      console.error("All fields must be filled out");
+      return;
+    }
+
     try {
       const response = await fetch("/api/transactions", {
         method: "POST",
@@ -46,9 +55,10 @@ export default function AddTransactionInput() {
       description: "",
       date: "",
       amount: "",
-      type: "Income",
+      type: "Expense",
       category: "",
     });
+    setFetch(!tofetch);
     // setIsOpen(false);
     // setIsOpen(true);
   };
@@ -71,7 +81,7 @@ export default function AddTransactionInput() {
 
   return (
     <div className={styles.inputSection}>
-      <form onSubmit={handleAddTransaction} className={styles.transactionForm}>
+      <form className={styles.transactionForm}>
         <div className={styles.formWrapper}>
           <button type="button" className={styles.plusButton}>
             <PlusIcon className={styles.plusIcon} />
@@ -130,7 +140,11 @@ export default function AddTransactionInput() {
           <RecordTransactionButton
             onTransactionRecorded={handleTransactionRecorded}
           />
-          <button type="submit" className={styles.addButton}>
+          <button
+            type="button"
+            onClick={handleAddTransaction}
+            className={styles.addButton}
+          >
             Add
           </button>
         </div>
