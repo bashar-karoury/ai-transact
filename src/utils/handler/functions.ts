@@ -7,7 +7,7 @@ import { sendNotification } from "@/utils/NotificationManager";
 export const addUser = async (userData: IUser) => {
   try {
     const newUser = new User(userData);
-    console.log(newUser);
+    // console.log(newUser);
     return await newUser.save();
   } catch (error) {
     console.error("Error adding user:", error);
@@ -77,6 +77,7 @@ export const updateTransaction = async (
       { $set: { "transactions.$": transactionData } },
       { new: true }
     );
+    // console.log("db: updated user", updatedUser);
     return updatedUser?.transactions;
   } catch (error) {
     console.error("Error updating transaction:", error);
@@ -126,6 +127,29 @@ export const getTransactionsForThisMonth = async (userId: string) => {
   } catch (error) {
     console.error("Error getting transactions for this month:", error);
     throw new Error("Failed to get transactions for this month");
+  }
+};
+
+// getTransactionForThisWeak function is used to get all the user's transactions for this week
+export const getTransactionsForThisWeek = async (userId: string) => {
+  try {
+    const user = await User.findById(userId).select("transactions"); // Get only transactions field
+
+    // Filter transactions locally (alternative approach since MongoDB's `$elemMatch` can't project nested arrays)
+    const today = new Date();
+    const startOfWeek = new Date(
+      today.setDate(today.getDate() - today.getDay())
+    );
+    const endOfWeek = new Date(
+      today.setDate(today.getDate() - today.getDay() + 6)
+    );
+    const transactions = user?.transactions.filter(
+      (t) => t.date >= startOfWeek && t.date <= endOfWeek
+    );
+    return transactions || [];
+  } catch (error) {
+    console.error("Error getting transactions for this week:", error);
+    throw new Error("Failed to get transactions for this week");
   }
 };
 
@@ -256,6 +280,18 @@ export const updateCurrency = async (userId: string, currency: string) => {
 export const getBalance = async (userId: string) => {
   try {
     const user = await User.findById(userId);
+    const balance = user?.transactions.reduce((acc, t) => {
+      if (t.type === "income") {
+        return acc + (typeof t.amount === "number" ? t.amount : 0);
+      } else if (t.type === "expense") {
+        return acc - (typeof t.amount === "number" ? t.amount : 0);
+      }
+      return acc;
+    }, 0);
+    if (user && typeof balance === "number") {
+      user.balance = balance;
+      user.save();
+    }
     return user?.balance;
   } catch (error) {
     console.error("Error getting balance:", error);
@@ -501,19 +537,22 @@ export const getNNN = async (user_email: string) => {
 
 // updateNotifications function is used to update the user's notifications
 export const updateNotifications = async (
-  userId: string,
+  user_email: string,
   notification: any[]
 ) => {
   try {
+    const _id: string = await getUserIdByEmail(user_email);
+    // console.log("type of received notification", typeof notification);
+    // console.log("notification", notification);
     const updatedUser = await User.findByIdAndUpdate(
-      userId,
+      _id,
       { $push: { notifications: notification } },
       { new: true }
     );
     return updatedUser?.notifications;
   } catch (error) {
     console.error(
-      `Error updating notifications for user ${userId} with data ${JSON.stringify(
+      `Error updating notifications for user ${user_email} with data ${JSON.stringify(
         notification
       )}:`,
       error
@@ -541,7 +580,7 @@ export const clearNotifications = async (user_email: string) => {
     return await User.findByIdAndUpdate(
       _id,
       {
-        notifications: "" /*[] I don't know what to return 'to be disccused'*/,
+        notifications: [] /*[] I don't know what to return 'to be disccused'*/,
       },
       { new: true }
     );
@@ -583,6 +622,7 @@ export const notifyOnOverBudget = async (user: IUser, category: string) => {
       }`;
       sendNotification(user.email, message);
     }
+    // await sendNotification(user.email, "test notificatin mechanism");
   } catch (error) {
     console.error("Error notifying on over budget:", error);
     throw new Error("Failed to notify on over budget");

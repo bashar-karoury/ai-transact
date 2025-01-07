@@ -46,7 +46,7 @@ export default function SignUp() {
         },
         body: JSON.stringify({ email }),
       });
-      console.log('result of adding user =', result);
+      // console.log('result of adding user =', result);
     } catch (error) {
       setError(`Failed to add user to database ${error}`);
     }

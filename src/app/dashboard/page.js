@@ -33,14 +33,18 @@ export default function Dashboard() {
     const fetchTransactions = async function (time) {
       try {
         const result = await fetch(`/api/transactions?${time}`);
-        const data = await result.json();
-        console.log('result', data);
-        setTransactions(data);
+        console.log('result', result);
+        if (result.ok) {
+          const data = await result.json();
+          // console.log('result', data);
+          setTransactions(data);
+        }
       } catch (error) {
         console.error(error);
       }
     }
     fetchTransactions(time);
+
   }, [time, tofetch]);
 
   return (
@@ -58,7 +62,8 @@ export default function Dashboard() {
         setFetch={setFetch}
       />
 
-      <AddTransactionInput />
+      <AddTransactionInput tofetch={tofetch}
+        setFetch={setFetch} />
     </div>
   );
 }

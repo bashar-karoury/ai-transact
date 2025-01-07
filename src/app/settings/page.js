@@ -1,66 +1,71 @@
 'use client'
 import { useState } from 'react';
-import styles from './settings.module.css';
+import {
+  UserIcon,
+  EnvelopeIcon,
+  CameraIcon,
+  CurrencyDollarIcon,
+  PaintBrushIcon,
+  BellIcon,
+  ShieldCheckIcon
+} from '@heroicons/react/24/outline';
 
 export default function Settings() {
-  const [settings, setSettings] = useState({
-    currency: '',
-    theme: '',
-    imageOpt: ''
+  const [formData, setFormData] = useState({
+    currency: 'USD',
+    logo: null
   });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setSettings(prev => ({
-      ...prev,
-      [name]: value
-    }));
+  const clickHandler = async () => {
+    try {
+      const userConfigs = formData;
+      console.log(userConfigs);
+      const result = await fetch("/api/userSettings", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userConfigs),
+      });
+      console.log("result of editing user settings =", result);
+    } catch (error) {
+      console.error(`Failed to put user settings to database ${error}`);
+    }
   };
 
   return (
-    <div className={styles.settingsContainer}>
-      <h1 className={styles.title}>Settings</h1>
-      
-      <div className={styles.settingsForm}>
-        <div className={styles.formGroup}>
-          <label htmlFor="currency">Currency:</label>
+    <div className="profile-container">
+      <h1>Settings</h1>
+
+      <form className="onboard-form">
+        <div className="form-group">
+          <label>Currency</label>
+          <select
+            value={formData.currency}
+            onChange={(e) =>
+              setFormData({ ...formData, currency: e.target.value })
+            }
+          >
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label>Logo</label>
           <input
-            type="text"
-            id="currency"
-            name="currency"
-            value={settings.currency}
-            onChange={handleChange}
-            placeholder="Enter currency"
-            className={styles.input}
+            type="file"
+            accept="image/*"
+            onChange={(e) =>
+              setFormData({ ...formData, logo: e.target.files[0] })
+            }
           />
         </div>
 
-        <div className={styles.formGroup}>
-          <label htmlFor="theme">Theme:</label>
-          <input
-            type="text"
-            id="theme"
-            name="theme"
-            value={settings.theme}
-            onChange={handleChange}
-            placeholder="Enter theme"
-            className={styles.input}
-          />
-        </div>
-
-        <div className={styles.formGroup}>
-          <label htmlFor="imageOpt">Image[opt]:</label>
-          <input
-            type="text"
-            id="imageOpt"
-            name="imageOpt"
-            value={settings.imageOpt}
-            onChange={handleChange}
-            placeholder="Enter image options"
-            className={styles.input}
-          />
-        </div>
-      </div>
-    </div>
+        <button type="button" onClick={clickHandler} className="submit-btn">
+          Save
+        </button>
+      </form>
+    </div >
   );
 } 
