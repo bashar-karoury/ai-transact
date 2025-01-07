@@ -36,6 +36,13 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
 
     if (!isTransactionValid) {
       console.error("All fields must be filled out");
+      setNewTransaction({
+        description: "----",
+        date: "-----",
+        amount: "---",
+        type: "------",
+        category: "---",
+      });
       return;
     }
 
@@ -60,7 +67,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       type: "expense",
       category: "",
     });
-    setFetch(!tofetch);
+    // setFetch(!tofetch);
     // setIsOpen(false);
     // setIsOpen(true);
   };
@@ -136,9 +143,6 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             ))}
           </select>
 
-          {/* <button type="button" className={styles.micButton}>
-            <MicrophoneIcon className={styles.micIcon} />
-          </button> */}
           <RecordTransactionButton
             onTransactionRecorded={handleTransactionRecorded}
           />

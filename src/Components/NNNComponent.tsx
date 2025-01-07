@@ -6,7 +6,6 @@ export default function NewNotificationsNumberComponent() {
 
   useEffect(() => {
     const eventSource = new EventSource("/api/nnn-events");
-
     eventSource.onmessage = (event) => {
       console.log("nnn receieved", event);
       const received = event.data;
@@ -19,13 +18,11 @@ export default function NewNotificationsNumberComponent() {
       }
       console.log(`receieved data[${data}]`);
     };
-
     eventSource.onerror = (event) => {
       console.error("SSE error occurred:", event);
       // Close the connection to avoid further errors
       eventSource.close();
     };
-
     return () => {
       eventSource.close();
     };
