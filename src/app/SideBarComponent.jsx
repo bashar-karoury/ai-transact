@@ -17,17 +17,7 @@ import Link from "next/link";
 // import styles from './styles.css';
 import styles from "./rootLayout.module.css";
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
-
-export function SignOutButton() {
-  const user = useUser();
-  return user ? (
-    <button onClick={() => user.signOut()}>Sign Out</button>
-  ) : (
-    "Not signed in"
-  );
-}
-
-
+import SignOutButtonComponent from "@/Components/SignOutButtonComponent";
 export default function SideBarComponent({ children }) {
   const pathname = usePathname();
   const isAuthPage =
@@ -46,7 +36,7 @@ export default function SideBarComponent({ children }) {
     const fetchBalance = async () => {
       try {
         const res = await fetch("/api/balance"); // Call the API endpoint
-        if (!res.ok) throw new Error("Failed to fetch balance");
+        if (!res.ok) return;
 
         const data = await res.json();
         setBalance(data); // Set balance
@@ -59,7 +49,6 @@ export default function SideBarComponent({ children }) {
     };
     fetchBalance();
   }, []);
-
 
   if (isAuthPage) {
     return <>{children}</>;
@@ -78,8 +67,7 @@ export default function SideBarComponent({ children }) {
           </div>
         </div>
 
-        <SignOutButton />
-
+        <SignOutButtonComponent />
 
         <nav className={styles.nav}>
           <a
@@ -120,19 +108,19 @@ export default function SideBarComponent({ children }) {
           </a>
         </nav>
 
-          {/* Balance section */}
+        {/* Balance section */}
         <div className={styles.balance}>
           <p>Balance:</p>
-            {loading ? (
-              <h2>Loading...</h2>
-            ) : error ? (
-              <h2>Error</h2>
-            ) : (
-              <h2>{balance} $</h2>
-            )}
-          </div>
-
+          {loading ? (
+            <h2>Loading...</h2>
+          ) : error ? (
+            <h2>Error</h2>
+          ) : (
+            <h2>{balance} $</h2>
+          )}
         </div>
+
+        {/* </div> */}
       </aside>
 
       {/* Main Content */}

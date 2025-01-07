@@ -17,7 +17,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     description: "",
     date: today,
     amount: "",
-    type: "Income",
+    type: "income",
     category: "",
   });
   const handleInputChange = (e) => {

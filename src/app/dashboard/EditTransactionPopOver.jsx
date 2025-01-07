@@ -57,7 +57,23 @@ export default function EditTransactionPopOver({
                   }
                 />
               </div>
-
+              <div className={styles.formField}>
+                <select
+                  name="type"
+                  // className={styles.typeSelect}
+                  // onChange={handleInputChange}
+                  onChange={(e) =>
+                    setEditingTransaction({
+                      ...editingTransaction,
+                      type: e.target.value,
+                    })
+                  }
+                  value={editingTransaction.type}
+                >
+                  <option value="expense">expense</option>
+                  <option value="income">income</option>
+                </select>
+              </div>
               <div className={styles.formField}>
                 <label>Amount:</label>
                 <input
