@@ -18,18 +18,18 @@ export async function GET(req: NextRequest) {
       // send initial nnn
       try {
         const nnn = await getNNN(primaryEmail);
-        console.log("nnn to be sent", Number(nnn));
+        // console.log("nnn to be sent", Number(nnn));
         controller.enqueue(`data: ${JSON.stringify(nnn)}\n\n`);
       } catch (error) {
         console.log(error);
       }
-      console.log("/api/nnn-events connection is established");
+      // console.log("/api/nnn-events connection is established");
 
       // Clean up when the connection is closed
       req.signal.addEventListener("abort", () => {
         removeClient(primaryEmail);
         controller.close();
-        console.log("/api/nnn-events connection is closed");
+        // console.log("/api/nnn-events connection is closed");
       });
     },
   });

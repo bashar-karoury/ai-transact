@@ -37,8 +37,7 @@ export default function Notifications() {
         {notifications.map((notification, index) => (
           <div key={index} className={styles.notificationCard}>
             <div className={styles.notificationContent}>
-              <p className={styles.message}>{notification.message}</p>
-              <span className={styles.date}>{notification.date}</span>
+              <p className={styles.message}>{notification}</p>
             </div>
           </div>
         ))}

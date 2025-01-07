@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     }
     // Get the user's email
     const user_email = user.primaryEmail;
-    console.log("User email:", user_email);
+    // console.log("User email:", user_email);
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }
@@ -36,15 +36,15 @@ export async function POST(req: NextRequest) {
       return new NextResponse("User not found", { status: 404 });
     }
 
-    console.log("Request ID:", _id);
+    // console.log("Request ID:", _id);
 
     // Get the body of the request
     const body = await req.json();
-    console.log("Request Body:", body);
+    // console.log("Request Body:", body);
 
     // Add the transaction
     const transaction = await addTransaction(_id, body);
-    console.log("transaction added:", transaction);
+    // console.log("transaction added:", transaction);
 
     return NextResponse.json(transaction, { status: 201 });
   } catch (error: any) {
@@ -95,7 +95,7 @@ export async function GET(req: NextRequest) {
       );
     }
 
-    console.log("Request ID:", _id);
+    // console.log("Request ID:", _id);
 
     let transactions;
 
@@ -109,7 +109,7 @@ export async function GET(req: NextRequest) {
         transactions = await getTransactionsForThisMonth(_id);
         break;
       // get transactions for this year
-      case 'this_weak':
+      case "this_weak":
         transactions = await getTransactionsForThisWeek(_id);
         break;
       // get all transactions
@@ -143,7 +143,7 @@ export async function PUT(req: NextRequest) {
     }
     // Get the user's email
     const user_email = user.primaryEmail;
-    console.log("User email:", user_email);
+    // console.log("User email:", user_email);
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }
@@ -152,11 +152,11 @@ export async function PUT(req: NextRequest) {
 
     // Get the body of the request
     const body = await req.json();
-    console.log("Request Body:", body);
+    // console.log("Request Body:", body);
 
     // Update the transaction
     const transaction = await updateTransaction(_id, body.transaction_id, body);
-    console.log("Transaction updated:", transaction);
+    // console.log("Transaction updated:", transaction);
 
     return NextResponse.json(transaction, { status: 200 });
   } catch (error: any) {
@@ -182,7 +182,7 @@ export async function DELETE(req: NextRequest) {
     }
     // Get the user's email
     const user_email = user.primaryEmail;
-    console.log("User email:", user_email);
+    // console.log("User email:", user_email);
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }
@@ -191,11 +191,11 @@ export async function DELETE(req: NextRequest) {
 
     // Get the body of the request
     const body = await req.json();
-    console.log("Request Body:", body);
+    // console.log("Request Body:", body);
 
     // Delete the transaction
     const transaction = await deleteTransaction(_id, body.transaction_id);
-    console.log("Transaction deleted:", transaction);
+    // console.log("Transaction deleted:", transaction);
 
     // Return the deleted transaction
     return NextResponse.json(transaction, { status: 200 });

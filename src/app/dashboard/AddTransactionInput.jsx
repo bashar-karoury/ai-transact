@@ -12,15 +12,17 @@ import categories from "@/utils/categories";
 import DescriptionInput from "@/Components/DescriptionInput";
 import RecordTransactionButton from "@/Components/RecordTransactionButton";
 export default function AddTransactionInput({ tofetch, setFetch }) {
+  const today = new Date().toISOString().split("T")[0];
   const [newTransaction, setNewTransaction] = useState({
     description: "",
-    date: "",
+    date: today,
     amount: "",
     type: "Income",
     category: "",
   });
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    // console.log(`name=${name} value=${value}`);
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 
@@ -34,6 +36,13 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
 
     if (!isTransactionValid) {
       console.error("All fields must be filled out");
+      setNewTransaction({
+        description: "----",
+        date: "-----",
+        amount: "---",
+        type: "------",
+        category: "---",
+      });
       return;
     }
 
@@ -58,7 +67,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       type: "expense",
       category: "",
     });
-    setFetch(!tofetch);
+    // setFetch(!tofetch);
     // setIsOpen(false);
     // setIsOpen(true);
   };
@@ -116,8 +125,8 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             onChange={handleInputChange}
             value={newTransaction.type}
           >
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
+            <option value="expense">expense</option>
+            <option value="income">income</option>
           </select>
 
           <select
@@ -134,9 +143,6 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             ))}
           </select>
 
-          {/* <button type="button" className={styles.micButton}>
-            <MicrophoneIcon className={styles.micIcon} />
-          </button> */}
           <RecordTransactionButton
             onTransactionRecorded={handleTransactionRecorded}
           />

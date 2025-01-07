@@ -50,7 +50,7 @@ output with the relative category or null if not found.
     const jsonizedTransaction = tokens.slice(1, -2).join("\n");
 
     const data = JSON.parse(jsonizedTransaction);
-    console.log("parsed data", data);
+    // console.log("parsed data", data);
     return data;
   } catch (error) {
     throw error; // re-throw the error
@@ -68,7 +68,7 @@ export async function transcactize_audio(
   const client = new AssemblyAI({
     apiKey: assemblyApiKey,
   });
-  console.log("Processing");
+  // console.log("Processing");
   try {
     const transcript = await client.transcripts.transcribe({ audio: audio });
     if (transcript.text) {

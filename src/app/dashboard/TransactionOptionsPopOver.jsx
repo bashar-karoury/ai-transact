@@ -38,7 +38,14 @@ export default function TranasactionOptionsPopOver({
               className={styles.popoverButton}
               onClick={() => {
                 // Add edit logic here
-                setEditingTransaction(activeTransaction);
+                // console.log("Active Transaction=", activeTransaction);
+                const editDate = activeTransaction.date.split("T")[0];
+                const updatedTransaction = {
+                  ...activeTransaction,
+                  date: editDate,
+                };
+                // console.log("Updated Transaction", updatedTransaction);
+                setEditingTransaction(updatedTransaction);
                 setShowPopover(false);
               }}
             >
@@ -48,7 +55,7 @@ export default function TranasactionOptionsPopOver({
               className={styles.popoverButton}
               onClick={async () => {
                 // Add delete logic here
-                console.log(activeTransaction);
+                console.log("active transaction", activeTransaction);
                 try {
                   const response = await fetch("/api/transactions", {
                     method: "DELETE",
@@ -56,7 +63,7 @@ export default function TranasactionOptionsPopOver({
                       "Content-Type": "application/json",
                     },
                     body: JSON.stringify({
-                      transaction_id: activeTransaction.id,
+                      transaction_id: activeTransaction.transaction_id,
                     }),
                   });
                   const data = await response.json();

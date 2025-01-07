@@ -4,7 +4,7 @@ import { stackServerApp } from "./stack";
 const authPathes = ["/login", "/signup"];
 
 export async function middleware(request: NextRequest) {
-  console.log("pathname = ", request.nextUrl.pathname);
+  // console.log("pathname = ", request.nextUrl.pathname);
   const isAuthPath = authPathes.includes(request.nextUrl.pathname);
   const user = await stackServerApp.getUser();
   if (!user) {
