@@ -492,6 +492,7 @@ export const getUserSettings = async (userId: string) => {
     return {
       currency: user?.currency,
       profilePicture: user?.profilePicture,
+      email: user?.email,
     };
   } catch (error) {
     console.error("Error getting user settings:", error);
