@@ -1,17 +1,37 @@
 'use client'
 import { useState } from 'react';
 import styles from './budget.module.css';
-
+import dashboardstyles from '../dashboard/dashboard.module.css';
+import BudgetOptionsPopOver from './BudgetOptionsPopOver';
+import {
+  EllipsisVerticalIcon,
+} from "@heroicons/react/24/outline";
 export default function Budget() {
   const [budgetForm, setBudgetForm] = useState({
     category: '',
     amount: "",
   });
-
+  const [showPopover, setShowPopover] = useState(false);
+  const [popoverPosition, setPopoverPosition] = useState({ x: 0, y: 0 });
+  const [activeBudget, setActiveBudget] = useState(null);
+  const [editingBudget, setEditingBudget] = useState(null);
   const [budgets] = useState([
-    { id: 1, name: 'Budget 1' },
-    { id: 2, name: 'Budget 2' },
-    { id: 3, name: 'Budget 3' }
+
+    {
+      budget_id: 1,
+      category: 'Utilities',
+      amount: 100
+    },
+    {
+      budget_id: 2,
+      category: 'Groceries',
+      amount: 100
+    },
+    {
+      budget_id: 3,
+      category: 'Entertainment',
+      amount: 100
+    },
   ]);
 
   const handleSubmit = async (e) => {
@@ -40,6 +60,20 @@ export default function Budget() {
       ...prev,
       [name]: value
     }));
+  };
+  // const handleOptionsClick = (index) => {
+  //   const options = document.getElementById(`options-${index}`);
+  //   // options.style.display = options.style.display === 'block' ? 'none' : 'block';
+  // };
+
+  const handleOptionsClick = (budget, e) => {
+    e.stopPropagation();
+    setActiveBudget(budget);
+    setShowPopover(true);
+    setPopoverPosition({
+      x: e.clientX,
+      y: e.clientY
+    });
   };
 
   return (
@@ -77,13 +111,52 @@ export default function Budget() {
 
       {/* Budgets List */}
       <div className={styles.budgetsList}>
-        {budgets.map((budget) => (
-          <div key={budget.id} className={styles.budgetItem}>
-            <span className={styles.budgetName}>{budget.name}</span>
-            <button className={styles.expandButton}>▼</button>
-          </div>
+        {budgets.map((budget, index) => (
+          (editingBudget && editingBudget.budget_id === budget.budget_id ?
+            <div key={index} className={styles.budgetItem}>
+              {/* <span className={styles.budgetName}>{'category input'}</span> */}
+              <input type="text" className={styles.input} placeholder="Category" value={budgetForm.category} onChange={handleChange} />
+              {/* <span className={styles.budgetName}>{'amount input'}</span> */}
+              <input type="number" className={styles.input} placeholder="Limit Amount" value={budgetForm.amount} onChange={handleChange} />
+              <button onClick={() => {
+
+                console.log('Done');
+                setEditingBudget(null)
+              }
+              }> Done </button>
+            </div>
+            :
+            < div key={index} className={styles.budgetItem} >
+              <span className={styles.budgetName}>{budget.category}</span>
+              <span className={styles.budgetName}>{budget.amount}</span>
+              <button
+                className={dashboardstyles.optionsButton}
+                onClick={(e) => handleOptionsClick(budget, e)}
+              >
+                <EllipsisVerticalIcon className={dashboardstyles.optionsIcon} />
+              </button>
+              {/* <button onClick={handleOptionsClick} className={styles.expandButton}>▼</button> */}
+            </div>
+          )
         ))}
+
       </div>
-    </div>
+
+      <BudgetOptionsPopOver
+        popoverPosition={popoverPosition}
+        showPopover={showPopover}
+        setShowPopover={setShowPopover}
+        activeBudget={activeBudget}
+        setEditingBudget={setEditingBudget}
+      // activeTransaction={activeTransaction}
+      // setActiveTransaction={setActiveTransaction}
+      // transactions={transactions}
+      // popoverPosition={popoverPosition}
+      // showPopover={true}
+      // setShowPopover={setShowPopover}
+      // tofetch={tofetch}
+      // setFetch={setFetch}
+      />
+    </div >
   );
 } 
