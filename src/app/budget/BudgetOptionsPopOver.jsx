@@ -9,9 +9,10 @@ export default function BudgetOptionsPopOver({
   showPopover,
   setShowPopover,
   activeBudget,
+  setActiveBudget,
   setEditingBudget,
-  // tofetch,
-  // setFetch,
+  tofetch,
+  setFetch,
 }) {
   const [editingTransaction, setEditingTransaction] = useState(null);
   return (
@@ -57,31 +58,33 @@ export default function BudgetOptionsPopOver({
             <button
               className={styles.popoverButton}
               onClick={async () => {
-                // Add delete logic here
-                // console.log("active transaction", activeTransaction);
-                // try {
-                //   const response = await fetch("/api/transactions", {
-                //     method: "DELETE",
-                //     headers: {
-                //       "Content-Type": "application/json",
-                //     },
-                //     body: JSON.stringify({
-                //       transaction_id: activeTransaction.transaction_id,
-                //     }),
-                //   });
-                //   const data = await response.json();
-                //   console.log("Success:", data);
-                //   // delete transaction from transactions
-                //   // const index = transactions.indexOf(activeTransaction);
-                //   // if (index !== -1) {
-                //   //   transactions.splice(index, 1);
-                //   // }
-                //   setActiveTransaction(null);
-                //   // we are fetching transactions after successful deleting
-                //   setFetch(!tofetch);
-                // } catch (error) {
-                //   console.error("Error:", error);
-                // }
+                console.log("active budget", activeBudget);
+                try {
+                  const response = await fetch("/api/budgets", {
+                    method: "DELETE",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                      budget_id: activeBudget.budget_id,
+                    }),
+                  });
+
+                  if (response.ok) {
+                    const data = await response.json();
+                    console.log("Success:", data);
+                    // delete transaction from transactions
+                    // const index = transactions.indexOf(activeTransaction);
+                    // if (index !== -1) {
+                    //   transactions.splice(index, 1);
+                    // }
+                    // we are fetching transactions after successful deleting
+                    setFetch(!tofetch);
+                  }
+                  setActiveBudget(null);
+                } catch (error) {
+                  console.error("Error:", error);
+                }
                 setShowPopover(false);
               }}
             >
@@ -90,31 +93,7 @@ export default function BudgetOptionsPopOver({
             <button
               className={styles.popoverButton}
               onClick={async () => {
-                // Add delete logic here
-                // console.log("active transaction", activeTransaction);
-                // try {
-                //   const response = await fetch("/api/transactions", {
-                //     method: "DELETE",
-                //     headers: {
-                //       "Content-Type": "application/json",
-                //     },
-                //     body: JSON.stringify({
-                //       transaction_id: activeTransaction.transaction_id,
-                //     }),
-                //   });
-                //   const data = await response.json();
-                //   console.log("Success:", data);
-                //   // delete transaction from transactions
-                //   // const index = transactions.indexOf(activeTransaction);
-                //   // if (index !== -1) {
-                //   //   transactions.splice(index, 1);
-                //   // }
-                //   setActiveTransaction(null);
-                //   // we are fetching transactions after successful deleting
-                //   setFetch(!tofetch);
-                // } catch (error) {
-                //   console.error("Error:", error);
-                // }
+                setActiveBudget(null);
                 setShowPopover(false);
               }}
             >
@@ -123,13 +102,6 @@ export default function BudgetOptionsPopOver({
           </div>
         </div>
       )}
-      {/* <EditTransactionPopOver
-        transactions={transactions}
-        editingTransaction={editingTransaction}
-        setEditingTransaction={setEditingTransaction}
-        tofetch={tofetch}
-        setFetch={setFetch}
-      /> */}
     </>
   );
 }

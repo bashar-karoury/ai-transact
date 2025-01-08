@@ -45,7 +45,10 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       });
       return;
     }
-
+    if (newTransaction.amount < 0) {
+      console.error("Error: amount can't be less than zero");
+      return;
+    }
     try {
       const response = await fetch("/api/transactions", {
         method: "POST",
@@ -114,6 +117,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             type="number"
             name="amount"
             placeholder="Amount"
+            min="0"
             className={styles.input}
             onChange={handleInputChange}
             value={newTransaction.amount}
