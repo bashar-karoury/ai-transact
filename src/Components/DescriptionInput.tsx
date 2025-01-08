@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import deduceCategoryFromDescription from "@/utils/categorization";
-import styles from "@/app/dashboard/dashboard.module.css";
+import styles from "@/app/(main)/dashboard/dashboard.module.css";
 interface DoneAutoCategorizationProps {
   onFinishCategorization: (calculatedCategory: string) => void; // Prop type for the callback function
 }

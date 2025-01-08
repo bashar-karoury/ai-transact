@@ -2,7 +2,7 @@
 
 import { transcactize_audio } from "@/utils/voiceTranscript";
 import { useEffect, useRef, useState } from "react";
-import styles from "@/app/dashboard/dashboard.module.css";
+import styles from "@/app/(main)/dashboard/dashboard.module.css";
 // interface RecordTransactionButtonProps {
 //   onTransactionRecorded: (newTransaction: object) => void; // Prop type for the callback function
 // }
