@@ -1,6 +1,12 @@
 .container {
   display: flex;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: left;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  font-size: 16px;
+  background: linear-gradient(45deg, #26415E, #83A6CE, #26415E);
 }
 
 .sidebar {
@@ -93,10 +99,9 @@
 .mainContent {
   flex: 1;
   margin-left: 250px;
-  padding: 20px 20px 20px;
-  /* background: #b2cbff; */
+  padding: 20px 40px;
   background: linear-gradient(45deg, #26415E, #83A6CE, #26415E);
-  border-radius: 15px;
+  border-radius: 20px; 
 }
 
 @media (max-width: 768px) {
@@ -107,13 +112,10 @@
     padding: 10px
   }
 
-  .container {
-    flex-direction: column;
-  }
-
   .mainContent {
     margin-left: 0;
     border-radius: 15px;
+    
   }
 
   .nav {
