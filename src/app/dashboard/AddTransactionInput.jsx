@@ -37,11 +37,11 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     if (!isTransactionValid) {
       console.error("All fields must be filled out");
       setNewTransaction({
-        description: "----",
-        date: "-----",
-        amount: "---",
-        type: "------",
-        category: "---",
+        description: "",
+        date: today,
+        amount: "",
+        type: "income",
+        category: "",
       });
       return;
     }
@@ -62,12 +62,12 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     console.log(newTransaction);
     setNewTransaction({
       description: "",
-      date: "",
+      date: new Date().toISOString().split("T")[0],
       amount: "",
       type: "expense",
       category: "",
     });
-    // setFetch(!tofetch);
+    setFetch(!tofetch);
     // setIsOpen(false);
     // setIsOpen(true);
   };

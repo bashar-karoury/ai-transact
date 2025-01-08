@@ -16,12 +16,12 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
 
   async function startButtonHandler(event) {
     event.preventDefault();
-    // setTimeout(() => {
-    //   if (isRecording) {
-    //     mediaRecorderRef.current?.stop();
-    //     setIsRecording(false);
-    //   }
-    // }, 20000);
+    const timeoutId = setTimeout(() => {
+      console.log("timeout triggered");
+      mediaRecorderRef.current?.stop();
+      setIsRecording(false);
+    }, 10000);
+
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorderRef.current = new MediaRecorder(stream);
 
@@ -34,6 +34,7 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
       console.log(audioBlob);
       audioChunks = [];
       setAudioblob(audioBlob);
+      clearTimeout(timeoutId);
     };
 
     mediaRecorderRef.current.start();
@@ -52,9 +53,10 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
         console.log(audioblob);
         setIsProcessing(true);
         try {
-          const transaction = await transcactize_audio(audioblob);
+          // const transaction = await transcactize_audio(audioblob);
+          const transaction = null;
           // console.log("transaction received", transaction);
-          onTransactionRecorded(transaction);
+          if (transaction) onTransactionRecorded(transaction);
         } catch (error) {
           console.log("Catch you");
           // console.log(error);
@@ -69,6 +71,7 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
   return (
     <>
       <button
+        type="button"
         className={styles.micButton}
         onMouseDown={startButtonHandler}
         onMouseUp={stopButtonHandler}
