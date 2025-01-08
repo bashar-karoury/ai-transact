@@ -20,11 +20,11 @@ import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 import SignOutButton from "@/Components/SignOutButtonComponent";
 export default function SideBarComponent({ children }) {
   const pathname = usePathname();
-  const isAuthPage =
-    pathname === "/" ||
-    pathname === "/login" ||
-    pathname === "/signup" ||
-    pathname === "/onboard";
+  // const isAuthPage =
+  //   pathname === "/" ||
+  //   pathname === "/login" ||
+  //   pathname === "/signup" ||
+  //   pathname === "/onboard";
 
   // State to store the balance
   const [balance, setBalance] = useState(null);
@@ -50,9 +50,9 @@ export default function SideBarComponent({ children }) {
     fetchBalance();
   }, []);
 
-  if (isAuthPage) {
-    return <>{children}</>;
-  }
+  // if (isAuthPage) {
+  //   return <>{children}</>;
+  // }
 
   return (
     <div className={styles.container}>
