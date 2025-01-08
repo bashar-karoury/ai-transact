@@ -67,7 +67,7 @@ export default function SideBarComponent({ children }) {
           </div>
         </div>
 
-        {/* <SignOutButton /> */}
+        <SignOutButton />
         <nav className={styles.nav}>
           <a
             href="/dashboard"
