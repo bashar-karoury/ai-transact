@@ -1,22 +1,23 @@
 .dashboardContainer {
   padding: 20px;
   padding-bottom: 80px;
-  
 }
 
 .inputSection {
   display: flex;
   position: fixed;
-  bottom: 14px;
-  right: 10px;
+  bottom: 14%;
+  right: 14%;
+  left: 7%;
+  gap: 10px;
+  z-index: 1000;
   transform: none;
-  background: white;
-  padding: 10px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 970px;
+  padding: 20px 40px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
   margin: 0 auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .formWrapper {
@@ -57,7 +58,7 @@
 }
 
 .descriptionInput {
-  flex: 2;
+  flex: 1;
   min-width: 200px;
 }
 
@@ -121,7 +122,7 @@
 
   .descriptionInput {
     min-width: 100%;
-    padding: 10px;
+    padding: 8px;
   }
 
   .dateInput,
@@ -172,7 +173,7 @@
 
 .transaction {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid #eee;
@@ -260,7 +261,7 @@
   }
 
   .inputGroup {
-    min-width: calc(50% - 4px);
+    min-width: calc(40% - 8px);
     padding: 10px;
   }
 
