@@ -17,7 +17,7 @@ import Link from "next/link";
 // import styles from './styles.css';
 import styles from "./rootLayout.module.css";
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
-import SignOutButtonComponent from "@/Components/SignOutButtonComponent";
+import SignOutButton from "@/Components/SignOutButtonComponent";
 export default function SideBarComponent({ children }) {
   const pathname = usePathname();
   const isAuthPage =
@@ -67,8 +67,7 @@ export default function SideBarComponent({ children }) {
           </div>
         </div>
 
-        <SignOutButtonComponent />
-
+        <SignOutButton />
         <nav className={styles.nav}>
           <a
             href="/dashboard"
