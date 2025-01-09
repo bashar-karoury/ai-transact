@@ -17,7 +17,7 @@ export default function LandingPage() {
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           {/* <a href="/handler/signin" className={styles.btn}>Sign In</a> */}
-          <Link href="/handler/signin" className={styles.btn}> Sign In </Link>
+          <Link href="/login" className={styles.btn}> Sign In </Link>
           {/* <a href="/handler/signup" className={styles.btn}>Sign Up</a> */}
           <Link href="/signup" className={styles.btn}> Sign Up </Link>
         </div>

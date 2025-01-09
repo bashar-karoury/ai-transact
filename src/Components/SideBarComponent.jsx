@@ -35,6 +35,7 @@ export default function SideBarComponent({ children }) {
   const [userSettings, setUserSettings] = useState("");
 
   // Fetch balance from API
+  // Fetch userSettings from API
   useEffect(() => {
     const fetchBalance = async () => {
       try {
@@ -50,7 +51,22 @@ export default function SideBarComponent({ children }) {
         setLoadingBalance(false);
       }
     };
+    const fetchUserSettings = async () => {
+      try {
+        const res = await fetch("/api/userSettings"); // call the API
+        if (!res.ok) return;
+
+        const data = await res.json();
+        setUserSettings(data); // set userSettings
+      } catch (err) {
+        console.error("Error fetching userSettings:", err);
+        setError(true);
+      } finally {
+        setLoadingSettings(false);
+      }
+    };
     fetchBalance();
+    fetchUserSettings();
   }, []);
 
   return (
@@ -78,42 +94,42 @@ export default function SideBarComponent({ children }) {
 
         <SignOutButton />
         <nav className={styles.nav}>
-          <a
+          <Link
             href="/dashboard"
             className={pathname === "/dashboard" ? styles.active : ""}
           >
             <HomeIcon className={styles.icon} />
             <span>Home</span>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/settings"
             className={pathname === "/settings" ? styles.active : ""}
           >
             <CogIcon className={styles.icon} />
             <span>Settings</span>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/notifications"
             className={pathname === "/notifications" ? styles.active : ""}
           >
             <BellIcon className={styles.icon} />
             <span>Notifications</span>
             <NewNotificationsNumberComponent />
-          </a>
-          <a
+          </Link>
+          <Link
             href="/budget"
             className={pathname === "/budget" ? styles.active : ""}
           >
             <WalletIcon className={styles.icon} />
             <span>Budget</span>
-          </a>
-          <a
+          </Link>
+          <Link
             href="/reports"
             className={pathname === "/reports" ? styles.active : ""}
           >
             <ChartPieIcon className={styles.icon} />
             <span>Reports</span>
-          </a>
+          </Link>
         </nav>
 
         {/* Balance section */}
