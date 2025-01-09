@@ -1,23 +1,39 @@
 .dashboardContainer {
   padding: 20px;
   padding-bottom: 80px;
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
 .inputSection {
+  /* display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  position: fixed;
+  border-radius: 10px;
+  max-width: 970px;
+  bottom: 0;
+  right: 10%;
+  transform: translateX(50%);
+  transform: translateY(50%);
+  padding-bottom: 0%;
+  border-radius: 20px;
+  max-width: 100%;*/
+
   display: flex;
   position: fixed;
   bottom: 14px;
-  right: 10px;
-  transform: none;
-  background: white;
-  padding: 10px;
+  right: 20%;
+  left: -30%;
+  transform: translateX(50%);
+  padding: 14px;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 970px;
-  margin: 0 auto;
-}
+  width: 100%;
+  max-width: 990px;
+
+} 
 
 .formWrapper {
   display: flex;
@@ -54,10 +70,15 @@
   font-size: 14px;
   outline: none;
   background: transparent;
+  bottom: 22px;
+  right: 0%;
+  transform: translateX(33.33% 40%);
+  border-radius: 8px;
+
 }
 
 .descriptionInput {
-  flex: 2;
+  flex: 1;
   min-width: 200px;
 }
 
@@ -70,7 +91,7 @@
 
 .categorySelect {
   appearance: none;
-  padding-right: 24px;
+  padding-right: 20px;
 }
 
 .micButton {
@@ -98,13 +119,6 @@
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px; 
-  width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -172,7 +186,6 @@
 
 .transaction {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 15px 0;
   border-bottom: 1px solid #eee;
@@ -256,11 +269,11 @@
 
   .transactionForm {
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 5px;
   }
 
   .inputGroup {
-    min-width: calc(50% - 4px);
+    min-width: calc(40% - 8px);
     padding: 10px;
   }
 
