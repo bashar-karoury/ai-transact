@@ -37,15 +37,18 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     if (!isTransactionValid) {
       console.error("All fields must be filled out");
       setNewTransaction({
-        description: "----",
-        date: "-----",
-        amount: "---",
-        type: "------",
-        category: "---",
+        description: "",
+        date: today,
+        amount: "",
+        type: "income",
+        category: "",
       });
       return;
     }
-
+    if (newTransaction.amount < 0) {
+      console.error("Error: amount can't be less than zero");
+      return;
+    }
     try {
       const response = await fetch("/api/transactions", {
         method: "POST",
@@ -62,12 +65,12 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     console.log(newTransaction);
     setNewTransaction({
       description: "",
-      date: "",
+      date: new Date().toISOString().split("T")[0],
       amount: "",
       type: "expense",
       category: "",
     });
-    // setFetch(!tofetch);
+    setFetch(!tofetch);
     // setIsOpen(false);
     // setIsOpen(true);
   };
@@ -114,6 +117,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             type="number"
             name="amount"
             placeholder="Amount"
+            min="0"
             className={styles.input}
             onChange={handleInputChange}
             value={newTransaction.amount}

@@ -12,7 +12,7 @@ export default async function deduceCategoryFromDescription(text: string) {
   }
 
   const genAI = new GoogleGenerativeAI(apiKey);
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-8b" });
   console.log(categories.join(", "));
   const prompt = `Deduce the most relative category for a transaction description from the categories list is [${categories.join(
     ", "

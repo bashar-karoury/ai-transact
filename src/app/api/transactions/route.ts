@@ -10,6 +10,7 @@ import {
   getAllTransactions,
   addTransaction,
 } from "../../../utils/handler/functions";
+import { ObjectId } from "mongodb";
 import dbConnect from "../../../utils/db";
 import { stackServerApp } from "@/stack";
 
@@ -76,7 +77,8 @@ export async function GET(req: NextRequest) {
     }
     // Get the user's id using the email
     const _id: string = await getUserIdByEmail(user_email);
-
+    console.log("_id=", _id);
+    // const _id = new ObjectId("677cff43a527bafc5d8b7280");
     // Get the 'time' parameter from the body
     // const body = await req.json();
     // const time = body.time;
@@ -86,7 +88,8 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
     // const _id = searchParams.get('_id');
     const time = searchParams.get("time");
-
+    console.log(`time =[${time}]`);
+    // const time = "Past";
     if (!_id) {
       // Return an error if the user id is not provided
       return NextResponse.json(
@@ -105,11 +108,11 @@ export async function GET(req: NextRequest) {
         transactions = await getTransactionsForToday(_id);
         break;
       // get transactions for this month
-      case "this_month":
+      case "this-month":
         transactions = await getTransactionsForThisMonth(_id);
         break;
       // get transactions for this year
-      case "this_weak":
+      case "this-week":
         transactions = await getTransactionsForThisWeek(_id);
         break;
       // get all transactions

@@ -15,16 +15,17 @@ import {
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 // import styles from './styles.css';
-import styles from "./rootLayout.module.css";
+// import styles from "../rootLayout.module.css"; //"./rootLayout.module.css";
+import styles from "@/app/rootLayout.module.css";
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
-import SignOutButtonComponent from "@/Components/SignOutButtonComponent";
+import SignOutButton from "@/Components/SignOutButtonComponent";
 export default function SideBarComponent({ children }) {
   const pathname = usePathname();
-  const isAuthPage =
-    pathname === "/" ||
-    pathname === "/login" ||
-    pathname === "/signup" ||
-    pathname === "/onboard";
+  // const isAuthPage =
+  //   pathname === "/" ||
+  //   pathname === "/login" ||
+  //   pathname === "/signup" ||
+  //   pathname === "/onboard";
 
   // State to store the balance
   const [balance, setBalance] = useState(null);
@@ -50,9 +51,9 @@ export default function SideBarComponent({ children }) {
     fetchBalance();
   }, []);
 
-  if (isAuthPage) {
-    return <>{children}</>;
-  }
+  // if (isAuthPage) {
+  //   return <>{children}</>;
+  // }
 
   return (
     <div className={styles.container}>
@@ -67,8 +68,7 @@ export default function SideBarComponent({ children }) {
           </div>
         </div>
 
-        <SignOutButtonComponent />
-
+        <SignOutButton />
         <nav className={styles.nav}>
           <a
             href="/dashboard"

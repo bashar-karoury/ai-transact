@@ -79,6 +79,7 @@ export default function EditTransactionPopOver({
                 <input
                   type="number"
                   value={Math.abs(editingTransaction.amount)}
+                  min="0"
                   onChange={(e) =>
                     setEditingTransaction({
                       ...editingTransaction,
