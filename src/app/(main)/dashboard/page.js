@@ -32,9 +32,10 @@ export default function Dashboard() {
     console.log('RE--RENDERING');
     const fetchTransactions = async function (time) {
       try {
-        const result = await fetch(`/api/transactions?${time}`);
+        const result = await fetch(`/api/transactions?time=${time}`);
+        // const result = null;
         console.log('result', result);
-        if (result.ok) {
+        if (result?.ok) {
           const data = await result.json();
           // console.log('result', data);
           setTransactions(data);
@@ -45,7 +46,8 @@ export default function Dashboard() {
     }
     fetchTransactions(time);
 
-  }, [time, tofetch]);
+  }, []);
+  // }, [time, tofetch]);
 
   return (
     <div className={styles.dashboardContainer}>
