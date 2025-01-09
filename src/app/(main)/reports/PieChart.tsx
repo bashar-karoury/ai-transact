@@ -8,9 +8,11 @@ Chart.register(ArcElement, Tooltip, Legend);
 interface PieChartProps {
   data: number[];
   labels: string[];
+  width?: number;
+  height?: number;
 }
 
-const PieChart: React.FC<PieChartProps> = ({ data, labels }) => {
+const PieChart: React.FC<PieChartProps> = ({ data, labels, width = 200, height = 200 }) => {
   const chartData = {
     labels: labels,
     datasets: [
@@ -22,7 +24,15 @@ const PieChart: React.FC<PieChartProps> = ({ data, labels }) => {
     ],
   };
 
-  return <Pie data={chartData} />;
+  const options = {
+    maintainAspectRatio: false,
+  };
+
+  return (
+    <div style={{ width, height }}>
+      <Pie data={chartData} options={options} />
+    </div>
+  );
 };
 
 export default PieChart;

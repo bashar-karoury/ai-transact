@@ -29,8 +29,10 @@ export default function SideBarComponent({ children }) {
 
   // State to store the balance
   const [balance, setBalance] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingBalance, setLoadingBalance] = useState(true);
+  const [loadingSettings, setLoadingSettings] = useState(true);
   const [error, setError] = useState(false);
+  const [userSettings, setUserSettings] = useState("");
 
   // Fetch balance from API
   useEffect(() => {
@@ -45,15 +47,11 @@ export default function SideBarComponent({ children }) {
         console.error("Error fetching balance:", err);
         setError(true);
       } finally {
-        setLoading(false);
+        setLoadingBalance(false);
       }
     };
     fetchBalance();
   }, []);
-
-  // if (isAuthPage) {
-  //   return <>{children}</>;
-  // }
 
   return (
     <div className={styles.container}>
@@ -62,8 +60,18 @@ export default function SideBarComponent({ children }) {
         <div className={styles.sidebarHeader}>
           <h1>Ai-Transact</h1>
           <div className={styles.userInfo}>
-            <UserIcon className={styles.userIcon} />
-            <span>menatalla@gmail.com</span>
+            {/* <UserIcon className={styles.userIcon} /> */}
+            <img
+              src={userSettings?.profilePicture || "/default-profile.png"} // Fallback profile image
+              className={styles.userIcon}
+            />
+            {loadingSettings ? (
+              <h2>Loading...</h2>
+            ) : error ? (
+              <h2>Error</h2>
+            ) : (
+              <span>{userSettings.email}</span>
+            )}
             {/* <SignOutButton /> */}
           </div>
         </div>
@@ -111,12 +119,14 @@ export default function SideBarComponent({ children }) {
         {/* Balance section */}
         <div className={styles.balance}>
           <p>Balance:</p>
-          {loading ? (
+          {loadingBalance && loadingSettings ? (
             <h2>Loading...</h2>
           ) : error ? (
             <h2>Error</h2>
           ) : (
-            <h2>{balance} $</h2>
+            <h2>
+              {balance} {userSettings?.currency || "USD"}
+            </h2>
           )}
         </div>
 
