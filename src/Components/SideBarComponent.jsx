@@ -15,7 +15,8 @@ import {
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 // import styles from './styles.css';
-import styles from "./rootLayout.module.css";
+// import styles from "../rootLayout.module.css"; //"./rootLayout.module.css";
+import styles from "@/app/rootLayout.module.css";
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 import SignOutButton from "@/Components/SignOutButtonComponent";
 export default function SideBarComponent({ children }) {
