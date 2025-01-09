@@ -46,8 +46,8 @@ export default function Dashboard() {
     }
     fetchTransactions(time);
 
-  }, []);
-  // }, [time, tofetch]);
+    // }, []);
+  }, [time, tofetch]);
 
   return (
     <div className={styles.dashboardContainer}>

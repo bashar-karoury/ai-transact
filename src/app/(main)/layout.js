@@ -1,6 +1,6 @@
 import SideBarComponent from '../SideBarComponent';
 
-export default function RootLayout({ children }) {
+export default function Layout({ children }) {
   return (
     <>
       <SideBarComponent>{children}</SideBarComponent>

@@ -64,21 +64,21 @@ export async function GET(req: NextRequest) {
     await dbConnect();
 
     // Get the user from the request
-    // const user = await stackServerApp.getUser();
+    const user = await stackServerApp.getUser();
 
-    // if (!user) {
-    //   return new NextResponse("Not authorized", { status: 401 });
-    // }
-    // // Get the user's email
-    // const user_email = user.primaryEmail;
-    // console.log("User email:", user_email);
-    // if (!user_email) {
-    //   return new NextResponse("User email not found", { status: 400 });
-    // }
-    // // Get the user's id using the email
-    // const _id: string = await getUserIdByEmail(user_email);
-    // console.log("_id=", _id);
-    const _id = new ObjectId("677cff43a527bafc5d8b7280");
+    if (!user) {
+      return new NextResponse("Not authorized", { status: 401 });
+    }
+    // Get the user's email
+    const user_email = user.primaryEmail;
+    console.log("User email:", user_email);
+    if (!user_email) {
+      return new NextResponse("User email not found", { status: 400 });
+    }
+    // Get the user's id using the email
+    const _id: string = await getUserIdByEmail(user_email);
+    console.log("_id=", _id);
+    // const _id = new ObjectId("677cff43a527bafc5d8b7280");
     // Get the 'time' parameter from the body
     // const body = await req.json();
     // const time = body.time;

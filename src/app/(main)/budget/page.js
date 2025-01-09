@@ -147,6 +147,10 @@ export default function Budget() {
     }
   }
 
+  const CloseHandler = () => {
+    setEditingBudget(null);
+  }
+
   return (
     <div className={styles.budgetContainer}>
       <h1 className={styles.title}>Budgets</h1>
@@ -227,6 +231,7 @@ export default function Budget() {
                 min="0"
               />
               <button onClick={EditHandler}> Done </button>
+              <button onClick={CloseHandler}> Close </button>
             </div>
             :
             < div key={index} className={styles.budgetItem} >
@@ -254,14 +259,6 @@ export default function Budget() {
         setEditingBudget={setEditingBudget}
         tofetch={tofetch}
         setFetch={setFetch}
-      // activeTransaction={activeTransaction}
-      // setActiveTransaction={setActiveTransaction}
-      // transactions={transactions}
-      // popoverPosition={popoverPosition}
-      // showPopover={true}
-      // setShowPopover={setShowPopover}
-      // tofetch={tofetch}
-      // setFetch={setFetch}
       />
     </div >
   );
