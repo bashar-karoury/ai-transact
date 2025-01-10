@@ -3,7 +3,6 @@ import {
   MicrophoneIcon,
   CalendarIcon,
   TagIcon,
-  // PlusIcon,
   EllipsisVerticalIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -11,6 +10,7 @@ import styles from "./dashboard.module.css";
 import categories from "@/utils/categories";
 import DescriptionInput from "@/Components/DescriptionInput";
 import RecordTransactionButton from "@/Components/RecordTransactionButton";
+
 export default function AddTransactionInput({ tofetch, setFetch }) {
   const today = new Date().toISOString().split("T")[0];
   const [newTransaction, setNewTransaction] = useState({
@@ -20,16 +20,19 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     type: "income",
     category: "",
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // console.log(`name=${name} value=${value}`);
     setNewTransaction({ ...newTransaction, [name]: value });
+  };
+
+  const clearDescription = () => {
+    setNewTransaction({ ...newTransaction, description: "" });
   };
 
   const handleAddTransaction = async (event) => {
     event.preventDefault();
-    // Implement transaction addition logic here
-    // POST request to /api/transactions
+
     const isTransactionValid = Object.values(newTransaction).every(
       (value) => value !== ""
     );
@@ -45,10 +48,12 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       });
       return;
     }
+
     if (newTransaction.amount < 0) {
       console.error("Error: amount can't be less than zero");
       return;
     }
+
     try {
       const response = await fetch("/api/transactions", {
         method: "POST",
@@ -62,6 +67,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     } catch (error) {
       console.error("Error:", error);
     }
+
     console.log(newTransaction);
     setNewTransaction({
       description: "",
@@ -71,24 +77,17 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       category: "",
     });
     setFetch(!tofetch);
-    // setIsOpen(false);
-    // setIsOpen(true);
   };
 
   function finishCategorization(output_category) {
-    console.log("Finished Categorizing");
-    console.log(output_category);
     setNewTransaction({ ...newTransaction, category: output_category });
   }
 
   const handleTransactionRecorded = (newVoiceTransaction) => {
-    console.log("Transaction recorded:", newTransaction);
     const cleanedTransaction = Object.fromEntries(
       Object.entries(newVoiceTransaction).filter(([_, v]) => v != null)
     );
     setNewTransaction({ ...newTransaction, ...cleanedTransaction });
-    // fill new transaction fields with the new transaction
-    // to do ...
   };
 
   return (
@@ -99,11 +98,24 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             <XMarkIcon className={styles.XMarkIcon} />
           </button>
 
-          <DescriptionInput
-            onFinishCategorization={finishCategorization}
-            value={newTransaction.description}
-            onChangeParent={handleInputChange}
-          />
+          {/* Description Input with Clear Button */}
+          <div className={styles.inputWrapper}>
+            <DescriptionInput
+              onFinishCategorization={finishCategorization}
+              value={newTransaction.description}
+              onChangeParent={handleInputChange}
+            />
+            {newTransaction.description && (
+              <button
+                type="button"
+                onClick={clearDescription}
+                className={styles.clearButton}
+                aria-label="Clear description"
+              >
+                <XMarkIcon className={styles.clearIcon} />
+              </button>
+            )}
+          </div>
 
           <input
             type="date"

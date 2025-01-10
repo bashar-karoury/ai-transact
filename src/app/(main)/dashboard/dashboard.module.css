@@ -45,7 +45,7 @@
   border: 1px solid #e5e7eb;
 }
 
-.XMarkButton {
+/* .XMarkButton {
   background: none;
   border: none;
   padding: 8px;
@@ -59,7 +59,7 @@
   width: 20px;
   height: 20px;
   color: #f30000;
-}
+} */
 
 .descriptionInput,
 .dateInput,
@@ -694,4 +694,31 @@
 
 .cancelButton:hover {
   background: #e5e7eb;
+}
+
+/* This for Clear Button */
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.clearButton {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.clearIcon {
+  width: 20px;
+  height: 20px;
+  color: #a32121; /* Tailwind's gray-500 */
+  transition: color 0.3s;
+}
+
+.clearIcon:hover {
+  color: #e63e3e; /* Tailwind's gray-700 */
 }
