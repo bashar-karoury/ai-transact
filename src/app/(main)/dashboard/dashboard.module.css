@@ -376,7 +376,6 @@
   background: #f3f4f6;
 }
 
-/* Add these styles for the edit modal */
 .modalOverlay {
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
@@ -696,6 +695,7 @@
   background: #e5e7eb;
 }
 
+
 /* This for Clear Button */
 .inputWrapper {
   position: relative;
@@ -712,13 +712,35 @@
   padding: 0;
 }
 
+/* Assuming you have these styles in dashboard.module.css */
+.formWrapper {
+  display: flex;
+  align-items: center; /* Ensures vertical alignment */
+  justify-content: flex-start; /* Aligns items to the left */
+  gap: 10px; /* Adjust the space between the elements */
+}
+
+.clearButton {
+  /* Add some styling to make the button appear correctly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
 .clearIcon {
   width: 20px;
   height: 20px;
-  color: #a32121; /* Tailwind's gray-500 */
-  transition: color 0.3s;
+  color: #a32121;
 }
 
 .clearIcon:hover {
   color: #e63e3e; /* Tailwind's gray-700 */
 }
+
+/* .input {
+  flex-grow: 1; 
+} */

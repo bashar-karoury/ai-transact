@@ -26,8 +26,14 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 
-  const clearDescription = () => {
-    setNewTransaction({ ...newTransaction, description: "" });
+  const clearTransactionFields = () => {
+    setNewTransaction({
+      description: "",
+      date: today,
+      amount: "",
+      type: "income",
+      category: "",
+    });
   };
 
   const handleAddTransaction = async (event) => {
@@ -39,13 +45,6 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
 
     if (!isTransactionValid) {
       console.error("All fields must be filled out");
-      setNewTransaction({
-        description: "",
-        date: today,
-        amount: "",
-        type: "income",
-        category: "",
-      });
       return;
     }
 
@@ -68,10 +67,9 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       console.error("Error:", error);
     }
 
-    console.log(newTransaction);
     setNewTransaction({
       description: "",
-      date: new Date().toISOString().split("T")[0],
+      date: today,
       amount: "",
       type: "expense",
       category: "",
@@ -79,43 +77,24 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     setFetch(!tofetch);
   };
 
-  function finishCategorization(output_category) {
-    setNewTransaction({ ...newTransaction, category: output_category });
-  }
-
-  const handleTransactionRecorded = (newVoiceTransaction) => {
-    const cleanedTransaction = Object.fromEntries(
-      Object.entries(newVoiceTransaction).filter(([_, v]) => v != null)
-    );
-    setNewTransaction({ ...newTransaction, ...cleanedTransaction });
-  };
-
   return (
     <div className={styles.inputSection}>
       <form className={styles.transactionForm}>
         <div className={styles.formWrapper}>
-          <button type="button" className={styles.XMarkButton}>
-            <XMarkIcon className={styles.XMarkIcon} />
+          {/* Clear Button before Description Input */}
+          <button
+            type="button"
+            onClick={clearTransactionFields}
+            className={styles.clearButton}
+            aria-label="Clear transaction"
+          >
+            <XMarkIcon className={styles.clearIcon} />
           </button>
 
-          {/* Description Input with Clear Button */}
-          <div className={styles.inputWrapper}>
-            <DescriptionInput
-              onFinishCategorization={finishCategorization}
-              value={newTransaction.description}
-              onChangeParent={handleInputChange}
-            />
-            {newTransaction.description && (
-              <button
-                type="button"
-                onClick={clearDescription}
-                className={styles.clearButton}
-                aria-label="Clear description"
-              >
-                <XMarkIcon className={styles.clearIcon} />
-              </button>
-            )}
-          </div>
+          <DescriptionInput
+            value={newTransaction.description}
+            onChangeParent={handleInputChange}
+          />
 
           <input
             type="date"
@@ -159,9 +138,8 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             ))}
           </select>
 
-          <RecordTransactionButton
-            onTransactionRecorded={handleTransactionRecorded}
-          />
+          <RecordTransactionButton />
+
           <button
             type="button"
             onClick={handleAddTransaction}

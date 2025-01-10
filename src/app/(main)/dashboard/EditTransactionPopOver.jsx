@@ -1,4 +1,4 @@
-import styles from "./EditPopOverTransaction.css";
+import styles from "./dashboard.module.css";
 export default function EditTransactionPopOver({
   transactions,
   editingTransaction,
