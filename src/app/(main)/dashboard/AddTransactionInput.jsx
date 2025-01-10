@@ -3,7 +3,7 @@ import {
   MicrophoneIcon,
   CalendarIcon,
   TagIcon,
-  PlusIcon,
+  // PlusIcon,
   EllipsisVerticalIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -95,8 +95,8 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     <div className={styles.inputSection}>
       <form className={styles.transactionForm}>
         <div className={styles.formWrapper}>
-          <button type="button" className={styles.plusButton}>
-            <PlusIcon className={styles.plusIcon} />
+          <button type="button" className={styles.XMarkButton}>
+            <XMarkIcon className={styles.XMarkIcon} />
           </button>
 
           <DescriptionInput

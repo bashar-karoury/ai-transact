@@ -32,7 +32,7 @@
   border-radius: 10px;
   width: 100%;
   max-width: 990px;
-
+  gap: 8px;
 } 
 
 .formWrapper {
@@ -45,7 +45,7 @@
   border: 1px solid #e5e7eb;
 }
 
-.plusButton {
+.XMarkButton {
   background: none;
   border: none;
   padding: 8px;
@@ -55,10 +55,10 @@
   justify-content: center;
 }
 
-.plusIcon {
+.XMarksIcon {
   width: 20px;
   height: 20px;
-  color: #6b7280;
+  color: #f30000;
 }
 
 .descriptionInput,
