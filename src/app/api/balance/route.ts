@@ -7,6 +7,8 @@ import { stackServerApp } from "@/stack";
 export async function GET(req: NextRequest) {
   try {
     // Connect to the database
+    await dbConnect();
+    const uesr_email = "tester@testing.test";
     const user_email = req.headers.get("x-user-email");
     // console.log('User email:', user_email);
     if (!user_email) {

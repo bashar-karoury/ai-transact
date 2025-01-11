@@ -55,8 +55,8 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     await dbConnect();
-
-    const user_email = req.headers.get("x-user-email");
+    const user_email = "tester@testing.test";
+    // const user_email = req.headers.get("x-user-email");
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }
