@@ -16,9 +16,10 @@
   border-radius: 10px;
   background-color: #f0f0f0;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  /* top: 50%; */
+  /* left: 50%; */
+  transform: translateX(-50%, 50%);
+  align-items: end;
 }
 
 .inputSection input {
@@ -30,7 +31,7 @@
   gap: 8px;
 }
 
-.formWrapper {
+/* .formWrapper {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -38,7 +39,7 @@
   padding: 4px;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
-}
+} */
 
 .XMarkButton {
   background: #e5e7eb;
@@ -183,7 +184,7 @@
 
 .transaction {
   display: flex;
-  align-items: center;
+  justify-content: start;
   padding: 15px 0;
   border-bottom: 1px solid #eee;
 }
@@ -206,7 +207,7 @@
 }
 
 .transactionDate {
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
 }
 
@@ -308,8 +309,8 @@
   padding: 4px;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: normal;
+  justify-content: end;
   border-radius: 4px;
 }
 

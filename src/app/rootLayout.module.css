@@ -1,3 +1,22 @@
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 70%;
+    height: auto;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .mainContent {
+    margin-left: 0;
+    border-radius: 15px;
+    
+  }
+
+  .nav {
+    margin-bottom: 20px;
+  }
+}
 .container {
   display: flex;
   justify-content: center;
