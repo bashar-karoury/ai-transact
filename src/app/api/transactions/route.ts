@@ -18,14 +18,7 @@ export async function POST(req: NextRequest) {
   try {
     await dbConnect();
 
-    // Get the user from the request
-    const user = await stackServerApp.getUser();
-
-    if (!user) {
-      return new NextResponse("Not authorized", { status: 401 });
-    }
-    // Get the user's email
-    const user_email = user.primaryEmail;
+    const user_email = req.headers.get("x-user-email");
     // console.log("User email:", user_email);
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
@@ -63,15 +56,7 @@ export async function GET(req: NextRequest) {
   try {
     await dbConnect();
 
-    // Get the user from the request
-    const user = await stackServerApp.getUser();
-
-    if (!user) {
-      return new NextResponse("Not authorized", { status: 401 });
-    }
-    // Get the user's email
-    const user_email = user.primaryEmail;
-    console.log("User email:", user_email);
+    const user_email = req.headers.get("x-user-email");
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }
@@ -137,15 +122,7 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     await dbConnect();
-
-    // Get the user from the request
-    const user = await stackServerApp.getUser();
-
-    if (!user) {
-      return new NextResponse("Not authorized", { status: 401 });
-    }
-    // Get the user's email
-    const user_email = user.primaryEmail;
+    const user_email = req.headers.get("x-user-email");
     // console.log("User email:", user_email);
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
@@ -176,15 +153,7 @@ export async function PUT(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     await dbConnect();
-
-    // Get the user from the request
-    const user = await stackServerApp.getUser();
-
-    if (!user) {
-      return new NextResponse("Not authorized", { status: 401 });
-    }
-    // Get the user's email
-    const user_email = user.primaryEmail;
+    const user_email = req.headers.get("x-user-email");
     // console.log("User email:", user_email);
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
