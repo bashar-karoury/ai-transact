@@ -11,15 +11,22 @@
 }
 
 .inputSection {
-  display: flex;
-  padding: 14px;
-  border-radius: 10px;
-  background-color: #f0f0f0;
-  position: absolute;
-  /* top: 50%; */
-  /* left: 50%; */
-  transform: translateX(-50%, 50%);
-  align-items: end;
+  position: fixed; /* Fixes it to the bottom of the page */
+  bottom: 0; /* Aligns it to the bottom */
+  left: 60%; /* Centers horizontally */
+  transform: translateX(-50%); /* Centers accurately */
+  width: 80%; /* Sets a width, adjust as needed */
+  max-width: 1200px; /* Prevents it from being too wide */
+  background-color: #5a5959; /* Background color for the section */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Adds a shadow for separation */
+  padding: 7px 8px; /* Adds padding inside the section */
+  border-top: 1px solid #ccc; /* Adds a top border */
+  z-index: 10; /* Ensures it's above other content */
+  display: flex; /* For alignment */
+  justify-content: space-between; /* Space between elements */
+  align-items: center; /* Align items vertically */
+  gap: 9px; /* Gap between elements */
+  border-radius: 20px; /* Adds rounded corners */
 }
 
 .inputSection input {
@@ -69,13 +76,15 @@
   bottom: 0;
   right: 0;
   transform: translateX(33.33% 40%);
-  border-radius: 8px;
+  border-radius: 20px;
+  background-color: #f3f4f6;
 
 }
 
 .descriptionInput {
   flex: 1;
   min-width: 200px;
+  background-color: #f3f4f6;
 }
 
 .dateInput,
@@ -83,11 +92,12 @@
 .categorySelect {
   flex: 1;
   min-width: 100px;
+  background-color: #f3f4f6;
 }
 
 .categorySelect {
   appearance: none;
-  padding-right: 20px;
+  padding: 20px;
 }
 
 .micButton {
@@ -111,7 +121,7 @@
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 8px 16px;
+  padding: 8px 8px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -202,13 +212,14 @@
 
 .transactionType {
   font-size: 16px;
-  color: #333;
+  color: #b7b5b5;
   padding: 10px;
 }
 
 .transactionDate {
   font-size: 13px;
   color: #666;
+  padding: 10px;
 }
 
 .transactionAmount {
