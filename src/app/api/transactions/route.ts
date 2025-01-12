@@ -13,10 +13,9 @@ import {
 import { ObjectId } from "mongodb";
 import dbConnect from "../../../utils/db";
 import { stackServerApp } from "@/stack";
-export const config = {
-  runtime: "nodejs", // Default runtime for Serverless Functions
-  regions: ["bom1"], // Deploy backend processing to Mumbai
-};
+export const runtime = "edge"; // 'nodejs' is the default
+// execute this function on iad1 or hnd1, based on the connecting client location
+export const preferredRegion = ["bom1"];
 export async function POST(req: NextRequest) {
   try {
     await dbConnect();
