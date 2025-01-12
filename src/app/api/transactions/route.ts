@@ -14,7 +14,7 @@ import { ObjectId } from "mongodb";
 import dbConnect from "../../../utils/db";
 import { stackServerApp } from "@/stack";
 export const config = {
-  runtime: "edge",
+  runtime: "nodejs", // Default runtime for Serverless Functions
   regions: ["bom1"], // Deploy backend processing to Mumbai
 };
 export async function POST(req: NextRequest) {
