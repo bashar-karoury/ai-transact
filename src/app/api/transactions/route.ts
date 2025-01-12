@@ -13,6 +13,9 @@ import {
 import { ObjectId } from "mongodb";
 import dbConnect from "../../../utils/db";
 import { stackServerApp } from "@/stack";
+export const runtime = "edge"; // 'nodejs' is the default
+// execute this function on iad1 or hnd1, based on the connecting client location
+export const preferredRegion = ["iad1", "hnd1"];
 
 export async function POST(req: NextRequest) {
   try {
