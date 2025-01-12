@@ -15,18 +15,17 @@
   bottom: 0; /* Aligns it to the bottom */
   left: 60%; /* Centers horizontally */
   transform: translateX(-50%); /* Centers accurately */
-  width: 80%; /* Sets a width, adjust as needed */
-  max-width: 1200px; /* Prevents it from being too wide */
-  background-color: #5a5959; /* Background color for the section */
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Adds a shadow for separation */
-  padding: 7px 8px; /* Adds padding inside the section */
-  border-top: 1px solid #ccc; /* Adds a top border */
-  z-index: 10; /* Ensures it's above other content */
+  width: 100%; /* Sets a width, adjust as needed */
+  max-width: 990px;/* Prevents it from being too wide */
+  background-color:#c1c1c1; /* Adds a background color */
+  padding: 7px 7px; /* Adds padding inside the section */
+  /* border-top: 1px solid #ccc; Adds a top border */
+  /* z-index: 10; Ensures it's above other content */
   display: flex; /* For alignment */
-  justify-content: space-between; /* Space between elements */
+  /* justify-content: space-between; Space between elements */
   align-items: center; /* Align items vertically */
-  gap: 9px; /* Gap between elements */
-  border-radius: 20px; /* Adds rounded corners */
+  gap: 5px; /* Gap between elements */
+  border-radius: 15px; /* Adds rounded corners */
 }
 
 .inputSection input {
@@ -48,7 +47,7 @@
   border: 1px solid #e5e7eb;
 } */
 
-.XMarkButton {
+/* .XMarkButton {
   background: #e5e7eb;
   border: none;
   padding: 8px;
@@ -62,14 +61,14 @@
   width: 20px;
   height: 20px;
   color: #f30000;
-}
+} */
 
-.descriptionInput,
+/* .descriptionInput,
 .dateInput,
 .amountInput,
 .categorySelect {
   border: none;
-  padding: 8px;
+  padding: 3px;
   font-size: 14px;
   outline: none;
   background: transparent;
@@ -79,41 +78,50 @@
   border-radius: 20px;
   background-color: #f3f4f6;
 
-}
+} */
 
 .descriptionInput {
-  flex: 1;
-  min-width: 200px;
+  /* flex: 0; */
+  min-width: 180px;
   background-color: #f3f4f6;
 }
 
-.dateInput,
-.amountInput,
-.categorySelect {
+
+.amountInput{
   flex: 1;
   min-width: 100px;
+  padding: 9px 8px;
   background-color: #f3f4f6;
 }
 
-.categorySelect {
+/* .categorySelect {
   appearance: none;
   padding: 20px;
+  background-color: #f3f4f6;
+} */
+
+.categorySelect,
+.typeSelect {
+  padding: 9px 8px;
+  border-radius: 10px;
+  background-color: #f3f4f6;
 }
 
 .micButton {
-  background: none;
+  background-color: #f3f4f6;
   border: none;
   padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 20px;
 }
 
 .micIcon {
   width: 20px;
   height: 20px;
-  color: #6b7280;
+  color: #26415e;
 }
 
 .addButton {
@@ -142,13 +150,16 @@
   .descriptionInput {
     min-width: 100%;
     padding: 10px;
+    background-color: #f3f4f6;
   }
 
   .dateInput,
   .amountInput,
   .categorySelect {
     min-width: calc(33.33% - 8px);
-    padding: 10px;
+    padding: 20px;
+    background-color: #f3f4f6;
+    border-radius: 20px;
   }
 }
 
@@ -213,7 +224,7 @@
 .transactionType {
   font-size: 16px;
   color: #b7b5b5;
-  padding: 10px;
+  padding: 20px;
 }
 
 .transactionDate {
@@ -294,7 +305,10 @@
   .categorySelect,
   .typeSelect {
     min-width: calc(50% - 4px);
-    padding: 10px;
+    min-width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+
   }
 }
 .recent-transactions {
@@ -320,7 +334,7 @@
   padding: 4px;
   cursor: pointer;
   display: flex;
-  align-items: normal;
+  align-items: end;
   justify-content: end;
   border-radius: 4px;
 }
@@ -715,32 +729,35 @@
 }
 
 .clearButton {
-  position: absolute;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-}
+  /* position: absolute; */
+  /* right: 10px; */
+  /* background-color: #f3f4f6; */
+  /* cursor: no-drop; */
+  padding: 4px;
+  border-radius: 8px;
+  border: navy;
+ }  
 
 /* Assuming you have these styles in dashboard.module.css */
 .formWrapper {
   display: flex;
-  align-items: center; /* Ensures vertical alignment */
-  justify-content: flex-start; /* Aligns items to the left */
-  gap: 10px; /* Adjust the space between the elements */
-}
-
-.clearButton {
-  /* Add some styling to make the button appear correctly */
-  display: flex;
   align-items: center;
-  justify-content: center;
-  background: none;
+  justify-content: flex-start;
+  gap: 10px; 
+ } 
+
+
+/* .clearButton {
+  Add some styling to make the button appear correctly
+  display: flex;
+  left: auto;
+   align-items: center;
+  justify-content: left; 
+  background-color: #f3f4f6;
   border: none;
   cursor: pointer;
-  padding: 5px;
-}
+  padding: 4px;
+} */
 
 .clearIcon {
   width: 20px;
@@ -749,9 +766,12 @@
 }
 
 .clearIcon:hover {
-  color: #e63e3e; /* Tailwind's gray-700 */
+  color: #e63e3e; 
 }
 
-/* .input {
+.inputCategory {
   flex-grow: 1; 
-} */
+  padding: 9px 8px;
+  border-radius: 10px;
+  background-color: #f3f4f6;
+}

@@ -109,7 +109,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             name="amount"
             placeholder="Amount"
             min="0"
-            className={styles.input}
+            className={styles.amountInput}
             onChange={handleInputChange}
             value={newTransaction.amount}
           />
@@ -126,7 +126,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
 
           <select
             name="category"
-            className={styles.input}
+            className={styles.inputCategory}
             onChange={handleInputChange}
             value={newTransaction.category}
           >
