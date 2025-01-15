@@ -47,35 +47,36 @@ export async function POST(req: NextRequest) {
 
 export async function GET(req: NextRequest) {
   try {
-    await dbConnect();
+    // await dbConnect();
 
-    const user = await stackServerApp.getUser();
+    // const user = await stackServerApp.getUser();
 
-    if (!user) {
-      return new NextResponse("Not authorized", { status: 401 });
-    }
-    const user_email = user.primaryEmail;
-    // console.log('User email:', user_email);
-    if (!user_email) {
-      return new NextResponse("User email not found", { status: 400 });
-    }
-    const _id: string = await getUserIdByEmail(user_email);
+    // if (!user) {
+    //   return new NextResponse("Not authorized", { status: 401 });
+    // }
+    // const user_email = user.primaryEmail;
+    // // console.log('User email:', user_email);
+    // if (!user_email) {
+    //   return new NextResponse("User email not found", { status: 400 });
+    // }
+    // const _id: string = await getUserIdByEmail(user_email);
 
-    // use the query parameter to get the user's id
-    // const { searchParams } = new URL(req.url);
-    // const _id = searchParams.get('_id');
+    // // use the query parameter to get the user's id
+    // // const { searchParams } = new URL(req.url);
+    // // const _id = searchParams.get('_id');
 
-    if (!_id) {
-      return NextResponse.json(
-        { error: "_id parameter is required" },
-        { status: 400 }
-      );
-    }
+    // if (!_id) {
+    //   return NextResponse.json(
+    //     { error: "_id parameter is required" },
+    //     { status: 400 }
+    //   );
+    // }
 
-    // console.log('Request ID:', _id);
+    // // console.log('Request ID:', _id);
 
-    const budgets = await getBudgets(_id);
-    // console.log('Budgets:', budgets);
+    // const budgets = await getBudgets(_id);
+    // // console.log('Budgets:', budgets);
+    const budgets = [];
 
     return NextResponse.json(budgets, { status: 200 });
   } catch (error: any) {
