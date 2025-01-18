@@ -159,7 +159,7 @@
     min-width: calc(33.33% - 8px);
     padding: 20px;
     background-color: #f3f4f6;
-    border-radius: 20px;
+    /* border-radius: 20px; */
   }
 }
 
@@ -187,16 +187,15 @@
   100% { transform: scale(1); }
 }
 
-.transactionList {
+ .transactionList {
   background: white;
   border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 20px  15px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
+} 
 
 .transactionList h3 {
-  margin: 0 0 20px 0;
+  /* margin: 0 0 20px 0; */
   color: #333;
   font-size: 18px;
   font-weight: 500;
@@ -257,6 +256,7 @@
   gap: 10px;
   margin-top: 15px;
   padding: 10px;
+  border-radius: 20px;
 }
 
 .filterButton {
@@ -311,7 +311,7 @@
 
   }
 }
-.recent-transactions {
+/* .recent-transactions {
   border-radius: 15px; /* Adjust the value to control the roundness of the corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow if desired */
   padding: 20px; /* Improves internal spacing */
@@ -319,7 +319,7 @@
   margin-bottom: 20px;
   /* max-height: 400px; Adjust the value to control the maximum height */
   /* overflow-y: auto; Enables vertical scrolling */
-}
+/* } */
 
 .transactionActions {
   display: flex;

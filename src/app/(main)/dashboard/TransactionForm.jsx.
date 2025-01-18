@@ -1,0 +1,54 @@
+import {
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Select,
+  Button,
+  HStack,
+  VStack,
+} from "@chakra-ui/react";
+
+const TransactionForm = () => {
+  return (
+    <Box p={4} bg="gray.100" borderRadius="md" boxShadow="md" maxW="800px" mx="auto">
+      <VStack spacing={4} align="stretch">
+        {/* Transaction Description */}
+        <FormControl>
+          <FormLabel>Transaction Description</FormLabel>
+          <Input placeholder="Enter transaction description" />
+        </FormControl>
+
+        {/* Date, Amount, Category */}
+        <HStack spacing={4}>
+          <FormControl>
+            <FormLabel>Date</FormLabel>
+            <Input type="date" />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Amount</FormLabel>
+            <Input type="number" placeholder="Enter amount" />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Category</FormLabel>
+            <Select placeholder="Select category">
+              <option value="expense">Expense</option>
+              <option value="income">Income</option>
+              <option value="savings">Savings</option>
+            </Select>
+          </FormControl>
+        </HStack>
+
+        {/* Buttons */}
+        <HStack spacing={4} justifyContent="flex-end">
+          <Button colorScheme="blue" variant="outline">
+            Record
+          </Button>
+          <Button colorScheme="teal">Add</Button>
+        </HStack>
+      </VStack>
+    </Box>
+  );
+};
+
+export default TransactionForm;
