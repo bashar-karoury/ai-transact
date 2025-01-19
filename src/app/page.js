@@ -7,11 +7,12 @@ import Link from 'next/link';
 export default function LandingPage() {
   return (
     <div>
-      <Head>
-        <title>AI-Transact | Smart Financial Transactions</title>
+        <title>AI-Transact</title>
         <meta name="description" content="AI-Transact - Revolutionizing Financial Transactions with AI" />
         <link rel="icon" href="/favicon.ico" />
-      </Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"></link>
 
       {/* Header Section */}
       <header className={styles.header}>
@@ -32,14 +33,14 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className={styles.hero}>
         <h2>Revolutionizing Financial Transactions</h2>
-        <p>AI-Powered Solutions for Secure and Smart Payments</p>
+        <p>AI-Powered Solutions for Tracking your income and exepense</p>
         <a href="#features" className={styles.btnPrimary}>Discover More</a>
       </section>
 
       {/* About Section */}
       <section id="about" className={styles.section}>
         <h3>About AI-Transact</h3>
-        <p>AI-Transact leverages artificial intelligence to make financial transactions faster, safer, and smarter. Built for individuals and businesses alike, our platform simplifies payments and streamlines processes with cutting-edge technology.</p>
+        <p>AI-Transact is a smart financial management app designed to help you track expenses and incomes, set budgets, and monitor your balance, it provides real-time insights into your financial habits with detailed views by day, week, or month. Stay on top of your goals with personalized notifications and interactive diagrams for better financial planning.</p>
       </section>
 
       {/* Features Section */}
@@ -47,17 +48,17 @@ export default function LandingPage() {
         <h3>contributers</h3>
         <div className={styles.featuresGrid}>
           <div className={styles.featureCard}>
-            <Image src="/feature1.png" alt="Feature 1" width={100} height={100} />
+            {/* <Image src="/feature1.png" alt="Feature 1" width={100} height={100} /> */}
             <h4>Mohamed abdalla</h4>
             <p>Software engineer - Back-End.</p>
           </div>
           <div className={styles.featureCard}>
-            <Image src="/feature2.png" alt="Feature 2" width={100} height={100} />
+            {/* <Image src="/feature2.png" alt="Feature 2" width={100} height={100} /> */}
             <h4>Bashar Alkaroury</h4>
             <p>Software engineer - Back-End.</p>
           </div>
           <div className={styles.featureCard}>
-            <Image src="/feature3.png" alt="Feature 3" width={100} height={100} />
+            {/* <Image src="/feature3.png" alt="Feature 3" width={100} height={100} /> */}
             <h4>Minatalla sabri</h4>
             <p>Software engineer - Back-End.</p>
           </div>
