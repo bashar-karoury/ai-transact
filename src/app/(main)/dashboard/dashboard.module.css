@@ -11,16 +11,14 @@
 }
 
 .inputSection {
-  position: fixed; /* Fixes it to the bottom of the page */
-  bottom: 0; /* Aligns it to the bottom */
-  left: 60%; /* Centers horizontally */
-  transform: translateX(-50%); /* Centers accurately */
-  width: 100%; /* Sets a width, adjust as needed */
-  max-width: 990px;/* Prevents it from being too wide */
-  background-color:#c1c1c1; /* Adds a background color */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:#26415e; /* Adds a background color */
   padding: 7px 7px; /* Adds padding inside the section */
-  /* border-top: 1px solid #ccc; Adds a top border */
-  /* z-index: 10; Ensures it's above other content */
   display: flex; /* For alignment */
   /* justify-content: space-between; Space between elements */
   align-items: center; /* Align items vertically */
@@ -37,15 +35,16 @@
   gap: 8px;
 }
 
-/* .formWrapper {
+.formWrapper {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 8px;
   background: white;
-  padding: 4px;
-  border-radius: 8px;
+  padding: 2em;
+  border-radius: 5px;
   border: 1px solid #e5e7eb;
-} */
+}
 
 /* .XMarkButton {
   background: #e5e7eb;
@@ -82,14 +81,14 @@
 
 .descriptionInput {
   /* flex: 0; */
-  min-width: 180px;
+  width: 100%;
   background-color: #f3f4f6;
 }
 
 
 .amountInput{
-  flex: 1;
-  min-width: 100px;
+  /* flex: 1; */
+  width: 100%;
   padding: 9px 8px;
   background-color: #f3f4f6;
 }
@@ -105,6 +104,7 @@
   padding: 9px 8px;
   border-radius: 10px;
   background-color: #f3f4f6;
+  width: 100%;
 }
 
 .micButton {
@@ -116,6 +116,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 20px;
+  width: 100%;
 }
 
 .micIcon {
@@ -134,6 +135,7 @@
   font-weight: 500;
   cursor: pointer;
   margin: 0 auto;
+  width: 100%;
 }
 
 
@@ -151,6 +153,7 @@
     min-width: 100%;
     padding: 10px;
     background-color: #f3f4f6;
+    /* border-radius: 20px; */
   }
 
   .dateInput,
@@ -159,7 +162,8 @@
     min-width: calc(33.33% - 8px);
     padding: 20px;
     background-color: #f3f4f6;
-    /* border-radius: 20px; */
+    border-radius: 20px;
+    width: 100%;
   }
 }
 
@@ -305,7 +309,7 @@
   .categorySelect,
   .typeSelect {
     min-width: calc(50% - 4px);
-    min-width: 100%;
+    width: 100%;
     padding: 20px;
     border-radius: 20px;
 
@@ -722,50 +726,40 @@
 
 
 /* This for Clear Button */
-.inputWrapper {
+/* .inputWrapper {
   position: relative;
   display: flex;
   align-items: center;
+} */
+ 
+/* This for Hiddin input section */
+.hiddingButton {
+  display: none;
 }
 
 .clearButton {
-  /* position: absolute; */
-  /* right: 10px; */
-  /* background-color: #f3f4f6; */
-  /* cursor: no-drop; */
   padding: 4px;
   border-radius: 8px;
   border: navy;
- }  
+  align-self: flex-start;
+  color: rgb(148, 1, 1);
+}
 
 /* Assuming you have these styles in dashboard.module.css */
 .formWrapper {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
   gap: 10px; 
  } 
 
 
-/* .clearButton {
-  Add some styling to make the button appear correctly
-  display: flex;
-  left: auto;
-   align-items: center;
-  justify-content: left; 
-  background-color: #f3f4f6;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-} */
-
-.clearIcon {
+/* .clearIcon {
   width: 20px;
   height: 20px;
   color: #a32121;
-}
+} */
 
-.clearIcon:hover {
+.clearButton:hover {
   color: #e63e3e; 
 }
 
@@ -774,4 +768,5 @@
   padding: 9px 8px;
   border-radius: 10px;
   background-color: #f3f4f6;
+  width: 100%;
 }

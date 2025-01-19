@@ -26,6 +26,8 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 
+  const [addMenu, setAddMenu] = useState(false);
+
   const clearTransactionFields = () => {
     setNewTransaction({
       description: "",
@@ -88,7 +90,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             className={styles.clearButton}
             aria-label="Clear transaction"
           >
-            <XMarkIcon className={styles.clearIcon} />
+            Clear
           </button>
 
           <DescriptionInput
@@ -103,7 +105,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             onChange={handleInputChange}
             className={styles.dateInput}
           />
-
+          
           <input
             type="number"
             name="amount"
@@ -147,6 +149,17 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
           >
             Add
           </button>
+
+            {/* Add Menu Button */}
+             <button
+            type="button"
+            onClick={() => setAddMenu(true)}
+            className={styles.hiddingButton}
+            aria-label="Open menu"
+          >
+            Close
+          </button>
+
         </div>
       </form>
     </div>
