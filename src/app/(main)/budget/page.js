@@ -158,20 +158,11 @@ export default function Budget() {
       {/* Budget Form */}
       <div className={styles.budgetFormCard}>
         <form className={styles.budgetForm}>
-          {/* <div className={styles.formGroup}>
-            <input
-              type="text"
-              name="category"
-              value={budgetForm.category}
-              onChange={handleChange}
-              placeholder="Category"
-              className={styles.input}
-            />
-          </div> */}
+
           <div className={styles.formGroup}>
             <select
+              className={styles.select}
               name="category"
-              className={styles.input}
               onChange={handleChange}
               value={budgetForm.category}
             >
@@ -186,12 +177,12 @@ export default function Budget() {
           </div>
           <div className={styles.formGroup}>
             <input
+              className={styles.input}
               type="number"
               name="amount"
               value={budgetForm.amount}
               onChange={handleChange}
               placeholder="Limit Amount"
-              className={styles.input}
               min="0"
             />
           </div>
@@ -206,10 +197,9 @@ export default function Budget() {
         {budgets.map((budget, index) => (
           (editingBudget && editingBudget.budget_id === budget.budget_id ?
             <div key={index} className={styles.budgetItem}>
-              {/* <span className={styles.budgetName}>{'category input'}</span> */}
               <select
                 name="category"
-                className={styles.input}
+                className={styles.editselect}
                 onChange={editHandleChange}
                 value={editingBudget.category}
               >
@@ -224,19 +214,21 @@ export default function Budget() {
               <input
                 name="amount"
                 type="number"
-                className={styles.input}
+                className={styles.editinput}
                 placeholder="Limit Amount"
                 value={editingBudget.amount}
                 onChange={editHandleChange}
                 min="0"
               />
-              <button onClick={EditHandler}> Done </button>
-              <button onClick={CloseHandler}> Close </button>
+              <div className={styles.EditButtonsContainer}>
+                <button className={styles.EditButtons} onClick={EditHandler}> Done </button>
+                <button className={styles.EditButtons} onClick={CloseHandler}> Close </button>
+              </div>
             </div>
             :
             < div key={index} className={styles.budgetItem} >
-              <span className={styles.budgetName}>{budget.category}</span>
-              <span className={styles.budgetName}>{budget.amount}</span>
+              <span className={styles.budgetCategory}>{budget.category}</span>
+              <span className={styles.budgetAmount}>{budget.amount}</span>
               <button
                 className={dashboardstyles.optionsButton}
                 onClick={(e) => handleOptionsClick(budget, e)}
