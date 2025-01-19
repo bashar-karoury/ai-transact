@@ -49,17 +49,20 @@ const ReportsPage = () => {
           <button onClick={() => setTimePeriod("this_year")}>Year</button>
         </div>
 
-        <div className={styles.reportSection}>
-          <h2>Expenses:</h2>
-          <PieChart data={expenseData} labels={Object.keys(data?.categorize_expense || {})} />
-          <div className={styles.total}>Total: ${totalExpenses}</div>
+        <div className={styles.reportContainer}>
+          <div className={styles.reportSection}>
+            <h2>Expenses:</h2>
+            <PieChart data={expenseData} labels={Object.keys(data?.categorize_expense || {})} />
+            <div className={styles.total}>Total: ${totalExpenses}</div>
+          </div>
+
+          <div className={styles.reportSection}>
+            <h2>Incomes:</h2>
+            <PieChart data={incomeData} labels={Object.keys(data?.categorize_income || {})} />
+            <div className={styles.total}>Total: ${totalIncomes}</div>
+          </div>
         </div>
 
-        <div className={styles.reportSection}>
-          <h2>Incomes:</h2>
-          <PieChart data={incomeData} labels={Object.keys(data?.categorize_income || {})} />
-          <div className={styles.total}>Total: ${totalIncomes}</div>
-        </div>
       </div>
     </div>
   );

@@ -65,11 +65,11 @@
     cursor: pointer;
   }
   
-  .reportSection {
-    margin-bottom: 30px;
+  /* .reportSection { */
+    /* margin-bottom: 30px; */
     /* height: 400px; */
     /* padding-left: 100px; */
-  }
+  /* } */
   
   .reportSection h2 {
     margin-bottom: 10px;
@@ -79,4 +79,19 @@
     margin-top: 10px;
     font-weight: bold;
   }
+  
+  .reportContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start; /* Align items to the top */
+  }
+  
+  .reportSection {
+    flex: 1;
+    text-align: center;
+    /* Optional: Add a max width if needed for balance */
+    max-width: 45%;
+  }
+
   
