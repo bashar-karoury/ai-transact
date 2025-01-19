@@ -13,6 +13,7 @@ export default function LandingPage() {
         <link rel="preconnect" href="https://fonts.googleapis.com"/>
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
         <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
       {/* Header Section */}
       <header className={styles.header}>
@@ -76,12 +77,12 @@ export default function LandingPage() {
       <footer className={styles.footer}>
         <p>&copy; 2025 AI-Transact. All Rights Reserved.</p>
         <div className={styles.socialIcons}>
-          <a href="https://github.com/user1" target="_blank" className={styles.icon}>GitHub 1</a>
-          <a href="https://github.com/user2" target="_blank" className={styles.icon}>GitHub 2</a>
-          <a href="https://github.com/user3" target="_blank" className={styles.icon}>GitHub 3</a>
-          <a href="https://linkedin.com/in/user1" target="_blank" className={styles.icon}>LinkedIn 1</a>
-          <a href="https://linkedin.com/in/user2" target="_blank" className={styles.icon}>LinkedIn 2</a>
-          <a href="https://linkedin.com/in/user3" target="_blank" className={styles.icon}>LinkedIn 3</a>
+          <a href="https://github.com/bashar-karoury" target="_blank" className={styles.icon}><i class="fa-brands fa-github"></i></a>
+          <a href="https://github.com/b7sh" target="_blank" className={styles.icon}><i class="fa-brands fa-github"></i></a>
+          <a href="https://github.com/Minatallasabri" target="_blank" className={styles.icon}><i class="fa-brands fa-github"></i></a>
+          <a href="https://linkedin.com/in/user1" target="_blank" className={styles.icon}><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://linkedin.com/in/user2" target="_blank" className={styles.icon}><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://linkedin.com/in/user3" target="_blank" className={styles.icon}><i class="fa-brands fa-linkedin"></i></a>
         </div>
       </footer>
     </div>
