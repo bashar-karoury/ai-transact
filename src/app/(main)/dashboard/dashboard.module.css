@@ -46,7 +46,7 @@
   border: 1px solid #e5e7eb;
 }
 
-/* .XMarkButton {
+ .XMarkButton {
   background: #e5e7eb;
   border: none;
   padding: 8px;
@@ -60,7 +60,7 @@
   width: 20px;
   height: 20px;
   color: #f30000;
-} */
+} 
 
 /* .descriptionInput,
 .dateInput,
@@ -136,6 +136,8 @@
   cursor: pointer;
   margin: 0 auto;
   width: 100%;
+  margin-top: 5px;
+  margin-bottom: 2px;
 }
 
 
@@ -739,10 +741,17 @@
 
 .clearButton {
   padding: 4px;
+  text-align: center;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 8px;
   border: navy;
   align-self: flex-start;
   color: rgb(148, 1, 1);
+  background-color: transparent;
+  margin-top: 3px;
+
 }
 
 /* Assuming you have these styles in dashboard.module.css */
@@ -762,6 +771,8 @@
 .clearButton:hover {
   color: #e63e3e; 
 }
+
+
 
 .inputCategory {
   flex-grow: 1; 

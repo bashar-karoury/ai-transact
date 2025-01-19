@@ -26,7 +26,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     setNewTransaction({ ...newTransaction, [name]: value });
   };
 
-  const [addMenu, setAddMenu] = useState(false);
+  const [addMenu, setAddMenu] = useState(true);
 
   const clearTransactionFields = () => {
     setNewTransaction({
@@ -83,14 +83,14 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     <div className={styles.inputSection}>
       <form className={styles.transactionForm}>
         <div className={styles.formWrapper}>
-          {/* Clear Button before Description Input */}
-          <button
+            {/* Add Menu Button */}
+             <button
             type="button"
-            onClick={clearTransactionFields}
-            className={styles.clearButton}
-            aria-label="Clear transaction"
+            onClick={() => setAddMenu(false)}
+            // className={styles.hiddingButton}
+            aria-label="Open menu"
           >
-            Clear
+            <XMarkIcon className={styles.XMarkIconButton} />
           </button>
 
           <DescriptionInput
@@ -150,14 +150,14 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
             Add
           </button>
 
-            {/* Add Menu Button */}
-             <button
+          {/* Clear Button before Description Input */}
+          <button
             type="button"
-            onClick={() => setAddMenu(true)}
-            className={styles.hiddingButton}
-            aria-label="Open menu"
+            onClick={clearTransactionFields}
+            className={styles.clearButton}
+            aria-label="Clear transaction"
           >
-            Close
+            Clear
           </button>
 
         </div>
