@@ -1,12 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stackServerApp } from "./stack";
-
 const authPathes = ["/login", "/signup"];
 
 export async function middleware(request: NextRequest) {
-  console.log("pathname = ", request.nextUrl.pathname);
+  // console.log("pathname = ", request.nextUrl.pathname);
   const isAuthPath = authPathes.includes(request.nextUrl.pathname);
+
   const user = await stackServerApp.getUser();
+
+  const response = NextResponse.next();
+
+  if (user?.primaryEmail) {
+    // Set custom header
+    response.headers.set("x-user-email", user.primaryEmail);
+  }
+
   if (!user) {
     if (isAuthPath) {
       return NextResponse.next();
@@ -27,7 +35,8 @@ export async function middleware(request: NextRequest) {
   ) {
     return NextResponse.redirect(new URL("/onboard", request.url));
   }
-  return NextResponse.next();
+
+  return response;
 }
 
 export const config = {
