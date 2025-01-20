@@ -1,9 +1,17 @@
+
 /* General Styles */
 /* body {
   margin: 0;
   font-family: Arial, sans-serif;
   color: #333;
 } */
+
+/* .pacifico-regular {
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
+} */
+
 
 /* Header Styles */
 .header {
@@ -18,18 +26,27 @@
 .headerLeft {
   display: flex;
   gap: 10px;
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .headerTitle {
-  font-size: 1.5rem;
-  font-weight: bold;
+  /* font-size: 1.5rem;
+  font-weight: bold; */
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .nav a {
   margin-left: 15px;
-  font-weight: bold;
-  color: #0070f3;
+  /* font-weight: bold; */
+  color: #4b5561;
   text-decoration: none;
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .nav a:hover {
@@ -40,8 +57,11 @@
 .hero {
   text-align: center;
   padding: 50px 20px;
-  background: linear-gradient(to right, #4facfe, #00f2fe);
+  background: linear-gradient(to right, #51616e, #00f2fe);
   color: white;
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .hero h2 {
@@ -55,19 +75,19 @@
 /* Button Styles */
 .btn {
   padding: 8px 15px;
-  border: 1px solid #0070f3;
+  border: 1px solid #30353b;
   border-radius: 5px;
-  color: #0070f3;
+  color: #30353b;
   font-weight: bold;
 }
 
 .btn:hover {
-  background: #0070f3;
-  color: white;
+  background: #8199b5;
+  color: rgb(116, 108, 108);
 }
 
 .btnPrimary {
-  background: #0070f3;
+  background: #444c55;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -77,6 +97,9 @@
 /* Section Styles */
 .section {
   padding: 40px 20px;
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .bgLight {
@@ -116,5 +139,5 @@
 }
 
 .icon:hover {
-  color: #0070f3;
+  color: #8199b5;
 }

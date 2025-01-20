@@ -1,5 +1,5 @@
 .container {
-  min-height: 200vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -83,8 +83,6 @@
 
 .input:focus {
   outline: none;
-  border-color:#26415E;
-  background: #26415e;
 }
 
 .loginButton {
