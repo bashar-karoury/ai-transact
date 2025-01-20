@@ -1,6 +1,7 @@
 import styles from "./dashboard.module.css";
 import EditTransactionPopOver from "./EditTransactionPopOver";
 import { useState } from "react";
+import { useErrorModal } from "@/Components/ModalContext";
 export default function TranasactionOptionsPopOver({
   activeTransaction,
   setActiveTransaction,
@@ -11,6 +12,7 @@ export default function TranasactionOptionsPopOver({
   tofetch,
   setFetch,
 }) {
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const [editingTransaction, setEditingTransaction] = useState(null);
   return (
     <>
@@ -68,16 +70,15 @@ export default function TranasactionOptionsPopOver({
                   });
                   const data = await response.json();
                   console.log("Success:", data);
-                  // delete transaction from transactions
-                  // const index = transactions.indexOf(activeTransaction);
-                  // if (index !== -1) {
-                  //   transactions.splice(index, 1);
-                  // }
+                  showStatusModal("transaction deleted successfully");
                   setActiveTransaction(null);
                   // we are fetching transactions after successful deleting
                   setFetch(!tofetch);
                 } catch (error) {
-                  console.error("Error:", error);
+                  // console.error("Error:", error);
+                  showErrorModal(
+                    "Couldn't delete transaction, try again later"
+                  );
                 }
                 setShowPopover(false);
               }}

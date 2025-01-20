@@ -47,6 +47,7 @@ export default function SideBarComponent({ children }) {
         if (!res.ok) return;
 
         const data = await res.json();
+        console.log("user settings, ", data);
         setUserSettings(data);
       } catch (err) {
         console.error("Error fetching userSettings:", err);
@@ -64,16 +65,24 @@ export default function SideBarComponent({ children }) {
     <div className={styles.container}>
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <h1 classname={styles.dancingScriptFont}>Ai-Transact</h1>
-          {/* <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
-          <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Playwrite+IN:wght@100..400&family=Playwrite+VN:wght@100..400&display=swap" rel="stylesheet" /> */}
-
+          <h1 className={styles.dancingScriptFont}>Ai-Transact</h1>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Playwrite+IN:wght@100..400&family=Playwrite+VN:wght@100..400&display=swap"
+            rel="stylesheet"
+          />
           <div className={styles.userInfo}>
             <img
-              src={userSettings?.profilePicture || "/default-profile.png"}
-              className={styles.userIcon}
+              src={userSettings?.profilePicture || "/userIcon.png"}
+              width={30}
+              height={30}
             />
+
             {loadingSettings ? (
               <h2>Loading...</h2>
             ) : error ? (
@@ -83,7 +92,6 @@ export default function SideBarComponent({ children }) {
             )}
           </div>
         </div>
-
 
         <SignOutButton className={styles.signOutButton} />
 
@@ -115,7 +123,7 @@ export default function SideBarComponent({ children }) {
             className={pathname === "/budget" ? styles.active : ""}
           >
             <WalletIcon className={styles.icon} />
-            <span>Budget</span>
+            <span>Budgets</span>
           </Link>
           <Link
             href="/reports"

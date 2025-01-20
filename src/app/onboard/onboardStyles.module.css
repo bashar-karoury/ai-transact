@@ -1,0 +1,123 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(45deg, #26415E, #83A6CE, #26415E);
+}
+
+.onboardCard {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 40px;
+  letter-spacing: 1px;
+}
+
+.label {
+  font-size: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.nameFields {
+  display: flex;
+  gap: 20px;
+}
+
+.inputGroup {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.inputGroup input {
+  /* width: 100px; Set the width of the dropdown */
+  height: auto; /* Adjust height for multiple options */
+  padding: 7px; /* Add padding for better spacing */
+  border: 2px solid #26415E; /* Green border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  font-size: 16px; /* Adjust font size */
+  color: #333; /* Text color */
+
+}
+
+.inputGroup input::placeholder {
+  color: #666;
+  font-size: 18px;
+}
+
+.inputGroup input:focus {
+  border-bottom-color: #9333EA;
+}
+
+.saveButton {
+  background: linear-gradient(to right, #26415E, #83A6CE);
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: opacity 0.3s;
+}
+
+.saveButton:hover {
+  opacity: 0.9;
+} 
+/* Style for the <select> element */
+.select {
+  width: 120px; /* Set the width of the dropdown */
+  height: auto; /* Adjust height for multiple options */
+  padding: 8px; /* Add padding for better spacing */
+  border: 2px solid #26415E; /* Green border */
+  border-radius: 8px; /* Rounded corners */
+  background-color: #f9f9f9; /* Light background */
+  font-size: 16px; /* Adjust font size */
+  color: #333; /* Text color */
+  outline: none; /* Remove outline on focus */
+  margin-right: 0;
+}
+/* Style for individual options */
+.option {
+  padding: 8px; /* Padding inside options */
+  border: none; /* Remove borders */
+  background-color: #ffffff; /* White background */
+  color: #333; /* Text color */
+}
+/* Style when hovering over an option */
+.select:hover {
+  border-color: #45a049; /* Darker green on hover */
+}
+/* Style for focused select element */
+.select:focus {
+  border-color: #2196F3; /* Blue border when focused */
+  box-shadow: 0 0 8px rgba(33, 150, 243, 0.5); /* Add a glowing effect */
+}
+
+.separator {
+  /* height: 1px; */
+  background-color: #ddd;
+  margin: 20px 0;
+  border: none;
+  width: 50%;
+}

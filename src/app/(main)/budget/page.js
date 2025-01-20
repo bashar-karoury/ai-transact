@@ -8,7 +8,9 @@ import {
   EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
 import { flightRouterStateSchema } from 'next/dist/server/app-render/types';
+import { useErrorModal } from "@/Components/ModalContext";
 export default function Budget() {
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const [budgetForm, setBudgetForm] = useState({
     category: '',
     amount: "",
@@ -41,16 +43,19 @@ export default function Budget() {
   const addBudgetHandler = async (e) => {
     e.preventDefault();
     if (budgets.some(budget => budget.category === budgetForm.category)) {
-      console.error("Error: Duplicate category");
+      // console.error("Error: Duplicate category");
+      showErrorModal('Duplicated category: category specified already exist');
       return;
     }
     if (!budgetForm.category || !budgetForm.amount) {
-      console.error("Error: All fields are required");
+      // console.error("Error: All fields are required");
+      showErrorModal('All fields are required');
       return;
     }
 
     if (budgetForm.amount < 0) {
-      console.error("Error: amount can't be less than zero");
+      // console.error("Error: amount can't be less than zero");
+      showErrorModal("amount can't be less than zero");
       return;
     }
     console.log('New budget:', budgetForm);
@@ -65,6 +70,7 @@ export default function Budget() {
       });
       if (result.ok) {
         setFetch(!tofetch);
+        showStatusModal("Budget added Successfully");
         console.log("result of adding budget =", result);
       }
       setBudgetForm({
@@ -72,7 +78,8 @@ export default function Budget() {
         amount: "",
       });
     } catch (error) {
-      console.error(`Failed to add budget to database ${error}`);
+      // console.error(`Failed to add budget to database ${error}`);
+      showErrorModal(`Failed to add budget to database ${error}`);
     }
   };
 
@@ -113,16 +120,19 @@ export default function Budget() {
   const EditHandler = async () => {
 
     if (budgets.some(budget => budget.category === editingBudget.category && budget.budget_id !== editingBudget.budget_id)) {
-      console.error("Error: Duplicate category");
+      // console.error("Error: Duplicate category");
+      showErrorModal("Duplicated category");
       return;
     }
     if (!editingBudget.category || !editingBudget.amount) {
-      console.error("Error: All fields are required");
+      // console.error("Error: All fields are required");
+      showErrorModal("All fields are required");
       return;
     }
 
     if (editingBudget.amount < 0) {
-      console.error("Error: amount can't be less than zero");
+      // console.error("Error: amount can't be less than zero");
+      showErrorModal("amount can't be less than zero");
       return;
     }
     // Edit Budget logic Here
@@ -137,13 +147,15 @@ export default function Budget() {
       if (response.ok) {
         const data = await response.json();
         console.log("Success:", data);
+        showStatusModal("Budget edited Successfully");
         setActiveBudget(editingBudget);
         console.log('Done');
         setFetch(!tofetch);
       }
       setEditingBudget(null);
     } catch (error) {
-      console.error("Error:", error);
+      // console.error("Error:", error);
+      showErrorModal("Couldn't Edit budget, try again later");
     }
   }
 
@@ -158,20 +170,11 @@ export default function Budget() {
       {/* Budget Form */}
       <div className={styles.budgetFormCard}>
         <form className={styles.budgetForm}>
-          {/* <div className={styles.formGroup}>
-            <input
-              type="text"
-              name="category"
-              value={budgetForm.category}
-              onChange={handleChange}
-              placeholder="Category"
-              className={styles.input}
-            />
-          </div> */}
+
           <div className={styles.formGroup}>
             <select
+              className={styles.select}
               name="category"
-              className={styles.input}
               onChange={handleChange}
               value={budgetForm.category}
             >
@@ -186,12 +189,12 @@ export default function Budget() {
           </div>
           <div className={styles.formGroup}>
             <input
+              className={styles.input}
               type="number"
               name="amount"
               value={budgetForm.amount}
               onChange={handleChange}
               placeholder="Limit Amount"
-              className={styles.input}
               min="0"
             />
           </div>
@@ -206,10 +209,9 @@ export default function Budget() {
         {budgets.map((budget, index) => (
           (editingBudget && editingBudget.budget_id === budget.budget_id ?
             <div key={index} className={styles.budgetItem}>
-              {/* <span className={styles.budgetName}>{'category input'}</span> */}
               <select
                 name="category"
-                className={styles.input}
+                className={styles.editselect}
                 onChange={editHandleChange}
                 value={editingBudget.category}
               >
@@ -224,19 +226,21 @@ export default function Budget() {
               <input
                 name="amount"
                 type="number"
-                className={styles.input}
+                className={styles.editinput}
                 placeholder="Limit Amount"
                 value={editingBudget.amount}
                 onChange={editHandleChange}
                 min="0"
               />
-              <button onClick={EditHandler}> Done </button>
-              <button onClick={CloseHandler}> Close </button>
+              <div className={styles.EditButtonsContainer}>
+                <button className={styles.EditButtons} onClick={EditHandler}> Done </button>
+                <button className={styles.EditButtons} onClick={CloseHandler}> Close </button>
+              </div>
             </div>
             :
             < div key={index} className={styles.budgetItem} >
-              <span className={styles.budgetName}>{budget.category}</span>
-              <span className={styles.budgetName}>{budget.amount}</span>
+              <span className={styles.budgetCategory}>{budget.category}</span>
+              <span className={styles.budgetAmount}>{budget.amount}</span>
               <button
                 className={dashboardstyles.optionsButton}
                 onClick={(e) => handleOptionsClick(budget, e)}

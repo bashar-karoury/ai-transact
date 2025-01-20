@@ -18,7 +18,9 @@ export const addUser = async (userData: IUser) => {
 // getUser function is used to get a user by id
 export const getUser = async (userId: string) => {
   try {
-    return await User.findById(userId);
+    return await User.findById(userId).select(
+      "email balance profilePicture currency"
+    );
   } catch (error) {
     console.error("Error getting user:", error);
     throw new Error("Failed to get user");
