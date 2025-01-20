@@ -76,15 +76,8 @@ export default function SideBarComponent({ children }) {
             rel="stylesheet"
           />
           <div className={styles.userInfo}>
-            {/* <Image
-              src={userSettings?.profilePicture || "/test-auth-logo.png"}
-              className={styles.userIcon}
-            /> */}
             <img
-              // aria-hidden
-              // src="/test-auth-logo.png"
-              src={userSettings?.profilePicture || "/test-auth-logo.png"}
-              // alt="File icon"
+              src={userSettings?.profilePicture || "/userIcon.png"}
               width={30}
               height={30}
             />
@@ -98,7 +91,6 @@ export default function SideBarComponent({ children }) {
             )}
           </div>
         </div>
-
         <SignOutButton className={styles.signOutButton} />
 
         <nav className={styles.nav}>

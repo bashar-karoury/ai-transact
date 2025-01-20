@@ -1,8 +1,9 @@
 "use client";
 import { useState } from "react";
 import styles from "./settingsStyles.module.css";
-
+import { useErrorModal } from "@/Components/ModalContext";
 export default function Settings() {
+  const { showErrorModal } = useErrorModal();
   const [formData, setFormData] = useState({
     currency: "USD",
     logo: null,
@@ -20,7 +21,8 @@ export default function Settings() {
       });
       console.log("result of editing user settings =", result);
     } catch (error) {
-      console.error(`Failed to put user settings to database ${error}`);
+      // console.error(`Failed to put user settings to database ${error}`);
+      showErrorModal(`Failed to put user settings to database ${error}`);
     }
   };
 

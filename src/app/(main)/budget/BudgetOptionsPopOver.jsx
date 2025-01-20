@@ -1,6 +1,7 @@
 import styles from "../dashboard/dashboard.module.css";
 
 import { useState } from "react";
+import { useErrorModal } from "@/Components/ModalContext";
 export default function BudgetOptionsPopOver({
   // activeTransaction,
   // setActiveTransaction,
@@ -14,6 +15,7 @@ export default function BudgetOptionsPopOver({
   tofetch,
   setFetch,
 }) {
+  const { showErrorModel } = useErrorModal();
   const [editingTransaction, setEditingTransaction] = useState(null);
   return (
     <>
@@ -83,7 +85,8 @@ export default function BudgetOptionsPopOver({
                   }
                   setActiveBudget(null);
                 } catch (error) {
-                  console.error("Error:", error);
+                  console.log("Error:", error);
+                  showErrorModel("Couldn't Delete Budget, try again later");
                 }
                 setShowPopover(false);
               }}

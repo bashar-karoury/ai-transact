@@ -8,7 +8,9 @@ import {
   EllipsisVerticalIcon,
 } from "@heroicons/react/24/outline";
 import { flightRouterStateSchema } from 'next/dist/server/app-render/types';
+import { useErrorModal } from "@/Components/ModalContext";
 export default function Budget() {
+  const { showErrorModal } = useErrorModal();
   const [budgetForm, setBudgetForm] = useState({
     category: '',
     amount: "",
@@ -41,16 +43,19 @@ export default function Budget() {
   const addBudgetHandler = async (e) => {
     e.preventDefault();
     if (budgets.some(budget => budget.category === budgetForm.category)) {
-      console.error("Error: Duplicate category");
+      // console.error("Error: Duplicate category");
+      showErrorModal('Duplicated category: category specified already exist');
       return;
     }
     if (!budgetForm.category || !budgetForm.amount) {
-      console.error("Error: All fields are required");
+      // console.error("Error: All fields are required");
+      showErrorModal('All fields are required');
       return;
     }
 
     if (budgetForm.amount < 0) {
-      console.error("Error: amount can't be less than zero");
+      // console.error("Error: amount can't be less than zero");
+      showErrorModal("amount can't be less than zero");
       return;
     }
     console.log('New budget:', budgetForm);
@@ -72,7 +77,8 @@ export default function Budget() {
         amount: "",
       });
     } catch (error) {
-      console.error(`Failed to add budget to database ${error}`);
+      // console.error(`Failed to add budget to database ${error}`);
+      showErrorModal(`Failed to add budget to database ${error}`);
     }
   };
 
@@ -113,16 +119,19 @@ export default function Budget() {
   const EditHandler = async () => {
 
     if (budgets.some(budget => budget.category === editingBudget.category && budget.budget_id !== editingBudget.budget_id)) {
-      console.error("Error: Duplicate category");
+      // console.error("Error: Duplicate category");
+      showErrorModal("Duplicated category");
       return;
     }
     if (!editingBudget.category || !editingBudget.amount) {
-      console.error("Error: All fields are required");
+      // console.error("Error: All fields are required");
+      showErrorModal("All fields are required");
       return;
     }
 
     if (editingBudget.amount < 0) {
-      console.error("Error: amount can't be less than zero");
+      // console.error("Error: amount can't be less than zero");
+      showErrorModal("amount can't be less than zero");
       return;
     }
     // Edit Budget logic Here
@@ -143,7 +152,8 @@ export default function Budget() {
       }
       setEditingBudget(null);
     } catch (error) {
-      console.error("Error:", error);
+      // console.error("Error:", error);
+      showErrorModal("Couldn't Edit budget, try again later");
     }
   }
 

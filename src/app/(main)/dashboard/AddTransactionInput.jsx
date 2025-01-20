@@ -10,8 +10,9 @@ import styles from "./dashboard.module.css";
 import categories from "@/utils/categories";
 import DescriptionInput from "@/Components/DescriptionInput";
 import RecordTransactionButton from "@/Components/RecordTransactionButton";
-
+import { useErrorModal } from "@/Components/ModalContext";
 export default function AddTransactionInput({ tofetch, setFetch }) {
+  const { showErrorModal } = useErrorModal();
   const today = new Date().toISOString().split("T")[0];
   const [newTransaction, setNewTransaction] = useState({
     description: "",
@@ -44,12 +45,14 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     );
 
     if (!isTransactionValid) {
-      console.error("All fields must be filled out");
+      // console.error("All fields must be filled out");
+      showErrorModal("All fields must be filled out");
       return;
     }
 
     if (newTransaction.amount < 0) {
-      console.error("Error: amount can't be less than zero");
+      // console.error("Error: amount can't be less than zero");
+      showErrorModal("amount can't be less than zero");
       return;
     }
 
@@ -64,7 +67,10 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       const data = await response.json();
       console.log("Success:", data);
     } catch (error) {
-      console.error("Error:", error);
+      // console.error("Error:", error);
+      showErrorModal(
+        "error happend while adding new transaction, try again later"
+      );
     }
 
     setNewTransaction({

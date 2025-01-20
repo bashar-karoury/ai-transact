@@ -1,4 +1,5 @@
 import styles from "./dashboard.module.css";
+import { useErrorModal } from "@/Components/ModalContext";
 export default function EditTransactionPopOver({
   transactions,
   editingTransaction,
@@ -6,6 +7,7 @@ export default function EditTransactionPopOver({
   tofetch,
   setFetch,
 }) {
+  const { showErrorModal } = useErrorModal();
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     // Add delete logic here
@@ -28,7 +30,8 @@ export default function EditTransactionPopOver({
       }
       // setActiveTransaction(null);
     } catch (error) {
-      console.error("Error:", error);
+      // console.error("Error:", error);
+      showErrorModal("Couldn't Edit transaction, try again later");
     }
     // setShowPopover(false);
 

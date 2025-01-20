@@ -1,9 +1,11 @@
 import SideBarComponent from '@/Components/SideBarComponent'//'../_SideBarComponent'; 
-
+import { ErrorModalProvider } from '@/Components/ModalContext';
 export default function Layout({ children }) {
   return (
-     <>
-      <SideBarComponent>{children}</SideBarComponent>
+    <>
+      <ErrorModalProvider>
+        <SideBarComponent>{children}</SideBarComponent>
+      </ErrorModalProvider>
     </>
   );
 }

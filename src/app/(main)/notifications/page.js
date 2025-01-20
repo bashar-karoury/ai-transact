@@ -20,7 +20,7 @@ export default function Notifications() {
     };
 
     eventSource.onerror = () => {
-      console.error("SSE error");
+      // console.error("SSE error");
       eventSource.close();
     };
 
