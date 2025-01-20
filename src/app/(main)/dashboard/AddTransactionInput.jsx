@@ -80,88 +80,111 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
   };
 
   return (
-    <div className={styles.inputSection}>
-      <form className={styles.transactionForm}>
-        <div className={styles.formWrapper}>
-            {/* Add Menu Button */}
-             <button
+    <div>
+      {/* Menu Section */}
+      {addMenu && (
+        <div className={styles.menu}>
+          {/* Menu content here */}
+          <button
             type="button"
             onClick={() => setAddMenu(false)}
-            // className={styles.hiddingButton}
-            aria-label="Open menu"
+            className={styles.closeMenuButton}
+            aria-label="Close menu"
           >
-            <XMarkIcon className={styles.XMarkIconButton} />
+            Close
           </button>
-
-          <DescriptionInput
-            value={newTransaction.description}
-            onChangeParent={handleInputChange}
-          />
-
-          <input
-            type="date"
-            name="date"
-            value={newTransaction.date}
-            onChange={handleInputChange}
-            className={styles.dateInput}
-          />
           
-          <input
-            type="number"
-            name="amount"
-            placeholder="Amount"
-            min="0"
-            className={styles.amountInput}
-            onChange={handleInputChange}
-            value={newTransaction.amount}
-          />
-
-          <select
-            name="type"
-            className={styles.typeSelect}
-            onChange={handleInputChange}
-            value={newTransaction.type}
-          >
-            <option value="expense">expense</option>
-            <option value="income">income</option>
-          </select>
-
-          <select
-            name="category"
-            className={styles.inputCategory}
-            onChange={handleInputChange}
-            value={newTransaction.category}
-          >
-            <option value="">Category</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-
-          <RecordTransactionButton />
-
-          <button
+          {/* <button
             type="button"
-            onClick={handleAddTransaction}
-            className={styles.addButton}
+            onClick={() => setEditingTransaction(null)}
+            className={styles.cancelButton}
           >
-            Add
-          </button>
-
-          {/* Clear Button before Description Input */}
-          <button
-            type="button"
-            onClick={clearTransactionFields}
-            className={styles.clearButton}
-            aria-label="Clear transaction"
-          >
-            Clear
-          </button>
-
+            Cancel
+          </button> */}
+  
+          <div className={styles.inputSection}>
+            <form className={styles.transactionForm}>
+              <div className={styles.formWrapper}>
+                {/* Add Menu Button */}
+                <button
+                  type="button"
+                  onClick={() => setAddMenu(false)}
+                  aria-label="Open menu"
+                >
+                  <XMarkIcon className={styles.XMarkIconButton} />
+                </button>
+  
+                <DescriptionInput
+                  value={newTransaction.description}
+                  onChangeParent={handleInputChange}
+                />
+  
+                <input
+                  type="date"
+                  name="date"
+                  value={newTransaction.date}
+                  onChange={handleInputChange}
+                  className={styles.dateInput}
+                />
+                
+                <input
+                  type="number"
+                  name="amount"
+                  placeholder="Amount"
+                  min="0"
+                  className={styles.amountInput}
+                  onChange={handleInputChange}
+                  value={newTransaction.amount}
+                />
+  
+                <select
+                  name="type"
+                  className={styles.typeSelect}
+                  onChange={handleInputChange}
+                  value={newTransaction.type}
+                >
+                  <option value="expense">expense</option>
+                  <option value="income">income</option>
+                </select>
+  
+                <select
+                  name="category"
+                  className={styles.inputCategory}
+                  onChange={handleInputChange}
+                  value={newTransaction.category}
+                >
+                  <option value="">Category</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
+  
+                <RecordTransactionButton />
+  
+                <button
+                  type="button"
+                  onClick={handleAddTransaction}
+                  className={styles.addButton}
+                >
+                  Add
+                </button>
+  
+                {/* Clear Button before Description Input */}
+                <button
+                  type="button"
+                  onClick={clearTransactionFields}
+                  className={styles.clearButton}
+                  aria-label="Clear transaction"
+                >
+                  Clear
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </form>
+      )}
     </div>
   );
 }
