@@ -107,21 +107,20 @@
 }
 
 
-  .signOutButton {
-    background-color: #1e2235;
-    border-radius: 20px;
-    display: block;
-    height: 100%;
-    transform: none;
-    transition: transform 50ms ease;
-    width: 100%;
-  }
-
-  .signOutButton:hover {
-    background-color: #26415E;
-    color: #fff;
-    cursor: pointer;
-  }
+.signOutButton {
+  background-color: #1e2235;
+  border-radius: 20px;
+  display: block;
+  height: 100%;
+  transform: none;
+  transition: transform 50ms ease;
+  width: 100%;
+}
+.signOutButton:hover {
+  background-color: #26415E;
+  color: #fff;
+  cursor: pointer;
+}
   
 .balance {
   margin-top: auto;
@@ -142,8 +141,8 @@
 
 .mainContent {
   flex: 1;
-  margin-left: 250px;
-  padding: 20px 40px;
+  margin-left: 230px;
+  padding: 15px 40px;
   background: (45deg, #26415E, #83A6CE, #26415E);
   border-radius: 20px; 
   flex-wrap: wrap;
@@ -159,14 +158,6 @@
     padding: 10px;
     margin-bottom: 20px;
   }
-/* 
-  .mainContent {
-    margin-left: 0;
-    border-radius: 15px;
-    width: 100%;
-    height: inherit;
-    
-  } */
 
   .nav {
     margin-bottom: 20px;

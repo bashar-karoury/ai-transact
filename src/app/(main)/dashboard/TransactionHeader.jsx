@@ -3,7 +3,7 @@ import styles from "./dashboard.module.css";
 export default function TransactionHeader({ setTime = () => {} }) {
   return (
     <div className={styles.transactionHeader}>
-      <h3>Recent Transactions</h3>
+      <h3 className={styles.title}>Recent Transactions</h3>
       <div className={styles.timeFilter}>
         <button
           className={styles.filterButton}
@@ -27,6 +27,3 @@ export default function TransactionHeader({ setTime = () => {} }) {
     </div>
   );
 }
-
-
-
