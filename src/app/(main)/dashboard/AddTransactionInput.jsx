@@ -87,24 +87,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       <button
         onClick={() => setAddMenu(true)}
         className={styles.floatingAddButton}
-        style={{
-          position: 'fixed',
-          bottom: '20px',
-          right: '20px',
-          width: '50px',
-          height: '50px',
-          borderRadius: '50%',
-          backgroundColor: '#4F46E5',
-          border: 'none',
-          color: 'white',
-          fontSize: '24px',
-          cursor: 'pointer',
-          display: !addMenu ? 'flex' : 'none',
-          alignItems: 'center',
-          justifyContent: 'center',
-          boxShadow: '0 2px 4px rgba(0,0,0,0.2)',
-          zIndex: 1000
-        }}
+        
       >
         +
       </button>
