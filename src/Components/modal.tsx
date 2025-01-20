@@ -8,9 +8,11 @@ export default function Modal({ isOpen, onClose, title, message }) {
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <h2 className={styles.title}>{title}</h2>
         <p className={styles.message}>{message}</p>
-        <button className={styles.closeButton} onClick={onClose}>
-          Close
-        </button>
+        {title === "Error" ? (
+          <button className={styles.closeButton} onClick={onClose}>
+            Close
+          </button>
+        ) : null}
       </div>
     </div>
   );

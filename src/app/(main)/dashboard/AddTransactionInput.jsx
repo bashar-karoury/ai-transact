@@ -12,7 +12,7 @@ import DescriptionInput from "@/Components/DescriptionInput";
 import RecordTransactionButton from "@/Components/RecordTransactionButton";
 import { useErrorModal } from "@/Components/ModalContext";
 export default function AddTransactionInput({ tofetch, setFetch }) {
-  const { showErrorModal } = useErrorModal();
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const today = new Date().toISOString().split("T")[0];
   const [newTransaction, setNewTransaction] = useState({
     description: "",
@@ -66,6 +66,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       });
       const data = await response.json();
       console.log("Success:", data);
+      showStatusModal("transaction added successfully");
     } catch (error) {
       // console.error("Error:", error);
       showErrorModal(

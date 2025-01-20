@@ -8,7 +8,7 @@ import TransactionHeader from './TransactionHeader'
 import { flightRouterStateSchema } from 'next/dist/server/app-render/types';
 import { useErrorModal } from '@/Components/ModalContext';
 export default function Dashboard() {
-  const { showErrorModal } = useErrorModal();
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const [transactions, setTransactions] = useState([]);
   const [activeTransaction, setActiveTransaction] = useState(null);
   const [showPopover, setShowPopover] = useState(false);
@@ -31,7 +31,7 @@ export default function Dashboard() {
     // fetch time depending on received time from TransactionHeader
     console.log(time);
     console.log('RE--RENDERING');
-
+    // showStatusModal('Fetching transactions');
     const fetchTransactions = async function (time) {
       try {
         const result = await fetch(`/api/transactions?time=${time}`);

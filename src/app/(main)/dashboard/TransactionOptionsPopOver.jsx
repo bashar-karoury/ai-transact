@@ -12,7 +12,7 @@ export default function TranasactionOptionsPopOver({
   tofetch,
   setFetch,
 }) {
-  const { showErrorModal } = useErrorModal();
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const [editingTransaction, setEditingTransaction] = useState(null);
   return (
     <>
@@ -70,11 +70,7 @@ export default function TranasactionOptionsPopOver({
                   });
                   const data = await response.json();
                   console.log("Success:", data);
-                  // delete transaction from transactions
-                  // const index = transactions.indexOf(activeTransaction);
-                  // if (index !== -1) {
-                  //   transactions.splice(index, 1);
-                  // }
+                  showStatusModal("transaction deleted successfully");
                   setActiveTransaction(null);
                   // we are fetching transactions after successful deleting
                   setFetch(!tofetch);
