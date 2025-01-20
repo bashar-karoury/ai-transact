@@ -93,14 +93,6 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
           >
             Close
           </button>
-          
-          {/* <button
-            type="button"
-            onClick={() => setEditingTransaction(null)}
-            className={styles.cancelButton}
-          >
-            Cancel
-          </button> */}
   
           <div className={styles.inputSection}>
             <form className={styles.transactionForm}>
