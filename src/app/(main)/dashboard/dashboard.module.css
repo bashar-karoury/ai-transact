@@ -47,13 +47,14 @@
 }
 
  .XMarkButton {
-  /* background-radius; 50%:;  */
   border: none;
   padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: left-auto;
+  /* background-image: url(url(vscode-local:/Ubuntu/root/ai-transact/public/cross%2Bdelete%2Bicon-1320191231078297480_32px.ico)); */
 }
 
 .XMarksIcon {
@@ -198,6 +199,7 @@
   border-radius: 8px;
   padding: 20px  15px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+
 } 
 
 .transactionList h3 {
@@ -380,11 +382,15 @@
 }
 
 .closeButton {
-  background: none;
+  background-color: transparent;
+  outline: none;
+  margin-left: auto;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
   border: none;
-  font-size: 18px;
+  font-weight: bold;
+  color:#940101 ;
   cursor: pointer;
-  color: #6b7280;
 }
 
 .popoverContent {
@@ -748,7 +754,7 @@
   border-radius: 8px;
   border: navy;
   align-self: flex-start;
-  color: rgb(148, 1, 1);
+  color: #940101;
   background-color: transparent;
   margin-top: 3px;
 
@@ -757,6 +763,9 @@
 /* Assuming you have these styles in dashboard.module.css */
 .formWrapper {
   display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
   align-items: center;
   gap: 10px; 
  } 
@@ -811,7 +820,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: #4F46E5;
+  background-color: #26415e;
   border: none;
   color: white;
   font-size: 24px;

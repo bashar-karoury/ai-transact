@@ -111,12 +111,10 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
                     type="button"
                     onClick={() => setAddMenu(false)}
                     aria-label="Close menu"
+                    className={styles.closeButton}
+                    
                   >
-                    {/* <XMarkIcon className={styles.XMarkIconButton} />    num1 */} 
-                    
-                    <img src="/ai-transact/public/cross-delete-icon48px.png" alt="Close" className={styles.XMarkIconButton} />  
-
-                    
+                    x                    
                   </button>
 
                   <DescriptionInput

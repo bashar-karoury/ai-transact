@@ -52,8 +52,10 @@
 .title {
   text-align: center;
   font-size: 24px;
-  font-weight: 600;
   margin-bottom: 8px;
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .subtitle {

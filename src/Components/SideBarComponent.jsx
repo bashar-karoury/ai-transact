@@ -18,6 +18,8 @@ import styles from "@/app/rootLayout.module.css";
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 import SignOutButton from "@/Components/SignOutButtonComponent";
 
+<><link rel="icon" href="/favicon.ico" /><link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /><link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"></link><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /></>
+
 export default function SideBarComponent({ children }) {
   const pathname = usePathname();
   const [balance, setBalance] = useState(null);
@@ -66,16 +68,8 @@ export default function SideBarComponent({ children }) {
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <h1 className={styles.dancingScriptFont}>Ai-Transact</h1>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin="true"
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Playwrite+IN:wght@100..400&family=Playwrite+VN:wght@100..400&display=swap"
-            rel="stylesheet"
-          />
+
+          
           <div className={styles.userInfo}>
             <img
               src={userSettings?.profilePicture || "/userIcon.png"}
@@ -92,8 +86,10 @@ export default function SideBarComponent({ children }) {
             )}
           </div>
         </div>
-
-        <SignOutButton className={styles.signOutButton} />
+            
+            <div className={styles.signOutComponent}> 
+        <SignOutButton />
+            </div>
 
         <nav className={styles.nav}>
           <Link

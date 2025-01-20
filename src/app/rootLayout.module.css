@@ -31,7 +31,7 @@
 }
 
 .sidebar {
-  width: 220px;
+  max-width: 250px;
   background: rgb(255, 255, 255);
   border-right: 1px solid #eee;
   padding: 20px;
@@ -61,9 +61,12 @@
 .userInfo {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 3px;
   color: #2e63a0;
-  font-size: 14px;
+  font-size: 10px;
+}
+.userInfo  span {
+  font-size: 9px;
 }
 
 .userIcon {
@@ -100,23 +103,11 @@
   height: 20px;
 }
 
-
-  .signOutButton {
-    background-color: #1e2235;
-    border-radius: 20px;
-    display: block;
-    height: 100%;
-    transform: none;
-    transition: transform 50ms ease;
-    width: 100%;
+  .signOutComponent{
+  margin-bottom: 12px;
+  display: flex;
   }
 
-  .signOutButton:hover {
-    background-color: #26415E;
-    color: #fff;
-    cursor: pointer;
-  }
-  
 .balance {
   margin-top: auto;
   padding: 20px;
@@ -164,3 +155,13 @@
     margin-bottom: 20px;
   }
 }
+
+.dancingScriptFont {
+  /* font-size: 1.5rem;
+  font-weight: bold; */
+  font-family: "Pacifico", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
