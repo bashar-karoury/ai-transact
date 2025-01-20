@@ -25,7 +25,7 @@ export default function TranasactionOptionsPopOver({
           }}
         >
           <div className={styles.popoverHeader}>
-            <h3>Edit Transaction</h3>
+            <h3>Options</h3>
             <button
               className={styles.closeButton}
               onClick={() => {

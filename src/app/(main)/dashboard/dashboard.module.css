@@ -210,8 +210,9 @@
 .transaction {
   display: flex;
   justify-content: start;
-  padding: 15px 0;
+  padding: 5px 0;
   border-bottom: 1px solid #eee;
+  min-width: 100%;
 }
 
 .transaction:last-child {
@@ -220,27 +221,40 @@
 
 .transactionInfo {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
+  flex-direction: row;
+  gap: 50px;
   padding: 10px;
+  width: 100%;
 }
 
-.transactionType {
-  font-size: 16px;
+.transactionDescription {
+  font-size: 20px;
+  color: #828282;
+  padding: 5px;
+  width: 55%;
+}
+
+.transactionCategory {
+  font-size: 20px;
   color: #b7b5b5;
-  padding: 20px;
+  padding: 5px;
+  width: 20%;
+  border: 1px solid rgb(167, 167, 167);
+  border-radius: 5px;
+  background-color: #26415E;
 }
-
 .transactionDate {
-  font-size: 13px;
+  font-size: 20px;
   color: #666;
-  padding: 10px;
+  padding: 5px;
+  width: 25%;
 }
 
 .transactionAmount {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
-  padding: 10px;
+  padding: 5px;
+  width: 10%;
 }
 
 .income {
@@ -320,21 +334,14 @@
 
   }
 }
-/* .recent-transactions {
-  border-radius: 15px; /* Adjust the value to control the roundness of the corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow if desired */
-  padding: 20px; /* Improves internal spacing */
-  /* margin-top: 20px; */
-  margin-bottom: 20px;
-  /* max-height: 400px; Adjust the value to control the maximum height */
-  /* overflow-y: auto; Enables vertical scrolling */
-/* } */
+
 
 .transactionActions {
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 10px;
+  margin-right: 5px;
 }
 
 .optionsButton {
@@ -346,6 +353,7 @@
   align-items: end;
   justify-content: end;
   border-radius: 4px;
+  /* width: 10px; */
 }
 
 .optionsButton:hover {
@@ -363,7 +371,8 @@
   background: white;
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-  width: 200px;
+  width: 120px;
+  /* height: 120px; */
   z-index: 1000;
   transform: translate(-100%, -100%);
 }
@@ -372,14 +381,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 16px;
+  padding: 10px 8px;
   border-bottom: 1px solid #e5e7eb;
+  margin: 0;
 }
 
 .popoverHeader h3 {
   margin: 0;
   font-size: 14px;
   font-weight: 500;
+  color: #000000;
 }
 
 .closeButton {
@@ -391,7 +402,7 @@
 }
 
 .popoverContent {
-  padding: 10px;
+  padding: 4px;
 }
 
 .popoverButton {
