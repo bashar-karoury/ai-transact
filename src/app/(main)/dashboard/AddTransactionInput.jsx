@@ -3,15 +3,17 @@ import {
   MicrophoneIcon,
   CalendarIcon,
   TagIcon,
-  PlusIcon,
   EllipsisVerticalIcon,
   XMarkIcon,
+  PlusIcon,
 } from "@heroicons/react/24/outline";
 import styles from "./dashboard.module.css";
 import categories from "@/utils/categories";
 import DescriptionInput from "@/Components/DescriptionInput";
 import RecordTransactionButton from "@/Components/RecordTransactionButton";
+import { useErrorModal } from "@/Components/ModalContext";
 export default function AddTransactionInput({ tofetch, setFetch }) {
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const today = new Date().toISOString().split("T")[0];
   const [newTransaction, setNewTransaction] = useState({
     description: "",
@@ -20,35 +22,44 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     type: "income",
     category: "",
   });
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // console.log(`name=${name} value=${value}`);
     setNewTransaction({ ...newTransaction, [name]: value });
+  };
+
+  const [addMenu, setAddMenu] = useState(false);
+  const [showInputSection, setShowInputSection] = useState(true);
+
+  const clearTransactionFields = () => {
+    setNewTransaction({
+      description: "",
+      date: today,
+      amount: "",
+      type: "income",
+      category: "",
+    });
   };
 
   const handleAddTransaction = async (event) => {
     event.preventDefault();
-    // Implement transaction addition logic here
-    // POST request to /api/transactions
+
     const isTransactionValid = Object.values(newTransaction).every(
       (value) => value !== ""
     );
 
     if (!isTransactionValid) {
-      console.error("All fields must be filled out");
-      setNewTransaction({
-        description: "",
-        date: today,
-        amount: "",
-        type: "income",
-        category: "",
-      });
+      // console.error("All fields must be filled out");
+      showErrorModal("All fields must be filled out");
       return;
     }
+
     if (newTransaction.amount < 0) {
-      console.error("Error: amount can't be less than zero");
+      // console.error("Error: amount can't be less than zero");
+      showErrorModal("amount can't be less than zero");
       return;
     }
+
     try {
       const response = await fetch("/api/transactions", {
         method: "POST",
@@ -59,106 +70,126 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       });
       const data = await response.json();
       console.log("Success:", data);
+      showStatusModal("transaction added successfully");
     } catch (error) {
-      console.error("Error:", error);
+      // console.error("Error:", error);
+      showErrorModal(
+        "error happend while adding new transaction, try again later"
+      );
     }
-    console.log(newTransaction);
+
     setNewTransaction({
       description: "",
-      date: new Date().toISOString().split("T")[0],
+      date: today,
       amount: "",
       type: "expense",
       category: "",
     });
     setFetch(!tofetch);
-    // setIsOpen(false);
-    // setIsOpen(true);
-  };
-
-  function finishCategorization(output_category) {
-    console.log("Finished Categorizing");
-    console.log(output_category);
-    setNewTransaction({ ...newTransaction, category: output_category });
-  }
-
-  const handleTransactionRecorded = (newVoiceTransaction) => {
-    console.log("Transaction recorded:", newTransaction);
-    const cleanedTransaction = Object.fromEntries(
-      Object.entries(newVoiceTransaction).filter(([_, v]) => v != null)
-    );
-    setNewTransaction({ ...newTransaction, ...cleanedTransaction });
-    // fill new transaction fields with the new transaction
-    // to do ...
   };
 
   return (
-    <div className={styles.inputSection}>
-      <form className={styles.transactionForm}>
-        <div className={styles.formWrapper}>
-          <button type="button" className={styles.plusButton}>
-            <PlusIcon className={styles.plusIcon} />
-          </button>
+    <div>
+      {/* + Button */}
+      <button
+        onClick={() => setAddMenu(true)}
+        className={styles.floatingAddButton}
+        
+      >
+        +
+      </button>
 
-          <DescriptionInput
-            onFinishCategorization={finishCategorization}
-            value={newTransaction.description}
-            onChangeParent={handleInputChange}
-          />
+      {/* Menu Section */}
+      {showInputSection && (
+        <div className={styles.menu}>
+          {addMenu && (
+            <div className={styles.inputSection}>
+              <form className={styles.transactionForm}>
+                <div className={styles.formWrapper}>
+                  {/* Close button */}
+                  <button
+                    type="button"
+                    onClick={() => setAddMenu(false)}
+                    aria-label="Close menu"
+                  >
+                    {/* <XMarkIcon className={styles.XMarkIconButton} />    num1 */} 
+                    
+                    <img src="/ai-transact/public/cross-delete-icon48px.png" alt="Close" className={styles.XMarkIconButton} />  
 
-          <input
-            type="date"
-            name="date"
-            value={newTransaction.date}
-            onChange={handleInputChange}
-            className={styles.dateInput}
-          />
+                    
+                  </button>
 
-          <input
-            type="number"
-            name="amount"
-            placeholder="Amount"
-            min="0"
-            className={styles.input}
-            onChange={handleInputChange}
-            value={newTransaction.amount}
-          />
+                  <DescriptionInput
+                    value={newTransaction.description}
+                    onChangeParent={handleInputChange}
+                  />
 
-          <select
-            name="type"
-            className={styles.typeSelect}
-            onChange={handleInputChange}
-            value={newTransaction.type}
-          >
-            <option value="expense">expense</option>
-            <option value="income">income</option>
-          </select>
+                  <input
+                    type="date"
+                    name="date"
+                    value={newTransaction.date}
+                    onChange={handleInputChange}
+                    className={styles.dateInput}
+                  />
 
-          <select
-            name="category"
-            className={styles.input}
-            onChange={handleInputChange}
-            value={newTransaction.category}
-          >
-            <option value="">Category</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+                  <input
+                    type="number"
+                    name="amount"
+                    placeholder="Amount"
+                    min="0"
+                    className={styles.amountInput}
+                    onChange={handleInputChange}
+                    value={newTransaction.amount}
+                  />
 
-          <RecordTransactionButton
-            onTransactionRecorded={handleTransactionRecorded}
-          />
-          <button
-            type="button"
-            onClick={handleAddTransaction}
-            className={styles.addButton}
-          >
-            Add
-          </button>
+                  <select
+                    name="type"
+                    className={styles.typeSelect}
+                    onChange={handleInputChange}
+                    value={newTransaction.type}
+                  >
+                    <option value="expense">expense</option>
+                    <option value="income">income</option>
+                  </select>
+
+                  <select
+                    name="category"
+                    className={styles.inputCategory}
+                    onChange={handleInputChange}
+                    value={newTransaction.category}
+                  >
+                    <option value="">Category</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+
+                  <RecordTransactionButton />
+
+                  <button
+                    type="button"
+                    onClick={handleAddTransaction}
+                    className={styles.addButton}
+                  >
+                    Add
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={clearTransactionFields}
+                    className={styles.clearButton}
+                    aria-label="Clear transaction"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
         </div>
-      </form>
+      )}
     </div>
   );
 }

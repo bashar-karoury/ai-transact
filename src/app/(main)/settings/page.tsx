@@ -1,65 +1,41 @@
 "use client";
-import { useUser } from "@stackframe/stack";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-// import styles from "./onboardStyles.css";
-import styles from "./onboardStyles.module.css";
-
-type CurrentUser = {
-  clientMetadata: { onboarded: boolean };
-  update: (params: {
-    clientMetadata: { onboarded: boolean; address: string };
-  }) => Promise<void>;
-};
-
-export default function Onboard() {
-  const user = useUser() as CurrentUser | null;
-  const router = useRouter();
-  const [address, setAddress] = useState("");
+import { useState } from "react";
+import styles from "./settingsStyles.module.css";
+import { useErrorModal } from "@/Components/ModalContext";
+export default function Settings() {
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const [formData, setFormData] = useState({
     currency: "USD",
     logo: null,
   });
-  useEffect(() => {
-    // if (user?.clientMetadata?.onboarded) {
-    //   router.push("/");
-    // }
-  }, [user, router]);
-
-  // if (user?.clientMetadata?.onboarded) {
-  //   return <></>;
-  // }
-  // should add all required fields for new users
   const clickHandler = async () => {
     try {
-      await user?.update({
-        clientMetadata: {
-          onboarded: true,
-          address,
-        },
-      });
-      const email = user?.primaryEmail;
-      const userConfigs = { email, balance: 0, ...formData };
+      const userConfigs = formData;
       console.log(userConfigs);
-      const result = await fetch("/api/users", {
-        method: "POST",
+      const result = await fetch("/api/userSettings", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(userConfigs),
       });
-      console.log("result of adding user =", result);
+      if (!result.ok) {
+        throw new Error("response status code not 200");
+      }
+      showStatusModel("User settings updated successfully");
+      console.log("result of editing user settings =", result);
     } catch (error) {
-      console.error(`Failed to add user to database ${error}`);
+      // console.error(`Failed to put user settings to database ${error}`);
+      showErrorModal(`Failed to put user settings to database ${error}`);
     }
-    router.push("/dashboard");
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.onboardCard}>
-        {/* <div className="onboard-container"> */}
-        <h1>Welcome to AI-Transact</h1>
+    // className={styles.container}
+    <div>
+      <div className={styles.settingsCard}>
+        <h1>Settings</h1>
+
         <form className={styles.form}>
           <div className={styles.inputGroup}>
             <label className={styles.label}>Currency</label>
@@ -100,7 +76,7 @@ export default function Onboard() {
             onClick={clickHandler}
             className={styles.saveButton}
           >
-            Get Started
+            Save
           </button>
         </form>
       </div>

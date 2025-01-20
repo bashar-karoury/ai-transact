@@ -14,36 +14,26 @@ import {
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-// import styles from './styles.css';
-// import styles from "../rootLayout.module.css"; //"./rootLayout.module.css";
 import styles from "@/app/rootLayout.module.css";
 import NewNotificationsNumberComponent from "@/Components/NNNComponent";
 import SignOutButton from "@/Components/SignOutButtonComponent";
+
 export default function SideBarComponent({ children }) {
   const pathname = usePathname();
-  // const isAuthPage =
-  //   pathname === "/" ||
-  //   pathname === "/login" ||
-  //   pathname === "/signup" ||
-  //   pathname === "/onboard";
-
-  // State to store the balance
   const [balance, setBalance] = useState(null);
   const [loadingBalance, setLoadingBalance] = useState(true);
   const [loadingSettings, setLoadingSettings] = useState(true);
   const [error, setError] = useState(false);
   const [userSettings, setUserSettings] = useState("");
 
-  // Fetch balance from API
-  // Fetch userSettings from API
   useEffect(() => {
     const fetchBalance = async () => {
       try {
-        const res = await fetch("/api/balance"); // Call the API endpoint
+        const res = await fetch("/api/balance");
         if (!res.ok) return;
 
         const data = await res.json();
-        setBalance(data); // Set balance
+        setBalance(data);
       } catch (err) {
         console.error("Error fetching balance:", err);
         setError(true);
@@ -53,11 +43,12 @@ export default function SideBarComponent({ children }) {
     };
     const fetchUserSettings = async () => {
       try {
-        const res = await fetch("/api/userSettings"); // call the API
+        const res = await fetch("/api/userSettings");
         if (!res.ok) return;
 
         const data = await res.json();
-        setUserSettings(data); // set userSettings
+        console.log("user settings, ", data);
+        setUserSettings(data);
       } catch (err) {
         console.error("Error fetching userSettings:", err);
         setError(true);
@@ -70,17 +61,28 @@ export default function SideBarComponent({ children }) {
   }, []);
 
   return (
+
     <div className={styles.container}>
-      {/* Dashboard Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <h1>Ai-Transact</h1>
+          <h1 className={styles.dancingScriptFont}>Ai-Transact</h1>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Playwrite+IN:wght@100..400&family=Playwrite+VN:wght@100..400&display=swap"
+            rel="stylesheet"
+          />
           <div className={styles.userInfo}>
-            {/* <UserIcon className={styles.userIcon} /> */}
             <img
-              src={userSettings?.profilePicture || "/default-profile.png"} // Fallback profile image
-              className={styles.userIcon}
+              src={userSettings?.profilePicture || "/userIcon.png"}
+              width={30}
+              height={30}
             />
+
             {loadingSettings ? (
               <h2>Loading...</h2>
             ) : error ? (
@@ -88,11 +90,11 @@ export default function SideBarComponent({ children }) {
             ) : (
               <span>{userSettings.email}</span>
             )}
-            {/* <SignOutButton /> */}
           </div>
         </div>
 
-        <SignOutButton />
+        <SignOutButton className={styles.signOutButton} />
+
         <nav className={styles.nav}>
           <Link
             href="/dashboard"
@@ -121,7 +123,7 @@ export default function SideBarComponent({ children }) {
             className={pathname === "/budget" ? styles.active : ""}
           >
             <WalletIcon className={styles.icon} />
-            <span>Budget</span>
+            <span>Budgets</span>
           </Link>
           <Link
             href="/reports"
@@ -132,7 +134,6 @@ export default function SideBarComponent({ children }) {
           </Link>
         </nav>
 
-        {/* Balance section */}
         <div className={styles.balance}>
           <p>Balance:</p>
           {loadingBalance && loadingSettings ? (
@@ -145,11 +146,8 @@ export default function SideBarComponent({ children }) {
             </h2>
           )}
         </div>
-
-        {/* </div> */}
       </aside>
 
-      {/* Main Content */}
       <main className={styles.mainContent}>{children}</main>
     </div>
   );

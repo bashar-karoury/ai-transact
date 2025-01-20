@@ -1,4 +1,6 @@
-import styles from "./EditPopOverTransaction.css";
+import styles from "./dashboard.module.css";
+import { useErrorModal } from "@/Components/ModalContext";
+import categories from "@/utils/categories";
 export default function EditTransactionPopOver({
   transactions,
   editingTransaction,
@@ -6,10 +8,17 @@ export default function EditTransactionPopOver({
   tofetch,
   setFetch,
 }) {
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const handleEditSubmit = async (e) => {
     e.preventDefault();
-    // Add delete logic here
     console.log(editingTransaction);
+    if (
+      editingTransaction.description === "" ||
+      editingTransaction.date === ""
+    ) {
+      showErrorModal("All fields should be filled");
+      return;
+    }
     try {
       const response = await fetch("/api/transactions", {
         method: "PUT",
@@ -20,15 +29,10 @@ export default function EditTransactionPopOver({
       });
       const data = await response.json();
       console.log("Success:", data);
-      // delete transaction from transactions
-      const index = transactions.indexOf(editingTransaction);
-      if (index !== -1) {
-        console.log("Edited Transaction available");
-        transactions[index].description = "la bla bla bla";
-      }
-      // setActiveTransaction(null);
+      showStatusModal("transaction Edited Successfully");
     } catch (error) {
-      console.error("Error:", error);
+      // console.error("Error:", error);
+      showErrorModal("Couldn't Edit transaction, try again later");
     }
     // setShowPopover(false);
 
@@ -41,7 +45,7 @@ export default function EditTransactionPopOver({
       {editingTransaction && (
         <div className={styles.editPopoverOverlay}>
           <div className={styles.editPopover}>
-            <h2 className={styles.editTitle}>Edit Transaction:</h2>
+            <h2 className={styles.editTitle}>Edit Transaction</h2>
 
             <form onSubmit={handleEditSubmit} className={styles.editForm}>
               <div className={styles.formField}>
@@ -58,6 +62,7 @@ export default function EditTransactionPopOver({
                 />
               </div>
               <div className={styles.formField}>
+                <label>Type:</label>
                 <select
                   name="type"
                   // className={styles.typeSelect}
@@ -69,6 +74,7 @@ export default function EditTransactionPopOver({
                     })
                   }
                   value={editingTransaction.type}
+                  className={styles.inputCategory}
                 >
                   <option value="expense">expense</option>
                   <option value="income">income</option>
@@ -105,7 +111,7 @@ export default function EditTransactionPopOver({
 
               <div className={styles.formField}>
                 <label>Category:</label>
-                <input
+                {/* <input
                   type="text"
                   value={editingTransaction.category || ""}
                   onChange={(e) =>
@@ -114,7 +120,25 @@ export default function EditTransactionPopOver({
                       category: e.target.value,
                     })
                   }
-                />
+                /> */}
+                <select
+                  name="category"
+                  className={styles.inputCategory}
+                  onChange={(e) =>
+                    setEditingTransaction({
+                      ...editingTransaction,
+                      category: e.target.value,
+                    })
+                  }
+                  value={editingTransaction.category}
+                >
+                  <option value="">Category</option>
+                  {categories.map((category) => (
+                    <option key={category} value={category}>
+                      {category}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className={styles.formField}>

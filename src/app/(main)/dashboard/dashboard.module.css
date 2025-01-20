@@ -3,50 +3,51 @@
   padding-bottom: 80px;
   margin: 0;
   padding: 0;
+  height: 100vh;
   box-sizing: border-box;
   flex-wrap: wrap;
+  flex-grow: 1;
+  gap: 20px; /* Adjust the space between the elements */
 }
 
 .inputSection {
-  /* display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-  position: fixed;
-  border-radius: 10px;
-  max-width: 970px;
-  bottom: 0;
-  right: 10%;
-  transform: translateX(50%);
-  transform: translateY(50%);
-  padding-bottom: 0%;
-  border-radius: 20px;
-  max-width: 100%;*/
-
   display: flex;
-  position: fixed;
-  bottom: 14px;
-  right: 20%;
-  left: -30%;
-  transform: translateX(50%);
-  padding: 14px;
-  border-radius: 10px;
-  width: 100%;
-  max-width: 990px;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color:#26415e; /* Adds a background color */
+  padding: 7px 7px; /* Adds padding inside the section */
+  display: flex; /* For alignment */
+  /* justify-content: space-between; Space between elements */
+  align-items: center; /* Align items vertically */
+  gap: 5px; /* Gap between elements */
+  border-radius: 15px; /* Adds rounded corners */
+}
 
-} 
+.inputSection input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 100%;
+  gap: 8px;
+}
 
 .formWrapper {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 8px;
   background: white;
-  padding: 4px;
-  border-radius: 8px;
+  padding: 2em;
+  border-radius: 5px;
   border: 1px solid #e5e7eb;
 }
 
-.plusButton {
-  background: none;
+ .XMarkButton {
+  /* background-radius; 50%:;  */
   border: none;
   padding: 8px;
   cursor: pointer;
@@ -55,59 +56,73 @@
   justify-content: center;
 }
 
-.plusIcon {
+.XMarksIcon {
   width: 20px;
   height: 20px;
-  color: #6b7280;
-}
+  color: #f30000;
+} 
 
-.descriptionInput,
+/* .descriptionInput,
 .dateInput,
 .amountInput,
 .categorySelect {
   border: none;
-  padding: 8px;
+  padding: 3px;
   font-size: 14px;
   outline: none;
   background: transparent;
-  bottom: 22px;
-  right: 0%;
+  bottom: 0;
+  right: 0;
   transform: translateX(33.33% 40%);
-  border-radius: 8px;
+  border-radius: 20px;
+  background-color: #f3f4f6;
 
-}
+} */
 
 .descriptionInput {
-  flex: 1;
-  min-width: 200px;
+  /* flex: 0; */
+  width: 100%;
+  background-color: #f3f4f6;
 }
 
-.dateInput,
-.amountInput,
-.categorySelect {
-  flex: 1;
-  min-width: 100px;
+
+.amountInput{
+  /* flex: 1; */
+  width: 100%;
+  padding: 9px 8px;
+  background-color: #f3f4f6;
 }
 
-.categorySelect {
+/* .categorySelect {
   appearance: none;
-  padding-right: 20px;
+  padding: 20px;
+  background-color: #f3f4f6;
+} */
+
+.categorySelect,
+.typeSelect {
+  padding: 9px 8px;
+  border-radius: 10px;
+  background-color: #f3f4f6;
+  width: 100%;
 }
 
 .micButton {
-  background: none;
+  background-color: #f3f4f6;
   border: none;
   padding: 8px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 20px;
+  width: 100%;
 }
 
 .micIcon {
   width: 20px;
   height: 20px;
-  color: #6b7280;
+  color: #26415e;
 }
 
 .addButton {
@@ -115,11 +130,14 @@
   color: white;
   border: none;
   border-radius: 6px;
-  padding: 8px 16px;
+  padding: 8px 8px;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   margin: 0 auto;
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 2px;
 }
 
 
@@ -136,13 +154,18 @@
   .descriptionInput {
     min-width: 100%;
     padding: 10px;
+    background-color: #f3f4f6;
+    /* border-radius: 20px; */
   }
 
   .dateInput,
   .amountInput,
   .categorySelect {
     min-width: calc(33.33% - 8px);
-    padding: 10px;
+    padding: 20px;
+    background-color: #f3f4f6;
+    border-radius: 20px;
+    width: 100%;
   }
 }
 
@@ -170,23 +193,24 @@
   100% { transform: scale(1); }
 }
 
-.transactionList {
+ .transactionList {
   background: white;
   border-radius: 8px;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 20px  15px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
+} 
 
 .transactionList h3 {
-  margin: 0 0 20px 0;
+  /* margin: 0 0 20px 0; */
   color: #333;
   font-size: 18px;
+  font-weight: 500;
+  gap: 8px;
 }
 
 .transaction {
   display: flex;
-  align-items: center;
+  justify-content: start;
   padding: 15px 0;
   border-bottom: 1px solid #eee;
 }
@@ -204,13 +228,14 @@
 
 .transactionType {
   font-size: 16px;
-  color: #333;
-  padding: 10px;
+  color: #b7b5b5;
+  padding: 20px;
 }
 
 .transactionDate {
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
+  padding: 10px;
 }
 
 .transactionAmount {
@@ -237,6 +262,7 @@
   gap: 10px;
   margin-top: 15px;
   padding: 10px;
+  border-radius: 20px;
 }
 
 .filterButton {
@@ -285,16 +311,21 @@
   .categorySelect,
   .typeSelect {
     min-width: calc(50% - 4px);
-    padding: 10px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+
   }
 }
-.recent-transactions {
+/* .recent-transactions {
   border-radius: 15px; /* Adjust the value to control the roundness of the corners */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Adds a shadow if desired */
   padding: 20px; /* Improves internal spacing */
-  margin-top: 20px;
+  /* margin-top: 20px; */
   margin-bottom: 20px;
-}
+  /* max-height: 400px; Adjust the value to control the maximum height */
+  /* overflow-y: auto; Enables vertical scrolling */
+/* } */
 
 .transactionActions {
   display: flex;
@@ -309,8 +340,8 @@
   padding: 4px;
   cursor: pointer;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: end;
+  justify-content: end;
   border-radius: 4px;
 }
 
@@ -376,7 +407,6 @@
   background: #f3f4f6;
 }
 
-/* Add these styles for the edit modal */
 .modalOverlay {
   position: fixed;
   background: rgba(0, 0, 0, 0.5);
@@ -469,7 +499,7 @@
 .cancelButton {
   background: #f3f4f6;
   border: 1px solid #e5e7eb;
-  color: #374151;
+  color: #000000;
 }
 
 .saveButton {
@@ -600,9 +630,9 @@
 
 .editPopover {
   background: white;
-  border-radius: 16px;
-  padding: 24px;
-  width: 90%;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
   max-width: 400px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
@@ -694,4 +724,101 @@
 
 .cancelButton:hover {
   background: #e5e7eb;
+}
+
+
+/* This for Clear Button */
+/* .inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+} */
+ 
+/* This for Hiddin input section */
+.hiddingButton {
+  display: none;
+}
+
+.clearButton {
+  padding: 4px;
+  text-align: center;
+  font-size: 14px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 8px;
+  border: navy;
+  align-self: flex-start;
+  color: rgb(148, 1, 1);
+  background-color: transparent;
+  margin-top: 3px;
+
+}
+
+/* Assuming you have these styles in dashboard.module.css */
+.formWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+ } 
+
+
+/* .clearIcon {
+  width: 20px;
+  height: 20px;
+  color: #a32121;
+} */
+
+.clearButton:hover {
+  color: #e63e3e; 
+}
+
+
+
+.inputCategory {
+  flex-grow: 1; 
+  padding: 9px 8px;
+  border-radius: 10px;
+  background-color: #f3f4f6;
+  width: 100%;
+}
+
+.addTransactionButton {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.plusIcon {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.floatingAddButton  {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #4F46E5;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-Shadow: 0 2px 4px rgba(0,0,0,0.2);
+  z-Index: 1000;
 }
