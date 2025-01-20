@@ -19,7 +19,7 @@ export default function NewNotificationsNumberComponent() {
       console.log(`receieved data[${data}]`);
     };
     eventSource.onerror = (event) => {
-      console.error("SSE error occurred:", event);
+      // console.error("SSE error occurred:", event);
       // Close the connection to avoid further errors
       eventSource.close();
     };
