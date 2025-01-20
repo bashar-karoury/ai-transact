@@ -61,6 +61,7 @@ export default function SideBarComponent({ children }) {
   }, []);
 
   return (
+
     <div className={styles.container}>
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
@@ -91,6 +92,7 @@ export default function SideBarComponent({ children }) {
             )}
           </div>
         </div>
+
         <SignOutButton className={styles.signOutButton} />
 
         <nav className={styles.nav}>

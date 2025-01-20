@@ -5,6 +5,7 @@ import {
   TagIcon,
   EllipsisVerticalIcon,
   XMarkIcon,
+  PlusIcon,
 } from "@heroicons/react/24/outline";
 import styles from "./dashboard.module.css";
 import categories from "@/utils/categories";
@@ -26,6 +27,9 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     const { name, value } = e.target;
     setNewTransaction({ ...newTransaction, [name]: value });
   };
+
+  const [addMenu, setAddMenu] = useState(false);
+  const [showInputSection, setShowInputSection] = useState(true);
 
   const clearTransactionFields = () => {
     setNewTransaction({
@@ -85,77 +89,107 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
   };
 
   return (
-    <div className={styles.inputSection}>
-      <form className={styles.transactionForm}>
-        <div className={styles.formWrapper}>
-          {/* Clear Button before Description Input */}
-          <button
-            type="button"
-            onClick={clearTransactionFields}
-            className={styles.clearButton}
-            aria-label="Clear transaction"
-          >
-            <XMarkIcon className={styles.clearIcon} />
-          </button>
+    <div>
+      {/* + Button */}
+      <button
+        onClick={() => setAddMenu(true)}
+        className={styles.floatingAddButton}
+        
+      >
+        +
+      </button>
 
-          <DescriptionInput
-            value={newTransaction.description}
-            onChangeParent={handleInputChange}
-          />
+      {/* Menu Section */}
+      {showInputSection && (
+        <div className={styles.menu}>
+          {addMenu && (
+            <div className={styles.inputSection}>
+              <form className={styles.transactionForm}>
+                <div className={styles.formWrapper}>
+                  {/* Close button */}
+                  <button
+                    type="button"
+                    onClick={() => setAddMenu(false)}
+                    aria-label="Close menu"
+                  >
+                    {/* <XMarkIcon className={styles.XMarkIconButton} />    num1 */} 
+                    
+                    <img src="/ai-transact/public/cross-delete-icon48px.png" alt="Close" className={styles.XMarkIconButton} />  
 
-          <input
-            type="date"
-            name="date"
-            value={newTransaction.date}
-            onChange={handleInputChange}
-            className={styles.dateInput}
-          />
+                    
+                  </button>
 
-          <input
-            type="number"
-            name="amount"
-            placeholder="Amount"
-            min="0"
-            className={styles.amountInput}
-            onChange={handleInputChange}
-            value={newTransaction.amount}
-          />
+                  <DescriptionInput
+                    value={newTransaction.description}
+                    onChangeParent={handleInputChange}
+                  />
 
-          <select
-            name="type"
-            className={styles.typeSelect}
-            onChange={handleInputChange}
-            value={newTransaction.type}
-          >
-            <option value="expense">expense</option>
-            <option value="income">income</option>
-          </select>
+                  <input
+                    type="date"
+                    name="date"
+                    value={newTransaction.date}
+                    onChange={handleInputChange}
+                    className={styles.dateInput}
+                  />
 
-          <select
-            name="category"
-            className={styles.inputCategory}
-            onChange={handleInputChange}
-            value={newTransaction.category}
-          >
-            <option value="">Category</option>
-            {categories.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+                  <input
+                    type="number"
+                    name="amount"
+                    placeholder="Amount"
+                    min="0"
+                    className={styles.amountInput}
+                    onChange={handleInputChange}
+                    value={newTransaction.amount}
+                  />
 
-          <RecordTransactionButton />
+                  <select
+                    name="type"
+                    className={styles.typeSelect}
+                    onChange={handleInputChange}
+                    value={newTransaction.type}
+                  >
+                    <option value="expense">expense</option>
+                    <option value="income">income</option>
+                  </select>
 
-          <button
-            type="button"
-            onClick={handleAddTransaction}
-            className={styles.addButton}
-          >
-            Add
-          </button>
+                  <select
+                    name="category"
+                    className={styles.inputCategory}
+                    onChange={handleInputChange}
+                    value={newTransaction.category}
+                  >
+                    <option value="">Category</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
+
+                  <RecordTransactionButton />
+
+                  <button
+                    type="button"
+                    onClick={handleAddTransaction}
+                    className={styles.addButton}
+                  >
+                    Add
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={clearTransactionFields}
+                    className={styles.clearButton}
+                    aria-label="Clear transaction"
+                  >
+                    Clear
+                  </button>
+                </div>
+              </form>
+            </div>
+          )}
         </div>
-      </form>
+      )}
     </div>
   );
 }

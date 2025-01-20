@@ -101,24 +101,18 @@
 }
 
 
-  .signOutButton::before {
+  .signOutButton {
     background-color: #1e2235;
-    border-radius: 5px;
-    content: '';
+    border-radius: 20px;
     display: block;
     height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
     transform: none;
     transition: transform 50ms ease;
     width: 100%;
-    z-index: 2;
-    display: flex;
   }
 
   .signOutButton:hover {
-    background-color: #1e2235;
+    background-color: #26415E;
     color: #fff;
     cursor: pointer;
   }
