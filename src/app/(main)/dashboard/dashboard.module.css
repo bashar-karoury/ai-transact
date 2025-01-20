@@ -1,29 +1,28 @@
 .dashboardContainer {
-  padding: 20px;
-  padding-bottom: 80px;
+  /* padding: 20px; */
+  /* padding-bottom: 80px; */
   margin: 0;
   padding: 0;
-  height: 100vh;
-  box-sizing: border-box;
-  flex-wrap: wrap;
-  flex-grow: 1;
-  gap: 20px; /* Adjust the space between the elements */
+  height: 900px;
+  /* box-sizing: border-box; */
+  /* flex-wrap: wrap; */
+  /* flex-grow: 1; */
+  /* gap: 20px; Adjust the space between the elements */
 }
 
-.inputSection {
+ .inputSection {
   display: flex;
   flex-direction: column;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color:#26415e; /* Adds a background color */
-  padding: 7px 7px; /* Adds padding inside the section */
-  display: flex; /* For alignment */
-  /* justify-content: space-between; Space between elements */
-  align-items: center; /* Align items vertically */
-  gap: 5px; /* Gap between elements */
-  border-radius: 15px; /* Adds rounded corners */
+  background-color:#26415e; 
+  padding: 7px 7px; 
+  display: flex; 
+  align-items: center; 
+  gap: 5px;
+  border-radius: 15px;
 }
 
 .inputSection input {

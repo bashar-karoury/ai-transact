@@ -1,6 +1,6 @@
 import { StackProvider } from "@stackframe/stack";
 import { stackServerApp } from "../stack";
-
+import './globals.css';
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

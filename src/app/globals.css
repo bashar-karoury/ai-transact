@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 :root {
     --background: #ffffff;
     --foreground: #171717;
@@ -16,7 +12,7 @@
 
   html,
   body {
-    max-width: 100vw;
+    /* max-width: 200vw; */
     overflow-x: hidden;
     margin: 0;
     padding: 0;
@@ -30,6 +26,7 @@
     font-family: Arial, Helvetica, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin:0px;
   }
   
   * {
@@ -38,10 +35,6 @@
     margin: 0;
   }
   
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
   
   @media (prefers-color-scheme: dark) {
     html {
@@ -63,59 +56,7 @@
     background: transparent;
     cursor: pointer;
   }
-  
-  .swiper {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-  }
-  
-  .swiper-slide {
-    display: grid;
-    place-items: center;
-    opacity: 0;
-    transition: 0.25s;
-  }
-  
-  .swiper-slide-active {
-    opacity: 1;
-  }
-  
-  .swiper-slide > div {
-    margin-top: -73px;
-  }
-  
-  .swiper-slide h2 {
-    opacity: 0.35;
-    font-weight: 400;
-    width: 100%;
-  }
-  
-  .swiper-button-next,
-  .swiper-button-prev {
-    opacity: 0.5;
-    color: rgb(255 255 255 / 96%);
-    transition: 0.3s;
-  }
-  
-  :is(.swiper-button-next, .swiper-button-prev):hover {
-    opacity: 1;
-  }
-  
-  .swiper-button-next {
-    right: 50px;
-  }
-  
-  .swiper-button-prev {
-    left: 50px;
-  }
-  
-  .burger-icon,
-  .menu,
-  .background {
-    position: fixed;
-  }
-  
+
   .background {
     z-index: 1;
     top: -5%;
@@ -212,64 +153,4 @@
   
   .menu a:hover::after {
     transform: scaleX(1);
-  }
-  
-  .burger-icon {
-    position: relative;
-    width: 32px;
-    border: 0;
-    scale: 1.25;
-  }
-  
-  .burger-icon,
-  .burger-icon::before,
-  .burger-icon::after {
-    display: block;
-    border-radius: 2px;
-    height: 2px;
-    background: #f9f9f9;
-    transition: 0.45s;
-  }
-  
-  .burger-icon::before,
-  .burger-icon::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    width: 100%;
-  }
-  
-  .burger-icon::before {
-    top: -8px;
-  }
-  
-  .burger-icon::after {
-    top: 8px;
-  }
-  
-  .burger-icon {
-    transition: none;
-    height: 0;
-  }
-  
-  .burger-icon::before,
-  .burger-icon::after {
-    transition-timing-function: linear;
-    transition-duration: 0.15s;
-  }
-  
-  .burger-icon::before {
-    top: -4px;
-  }
-  
-  .burger-icon::after {
-    top: 3px;
-  }
-  
-  body.open .burger-icon::before {
-    transform: rotate(-45deg) translate(-3px, 2px);
-  }
-  
-  body.open .burger-icon::after {
-    transform: rotate(45deg) translate(-2px, -3px);
   }
