@@ -10,7 +10,7 @@ import {
 import { flightRouterStateSchema } from 'next/dist/server/app-render/types';
 import { useErrorModal } from "@/Components/ModalContext";
 export default function Budget() {
-  const { showErrorModal } = useErrorModal();
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const [budgetForm, setBudgetForm] = useState({
     category: '',
     amount: "",
@@ -70,6 +70,7 @@ export default function Budget() {
       });
       if (result.ok) {
         setFetch(!tofetch);
+        showStatusModal("Budget added Successfully");
         console.log("result of adding budget =", result);
       }
       setBudgetForm({
@@ -146,6 +147,7 @@ export default function Budget() {
       if (response.ok) {
         const data = await response.json();
         console.log("Success:", data);
+        showStatusModal("Budget edited Successfully");
         setActiveBudget(editingBudget);
         console.log('Done');
         setFetch(!tofetch);

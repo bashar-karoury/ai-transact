@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./settingsStyles.module.css";
 import { useErrorModal } from "@/Components/ModalContext";
 export default function Settings() {
-  const { showErrorModal } = useErrorModal();
+  const { showErrorModal, showStatusModal } = useErrorModal();
   const [formData, setFormData] = useState({
     currency: "USD",
     logo: null,
@@ -19,6 +19,10 @@ export default function Settings() {
         },
         body: JSON.stringify(userConfigs),
       });
+      if (!result.ok) {
+        throw new Error("response status code not 200");
+      }
+      showStatusModel("User settings updated successfully");
       console.log("result of editing user settings =", result);
     } catch (error) {
       // console.error(`Failed to put user settings to database ${error}`);

@@ -15,7 +15,7 @@ export default function BudgetOptionsPopOver({
   tofetch,
   setFetch,
 }) {
-  const { showErrorModel } = useErrorModal();
+  const { showErrorModel, showStatusModel } = useErrorModal();
   const [editingTransaction, setEditingTransaction] = useState(null);
   return (
     <>
@@ -75,6 +75,7 @@ export default function BudgetOptionsPopOver({
                   if (response.ok) {
                     const data = await response.json();
                     console.log("Success:", data);
+                    showStatusModel("Budget deleted Successfully");
                     // delete transaction from transactions
                     // const index = transactions.indexOf(activeTransaction);
                     // if (index !== -1) {
