@@ -8,27 +8,23 @@ import { sendNotification as nnnSendNotification } from "@/utils/newNumberOfNoti
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const user = await stackServerApp.getUser();
-  if (!user || !user.primaryEmail) {
-    return new NextResponse("User not found or email not available", {
-      status: 404,
-    });
+  const user_email = req.headers.get("x-user-email");
+  if (!user_email) {
+    return new NextResponse("User email not found", { status: 400 });
   }
-  const { primaryEmail } = user;
-  // console.log("email = ", primaryEmail);
   const stream = new ReadableStream({
     async start(controller) {
-      addClient(primaryEmail, controller);
+      addClient(user_email, controller);
       //
-      const newNotificationList = await getNotifications(primaryEmail);
+      const newNotificationList = await getNotifications(user_email);
       controller.enqueue(`data: ${JSON.stringify(newNotificationList)}\n\n`);
       // Clean up when the connection is closed
       req.signal.addEventListener("abort", async () => {
-        removeClient(primaryEmail);
+        removeClient(user_email);
         controller.close();
         // console.log("Connection from client is closed CLEANUP");
-        await clearNotifications(primaryEmail);
-        nnnSendNotification(primaryEmail, 0);
+        await clearNotifications(user_email);
+        nnnSendNotification(user_email, 0);
         // set Notificatins' new flag to false so they wont' be rendered again
       });
     },

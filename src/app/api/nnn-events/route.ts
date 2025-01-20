@@ -4,20 +4,16 @@ import { addClient, removeClient } from "@/utils/newNumberOfNotifications";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const user = await stackServerApp.getUser();
-  if (!user || !user.primaryEmail) {
-    return new NextResponse("User not found or email not available", {
-      status: 404,
-    });
+  const user_email = req.headers.get("x-user-email");
+  if (!user_email) {
+    return new NextResponse("User email not found", { status: 400 });
   }
-  const { primaryEmail } = user;
-  // console.log("email = ", primaryEmail);
   const stream = new ReadableStream({
     async start(controller) {
-      addClient(primaryEmail, controller);
+      addClient(user_email, controller);
       // send initial nnn
       try {
-        const nnn = await getNNN(primaryEmail);
+        const nnn = await getNNN(user_email);
         // console.log("nnn to be sent", Number(nnn));
         controller.enqueue(`data: ${JSON.stringify(nnn)}\n\n`);
       } catch (error) {
@@ -27,7 +23,7 @@ export async function GET(req: NextRequest) {
 
       // Clean up when the connection is closed
       req.signal.addEventListener("abort", () => {
-        removeClient(primaryEmail);
+        removeClient(user_email);
         controller.close();
         // console.log("/api/nnn-events connection is closed");
       });

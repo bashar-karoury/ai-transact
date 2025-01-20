@@ -121,7 +121,7 @@ export default function SideBarComponent({ children }) {
             className={pathname === "/budget" ? styles.active : ""}
           >
             <WalletIcon className={styles.icon} />
-            <span>Budget</span>
+            <span>Budgets</span>
           </Link>
           <Link
             href="/reports"
