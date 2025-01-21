@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(45deg, #26415E, #83A6CE, #26415E);
+  color:#333
 }
 
 .signupCard {
@@ -11,13 +12,13 @@
   padding: 40px;
   border-radius: 20px;
   width: 100%;
-  max-width: 400px;
+  max-width: 500px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .title {
   text-align: center;
-  font-size: 24px;
+  font-size: 34px;
   font-weight: 500;
   color: #333;
   margin-bottom: 40px;
@@ -44,7 +45,7 @@
   padding: 8px 0;
   border: none;
   border-bottom: 1px solid #ddd;
-  font-size: 16px;
+  font-size: 26px;
   outline: none;
   background: transparent;
   color: #333;
@@ -52,7 +53,7 @@
 
 .inputGroup input::placeholder {
   color: #666;
-  font-size: 14px;
+  font-size: 24px;
 }
 
 .inputGroup input:focus {
@@ -65,7 +66,7 @@
   padding: 15px;
   border: none;
   border-radius: 30px;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: 500;
   cursor: pointer;
   margin-top: 20px;
@@ -77,3 +78,8 @@
 .signupButton:hover {
   opacity: 0.9;
 } 
+
+.tologin{
+  margin-top: 20px;
+  font-size: 20px;
+}

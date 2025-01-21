@@ -50,7 +50,7 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
   useEffect(() => {
     async function extractHandler() {
       if (audioblob) {
-        console.log(audioblob);
+        // console.log(audioblob);
         setIsProcessing(true);
         try {
           const transaction = await transcactize_audio(audioblob);
@@ -59,7 +59,7 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
           if (transaction) onTransactionRecorded(transaction);
         } catch (error) {
           console.log("Catch you");
-          // console.log(error);
+          console.log(error);
         } finally {
           setIsProcessing(false);
         }

@@ -70,12 +70,32 @@ export async function transcactize_audio(
   });
   // console.log("Processing");
   try {
-    const transcript = await client.transcripts.transcribe({ audio: audio });
-    console.log(transcript);
+    //upload file first
+    // const formData = new FormData();
+    // formData.append("file", audio);
+    // const uploadResponse = await fetch("https://api.assemblyai.com/v2/upload", {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: assemblyApiKey, // Replace with your API key
+    //   },
+    //   body: formData,
+    // });
+
+    // console.log("uploadResponse", uploadResponse);
+    // const uploadData = await uploadResponse.json();
+    // console.log("Uploaded File URL:", uploadData.upload_url);
+
+    // Start transcription
+    const transcript = await client.transcripts.transcribe({
+      // audio_url: uploadData.upload_url,
+      audio: audio,
+    });
+    console.log("transcript.text", transcript.text);
     if (transcript.text) {
       const transact: TransactionData = await extractTransactionGemini(
         transcript.text
       );
+      console.log("transact", transact);
       return transact;
     } else {
       // throw new Error("Transcript text is null or undefined");

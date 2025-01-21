@@ -44,6 +44,15 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       category: "",
     });
   };
+  const handleTransactionRecorded = (newVoiceTransaction) => {
+    console.log("Transaction recorded:", newTransaction);
+    const cleanedTransaction = Object.fromEntries(
+      Object.entries(newVoiceTransaction).filter(([_, v]) => v != null)
+    );
+    setNewTransaction({ ...newTransaction, ...cleanedTransaction });
+    // fill new transaction fields with the new transaction
+    // to do ...
+  };
 
   const handleAddTransaction = async (event) => {
     event.preventDefault();
@@ -172,7 +181,9 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
                     ))}
                   </select>
 
-                  <RecordTransactionButton />
+                  <RecordTransactionButton
+                    onTransactionRecorded={handleTransactionRecorded}
+                  />
 
                   <button
                     type="button"

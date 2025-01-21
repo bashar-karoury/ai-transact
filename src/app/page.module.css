@@ -1,24 +1,23 @@
 
 /* General Styles */
-/* body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  color: #333;
-} */
-
-/* .pacifico-regular {
-  font-family: "Pacifico", serif;
-  font-weight: 400;
-  font-style: normal;
-} */
-
-
+.main{
+  /* width:  */
+  display: flex;
+  /* flex-grow: 1; */
+  flex-direction: column;
+  flex: 1;
+  min-height: 100vh;
+  font-family:'Brush Script MT', cursive;
+  background-color: #dae0e8;
+  /* background-color: #071a2e; */
+}
 /* Header Styles */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  padding-bottom: 5px;
   background-color: #f8f8f8;
   border-bottom: 1px solid #ddd;
 }
@@ -32,11 +31,13 @@
 }
 
 .headerTitle {
-  font-size: 3.5rem;
+  color: #26415E;
+  font-size: 10.5rem;
   font-weight: bold;
-  font-family: "Pacifico", serif;
+  font-family: "Leckerli One", serif;
   font-weight: 400;
   font-style: normal;
+  padding-left: 30px;
 }
 
 .nav a {
@@ -44,7 +45,6 @@
   /* font-weight: bold; */
   color: #4b5561;
   text-decoration: none;
-  font-family: "Pacifico", serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -56,11 +56,12 @@
 /* Hero Section */
 .hero {
   text-align: center;
-  padding: 50px 20px;
-  background: linear-gradient(to right, #51616e, #00f2fe);
+  padding: 30px 20px;
+  background :linear-gradient(45deg, #26415E, #83A6CE, #26415E);
+  /* background: linear-gradient(to right, #51616e, #00f2fe); */
   color: white;
-  font-family: "Pacifico", serif;
-  font-weight: 300;
+  /* font-family: "Pacifico", serif; */
+  font-weight: 200;
   font-style: normal;
 }
 
@@ -74,11 +75,13 @@
 
 /* Button Styles */
 .btn {
-  padding: 8px 15px;
-  border: 1px solid #30353b;
+  padding: 40px 30px;
+  border: 3px solid #203249;
   border-radius: 5px;
-  color: #30353b;
+  color: #203249;
   font-weight: bold;
+  font-size: 38px;
+  margin-right: 10px;
 }
 
 .btn:hover {
@@ -86,25 +89,54 @@
   color: rgb(116, 108, 108);
 }
 
+.contactP{
+  /* height: 70px; */
+  margin: 10px 0px;
+  font-size: smaller;
+}
 .btnPrimary {
   background: #444c55;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
   text-decoration: none;
+
 }
 
 /* Section Styles */
+
+.container{
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  /* height: calc(100vh - 60px); Adjust 60px based on your header and footer height */
+}
 .section {
   padding: 40px 20px;
-  font-family: "Pacifico", serif;
+  /* font-family: "Pacifico", serif; */
   font-weight: 200;
   font-style: normal;
   font-size: 1.6rem;
+  color: #30353b;
+  width: 50%;
+  /* background-color: #ebf1f8; */
+}
+.section h3{
+  font-size: 2.8rem;
+  margin-bottom: 80px;
+}
+.contact {
+  padding: 10px 5px;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 1.6rem;
+  color: #30353b;
+  background-color: #ebf1f8;
 }
 
+
 .bgLight {
-  background-color: #f9f9f9;
+
 }
 
 .featuresGrid {
@@ -114,18 +146,31 @@
 }
 
 .featureCard {
+  background: #ffffff;
   text-align: center;
-  padding: 20px;
-  border: 1px solid #ddd;
+  padding: 10px;
+  border: 2px solid #ebf1f8;
   border-radius: 8px;
+  height: 120%;
 }
+
+.featureCard h4{
+  margin-bottom: 30px;
+  font-size: 1.6rem;
+} 
+.featureCard p{
+  margin-top: 30px;
+  font-size: 1.4rem;
+} 
 
 /* Footer */
 .footer {
   text-align: center;
-  padding: 20px;
+  padding: 5px;
   background-color: #333;
-  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .socialIcons {

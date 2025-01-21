@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   background: linear-gradient(45deg, #26415E, #83A6CE, #26415E);
+  color: #333;
 }
 
 .onboardCard {
@@ -11,17 +12,17 @@
   padding: 40px;
   border-radius: 20px;
   width: 100%;
-  max-width: 400px;
+  max-width: 600px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 500;
+  /* text-align: center; */
+  font-size: 44px;
+  /* font-weight: 500; */
   color: #333;
   margin-bottom: 40px;
-  letter-spacing: 1px;
+  /* letter-spacing: 1px; */
 }
 
 .label {
@@ -40,9 +41,10 @@
 }
 
 .inputGroup {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .inputGroup input {
@@ -86,8 +88,8 @@
 } 
 /* Style for the <select> element */
 .select {
-  width: 120px; /* Set the width of the dropdown */
-  height: auto; /* Adjust height for multiple options */
+  /* width: 120px; Set the width of the dropdown */
+  /* height: auto; Adjust height for multiple options */
   padding: 8px; /* Add padding for better spacing */
   border: 2px solid #26415E; /* Green border */
   border-radius: 8px; /* Rounded corners */
@@ -95,7 +97,7 @@
   font-size: 16px; /* Adjust font size */
   color: #333; /* Text color */
   outline: none; /* Remove outline on focus */
-  margin-right: 0;
+  align-self: flex-end;
 }
 /* Style for individual options */
 .option {

@@ -89,7 +89,7 @@ export default function SignUp() {
             SIGN UP
           </button>
         </form>
-        <p className={styles.signupText}>
+        <p className={styles.tologin}>
           Already have an account? <Link href="/login">Login</Link>
         </p>
       </div>

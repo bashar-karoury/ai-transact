@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
   try {
     await dbConnect();
     const user_email = req.headers.get("x-user-email");
-    // console.log('User email:', user_email);
+
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }
@@ -79,9 +79,8 @@ export async function GET(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     await dbConnect();
-    // const user_email = req.headers.get("x-user-email");
-    const user_email = "tester@testing.test";
-    // console.log('User email:', user_email);
+    const user_email = req.headers.get("x-user-email");
+
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }
@@ -107,9 +106,8 @@ export async function PUT(req: NextRequest) {
 export async function DELETE(req: NextRequest) {
   try {
     await dbConnect();
-    // const user_email = req.headers.get("x-user-email");
-    const user_email = "tester@testing.test";
-    // console.log('User email:', user_email);
+    const user_email = req.headers.get("x-user-email");
+
     if (!user_email) {
       return new NextResponse("User email not found", { status: 400 });
     }

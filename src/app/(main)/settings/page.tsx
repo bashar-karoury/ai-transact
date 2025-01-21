@@ -22,7 +22,7 @@ export default function Settings() {
       if (!result.ok) {
         throw new Error("response status code not 200");
       }
-      showStatusModel("User settings updated successfully");
+      showStatusModal("User settings updated successfully");
       console.log("result of editing user settings =", result);
     } catch (error) {
       // console.error(`Failed to put user settings to database ${error}`);

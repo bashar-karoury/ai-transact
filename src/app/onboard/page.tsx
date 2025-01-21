@@ -59,7 +59,7 @@ export default function Onboard() {
     <div className={styles.container}>
       <div className={styles.onboardCard}>
         {/* <div className="onboard-container"> */}
-        <h1>Welcome to AI-Transact</h1>
+        <h1 className={styles.title}>Welcome to Ai-Transact</h1>
         <form className={styles.form}>
           <div className={styles.inputGroup}>
             <label className={styles.label}>Currency</label>
