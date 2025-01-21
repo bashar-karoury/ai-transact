@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Reports.module.css";
 import PieChart from "./PieChart";
 import { useErrorModal } from "@/Components/ModalContext";
+
 const ReportsPage = () => {
   const { showErrorModal } = useErrorModal();
   const [timePeriod, setTimePeriod] = useState("this_month");
@@ -13,18 +14,13 @@ const ReportsPage = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Fetch the data from the API when the timePeriod changes
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/reports?time=${timePeriod}`);
         const data = await response.json();
         setData(data);
-        console.log("this is the response", response);
-        console.log("this is the data", data);
 
         if (response.ok) {
-          // Set the fetched data
-
           setExpenseData(Object.values(data.categorize_expense));
           setIncomeData(Object.values(data.categorize_income));
           setTotalExpenses(data.total_expense);
@@ -53,19 +49,33 @@ const ReportsPage = () => {
 
         <div className={styles.reportContainer}>
           <div className={styles.reportSection}>
-            <h2>Expenses:</h2>
-            <PieChart data={expenseData} labels={Object.keys(data?.categorize_expense || {})} />
-            <div className={styles.total}>Total: ${totalExpenses}</div>
+            <div className={styles.chartContainer}>
+              <h2>Expenses</h2>
+              <div className={styles.stats}>
+                <span>Income:</span>
+                <span className={styles.value}>${totalIncomes}</span>
+              </div>
+              <PieChart
+                data={expenseData}
+                labels={Object.keys(data?.categorize_expense || {})}
+              />
+            </div>
           </div>
 
           <div className={styles.reportSection}>
-            <h2>Incomes:</h2>
-            <PieChart data={incomeData} labels={Object.keys(data?.categorize_income || {})} />
-            <div className={styles.total}>Total: ${totalIncomes}</div>
+            <div className={styles.chartContainer}>
+              <h2>Incomes</h2>
+              <div className={styles.stats}>
+                <span>Expenses:</span>
+                <span className={styles.value}>${totalExpenses}</span>
+              </div>
+              <PieChart
+                data={incomeData}
+                labels={Object.keys(data?.categorize_income || {})}
+              />
+            </div>
           </div>
-
         </div>
-
       </div>
     </div>
   );
