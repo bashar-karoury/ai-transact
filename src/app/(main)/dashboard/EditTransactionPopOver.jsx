@@ -111,16 +111,6 @@ export default function EditTransactionPopOver({
 
               <div className={styles.formField}>
                 <label>Category:</label>
-                {/* <input
-                  type="text"
-                  value={editingTransaction.category || ""}
-                  onChange={(e) =>
-                    setEditingTransaction({
-                      ...editingTransaction,
-                      category: e.target.value,
-                    })
-                  }
-                /> */}
                 <select
                   name="category"
                   className={styles.inputCategory}

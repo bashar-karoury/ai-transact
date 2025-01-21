@@ -240,7 +240,7 @@ export default function Budget() {
             :
             < div key={index} className={styles.budgetItem} >
               <span className={styles.budgetCategory}>{budget.category}</span>
-              <span className={styles.budgetAmount}>{budget.amount}</span>
+              <span className={styles.budgetAmount}>${budget.amount}</span>
               <button
                 className={dashboardstyles.optionsButton}
                 onClick={(e) => handleOptionsClick(budget, e)}

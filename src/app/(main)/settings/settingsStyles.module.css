@@ -10,17 +10,17 @@
   background: white;
   padding: 40px;
   border-radius: 20px;
-  width: 100%;
-  max-width: 400px;
+  /* width: 100%; */
+  max-width: 600px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   margin-left: 15px;
   margin-top: 15px;
 }
 
 .title {
-  text-align: center;
-  font-size: 24px;
-  font-weight: 500;
+  text-align: left;
+  font-size: 38px;
+  /* font-weight: 500; */
   color: #333;
   margin-bottom: 40px;
   letter-spacing: 1px;
@@ -28,7 +28,9 @@
 
 .label {
   font-size: 24px;
+  color: #333;
 }
+
 
 .form {
   display: flex;
@@ -56,7 +58,8 @@
   background-color: #f9f9f9; /* Light background */
   font-size: 16px; /* Adjust font size */
   color: #333; /* Text color */
-  margin-right: 0;
+  /* margin-right: 0; */
+  margin-left: auto;
 
 }
 
@@ -89,7 +92,7 @@
 } 
 /* Style for the <select> element */
 .select {
-  width: 120px; /*Set the width of the dropdown */
+  /* width: 120px; Set the width of the dropdown */
   height: auto; /* Adjust height for multiple options */
   padding: 7px; /* Add padding for better spacing */
   border: 2px solid #26415E; /* Green border */
@@ -98,7 +101,8 @@
   font-size: 16px; /* Adjust font size */
   color: #333; /* Text color */
   outline: none; /* Remove outline on focus */
-  margin-right: 0;
+  margin-left: auto;
+  align-self: flex-end;
 }
 /* Style for individual options */
 .option {

@@ -61,7 +61,6 @@ export default function SideBarComponent({ children }) {
   }, []);
 
   return (
-
     <div className={styles.container}>
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
@@ -79,8 +78,8 @@ export default function SideBarComponent({ children }) {
           <div className={styles.userInfo}>
             <img
               src={userSettings?.profilePicture || "/userIcon.png"}
-              width={30}
-              height={30}
+              width={40}
+              height={40}
             />
 
             {loadingSettings ? (
@@ -88,7 +87,7 @@ export default function SideBarComponent({ children }) {
             ) : error ? (
               <h2>Error</h2>
             ) : (
-              <span>{userSettings.email}</span>
+              <span className={styles.userEmail}>{userSettings.email}</span>
             )}
           </div>
         </div>

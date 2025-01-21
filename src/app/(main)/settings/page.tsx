@@ -34,7 +34,7 @@ export default function Settings() {
     // className={styles.container}
     <div>
       <div className={styles.settingsCard}>
-        <h1>Settings</h1>
+        <h1 className={styles.title}>Settings</h1>
 
         <form className={styles.form}>
           <div className={styles.inputGroup}>
