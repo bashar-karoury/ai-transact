@@ -35,8 +35,8 @@ export default function DescriptionInput({
   useEffect(() => {
     async function CallCategorization() {
       try {
-        // const result = await deduceCategoryFromDescription(description);
-        const result = null;
+        const result = await deduceCategoryFromDescription(description);
+        console.log(result);
         if (result) {
           onFinishCategorization(result);
         }

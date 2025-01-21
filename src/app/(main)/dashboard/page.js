@@ -54,7 +54,7 @@ export default function Dashboard() {
 
   return (
     <div className={styles.dashboardContainer}>
-      <TransactionHeader setTime={setTime} />
+      <TransactionHeader time={time} setTime={setTime} />
       <TransactionsListComponent transactions={transactions} handleOptionsClick={handleOptionsClick} />
 
       <TranasactionOptionsPopOver activeTransaction={activeTransaction}

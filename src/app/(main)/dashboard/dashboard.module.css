@@ -273,33 +273,37 @@
 .title{
   font-size: 38px;
 }
+
 .timeFilter {
-  display: flex;
-  gap: 15px;
+    /* margin-bottom: 20px; */
   margin-top: 15px;
+  margin-bottom: 2%;
   padding: 10px;
-  padding-left: 0;
   border-radius: 20px;
+  gap: 15px;
+  text-align: center;
+  align-items: center;
 }
 
-.filterButton {
+.timeFilter button {
   padding: 10px 60px;
+  margin: 5px;
   border: 1px solid #3c4a7e;
   border-radius: 6px;
   background: #f5f5f5;
   color: #000000;
-  font-size: 18px;
+  font-size: 24px;
   cursor: pointer;
   transition: all 0.3s;
 }
 
-.filterButton:hover {
+.timeFilter button:hover {
   background: #83A6CE;
 }
 
-.filterButton.active {
+.timeFilter button.active {
   border: 1px solid #3c4a7e;
-  background: #0B1B32;
+  background: #4b5f75;
   color: white;
   border-color: #1e3d57;
 }

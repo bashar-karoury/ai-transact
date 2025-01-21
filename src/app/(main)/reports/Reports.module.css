@@ -1,58 +1,83 @@
 .container {
   display: flex;
   height: 100vh;
-  font-family: Arial, sans-serif;
+  /* height: 100%; */
+  /* font-family: Arial, sans-serif; */
 }
 
 .main {
   flex: 1;
   padding: 20px;
-  overflow-y: auto;
+  /* overflow-y: auto; */
+  /* overflow-x: auto; */
+}
+
+.title{
+  font-size: 48px;
 }
 
 .filters {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
+  margin-bottom: 5%;
   text-align: center;
+  align-items: center;
 }
 
 .filters button {
-  margin-right: 10px;
+  font-size: 30px;
+  margin-right: 20px;
   padding: 5px 15px;
   cursor: pointer;
   border: none;
-  background-color: #558a60;
+  background-color: #f1f9f2;
   color: rgb(26, 20, 20);
   border-radius: 5px;
   transition: background-color 0.3s;
 }
 
+
 .filters button:hover {
-  background-color: #222c36;
+  background-color: #5b9cdc;
 }
 
+
+.filters button.active {
+  background: #5b9cdc;
+  /* color: red; */
+}
 .reportContainer {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  /* justify-content: space-between; */
+  justify-content: space-evenly; /* Equal space around items */
+  align-items: center; /* Align items vertically */
+  gap: auto;
 }
 
 .reportSection {
-  flex: 1;
-  max-width: 45%;
+  /* flex: 1; */
+  /* max-width: 45%; */
 }
 
 .chartContainer {
-  padding: 20px;
+  padding: 15px;
   background-color: #f8f9fa;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   text-align: center;
-  height: 300px;
-  width: 300px;
+  width: fit-content;
+  margin: 2px;
+  /* height: 300px; */
+  /* max-width: 90%; */
+  /* margin-left: 70px; */
 }
 
 .chartContainer h2 {
   margin-bottom: 15px;
+}
+
+.heading2{
+  color:#333;
+  font-size: 34px;
 }
 
 .stats {
@@ -63,14 +88,22 @@
 }
 
 .stats span {
-  font-size: 16px;
+  font-size: 26px;
   font-weight: bold;
+  margin-left: 45%;
+  justify-content: center;
+  align-items: center;
 }
 
-.stats .value {
+.stats .green {
   color: #28a745;
+  /* font-size: 30px; */
+}
+.stats .red {
+  color: red;
+  /* font-size: 30px; */
 }
 
 .chartContainer canvas {
-  margin: auto;
+  /* margin: auto; */
 }

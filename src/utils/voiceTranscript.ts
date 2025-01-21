@@ -71,6 +71,7 @@ export async function transcactize_audio(
   // console.log("Processing");
   try {
     const transcript = await client.transcripts.transcribe({ audio: audio });
+    console.log(transcript);
     if (transcript.text) {
       const transact: TransactionData = await extractTransactionGemini(
         transcript.text

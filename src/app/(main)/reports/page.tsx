@@ -25,6 +25,7 @@ const ReportsPage = () => {
           setIncomeData(Object.values(data.categorize_income));
           setTotalExpenses(data.total_expense);
           setTotalIncomes(data.total_income);
+          console.log("reports received data", data);
         } else {
           console.log("Error fetching data:", data.error);
         }
@@ -40,20 +41,34 @@ const ReportsPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.main}>
-        <h1>Reports</h1>
+        <h1 className={styles.title}>Reports</h1>
         <div className={styles.filters}>
-          <button onClick={() => setTimePeriod("today")}>Today</button>
-          <button onClick={() => setTimePeriod("this_month")}>Month</button>
-          <button onClick={() => setTimePeriod("this_year")}>Year</button>
+          <button
+            onClick={() => setTimePeriod("today")}
+            className={timePeriod === "today" ? styles.active : ""}
+          >
+            Today
+          </button>
+          <button
+            onClick={() => setTimePeriod("this_month")}
+            className={timePeriod === "this_month" ? styles.active : ""}
+          >
+            Month
+          </button>
+          <button
+            onClick={() => setTimePeriod("this_year")}
+            className={timePeriod === "this_year" ? styles.active : ""}
+          >
+            Year
+          </button>
         </div>
 
         <div className={styles.reportContainer}>
           <div className={styles.reportSection}>
             <div className={styles.chartContainer}>
-              <h2>Expenses</h2>
+              <h2 className={styles.heading2}>Expenses</h2>
               <div className={styles.stats}>
-                <span>Income:</span>
-                <span className={styles.value}>${totalIncomes}</span>
+                <span className={styles.red}>${totalExpenses}</span>
               </div>
               <PieChart
                 data={expenseData}
@@ -64,10 +79,9 @@ const ReportsPage = () => {
 
           <div className={styles.reportSection}>
             <div className={styles.chartContainer}>
-              <h2>Incomes</h2>
+              <h2 className={styles.heading2}>Incomes</h2>
               <div className={styles.stats}>
-                <span>Expenses:</span>
-                <span className={styles.value}>${totalExpenses}</span>
+                <span className={styles.green}>${totalIncomes}</span>
               </div>
               <PieChart
                 data={incomeData}

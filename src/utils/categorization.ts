@@ -6,7 +6,6 @@ import {
 import categories from "@/utils/categories";
 export default async function deduceCategoryFromDescription(text: string) {
   const apiKey: string = process.env.NEXT_PUBLIC_GEMINI_API_KEY || "";
-
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY environment variable not set.");
   }

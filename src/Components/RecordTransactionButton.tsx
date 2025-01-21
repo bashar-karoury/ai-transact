@@ -53,8 +53,8 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
         console.log(audioblob);
         setIsProcessing(true);
         try {
-          // const transaction = await transcactize_audio(audioblob);
-          const transaction = null;
+          const transaction = await transcactize_audio(audioblob);
+          // const transaction = null;
           // console.log("transaction received", transaction);
           if (transaction) onTransactionRecorded(transaction);
         } catch (error) {

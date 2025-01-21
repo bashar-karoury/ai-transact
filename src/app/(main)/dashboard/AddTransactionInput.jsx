@@ -22,7 +22,11 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     type: "income",
     category: "",
   });
-
+  function finishCategorization(output_category) {
+    console.log("Finished Categorizing");
+    console.log(output_category);
+    setNewTransaction({ ...newTransaction, category: output_category });
+  }
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewTransaction({ ...newTransaction, [name]: value });
@@ -94,7 +98,6 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       <button
         onClick={() => setAddMenu(true)}
         className={styles.floatingAddButton}
-        
       >
         +
       </button>
@@ -112,14 +115,17 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
                     onClick={() => setAddMenu(false)}
                     aria-label="Close menu"
                   >
-                    {/* <XMarkIcon className={styles.XMarkIconButton} />    num1 */} 
-                    
-                    <img src="/ai-transact/public/cross-delete-icon48px.png" alt="Close" className={styles.XMarkIconButton} />  
+                    {/* <XMarkIcon className={styles.XMarkIconButton} />    num1 */}
 
-                    
+                    <img
+                      src="/ai-transact/public/cross-delete-icon48px.png"
+                      alt="Close"
+                      className={styles.XMarkIconButton}
+                    />
                   </button>
 
                   <DescriptionInput
+                    onFinishCategorization={finishCategorization}
                     value={newTransaction.description}
                     onChangeParent={handleInputChange}
                   />
