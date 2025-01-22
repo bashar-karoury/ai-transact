@@ -17,12 +17,17 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color:#26415e; 
+  background-color:#ffffff;
+  border: 5px solid #111827;
   padding: 7px 7px; 
   display: flex; 
   align-items: center; 
-  gap: 5px;
+  gap: 15px;
   border-radius: 15px;
+  width: 25%;
+  font-size: 30px;
+  height: 80%;
+  /* padding: 0px 100px; */
 }
 
 .inputSection input {
@@ -43,6 +48,7 @@
   padding: 2em;
   border-radius: 5px;
   border: 1px solid #e5e7eb;
+  width: 100%;
 }
 
  .XMarkButton {
@@ -61,26 +67,23 @@
   color: #f30000;
 } 
 
-/* .descriptionInput,
-.dateInput,
-.amountInput,
-.categorySelect {
-  border: none;
-  padding: 3px;
-  font-size: 14px;
+.closeButton {
+  background-color: transparent;
   outline: none;
-  background: transparent;
-  bottom: 0;
-  right: 0;
-  transform: translateX(33.33% 40%);
-  border-radius: 20px;
-  background-color: #f3f4f6;
+  margin-left: auto;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  border: none;
+  font-weight: bold;
+  color:#940101 ;
+  cursor: pointer;
+}
 
-} */
 
 .descriptionInput {
   /* flex: 0; */
   width: 100%;
+  font-size: 30px;
   background-color: #f3f4f6;
 }
 
@@ -154,6 +157,7 @@
     min-width: 100%;
     padding: 10px;
     background-color: #f3f4f6;
+    font-size: 40px;
     /* border-radius: 20px; */
   }
 
@@ -165,6 +169,7 @@
     background-color: #f3f4f6;
     border-radius: 20px;
     width: 100%;
+    font-size: 40px ;
   }
 }
 
@@ -228,8 +233,8 @@
 }
 
 .transactionDescription {
-  font-size: 20px;
-  color: #828282;
+  font-size: 22px;
+  color: #666666;
   padding: 5px;
   width: 55%;
 }
@@ -271,7 +276,9 @@
   padding-left: 0;
 }
 .title{
-  font-size: 38px;
+  font-size: 42px;
+  font-weight: 200;
+  font-family: "DM Serif Text", serif;;
 }
 
 .timeFilter {
@@ -295,6 +302,8 @@
   font-size: 24px;
   cursor: pointer;
   transition: all 0.3s;
+  /* font-family: "Leckerli One", serif; */
+  font-family: "DM Serif Text", serif;
 }
 
 .timeFilter button:hover {
@@ -315,18 +324,32 @@
   }
 
   .transactionForm {
-    flex-wrap: wrap;
-    gap: 5px;
+    display: flex;
+    /* align-items: center; */
+    gap: 100px; 
+    /* flex-wrap: wrap; */
+    /* display: flex; */
+    /* align-items: center; */
+    flex-direction: column;
+    /* gap: 8px; */
+    background: white;
+    padding: 2em;
+    border-radius: 5px;
+    border: 1px solid #e5e7eb;
+    width: 100%;
+    font-size: 50px;
   }
 
   .inputGroup {
-    min-width: calc(40% - 8px);
+    /* min-width: calc(40% - 8px); */
+    min-width: 500px;
     padding: 10px;
   }
 
   .descriptionInput {
     min-width: 100%;
     padding: 10px;
+    font-size: 400px;
   }
 
   .categorySelect,
@@ -820,13 +843,13 @@
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background-color: #4F46E5;
+  background-color: #26415E;
   border: none;
   color: white;
-  font-size: 24px;
+  font-size: 44px;
   cursor: pointer;
   display: flex;
   align-items: center;

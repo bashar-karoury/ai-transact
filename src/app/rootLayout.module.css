@@ -29,7 +29,7 @@
   /* height: 500%; */
   min-height: 100%;
   /* height: auto; */
-  font-size: 24px;
+  font-size: 30px;
   flex-wrap: wrap;
   flex-grow: 1;
   background :linear-gradient(45deg, #26415E, #83A6CE, #26415E);
@@ -37,7 +37,7 @@
 }
 
 .sidebar {
-  width: 250px;
+  width: 380px;
   background: rgb(255, 255, 255);
   border-right: 1px solid #eee;
   padding: 20px;
@@ -70,6 +70,7 @@
   gap: 8px;
   color: #2e63a0;
   font-size: 14px;
+  margin-top: 20px;
 }
 
 .userIcon {
@@ -125,7 +126,7 @@
 .balance {
   margin-top: auto;
   padding: 20px;
-  background: #f8f9fa;
+  background: #ebf5fb;
   border-radius: 8px;
 }
 
@@ -136,12 +137,12 @@
 
 .balance h2 {
   color: #26415E;
-  font-size: 24px;
+  font-size: 34px;
 }
 
 .mainContent {
   flex: 1;
-  margin-left: 230px;
+  margin-left: 370px;
   padding: 15px 40px;
   background: (45deg, #26415E, #83A6CE, #26415E);
   border-radius: 20px; 
@@ -164,5 +165,38 @@
   }
 }
 .userEmail{
-  font-size: 18px;
+  font-size: 28px;
+  padding-left: 40px;
+}
+
+.signOutButton {
+  margin-top: 12px;
+  margin-left: 180px;
+  /* display: flex; */
+  background-color: #26415E;
+  padding: 2px 0;
+  border-radius: 10px;
+  color: #fff;
+  transform: none;
+  transition: transform 50ms ease;
+  /* width: 100%; */
+  max-width: 40%;
+  max-height: 35px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.signOutButton:hover {
+  background-color: #83A6CE;
+}
+
+.sidebarHeader h1 {
+  font-family: "Leckerli One", serif;
+  font-weight: 400;
+  letter-spacing: 0.1px; /* Adjust the value as needed */
+  font-size: 65px;
+  width: 300%;
+  margin:0;
+  padding-top: 30px;
+  margin-bottom: 50px;
 }
