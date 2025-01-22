@@ -21,9 +21,9 @@ export default function Onboard() {
     logo: null,
   });
   useEffect(() => {
-    // if (user?.clientMetadata?.onboarded) {
-    //   router.push("/");
-    // }
+    if (user?.clientMetadata?.onboarded) {
+      router.push("/");
+    }
   }, [user, router]);
 
   // if (user?.clientMetadata?.onboarded) {
