@@ -106,7 +106,10 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
     <div>
       {/* + Button */}
       <button
-        onClick={() => setAddMenu(true)}
+        onClick={() => {
+          setAddMenu(true);
+          clearTransactionFields;
+        }}
         className={styles.floatingAddButton}
       >
         +
