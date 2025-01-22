@@ -78,6 +78,8 @@
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
+  background-color: white;
+  color: black;
   border-radius: 8px;
   font-size: 26px;
   transition: border-color 0.3s;
