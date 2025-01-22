@@ -68,8 +68,8 @@ export default function SideBarComponent({ children }) {
           <div className={styles.userInfo}>
             <img
               src={userSettings?.profilePicture || "/userIcon.png"}
-              width={60}
-              height={60}
+              width={40}
+              height={40}
             />
 
             {loadingSettings ? (

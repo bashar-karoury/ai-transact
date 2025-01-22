@@ -53,7 +53,7 @@
   margin-bottom: 30px;
 }
 
-.sidebarHeader h1 {
+/* .sidebarHeader h1 {
   font-size: 24px;
   color: #26415E;
   margin-bottom: 10px;
@@ -62,7 +62,7 @@
   height: 72px;
   padding: 0 1.25rem 0 0;
  
-}
+} */
 
 .userInfo {
   display: flex;
@@ -107,7 +107,7 @@
   height: 20px;
 }
 
-
+/* 
 .signOutButton {
   background-color: #1e2235;
   border-radius: 20px;
@@ -122,7 +122,7 @@
   color: #fff;
   cursor: pointer;
 }
-  
+   */
 .balance {
   margin-top: auto;
   padding: 20px;
@@ -137,7 +137,7 @@
 
 .balance h2 {
   color: #26415E;
-  font-size: 34px;
+  font-size: 30px;
 }
 
 .mainContent {
@@ -165,25 +165,26 @@
   }
 }
 .userEmail{
-  font-size: 28px;
-  padding-left: 40px;
+  font-size: 24px;
+  padding-left: 10px;
 }
 
 .signOutButton {
   margin-top: 12px;
-  margin-left: 180px;
+  /* margin-left: 220px; */
   /* display: flex; */
   background-color: #26415E;
-  padding: 2px 0;
-  border-radius: 10px;
+  /* padding: 20px 0; */
+  padding: 10px;
+  border-radius: 5px;
   color: #fff;
   transform: none;
   transition: transform 50ms ease;
-  /* width: 100%; */
+  width: fit-content;
   max-width: 40%;
   max-height: 35px;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .signOutButton:hover {
@@ -199,4 +200,8 @@
   margin:0;
   padding-top: 30px;
   margin-bottom: 50px;
+  color: #26415E;
+  align-items: center;
+  height: 72px;
+  padding: 0 1.25rem 0 0;
 }

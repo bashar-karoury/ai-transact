@@ -84,6 +84,7 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       const data = await response.json();
       console.log("Success:", data);
       showStatusModal("transaction added successfully");
+      setAddMenu(false);
     } catch (error) {
       // console.error("Error:", error);
       showErrorModal(
@@ -115,89 +116,91 @@ export default function AddTransactionInput({ tofetch, setFetch }) {
       {showInputSection && (
         <div className={styles.menu}>
           {addMenu && (
-            <div className={styles.inputSection}>
-              <form className={styles.transactionForm}>
-                {/* <div className={styles.formWrapper}> */}
-                {/* Close button */}
-                <button
-                  type="button"
-                  onClick={() => setAddMenu(false)}
-                  aria-label="Close menu"
-                  className={styles.closeButton}
-                >
-                  x
-                </button>
+            <div className={styles.editPopoverOverlay}>
+              <div className={styles.inputSection}>
+                <form className={styles.transactionForm}>
+                  {/* <div className={styles.formWrapper}> */}
+                  {/* Close button */}
+                  <button
+                    type="button"
+                    onClick={() => setAddMenu(false)}
+                    aria-label="Close menu"
+                    className={styles.closeButton}
+                  >
+                    x
+                  </button>
 
-                <DescriptionInput
-                  onFinishCategorization={finishCategorization}
-                  value={newTransaction.description}
-                  onChangeParent={handleInputChange}
-                />
+                  <DescriptionInput
+                    onFinishCategorization={finishCategorization}
+                    value={newTransaction.description}
+                    onChangeParent={handleInputChange}
+                  />
 
-                <input
-                  type="date"
-                  name="date"
-                  value={newTransaction.date}
-                  onChange={handleInputChange}
-                  className={styles.dateInput}
-                />
+                  <input
+                    type="date"
+                    name="date"
+                    value={newTransaction.date}
+                    onChange={handleInputChange}
+                    className={styles.dateInput}
+                  />
 
-                <input
-                  type="number"
-                  name="amount"
-                  placeholder="Amount"
-                  min="0"
-                  className={styles.amountInput}
-                  onChange={handleInputChange}
-                  value={newTransaction.amount}
-                />
+                  <input
+                    type="number"
+                    name="amount"
+                    placeholder="Amount"
+                    min="0"
+                    className={styles.amountInput}
+                    onChange={handleInputChange}
+                    value={newTransaction.amount}
+                  />
 
-                <select
-                  name="type"
-                  className={styles.typeSelect}
-                  onChange={handleInputChange}
-                  value={newTransaction.type}
-                >
-                  <option value="expense">expense</option>
-                  <option value="income">income</option>
-                </select>
+                  <select
+                    name="type"
+                    className={styles.typeSelect}
+                    onChange={handleInputChange}
+                    value={newTransaction.type}
+                  >
+                    <option value="expense">expense</option>
+                    <option value="income">income</option>
+                  </select>
 
-                <select
-                  name="category"
-                  className={styles.inputCategory}
-                  onChange={handleInputChange}
-                  value={newTransaction.category}
-                >
-                  <option value="">Category</option>
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
+                  <select
+                    name="category"
+                    className={styles.inputCategory}
+                    onChange={handleInputChange}
+                    value={newTransaction.category}
+                  >
+                    <option value="">Category</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </select>
 
-                <RecordTransactionButton
-                  onTransactionRecorded={handleTransactionRecorded}
-                />
+                  <RecordTransactionButton
+                    onTransactionRecorded={handleTransactionRecorded}
+                  />
 
-                <button
-                  type="button"
-                  onClick={handleAddTransaction}
-                  className={styles.addButton}
-                >
-                  Add
-                </button>
+                  <button
+                    type="button"
+                    onClick={handleAddTransaction}
+                    className={styles.addButton}
+                  >
+                    Add
+                  </button>
 
-                <button
-                  type="button"
-                  onClick={clearTransactionFields}
-                  className={styles.clearButton}
-                  aria-label="Clear transaction"
-                >
-                  Clear
-                </button>
-                {/* </div> */}
-              </form>
+                  <button
+                    type="button"
+                    onClick={clearTransactionFields}
+                    className={styles.clearButton}
+                    aria-label="Clear transaction"
+                  >
+                    Clear
+                  </button>
+                  {/* </div> */}
+                </form>
+              </div>
             </div>
           )}
         </div>

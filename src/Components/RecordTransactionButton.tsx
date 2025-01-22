@@ -77,9 +77,9 @@ export default function RecordTransactionButton({ onTransactionRecorded }) {
         onMouseUp={stopButtonHandler}
       >
         <MicrophoneIcon className={styles.micIcon} />
-        {isRecording ? "Recording Now.." : "Record"}
+        {isRecording ? "Recording Now.." : ""}
+        {isProcessing ? "AI thinking ..." : ""}
       </button>
-      {isProcessing ? "AI thinking.." : ""}
     </>
   );
 }

@@ -18,16 +18,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color:#ffffff;
-  border: 5px solid #111827;
+  border: 7px solid #111827;
   padding: 7px 7px; 
   display: flex; 
   align-items: center; 
   gap: 15px;
   border-radius: 15px;
-  width: 25%;
-  font-size: 30px;
-  height: 80%;
-  /* padding: 0px 100px; */
+  width: 30%;
 }
 
 .inputSection input {
@@ -50,8 +47,19 @@
   border: 1px solid #e5e7eb;
   width: 100%;
 }
+.transactionForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background: white;
+  padding: 20px;
+  border-radius: 5px;
+  border: 1px solid #e5e7eb;
+  width: 100%;
+  font-family: "Euclid Circular A", Poppins;
+}
 
- .XMarkButton {
+.XMarkButton {
   /* background-radius; 50%:;  */
   border: none;
   padding: 8px;
@@ -80,12 +88,12 @@
 }
 
 
-.descriptionInput {
-  /* flex: 0; */
+/* .descriptionInput {
   width: 100%;
-  font-size: 30px;
+  font-size: 22px;
   background-color: #f3f4f6;
-}
+  font-family: "Euclid Circular A", Poppins;
+} */
 
 
 .amountInput{
@@ -100,14 +108,14 @@
   padding: 20px;
   background-color: #f3f4f6;
 } */
-
-.categorySelect,
+/* .categorySelect,
 .typeSelect {
-  padding: 9px 8px;
-  border-radius: 10px;
-  background-color: #f3f4f6;
+  min-width: calc(50% - 4px);
   width: 100%;
-}
+  padding: 20px;
+  border-radius: 20px;
+
+} */
 
 .micButton {
   background-color: #f3f4f6;
@@ -118,13 +126,16 @@
   align-items: center;
   justify-content: center;
   border-radius: 20px;
-  width: 100%;
+  /* width: 30%; */
+  font-size: 20px;
+  margin: 0 auto;
 }
 
 .micIcon {
-  width: 20px;
-  height: 20px;
+  width: 60px;
+  height: 60px;
   color: #26415e;
+  
 }
 
 .addButton {
@@ -133,11 +144,11 @@
   border: none;
   border-radius: 6px;
   padding: 8px 8px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 500;
   cursor: pointer;
   margin: 0 auto;
-  width: 100%;
+  width: 50%;
   margin-top: 5px;
   margin-bottom: 2px;
 }
@@ -147,30 +158,24 @@
   background: #83A6CE;
 }
 
-/* Responsive styles */
-@media (max-width: 768px) {
-  .formWrapper {
-    flex-wrap: wrap;
-  }
 
-  .descriptionInput {
-    min-width: 100%;
-    padding: 10px;
-    background-color: #f3f4f6;
-    font-size: 40px;
-    /* border-radius: 20px; */
-  }
+.formWrapper {
+  flex-wrap: wrap;
+}
 
-  .dateInput,
-  .amountInput,
-  .categorySelect {
-    min-width: calc(33.33% - 8px);
-    padding: 20px;
-    background-color: #f3f4f6;
-    border-radius: 20px;
-    width: 100%;
-    font-size: 40px ;
-  }
+.typeSelect,
+.descriptionInput,
+.dateInput,
+.amountInput,
+.inputCategory,
+.categorySelect {
+  padding: 10px;
+  background-color: #f3f4f6;
+  border-radius: 20px;
+  width: 100%;
+  min-width: 100%;
+  font-size: 22px ;
+  font-family: "Euclid Circular A", Poppins;
 }
 
 .recording {
@@ -276,9 +281,8 @@
   padding-left: 0;
 }
 .title{
-  font-size: 42px;
-  font-weight: 200;
-  font-family: "DM Serif Text", serif;;
+  font-size: 44px;
+  color: #ffffff
 }
 
 .timeFilter {
@@ -293,16 +297,17 @@
 }
 
 .timeFilter button {
-  padding: 10px 60px;
+  font-size: 30px;
+  margin-right: 20px;
+  padding: 5px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* padding: 10px 60px; */
   margin: 5px;
   border: 1px solid #3c4a7e;
   border-radius: 6px;
   background: #f5f5f5;
   color: #000000;
-  font-size: 24px;
-  cursor: pointer;
-  transition: all 0.3s;
-  /* font-family: "Leckerli One", serif; */
   font-family: "DM Serif Text", serif;
 }
 
@@ -317,50 +322,25 @@
   border-color: #1e3d57;
 }
 
-/* Adjust for mobile */
-@media (max-width: 768px) {
-  .inputContainer {
-    left: 0;
-  }
 
-  .transactionForm {
-    display: flex;
-    /* align-items: center; */
-    gap: 100px; 
-    /* flex-wrap: wrap; */
-    /* display: flex; */
-    /* align-items: center; */
-    flex-direction: column;
-    /* gap: 8px; */
-    background: white;
-    padding: 2em;
-    border-radius: 5px;
-    border: 1px solid #e5e7eb;
-    width: 100%;
-    font-size: 50px;
-  }
-
-  .inputGroup {
-    /* min-width: calc(40% - 8px); */
-    min-width: 500px;
-    padding: 10px;
-  }
-
-  .descriptionInput {
-    min-width: 100%;
-    padding: 10px;
-    font-size: 400px;
-  }
-
-  .categorySelect,
-  .typeSelect {
-    min-width: calc(50% - 4px);
-    width: 100%;
-    padding: 20px;
-    border-radius: 20px;
-
-  }
+.inputContainer {
+  left: 0;
 }
+
+
+.inputGroup {
+  /* min-width: calc(40% - 8px); */
+  min-width: 500px;
+  padding: 10px;
+}
+/* .descriptionInput {
+  min-width: 100%;
+  padding: 10px;
+  font-size: 20px;
+  font-family: "Euclid Circular A", Poppins;
+} */
+
+
 
 
 .transactionActions {
@@ -415,7 +395,7 @@
 
 .popoverHeader h3 {
   margin: 0;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 500;
   color: #000000;
 }
@@ -439,7 +419,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 18px;
   color: #374151;
   border-radius: 4px;
 }
@@ -494,6 +474,7 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  font-size: 20px;
 }
 
 .formGroup {
@@ -532,7 +513,7 @@
 .saveButton {
   padding: 10px 16px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 }
@@ -631,7 +612,7 @@
 .saveButton {
   padding: 10px 12px;
   border-radius: 4px;
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 500;
   cursor: pointer;
 }
@@ -680,8 +661,8 @@
 }
 
 .editTitle {
-  font-size: 20px;
-  font-weight: 500;
+  font-size: 32px;
+  font-weight: 600;
   margin: 0 0 20px 0;
   color: #111827;
 }
@@ -705,12 +686,11 @@
 }
 
 .formField input,
-.formField textarea,
-.inputCategory {
+.formField textarea {
   padding: 8px 12px;
   border: 2px solid #e5e7eb;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 20px;
   width: 100%;
 }
 
@@ -730,7 +710,7 @@
 .saveButton {
   padding: 8px 16px;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 500;
   cursor: pointer;
 }
@@ -785,7 +765,7 @@
 .clearButton {
   padding: 4px;
   text-align: center;
-  font-size: 14px;
+  font-size: 20px;
   margin-left: auto;
   margin-right: auto;
   border-radius: 8px;
@@ -856,4 +836,8 @@
   justify-content: center;
   box-Shadow: 0 2px 4px rgba(0,0,0,0.2);
   z-Index: 1000;
+}
+
+.editForm label{
+  font-size: 24px;
 }

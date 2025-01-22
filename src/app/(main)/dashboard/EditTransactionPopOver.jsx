@@ -59,6 +59,7 @@ export default function EditTransactionPopOver({
                       description: e.target.value,
                     })
                   }
+                  className={styles.descriptionInput}
                 />
               </div>
               <div className={styles.formField}>

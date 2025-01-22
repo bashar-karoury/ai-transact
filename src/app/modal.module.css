@@ -24,12 +24,12 @@
   
   .title {
     margin: 0 0 10px;
-    font-size: 20px;
+    font-size: 30px;
     color: #e74c3c;
   }
   
   .message {
-    font-size: 16px;
+    font-size: 24px;
     color: #333;
     margin-bottom: 15px;
   }
@@ -41,7 +41,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 20px;
   }
   
   .closeButton:hover {

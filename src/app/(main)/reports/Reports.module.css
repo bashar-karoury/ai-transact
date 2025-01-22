@@ -33,18 +33,44 @@
   color: rgb(26, 20, 20);
   border-radius: 5px;
   transition: background-color 0.3s;
+  /* padding: 10px 60px; */
+  margin: 5px;
+  border: 1px solid #3c4a7e;
+  border-radius: 6px;
+  background: #f5f5f5;
+  color: #000000;
+  /* font-size: 24px;
+  cursor: pointer;
+  transition: all 0.3s; */
+  /* font-family: "Leckerli One", serif; */
+  font-family: "DM Serif Text", serif;
 }
 
 
+
 .filters button:hover {
-  background-color: #5b9cdc;
+  /* background-color: #5b9cdc; */
+  background: #83A6CE;
 }
 
 
 .filters button.active {
-  background: #5b9cdc;
+  /* background: #5b9cdc; */
+  border: 1px solid #3c4a7e;
+  background: #4b5f75;
+  color: white;
+  border-color: #1e3d57;
   /* color: red; */
 }
+
+
+.timeFilter button:hover {
+}
+
+.timeFilter button.active {
+}
+
+
 .reportContainer {
   display: flex;
   /* justify-content: space-between; */
