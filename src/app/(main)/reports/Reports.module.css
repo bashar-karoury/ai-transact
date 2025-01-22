@@ -28,10 +28,6 @@
   margin-right: 20px;
   padding: 5px 15px;
   cursor: pointer;
-  border: none;
-  background-color: #f1f9f2;
-  color: rgb(26, 20, 20);
-  border-radius: 5px;
   transition: background-color 0.3s;
   /* padding: 10px 60px; */
   margin: 5px;
@@ -39,10 +35,6 @@
   border-radius: 6px;
   background: #f5f5f5;
   color: #000000;
-  /* font-size: 24px;
-  cursor: pointer;
-  transition: all 0.3s; */
-  /* font-family: "Leckerli One", serif; */
   font-family: "DM Serif Text", serif;
 }
 
@@ -61,13 +53,6 @@
   color: white;
   border-color: #1e3d57;
   /* color: red; */
-}
-
-
-.timeFilter button:hover {
-}
-
-.timeFilter button.active {
 }
 
 

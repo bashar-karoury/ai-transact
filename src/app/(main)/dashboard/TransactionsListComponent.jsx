@@ -22,7 +22,9 @@ export default function TransactionsListComponent({
                 {transaction.description}
               </span>
               <span className={styles.transactionCategory}>
-                {transaction.category}
+                <span className={styles.transactionCategoryFill}>
+                  {transaction.category}
+                </span>
               </span>
               <span className={styles.transactionDate}>
                 {transaction.date.split("T")[0]}
