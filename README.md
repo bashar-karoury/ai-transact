@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Transact
 
-## Getting Started
+AI Transact is an intelligent expense and income tracking system designed to help users manage their finances effectively. With advanced AI-powered features and an intuitive interface, AI Transact simplifies financial management by providing insights, tracking budgets, and enabling seamless transaction entry.
 
-First, run the development server:
+## Features
+- **Budget Management**: Set budgets and receive notifications when you exceed them.
+- **Data Visualization**: Intuitive charts display income and expenses broken down by day, week, or month.
+- **AI-Powered Categorization**: Automatically categorize transactions for better insights.
+- **Voice Input**: Add new transactions using voice commands for a hands-free experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Team Members
+- **Mohamed Abdalla**: Back-End Software Engineer 
+- **Bashar Sirelkhatim**: Software Enginner
+- **Minnatalla Sabrii**: Front-End Developer
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Architecture
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Front End
+- **Next.js**: Fast, server-rendered React framework.
+- **React**: For dynamic and interactive UI components.
+- **Chart.js & react-chartjs-2**: Customizable charts to visualize financial data.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Back End
+- **Node.js**: Manages server-side logic and API endpoints.
+- **Mongoose**: Integrates with MongoDB for efficient database operations.
 
-## Learn More
+### AI Features
+- **@google/generative-ai**: Powers automatic transaction categorization and Transaction Deduction from Transcript
+- **AssemblyAI**: Handles voice recording and transcription for transaction entry.
 
-To learn more about Next.js, take a look at the following resources:
+## Development Report
+- **MVP Features**:
+  - Comprehensive user authentication and secure account management.
+  - Interactive dashboard with financial summaries and visual analytics.
+  - Detailed transaction management with automatic categorization.
+  - Budget creation and monitoring with progress tracking.
+  - Voice command integration for transaction entry.
+  - Smart notifications for budget alerts.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Next Steps
+- Expand AI features to include predictive analytics for forecasting expenses and income.
+- Develop a mobile application for enhanced accessibility.
+- Allow users to create custom categories and tailor notification preferences.
+- Gather user feedback post-launch to identify areas for improvement and prioritize updates.
+  
+## How to Run the Code
+To run AI Transact locally, follow these steps:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd ai-transact
+   ```
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the application:
+   ```bash
+   npm run start
+   ```
+5. Open your browser and navigate to `http://localhost:3000` to access the application.
