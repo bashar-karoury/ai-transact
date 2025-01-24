@@ -2,6 +2,11 @@
 ![image](https://github.com/user-attachments/assets/d7220356-0302-4fee-887b-d46d593187a2)
 
 AI Transact is an intelligent expense and income tracking system designed to help users manage their finances effectively. With advanced AI-powered features and an intuitive interface, AI Transact simplifies financial management by providing insights, tracking budgets, and enabling seamless transaction entry.
+![image](https://github.com/user-attachments/assets/f459971f-a50c-4089-8de5-83cfa7cd2a05)
+![image](https://github.com/user-attachments/assets/31362635-27f7-4c17-affb-da6a86583f0b)
+![image](https://github.com/user-attachments/assets/4c901f26-d332-4325-973b-8b722bc5e691)
+![image](https://github.com/user-attachments/assets/0c17e9c3-9bb1-4c0b-8e18-27222eacc5db)
+![image](https://github.com/user-attachments/assets/8acba416-7bab-43c3-80fa-abc4b23b1912)
 
 ## Features
 - **Budget Management**: Set budgets and receive notifications when you exceed them.
